@@ -122,8 +122,8 @@
    $dark-color:                     $light-opposite-color !default;
    $dark-opposite-color:            $light-color          !default;
    // accent
-   $accent-color:                   #ffd333               !default;
-   $accent-opposite-color:          $light-opposite-color !default;
+   $accent-color:                   #003C7E               !default;
+   $accent-opposite-color:          #fff !default;
    //links
    $link-color:                     #1a66ff               !default;
    $link-hover-color:               #1a66ff               !default;
@@ -310,7 +310,7 @@
    // ----------------------------------------
    // -- .departments
    // ----------------------------------------
-      $departments-bg:            $dark-color                                !default;
+      $departments-bg:            #00243F                                !default;
       $departments-shadow:        none                                       !default;
       $departments-font-color:    $dark-opposite-color                       !default;
       $departments-height:        $nav-panel-height - $nav-panel-padding * 2 !default;
@@ -329,7 +329,7 @@
       $nav-links-item-default-bg:          transparent                                !default;
       $nav-links-item-default-shadow:      none                                       !default;
       $nav-links-item-default-font-color:  inherit                                    !default;
-      $nav-links-item-default-arrow-color: rgba(#000, .3)                             !default;
+      $nav-links-item-default-arrow-color: rgba(#fff, .3)                             !default;
       // hover
       $nav-links-item-hover-bg:            rgba(#fff, .5)                             !default;
       $nav-links-item-hover-shadow:        $nav-links-item-default-shadow             !default;
