@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 // application
 import AppLink from '../shared/AppLink';
-import StroykaSlick from '../shared/StroykaSlick';
+import GoldfarbSlick from '../shared/GoldfarbSlick';
 import url from '../../services/url';
 
 // data stubs
@@ -71,7 +71,7 @@ function SitePageAboutUs() {
                                     and we will consider your candidacy.
                                 </div>
                                 <div className="about-us__teammates teammates">
-                                    <StroykaSlick {...slickSettings}>
+                                    <GoldfarbSlick {...slickSettings}>
                                         <div className="teammates__item teammate">
                                             <div className="teammate__avatar">
                                                 <img src="/images/teammates/teammate-1.jpg" alt="" />
@@ -93,7 +93,7 @@ function SitePageAboutUs() {
                                             <div className="teammate__name">Anthony Harris</div>
                                             <div className="teammate__position text-muted">Finance Director</div>
                                         </div>
-                                    </StroykaSlick>
+                                    </GoldfarbSlick>
                                 </div>
                             </div>
                         </div>

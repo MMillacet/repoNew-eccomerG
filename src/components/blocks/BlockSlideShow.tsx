@@ -7,7 +7,7 @@ import classNames from 'classnames';
 // application
 import AppLink from '../shared/AppLink';
 import departmentsService from '../../services/departmentsService';
-import StroykaSlick from '../shared/StroykaSlick';
+import GoldfarbSlick from '../shared/GoldfarbSlick';
 import { useDirection } from '../../store/locale/localeHooks';
 import { useMedia } from '../../services/hooks';
 
@@ -157,9 +157,9 @@ function BlockSlideShow(props: BlockSlideShowProps) {
 
                     <div className={layoutClasses}>
                         <div className="block-slideshow__body">
-                            <StroykaSlick {...slickSettings}>
+                            <GoldfarbSlick {...slickSettings}>
                                 {slidesList}
-                            </StroykaSlick>
+                            </GoldfarbSlick>
                         </div>
                     </div>
                 </div>

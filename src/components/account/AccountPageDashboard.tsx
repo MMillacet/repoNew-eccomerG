@@ -47,7 +47,7 @@ export default function AccountPageDashboard() {
                         <img src="/images/avatars/avatar-3.jpg" alt="" />
                     </div>
                     <div className="profile-card__name">Helena Garcia</div>
-                    <div className="profile-card__email">stroyka@example.com</div>
+                    <div className="profile-card__email">goldfarb@example.com</div>
                     <div className="profile-card__edit">
                         <AppLink href={url.accountProfile()} className="btn btn-secondary btn-sm">
                             Edit Profile

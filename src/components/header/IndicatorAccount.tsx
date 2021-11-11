@@ -26,7 +26,7 @@ function IndicatorAccount() {
             <AppLink href={url.accountDashboard()} className="account-menu__user">
                 <div className="account-menu__user-info">
                     <div className="account-menu__user-name">Helena Garcia</div>
-                    <div className="account-menu__user-email">stroyka@example.com</div>
+                    <div className="account-menu__user-email">goldfarb@example.com</div>
                 </div>
             </AppLink>
             <div className="account-menu__divider" />

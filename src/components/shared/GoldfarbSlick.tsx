@@ -22,14 +22,14 @@ import { useDirection } from '../../store/locale/localeHooks';
 
 export type SlickProps = Settings;
 
-export type StroykaSlickProps = PropsWithChildren<SlickProps>;
+export type GoldfarbSlickProps = PropsWithChildren<SlickProps>;
 
-export interface StroykaSlickInnerProps extends SlickProps {
+export interface GoldfarbSlickInnerProps extends SlickProps {
     children: ReactNode;
     forwardRef: RefCallback<Slick | null> | MutableRefObject<Slick | null> | null;
 }
 
-function StroykaSlickInner(props: StroykaSlickInnerProps) {
+function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
     const {
         children,
         forwardRef,
@@ -339,14 +339,14 @@ function StroykaSlickInner(props: StroykaSlickInnerProps) {
     );
 }
 
-export default forwardRef<Slick, StroykaSlickProps>(
+export default forwardRef<Slick, GoldfarbSlickProps>(
     (props, ref) => {
         const { children } = props;
 
         return (
-            <StroykaSlickInner forwardRef={ref} {...props}>
+            <GoldfarbSlickInner forwardRef={ref} {...props}>
                 {children}
-            </StroykaSlickInner>
+            </GoldfarbSlickInner>
         );
     },
 );

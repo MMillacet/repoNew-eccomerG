@@ -160,7 +160,7 @@ function Product(props: ProductProps) {
                                     </label>
                                     <label
                                         className="input-radio-color__item"
-                                        style={{ color: '#ffd333' }}
+                                        style={{ color: '#003C7E' }}
                                         data-toggle="tooltip"
                                         title="Yellow"
                                     >

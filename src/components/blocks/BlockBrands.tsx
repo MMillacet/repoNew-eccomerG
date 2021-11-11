@@ -1,6 +1,6 @@
 // application
 import AppLink from '../shared/AppLink';
-import StroykaSlick from '../shared/StroykaSlick';
+import GoldfarbSlick from '../shared/GoldfarbSlick';
 
 // data stubs
 import dataShopBrands from '../../data/shopBrands';
@@ -57,9 +57,9 @@ export default function BlockBrands() {
         <div className="block block-brands">
             <div className="container">
                 <div className="block-brands__slider">
-                    <StroykaSlick {...slickSettings}>
+                    <GoldfarbSlick {...slickSettings}>
                         {brandsList}
-                    </StroykaSlick>
+                    </GoldfarbSlick>
                 </div>
             </div>
         </div>

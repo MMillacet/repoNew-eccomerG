@@ -66,7 +66,7 @@ const dataAccountOrderDetails: IOrder = {
     shippingAddress: {
         firstName: 'Helena',
         lastName: 'Garcia',
-        email: 'stroyka@example.com',
+        email: 'goldfarb@example.com',
         phone: '38 972 588-42-36',
         country: 'Random Federation',
         city: 'Moscow',
@@ -76,7 +76,7 @@ const dataAccountOrderDetails: IOrder = {
     billingAddress: {
         firstName: 'Jupiter',
         lastName: 'Saturnov',
-        email: 'stroyka@example.com',
+        email: 'goldfarb@example.com',
         phone: 'ZX 971 972-57-26',
         country: 'RandomLand',
         city: 'MarsGrad',

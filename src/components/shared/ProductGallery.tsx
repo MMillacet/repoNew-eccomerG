@@ -15,7 +15,7 @@ import Slick from 'react-slick';
 
 // application
 import AppLink from './AppLink';
-import StroykaSlick, { SlickProps } from './StroykaSlick';
+import GoldfarbSlick, { SlickProps } from './GoldfarbSlick';
 import ZoomIn24Svg from '../../svg/zoom-in-24.svg';
 import { useDirection } from '../../store/locale/localeHooks';
 
@@ -329,19 +329,19 @@ function ProductGallery(props: ProductGalleryProps) {
                             <ZoomIn24Svg />
                         </button>
                     )}
-                    <StroykaSlick
+                    <GoldfarbSlick
                         ref={slickFeaturedRef}
                         {...slickSettingsFeatured}
                         beforeChange={handleFeaturedBeforeChange}
                         afterChange={handleFeaturedAfterChange}
                     >
                         {featured}
-                    </StroykaSlick>
+                    </GoldfarbSlick>
                 </div>
                 <div className="product-gallery__carousel">
-                    <StroykaSlick {...slickSettingsThumbnails[layout]}>
+                    <GoldfarbSlick {...slickSettingsThumbnails[layout]}>
                         {thumbnails}
-                    </StroykaSlick>
+                    </GoldfarbSlick>
                 </div>
             </div>
         </div>

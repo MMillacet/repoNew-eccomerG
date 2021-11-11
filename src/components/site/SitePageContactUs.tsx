@@ -42,7 +42,7 @@ function SitePageContactUs() {
                                             <p>
                                                 715 Fake Ave, Apt. 34, New York, NY 10021 USA
                                                 <br />
-                                                Email: stroyka@example.com
+                                                Email: goldfarb@example.com
                                                 <br />
                                                 Phone Number: +1 754 000-00-00
                                             </p>

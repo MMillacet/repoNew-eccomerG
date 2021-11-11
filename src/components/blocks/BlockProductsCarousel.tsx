@@ -8,7 +8,7 @@ import Slick from 'react-slick';
 // application
 import BlockHeader, { BlockHeaderGroup } from '../shared/BlockHeader';
 import ProductCard from '../shared/ProductCard';
-import StroykaSlick, { StroykaSlickProps } from '../shared/StroykaSlick';
+import GoldfarbSlick, { GoldfarbSlickProps } from '../shared/GoldfarbSlick';
 import { IProduct } from '../../interfaces/product';
 
 function getProductsColumns(products: IProduct[], rows: number) {
@@ -38,7 +38,7 @@ export interface BlockProductsCarouselProps<T extends BlockHeaderGroup> {
     onGroupClick?: (group: T) => void;
 }
 
-const slickSettings: { [layout: string]: StroykaSlickProps } = {
+const slickSettings: { [layout: string]: GoldfarbSlickProps } = {
     'grid-4': {
         dots: false,
         arrows: false,
@@ -234,12 +234,12 @@ function BlockProductsCarousel<T extends BlockHeaderGroup>(props: BlockProductsC
                 <div className="block-products-carousel__slider">
                     <div className="block-products-carousel__preloader" />
 
-                    <StroykaSlick
+                    <GoldfarbSlick
                         ref={slickRef}
                         {...slickSettings[layout]}
                     >
                         {columns}
-                    </StroykaSlick>
+                    </GoldfarbSlick>
                 </div>
             </div>
         </div>

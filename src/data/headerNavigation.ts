@@ -170,7 +170,7 @@ const dataHeaderNavigation: INav = [
     },
     {
         title: 'Buy Theme',
-        url: 'https://themeforest.net/item/stroyka-tools-store-react-ecommerce-template/23909258',
+        url: 'https://themeforest.net/item/goldfarb-tools-store-react-ecommerce-template/23909258',
         props: {
             target: '_blank',
         },

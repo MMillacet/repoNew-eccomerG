@@ -105,7 +105,7 @@ export default function AccountPageOrderDetails() {
                             </div>
                             <div className="address-card__row">
                                 <div className="address-card__row-title">Email Address</div>
-                                <div className="address-card__row-content">stroyka@example.com</div>
+                                <div className="address-card__row-content">goldfarb@example.com</div>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ export default function AccountPageOrderDetails() {
                             </div>
                             <div className="address-card__row">
                                 <div className="address-card__row-title">Email Address</div>
-                                <div className="address-card__row-content">stroyka@example.com</div>
+                                <div className="address-card__row-content">goldfarb@example.com</div>
                             </div>
                         </div>
                     </div>

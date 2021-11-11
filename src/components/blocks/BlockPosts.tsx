@@ -7,7 +7,7 @@ import Slick, { Settings } from 'react-slick';
 // application
 import BlockHeader from '../shared/BlockHeader';
 import PostCard from '../shared/PostCard';
-import StroykaSlick from '../shared/StroykaSlick';
+import GoldfarbSlick from '../shared/GoldfarbSlick';
 import { IPost } from '../../interfaces/post';
 
 export type BlockPostsLayout = 'list-sm' | 'grid-nl';
@@ -99,12 +99,12 @@ function BlockPosts(props: BlockPostsProps) {
                 />
 
                 <div className="block-posts__slider">
-                    <StroykaSlick
+                    <GoldfarbSlick
                         ref={slickRef}
                         {...slickSettings[layout]}
                     >
                         {postsList}
-                    </StroykaSlick>
+                    </GoldfarbSlick>
                 </div>
             </div>
         </div>
