@@ -10,6 +10,7 @@ import { AppProps } from 'next/app';
 import { IntlProvider } from 'react-intl';
 import { NextComponentType, NextPageContext } from 'next';
 import { useStore } from 'react-redux';
+import { UserProvider } from '@auth0/nextjs-auth0';
 // application
 import Layout from '../components/Layout';
 import { load, save, wrapper } from '../store/store';
@@ -18,13 +19,13 @@ import { useDirection, useLocale, useMessages } from '../store/locale/localeHook
 // styles
 import '../scss/index.scss';
 
-export type StroykaAppProps = AppProps & {
+export type GoldfarbAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
         Layout: ComponentType
     }
 };
 
-function StroykaApp({ Component, pageProps, router }: StroykaAppProps) {
+function GoldfarbApp({ Component, pageProps, router }: GoldfarbAppProps) {
     const headerLayout = router.pathname === '/home-two' ? 'compact' : 'default';
     const applyClientState = useApplyClientState();
     const locale = useLocale();
@@ -90,9 +91,11 @@ function StroykaApp({ Component, pageProps, router }: StroykaAppProps) {
 
     return (
         <IntlProvider locale={locale} messages={messages}>
-            {content}
+            <UserProvider>
+                {content}
+            </UserProvider>
         </IntlProvider>
     );
 }
 
-export default wrapper.withRedux(StroykaApp);
+export default wrapper.withRedux(GoldfarbApp);

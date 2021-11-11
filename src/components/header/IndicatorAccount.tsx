@@ -1,49 +1,29 @@
 // application
+import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import Indicator from './Indicator';
 import Person20Svg from '../../svg/person-20.svg';
 import url from '../../services/url';
 
 function IndicatorAccount() {
-    const dropdown = (
+    const { user } = useUser();
+
+    const loggedOutDropdown = (
         <div className="account-menu">
             <form className="account-menu__form">
-                <div className="account-menu__form-title">Log In to Your Account</div>
-                <div className="form-group">
-                    <label htmlFor="header-signin-email" className="sr-only">Email address</label>
-                    <input
-                        id="header-signin-email"
-                        type="email"
-                        className="form-control form-control-sm"
-                        placeholder="Email address"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="header-signin-password" className="sr-only">Password</label>
-                    <div className="account-menu__form-forgot">
-                        <input
-                            id="header-signin-password"
-                            type="password"
-                            className="form-control form-control-sm"
-                            placeholder="Password"
-                        />
-                        <AppLink href={url.accountSignIn()} className="account-menu__form-forgot-link">
-                            Forgot?
-                        </AppLink>
-                    </div>
-                </div>
                 <div className="form-group account-menu__form-button">
-                    <button type="submit" className="btn btn-primary btn-sm">Login</button>
+                    <a className="btn btn-primary btn-sm" href="/api/auth/login">Iniciar sesión</a>
                 </div>
                 <div className="account-menu__form-link">
-                    <AppLink href={url.accountSignUp()}>Create An Account</AppLink>
+                    <a href="/api/auth/login">Registrate</a>
                 </div>
             </form>
-            <div className="account-menu__divider" />
+        </div>
+    );
+
+    const loggedInDropdown = (
+        <div className="account-menu">
             <AppLink href={url.accountDashboard()} className="account-menu__user">
-                <div className="account-menu__user-avatar">
-                    <img src="/images/avatars/avatar-3.jpg" alt="" />
-                </div>
                 <div className="account-menu__user-info">
                     <div className="account-menu__user-name">Helena Garcia</div>
                     <div className="account-menu__user-email">stroyka@example.com</div>
@@ -58,13 +38,15 @@ function IndicatorAccount() {
             </ul>
             <div className="account-menu__divider" />
             <ul className="account-menu__links">
-                <li><AppLink href={url.accountSignOut()}>Logout</AppLink></li>
+                <li><a href="/api/auth/logout">Logout</a></li>
             </ul>
         </div>
     );
 
+    const dropdown = user ? loggedInDropdown : loggedOutDropdown;
+
     return (
-        <Indicator url={url.accountSignIn()} dropdown={dropdown} icon={<Person20Svg />} />
+        <Indicator dropdown={dropdown} icon={<Person20Svg />} />
     );
 }
 

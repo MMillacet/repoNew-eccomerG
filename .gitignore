@@ -1,0 +1,8 @@
+.vscode
+.next
+
+yarn-error.log
+
+node_modules
+
+

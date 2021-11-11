@@ -1,5 +1,5 @@
 {
-  "name": "stroyka.react",
+  "name": "goldfarb-ecommerce",
   "version": "1.9.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "build-and-start": "next build && next start"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.6.1",
     "@fortawesome/fontawesome-free": "5.15.4",
     "bootstrap": "4.6.0",
     "classnames": "2.3.1",
