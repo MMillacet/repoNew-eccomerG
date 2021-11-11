@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 // application
 import AppLink from '../shared/AppLink';
-import LogoSvg from '../../svg/logo.svg';
+// import LogoSvg from '../../svg/logo.svg';
 import NavPanel from './NavPanel';
 import Search from './Search';
 import Topbar from './Topbar';
@@ -25,7 +25,7 @@ function Header(props: HeaderProps) {
         bannerSection = (
             <div className="site-header__middle container">
                 <div className="site-header__logo">
-                    <AppLink href="/"><LogoSvg /></AppLink>
+                    <AppLink href="/"><img src="/images/logos/goldfarb-logo.png" alt="" /></AppLink>
                 </div>
                 <div className="site-header__search">
                     <Search context="header" />
