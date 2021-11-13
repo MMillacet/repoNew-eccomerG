@@ -1,9 +1,7 @@
 // application
 import AppLink from '../shared/AppLink';
 import GoldfarbSlick from '../shared/GoldfarbSlick';
-
-// data stubs
-import dataShopBrands from '../../data/shopBrands';
+import { IBrand } from '../../interfaces/brand';
 
 const slickSettings = {
     dots: false,
@@ -44,11 +42,14 @@ const slickSettings = {
     ],
 };
 
-export default function BlockBrands() {
-    const brandsList = dataShopBrands.map((brand, index) => (
+export interface BlockBrandsProps {
+    brands?: Array<IBrand>;
+}
+export default function BlockBrands(props: BlockBrandsProps) {
+    const brandsList = props.brands?.map((brand, index) => (
         <div key={index} className="block-brands__item">
             <AppLink href="/">
-                <img src={brand.image} alt="" />
+                <img src={brand.logo?.url} alt="" />
             </AppLink>
         </div>
     ));
@@ -57,9 +58,7 @@ export default function BlockBrands() {
         <div className="block block-brands">
             <div className="container">
                 <div className="block-brands__slider">
-                    <GoldfarbSlick {...slickSettings}>
-                        {brandsList}
-                    </GoldfarbSlick>
+                    <GoldfarbSlick {...slickSettings}>{brandsList}</GoldfarbSlick>
                 </div>
             </div>
         </div>

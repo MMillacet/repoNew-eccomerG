@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 
 // third-party
 import classNames from 'classnames';
+import { ImageAsset } from '@sanity/types';
 
 // application
 import AppLink from '../shared/AppLink';
@@ -10,9 +11,18 @@ import departmentsService from '../../services/departmentsService';
 import GoldfarbSlick from '../shared/GoldfarbSlick';
 import { useDirection } from '../../store/locale/localeHooks';
 import { useMedia } from '../../services/hooks';
+import { SanityLink } from '../../custom-sanity-types/link';
+
+export interface BlockSlideItem {
+    title: string;
+    subtitle: string;
+    link: SanityLink;
+    image?: ImageAsset;
+}
 
 export interface BlockSlideShowProps {
     withDepartments?: boolean;
+    slides?: Array<BlockSlideItem>;
 }
 
 const slickSettings = {
@@ -81,9 +91,12 @@ function BlockSlideShow(props: BlockSlideShowProps) {
     const departmentsAreaRef = useRef<HTMLDivElement | null>(null);
     const isDesktop = useMedia('(min-width: 992px)');
 
-    useEffect(() => () => {
-        departmentsService.area = null;
-    }, []);
+    useEffect(
+        () => () => {
+            departmentsService.area = null;
+        },
+        [],
+    );
 
     useEffect(() => {
         departmentsService.area = departmentsAreaRef.current;
@@ -97,25 +110,19 @@ function BlockSlideShow(props: BlockSlideShowProps) {
         }
     };
 
-    const blockClasses = classNames(
-        'block-slideshow block',
-        {
-            'block-slideshow--layout--full': !withDepartments,
-            'block-slideshow--layout--with-departments': withDepartments,
-        },
-    );
+    const blockClasses = classNames('block-slideshow block', {
+        'block-slideshow--layout--full': !withDepartments,
+        'block-slideshow--layout--with-departments': withDepartments,
+    });
 
-    const layoutClasses = classNames(
-        'col-12',
-        {
-            'col-lg-12': !withDepartments,
-            'col-lg-9': withDepartments,
-        },
-    );
+    const layoutClasses = classNames('col-12', {
+        'col-lg-12': !withDepartments,
+        'col-lg-9': withDepartments,
+    });
 
-    const slidesList = slides.map((slide, index) => {
-        const image = (withDepartments ? slide.image_classic : slide.image_full)[direction];
-
+    const slidesList = props.slides?.map((slide, index) => {
+        // const image = (withDepartments ? slide.image_classic : slide.image_full)[direction];
+        const image = slide.image?.url;
         return (
             <div key={index} className="block-slideshow__slide">
                 <div
@@ -127,7 +134,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                 <div
                     className="block-slideshow__slide-image block-slideshow__slide-image--mobile"
                     style={{
-                        backgroundImage: `url(${slide.image_mobile[direction]})`,
+                        backgroundImage: `url(${image})`,
                     }}
                 />
                 <div className="block-slideshow__slide-content">
@@ -137,10 +144,17 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                     />
                     <div
                         className="block-slideshow__slide-text"
-                        dangerouslySetInnerHTML={{ __html: slide.text }}
+                        dangerouslySetInnerHTML={{ __html: slide.subtitle }}
                     />
                     <div className="block-slideshow__slide-button">
-                        <AppLink href="/" className="btn btn-primary btn-lg">Shop Now</AppLink>
+                        <AppLink
+                            href={
+                                slide.link?.url || (slide.link?.phone && `tel:${slide.link?.phone}`)
+                            }
+                            className="btn btn-primary btn-lg"
+                        >
+                            {slide.link?.text}
+                        </AppLink>
                     </div>
                 </div>
             </div>
@@ -157,9 +171,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
 
                     <div className={layoutClasses}>
                         <div className="block-slideshow__body">
-                            <GoldfarbSlick {...slickSettings}>
-                                {slidesList}
-                            </GoldfarbSlick>
+                            <GoldfarbSlick {...slickSettings}>{slidesList}</GoldfarbSlick>
                         </div>
                     </div>
                 </div>
