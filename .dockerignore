@@ -1,0 +1,10 @@
+.dockerignore
+.next
+.vscode
+dist
+node_modules
+Dockerfile
+
+
+yarn-error.log
+README.md
