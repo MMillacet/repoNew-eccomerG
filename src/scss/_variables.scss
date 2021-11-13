@@ -119,9 +119,10 @@
    $light-opposite-alt-color:       #6c757d               !default;
    $light-divider-color:            #ebebeb               !default;
    // dark
-   $dark-color:                     $light-opposite-color !default;
-   $dark-opposite-color:            $light-color          !default;
+   $dark-color:                     $light-opposite-color   !default;
+   $dark-opposite-color:            $light-color            !default;
    // accent
+   $accent-dark-color:              #00243F               !default; 
    $accent-color:                   #003C7E               !default;
    $accent-opposite-color:          #fff !default;
    //links
@@ -173,7 +174,7 @@
 // ----------------------------------------
 // -- header
 // ----------------------------------------
-      $header-type:             white                  !default; // or colored
+      $header-type:             red                  !default; // or colored
       $header-bg:               transparent            !default;
       $header-font-color:       inherit                !default;
       $header-font-muted-color: $body-font-muted-color !default;
@@ -182,11 +183,11 @@
    // ----------------------------------------
    // -- .topbar
    // ----------------------------------------
-      $topbar-height:        32px    !default;
-      $topbar-bg:            #f7f7f7 !default;
-      $topbar-shadow:        none    !default;
-      $topbar-border-bottom: none    !default;
-      $topbar-font-color:    #737373 !default;
+      $topbar-height:        42px                     !default;
+      $topbar-bg:            $accent-dark-color       !default;
+      $topbar-shadow:        none                     !default;
+      $topbar-border-bottom: none                     !default;
+      $topbar-font-color:    $accent-opposite-color   !default;
 
    // ----------------------------------------
    // -- .topbar-link

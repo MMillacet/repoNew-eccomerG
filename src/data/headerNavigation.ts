@@ -7,8 +7,8 @@ const dataHeaderNavigation: INav = [
         submenu: {
             type: 'menu',
             menu: [
-                { title: 'Home 1', url: '/' },
-                { title: 'Home 2', url: '/home-two' },
+                { title: 'Home 1', url: '/home-one' },
+                { title: 'Home 2', url: '/' },
             ],
         },
     },

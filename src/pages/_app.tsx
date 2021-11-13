@@ -26,7 +26,8 @@ export type GoldfarbAppProps = AppProps & {
 };
 
 function GoldfarbApp({ Component, pageProps, router }: GoldfarbAppProps) {
-    const headerLayout = router.pathname === '/home-two' ? 'compact' : 'default';
+    // const headerLayout = router.pathname === '/home-two' ? 'compact' : 'default';
+    const headerLayout = 'default';
     const applyClientState = useApplyClientState();
     const locale = useLocale();
     const messages = useMessages();

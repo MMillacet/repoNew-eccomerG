@@ -6,8 +6,5 @@
   "topbar.blog": "Blog",
   "topbar.myAccount": "My Account",
   "topbar.currency": "Currency",
-  "topbar.language": "Language",
-
-  "header.phoneLabel": "Customer Service",
-  "header.phone": "(800) 060-0730"
+  "topbar.language": "Language"
 }

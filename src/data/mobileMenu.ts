@@ -6,8 +6,8 @@ const dataMobileMenu: IMobileMenu = [
         title: 'Home',
         url: '/',
         children: [
-            { type: 'link', title: 'Home 1', url: '/' },
-            { type: 'link', title: 'Home 2', url: '/home-two' },
+            { type: 'link', title: 'Home 1', url: '/home-one' },
+            { type: 'link', title: 'Home 2', url: '/' },
         ],
     },
 
