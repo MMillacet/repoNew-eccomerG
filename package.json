@@ -11,8 +11,11 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.6.1",
     "@fortawesome/fontawesome-free": "5.15.4",
+    "@sanity/client": "^2.21.10",
+    "@sanity/types": "^2.21.10",
     "bootstrap": "4.6.0",
     "classnames": "2.3.1",
+    "eslint-plugin-prettier": "^4.0.0",
     "next": "11.1.2",
     "next-redux-wrapper": "7.0.2",
     "photoswipe": "4.1.3",
