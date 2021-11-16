@@ -1,13 +1,10 @@
-import axios from 'axios';
 import { Request, Response, RequestHandler } from 'express';
-import api from '../api';
+import ordersApi from '../api/orders';
 
 const create: RequestHandler = async (req: Request, res: Response) => {
     const data = req.body;
-
     try {
-        const response = await axios(api.createOrder(data));
-        console.log(response);
+        const response = await ordersApi.create(data);
         res.send(response.data);
     } catch (error: any) {
         res.status(400).send({ reason: 'Ha ocurrido un error al conectarse a Goldfarb', description: error.message });

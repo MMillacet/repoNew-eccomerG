@@ -45,9 +45,12 @@ function Product(props: ProductProps) {
     if (product.compareAtPrice) {
         prices = (
             <Fragment>
-                <span className="product__new-price"><CurrencyFormat value={product.price} /></span>
-                {' '}
-                <span className="product__old-price"><CurrencyFormat value={product.compareAtPrice} /></span>
+                <span className="product__new-price">
+                    <CurrencyFormat value={product.price} />
+                </span>{' '}
+                <span className="product__old-price">
+                    <CurrencyFormat value={product.compareAtPrice} />
+                </span>
             </Fragment>
         );
     } else {
@@ -96,7 +99,7 @@ function Product(props: ProductProps) {
                             )}
                         />
                     </div>
-                    <h1 className="product__name">{product.name}</h1>
+                    <h1 className="product__name">{product.title}</h1>
                     <div className="product__rating">
                         <div className="product__rating-stars">
                             <Rating value={product.rating} />
@@ -107,11 +110,7 @@ function Product(props: ProductProps) {
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
                     </div>
-                    <div className="product__description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-                        ornare, mi in ornare elementum, libero nibh lacinia urna, quis
-                        convallis lorem erat at purus. Maecenas eu varius nisi.
-                    </div>
+                    <div className="product__description">{product.description}</div>
                     <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
@@ -121,31 +120,29 @@ function Product(props: ProductProps) {
                     </ul>
                     <ul className="product__meta">
                         <li className="product__meta-availability">
-                            Availability:
-                            {' '}
-                            <span className="text-success">In Stock</span>
+                            Availability:{' '}
+                            {product.hasStock ? (
+                                <span className="text-success">In Stock</span>
+                            ) : (
+                                <span className="text-muted">Out Of Stock</span>
+                            )}
                         </li>
                         <li>
-                            Brand:
-                            <AppLink href="/">Wakita</AppLink>
+                            Brand: <AppLink href="/">{product.brand}</AppLink>
                         </li>
-                        <li>SKU: 83690/32</li>
+                        <li>SKU: {product.id}</li>
                     </ul>
                 </div>
 
                 <div className="product__sidebar">
                     <div className="product__availability">
-                        Availability:
-                        {' '}
-                        <span className="text-success">In Stock</span>
+                        Availability: <span className="text-success">In Stock</span>
                     </div>
 
-                    <div className="product__prices">
-                        {prices}
-                    </div>
+                    <div className="product__prices">{prices}</div>
 
                     <form className="product__options">
-                        <div className="form-group product__option">
+                        {/* <div className="form-group product__option">
                             <div className="product__option-label">Color</div>
                             <div className="input-radio-color">
                                 <div className="input-radio-color__list">
@@ -187,8 +184,8 @@ function Product(props: ProductProps) {
                                     </label>
                                 </div>
                             </div>
-                        </div>
-                        <div className="form-group product__option">
+                        </div> */}
+                        {/* <div className="form-group product__option">
                             <div className="product__option-label">Material</div>
                             <div className="input-radio-label">
                                 <div className="input-radio-label__list">
@@ -206,9 +203,11 @@ function Product(props: ProductProps) {
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="form-group product__option">
-                            <label htmlFor="product-quantity" className="product__option-label">Quantity</label>
+                            <label htmlFor="product-quantity" className="product__option-label">
+                                Quantity
+                            </label>
                             <div className="product__actions">
                                 <div className="product__actions-item">
                                     <InputNumber
@@ -247,9 +246,12 @@ function Product(props: ProductProps) {
                                                 data-toggle="tooltip"
                                                 title="Wishlist"
                                                 onClick={run}
-                                                className={classNames('btn btn-secondary btn-svg-icon btn-lg', {
-                                                    'btn-loading': loading,
-                                                })}
+                                                className={classNames(
+                                                    'btn btn-secondary btn-svg-icon btn-lg',
+                                                    {
+                                                        'btn-loading': loading,
+                                                    },
+                                                )}
                                             >
                                                 <Wishlist16Svg />
                                             </button>
@@ -265,9 +267,12 @@ function Product(props: ProductProps) {
                                                 data-toggle="tooltip"
                                                 title="Compare"
                                                 onClick={run}
-                                                className={classNames('btn btn-secondary btn-svg-icon btn-lg', {
-                                                    'btn-loading': loading,
-                                                })}
+                                                className={classNames(
+                                                    'btn btn-secondary btn-svg-icon btn-lg',
+                                                    {
+                                                        'btn-loading': loading,
+                                                    },
+                                                )}
                                             >
                                                 <Compare16Svg />
                                             </button>
@@ -280,13 +285,13 @@ function Product(props: ProductProps) {
                 </div>
 
                 <div className="product__footer">
-                    <div className="product__tags tags">
+                    {/* <div className="product__tags tags">
                         <div className="tags__list">
                             <AppLink href="/">Mounts</AppLink>
                             <AppLink href="/">Electrodes</AppLink>
                             <AppLink href="/">Chainsaws</AppLink>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="product__share-links share-links">
                         <ul className="share-links__list">

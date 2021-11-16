@@ -12,21 +12,19 @@ import { useDeferredData, useProductColumns, useProductTabs } from '../../servic
 // blocks
 import BlockBanner, { BlockBannerItem } from '../blocks/BlockBanner';
 import BlockBrands from '../blocks/BlockBrands';
-import BlockCategories from '../blocks/BlockCategories';
 import BlockFeatures from '../blocks/BlockFeatures';
-import BlockPosts from '../blocks/BlockPosts';
 import BlockProductColumns, { BlockProductColumnsItem } from '../blocks/BlockProductColumns';
-import BlockProducts from '../blocks/BlockProducts';
 import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
 // data stubs
-import dataBlogPosts from '../../data/blogPosts';
-import dataShopBlockCategories from '../../data/shopBlockCategories';
 import theme from '../../data/theme';
 import { IBrand } from '../../interfaces/brand';
 
 export interface InitData {
+    herramientas?: IProduct[];
+    loMasVendido?: IProduct[];
+    destacados?: IProduct[];
     featuredProducts?: IProduct[];
     bestsellers?: IProduct[];
     latestProducts?: IProduct[];
@@ -137,10 +135,10 @@ function HomePageTwo(props: HomePageOneProps) {
                         title="HERRAMIENTAS"
                         layout="grid-5"
                         rows={1}
-                        products={featuredProducts.data}
+                        products={props.initData?.herramientas}
                         loading={featuredProducts.isLoading}
                         // groups={featuredProducts.tabs}
-                        onGroupClick={featuredProducts.handleTabChange}
+                        // onGroupClick={featuredProducts.handleTabChange}
                     />
                 ),
                 [featuredProducts],
@@ -148,10 +146,10 @@ function HomePageTwo(props: HomePageOneProps) {
             {useMemo(
                 () => (
                     <BlockProductsCarousel
-                        title="LOS MÁS VENDIDOS"
+                        title="LO MÁS VENDIDO"
                         layout="grid-5"
                         rows={1}
-                        products={featuredProducts.data}
+                        products={props.initData?.loMasVendido}
                         loading={featuredProducts.isLoading}
                         // groups={featuredProducts.tabs}
                         onGroupClick={featuredProducts.handleTabChange}
@@ -162,24 +160,17 @@ function HomePageTwo(props: HomePageOneProps) {
 
             {useMemo(
                 () => (
-                    <BlockBanner banner={props.initData?.banners?.[0]} />
+                    <BlockSlideShow slides={initData?.banners} />
                 ),
                 [],
             )}
-            {useMemo(
-                () => (
-                    <BlockBanner banner={props.initData?.banners?.[1]} />
-                ),
-                [],
-            )}
-
             {useMemo(
                 () => (
                     <BlockProductsCarousel
                         title="DESTACADOS"
                         layout="grid-5"
                         rows={1}
-                        products={featuredProducts.data}
+                        products={props.initData?.destacados}
                         loading={featuredProducts.isLoading}
                         // groups={featuredProducts.tabs}
                         onGroupClick={featuredProducts.handleTabChange}

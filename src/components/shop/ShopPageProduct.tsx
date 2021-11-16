@@ -35,11 +35,7 @@ export interface ShopPageProductProps {
 }
 
 function ShopPageProduct(props: ShopPageProductProps) {
-    const {
-        product,
-        layout = 'standard',
-        sidebarPosition = 'start',
-    } = props;
+    const { product, layout = 'standard', sidebarPosition = 'start' } = props;
     const [relatedProducts, setRelatedProducts] = useState<IProduct[]>([]);
     const [categories, setCategories] = useState<IShopCategory[]>([]);
     const [latestProducts, setLatestProducts] = useState<IProduct[]>([]);
@@ -172,7 +168,7 @@ function ShopPageProduct(props: ShopPageProductProps) {
     return (
         <Fragment>
             <Head>
-                <title>{`${product.name} — ${theme.name}`}</title>
+                <title>{`${product.title} — ${theme.name}`}</title>
             </Head>
 
             <PageHeader breadcrumb={breadcrumb} />

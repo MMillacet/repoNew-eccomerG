@@ -129,6 +129,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                     className="block-slideshow__slide-image block-slideshow__slide-image--desktop"
                     style={{
                         backgroundImage: `url(${image})`,
+                        backgroundPosition: 'center',
                     }}
                 />
                 <div
@@ -137,7 +138,11 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                         backgroundImage: `url(${image})`,
                     }}
                 />
-                <div className="block-slideshow__slide-content">
+                <div
+                    className="block-slideshow__slide-content"
+                    // todo: move to class
+                    style={{ background: '#FFFFFF90', padding: '20px' }}
+                >
                     <div
                         className="block-slideshow__slide-title"
                         dangerouslySetInnerHTML={{ __html: slide.title }}

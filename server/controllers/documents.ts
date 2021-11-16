@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { Request, Response, RequestHandler } from 'express';
-import api from '../api';
+import documentsApi from '../api/documents';
 
 const invoice: RequestHandler = async (req: Request, res: Response) => {
     try {
@@ -11,8 +10,7 @@ const invoice: RequestHandler = async (req: Request, res: Response) => {
         } else if (typeof (cardcode) !== 'string') {
             res.status(400).send('cardcode is required');
         } else {
-            const response = await axios(api.invoice(docNum, cardcode));
-            console.log(response);
+            const response = await documentsApi.invoice(docNum, cardcode);
             res.send(response.data);
         }
     } catch (error: any) {
@@ -29,8 +27,7 @@ const invoiceReturn: RequestHandler = async (req: Request, res: Response) => {
         } else if (typeof (cardcode) !== 'string') {
             res.status(400).send('cardcode is required');
         } else {
-            const response = await axios(api.invoiceReturn(docNum, cardcode));
-            console.log(response);
+            const response = await documentsApi.invoiceReturn(docNum, cardcode);
             res.send(response.data);
         }
     } catch (error: any) {
@@ -45,8 +42,7 @@ const recipe: RequestHandler = async (req: Request, res: Response) => {
         if (typeof (docNum) !== 'string') {
             res.status(400).send('docNum is required');
         } else {
-            const response = await axios(api.clientRecipe(docNum));
-            console.log(response);
+            const response = await documentsApi.recipe(docNum);
             res.send(response.data);
         }
     } catch (error: any) {

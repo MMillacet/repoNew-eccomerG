@@ -16,6 +16,7 @@ import {
     getSuggestions,
     getTopRatedProducts,
 } from '../fake-server/endpoints/products';
+import productsApi from '../../server/api/products';
 
 export interface GetCategoriesOptions {
     depth?: number;
@@ -80,20 +81,9 @@ const shopApi = {
     /**
      * Returns product.
      */
-    getProductBySlug: (slug: string): Promise<IProduct> => {
-        /**
-         * This is what your API endpoint might look like:
-         *
-         * https://example.com/api/products/screwdriver-a2017.json
-         *
-         * where:
-         * - screwdriver-a2017 = slug
-         */
-        // return fetch(`https://example.com/api/products/${slug}.json`)
-        //     .then((response) => response.json());
-
-        // This is for demonstration purposes only. Remove it and use the code above.
-        return getProductBySlug(slug);
+    getProductBySlug: async (slug: string): Promise<IProduct> => {
+        const { products: [product, ] } = await productsApi.lookup([slug]);
+        return product;
     },
     /**
      * Returns array of related products.

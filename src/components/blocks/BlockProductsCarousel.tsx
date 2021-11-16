@@ -183,6 +183,7 @@ function BlockProductsCarousel<T extends BlockHeaderGroup>(props: BlockProductsC
         loading = false,
         onGroupClick,
     } = props;
+
     const slickRef = useRef<Slick>(null);
 
     const handleNextClick = () => {
@@ -234,10 +235,7 @@ function BlockProductsCarousel<T extends BlockHeaderGroup>(props: BlockProductsC
                 <div className="block-products-carousel__slider">
                     <div className="block-products-carousel__preloader" />
 
-                    <GoldfarbSlick
-                        ref={slickRef}
-                        {...slickSettings[layout]}
-                    >
+                    <GoldfarbSlick ref={slickRef} {...slickSettings[layout]}>
                         {columns}
                     </GoldfarbSlick>
                 </div>

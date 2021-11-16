@@ -20,7 +20,6 @@ export interface IProduct {
     slug: string;
     name: string;
     images: string[];
-    price: number;
     compareAtPrice: number | null;
     brand: IBrand | null;
     badges: string[];
@@ -29,6 +28,22 @@ export interface IProduct {
     rating: number;
     attributes: IProductAttribute[];
     availability: string;
+    // goldfarb
+    code: string;
+    price: number;
+    discount: number;
+    currency: string;
+    unitMult: string;
+    unitsPerItem: string;
+    hasStock: boolean;
+    title: string;
+    description: string;
+    family: string;
+    category: string;
+    subcategory: string;
+    hasBought: boolean;
+    brand2: string;
+    tax: number;
 }
 
 export type IProductsList = IPaginatedList<IProduct> & IFilterableList<IProduct, IFilter>;

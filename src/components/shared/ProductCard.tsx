@@ -40,26 +40,30 @@ function ProductCard(props: ProductCardProps) {
     const compareAddItem = useCompareAddItem();
     const quickviewOpen = useQuickviewOpen();
 
-    const badges = [];
+    const badges: any[] = [];
     let image;
     let price;
     let features;
 
-    if (product.badges.includes('sale')) {
-        badges.push(<div key="sale" className="product-card__badge product-card__badge--sale">Sale</div>);
-    }
-    if (product.badges.includes('hot')) {
-        badges.push(<div key="hot" className="product-card__badge product-card__badge--hot">Hot</div>);
-    }
-    if (product.badges.includes('new')) {
-        badges.push(<div key="new" className="product-card__badge product-card__badge--new">New</div>);
-    }
+    // if (product.badges.includes('sale')) {
+    //     badges.push(<div key="sale" className="product-card__badge product-card__badge--sale">Sale</div>);
+    // }
+    // if (product.badges.includes('hot')) {
+    //     badges.push(<div key="hot" className="product-card__badge product-card__badge--hot">Hot</div>);
+    // }
+    // if (product.badges.includes('new')) {
+    //     badges.push(<div key="new" className="product-card__badge product-card__badge--new">New</div>);
+    // }
 
-    if (product.images && product.images.length > 0) {
+    if (product.id) {
         image = (
             <div className="product-card__image product-image">
                 <AppLink href={url.product(product)} className="product-image__body">
-                    <img className="product-image__img" src={product.images[0]} alt="" />
+                    <img
+                        className="product-image__img"
+                        src={`https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.id}_0.jpg`}
+                        alt=""
+                    />
                 </AppLink>
             </div>
         );
@@ -68,9 +72,12 @@ function ProductCard(props: ProductCardProps) {
     if (product.compareAtPrice) {
         price = (
             <div className="product-card__prices">
-                <span className="product-card__new-price"><CurrencyFormat value={product.price} /></span>
-                {' '}
-                <span className="product-card__old-price"><CurrencyFormat value={product.compareAtPrice} /></span>
+                <span className="product-card__new-price">
+                    <CurrencyFormat value={product.price} />
+                </span>{' '}
+                <span className="product-card__old-price">
+                    <CurrencyFormat value={product.compareAtPrice} />
+                </span>
             </div>
         );
     } else {
@@ -81,20 +88,20 @@ function ProductCard(props: ProductCardProps) {
         );
     }
 
-    if (product.attributes && product.attributes.length) {
-        features = (
-            <ul className="product-card__features-list">
-                {product.attributes.filter((x) => x.featured).map((attribute, index) => (
-                    <li key={index}>{`${attribute.name}: ${attribute.values.map((x) => x.name).join(', ')}`}</li>
-                ))}
-            </ul>
-        );
-    }
+    // if (product.attributes && product.attributes.length) {
+    //     features = (
+    //         <ul className="product-card__features-list">
+    //             {product.attributes.filter((x) => x.featured).map((attribute, index) => (
+    //                 <li key={index}>{`${attribute.name}: ${attribute.values.map((x) => x.name).join(', ')}`}</li>
+    //             ))}
+    //         </ul>
+    //     );
+    // }
 
     return (
         <div className={containerClasses}>
             <AsyncAction
-                action={() => quickviewOpen(product.slug)}
+                action={() => quickviewOpen(`${product.id}`)}
                 render={({ run, loading }) => (
                     <button
                         type="button"
@@ -107,13 +114,11 @@ function ProductCard(props: ProductCardProps) {
                     </button>
                 )}
             />
-            {badges.length > 0 && (
-                <div className="product-card__badges-list">{badges}</div>
-            )}
+            {badges.length > 0 && <div className="product-card__badges-list">{badges}</div>}
             {image}
             <div className="product-card__info">
                 <div className="product-card__name">
-                    <AppLink href={url.product(product)}>{product.name}</AppLink>
+                    <AppLink href={url.product(product)}>{product.title}</AppLink>
                 </div>
                 <div className="product-card__rating">
                     <Rating value={product.rating} />
@@ -135,18 +140,24 @@ function ProductCard(props: ProductCardProps) {
                                 <button
                                     type="button"
                                     onClick={run}
-                                    className={classNames('btn btn-primary product-card__addtocart', {
-                                        'btn-loading': loading,
-                                    })}
+                                    className={classNames(
+                                        'btn btn-primary product-card__addtocart',
+                                        {
+                                            'btn-loading': loading,
+                                        },
+                                    )}
                                 >
                                     Add To Cart
                                 </button>
                                 <button
                                     type="button"
                                     onClick={run}
-                                    className={classNames('btn btn-secondary product-card__addtocart product-card__addtocart--list', {
-                                        'btn-loading': loading,
-                                    })}
+                                    className={classNames(
+                                        'btn btn-secondary product-card__addtocart product-card__addtocart--list',
+                                        {
+                                            'btn-loading': loading,
+                                        },
+                                    )}
                                 >
                                     Add To Cart
                                 </button>
@@ -159,9 +170,12 @@ function ProductCard(props: ProductCardProps) {
                             <button
                                 type="button"
                                 onClick={run}
-                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist', {
-                                    'btn-loading': loading,
-                                })}
+                                className={classNames(
+                                    'btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist',
+                                    {
+                                        'btn-loading': loading,
+                                    },
+                                )}
                             >
                                 <Wishlist16Svg />
                             </button>
@@ -173,9 +187,12 @@ function ProductCard(props: ProductCardProps) {
                             <button
                                 type="button"
                                 onClick={run}
-                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare', {
-                                    'btn-loading': loading,
-                                })}
+                                className={classNames(
+                                    'btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare',
+                                    {
+                                        'btn-loading': loading,
+                                    },
+                                )}
                             >
                                 <Compare16Svg />
                             </button>

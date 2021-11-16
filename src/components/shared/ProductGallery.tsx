@@ -276,7 +276,7 @@ function ProductGallery(props: ProductGalleryProps) {
     const featured = images.map((image, index) => (
         <div key={index} className="product-image product-image--location--gallery">
             <AppLink
-                href={`/${image}`}
+                href={`${image}`}
                 className="product-image__body"
                 target="_blank"
                 onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
