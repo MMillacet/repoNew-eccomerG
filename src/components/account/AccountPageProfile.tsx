@@ -2,65 +2,92 @@
 import Head from 'next/head';
 
 // data stubs
-import theme from '../../data/theme';
+import { IUser } from '../../interfaces/user';
 
-export default function AccountPageProfile() {
+export interface AccountPageProfileProps {
+    user: IUser
+}
+
+export default function AccountPageProfile(props: AccountPageProfileProps) {
+
+    const updateUser = async (event: any) => {
+        event.preventDefault();
+        
+        const res = await fetch('/api/user/update', {
+            body: JSON.stringify({
+                id: props.user.id,
+                name: event.target.name.value,
+                phone: event.target.phone.value,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            method: 'PATCH'
+        });
+
+        const result = await res.json()
+        console.log({result});
+    }
+  
+
+
+    const { user } = props;
+
     return (
         <div className="card">
             <Head>
-                <title>{`Profile — ${theme.name}`}</title>
+                <title>{`Profile — ${user.name}`}</title>
             </Head>
 
             <div className="card-header">
-                <h5>Edit Profile</h5>
+                <h5>Editar Perfil</h5>
             </div>
             <div className="card-divider" />
-            <div className="card-body">
+            <form className="card-body" onSubmit={updateUser}>
                 <div className="row no-gutters">
                     <div className="col-12 col-lg-7 col-xl-6">
                         <div className="form-group">
-                            <label htmlFor="profile-first-name">First Name</label>
+                            <label htmlFor="name">Nombre</label>
                             <input
-                                id="profile-first-name"
+                                id="name"
                                 type="text"
                                 className="form-control"
-                                placeholder="First Name"
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="profile-last-name">Last Name</label>
+                            <label htmlFor="email">Email</label>
                             <input
-                                id="profile-last-name"
-                                type="text"
-                                className="form-control"
-                                placeholder="Last Name"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="profile-email">Email Address</label>
-                            <input
-                                id="profile-email"
+                                id="email"
                                 type="email"
                                 className="form-control"
-                                placeholder="Email Address"
+                                value={user.email}
+                                readOnly
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="profile-phone">Phone Number</label>
+                            <label htmlFor="phone">Telefono</label>
                             <input
-                                id="profile-phone"
+                                id="phone"
                                 type="text"
                                 className="form-control"
-                                placeholder="Phone Number"
                             />
                         </div>
-
+                        <div className="form-group">
+                            <label htmlFor="cardcode">Codigo cliente</label>
+                            <input
+                                id="cardcode"
+                                type="text"
+                                className="form-control"
+                                value={user.cardcode}
+                                readOnly
+                            />
+                        </div>
                         <div className="form-group mt-5 mb-0">
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <button type="submit" className="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }

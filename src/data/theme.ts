@@ -1,6 +1,6 @@
 export default {
     name: 'Goldfarb',
-    fullName: 'Goldfarb - Tools Store React eCommerce Template',
+    fullName: 'Goldfarb',
     url: 'https://themeforest.net/item/goldfarb-tools-store-react-ecommerce-template/23909258',
     author: {
         name: 'Kos',

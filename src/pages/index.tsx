@@ -1,12 +1,11 @@
 // third-party
 import axios from 'axios';
 import { GetStaticProps } from 'next';
-import productsApi from '../../server/api/products';
+import goldfarbApi from '../api/goldfarb';
 
 // application
-import { getHomePage } from '../api/sanityClient';
+import sanityApi from '../api/sanity';
 import HomePageTwo, { InitData } from '../components/home/HomePageTwo';
-// import shopApi from '../api/shop';
 
 export interface PageProps {
     initData?: InitData;
@@ -19,11 +18,11 @@ function Page(props: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-    const sanityHomeData = await getHomePage();
+    const result = await sanityApi.getHomeContent();
 
     const [herramientas, loMasVendido, destacados] = await Promise.all(
-        [sanityHomeData.herramientas, sanityHomeData.loMasVendido, sanityHomeData.destacados].map(
-            (list) => productsApi.lookup(list),
+        [result.herramientas, result.loMasVendido, result.destacados].map((list) =>
+            goldfarbApi.getProductsLookup({ itemcodes: list }),
         ),
     );
 
@@ -33,12 +32,14 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
                 herramientas: herramientas?.products,
                 loMasVendido: loMasVendido?.products,
                 destacados: destacados?.products,
-                slides: sanityHomeData?.slides,
-                banners: sanityHomeData?.banners,
-                ourBrands: sanityHomeData?.nuestrasMarcas,
+                slides: result?.slides,
+                banners: result?.banners,
+                ourBrands: result?.nuestrasMarcas,
             },
         },
     };
 };
 
 export default Page;
+
+

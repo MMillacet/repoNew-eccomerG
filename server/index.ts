@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import next from 'next';
-import routes from './routes';
+// import routes from './routes';
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
         // /api/auth needs to be handled by nextjs
         server.get('/api/auth', (req: Request, res: Response) => handle(req, res));
 
-        server.use('/api', routes());
+        // server.use('/api', routes());
 
         server.all('*', (req: Request, res: Response) => handle(req, res));
 
