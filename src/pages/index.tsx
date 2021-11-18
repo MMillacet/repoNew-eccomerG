@@ -1,6 +1,7 @@
 // third-party
-import axios from 'axios';
-import { GetStaticProps } from 'next';
+import { useUser } from '@auth0/nextjs-auth0';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { useEffect } from 'react';
 import goldfarbApi from '../api/goldfarb';
 
 // application
@@ -12,12 +13,24 @@ export interface PageProps {
 }
 
 function Page(props: PageProps) {
+    const { user } = useUser();
+
+    const fetchUserInfo = async () => {
+        await fetch('/api/user/info');
+    }
+
+    useEffect(() => {
+        if(user && !user.initialised) {
+            fetchUserInfo();
+        }
+    }, [user]);
+
     const { initData } = props;
 
     return <HomePageTwo initData={initData} />;
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
     const result = await sanityApi.getHomeContent();
 
     const [herramientas, loMasVendido, destacados] = await Promise.all(

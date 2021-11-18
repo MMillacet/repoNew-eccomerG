@@ -1,5 +1,6 @@
 // third-party
 import Head from 'next/head';
+import { useState } from 'react';
 
 // data stubs
 import { IUser } from '../../interfaces/user';
@@ -10,28 +11,25 @@ export interface AccountPageProfileProps {
 
 export default function AccountPageProfile(props: AccountPageProfileProps) {
 
-    const updateUser = async (event: any) => {
+    const { user } = props;
+
+    const [name, setName] = useState(user.name);
+    const [phone, setPhone] = useState(user.phone);
+
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-        
+    
         const res = await fetch('/api/user/update', {
             body: JSON.stringify({
-                id: props.user.id,
                 name: event.target.name.value,
                 phone: event.target.phone.value,
             }),
-            headers: {
-                'Content-Type': 'application/json'
-              },
+            headers: { 'Content-Type': 'application/json' },
             method: 'PATCH'
         });
 
-        const result = await res.json()
-        console.log({result});
+        await res.json();
     }
-  
-
-
-    const { user } = props;
 
     return (
         <div className="card">
@@ -43,7 +41,7 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                 <h5>Editar Perfil</h5>
             </div>
             <div className="card-divider" />
-            <form className="card-body" onSubmit={updateUser}>
+            <form className="card-body" onSubmit={handleSubmit}>
                 <div className="row no-gutters">
                     <div className="col-12 col-lg-7 col-xl-6">
                         <div className="form-group">
@@ -52,6 +50,8 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                                 id="name"
                                 type="text"
                                 className="form-control"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -70,6 +70,8 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                                 id="phone"
                                 type="text"
                                 className="form-control"
+                                value={phone}
+                                onChange={e => setPhone(e.target.value)}
                             />
                         </div>
                         <div className="form-group">

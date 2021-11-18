@@ -1,19 +1,25 @@
-import { getAccessToken, getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
+import { getAccessToken, getSession, handleLogin, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-const auth0Url = 'https://goldfarb.us.auth0.com';
+import auth0Api from '../../../api/auth0';
+import { transformUser } from '../../../services/user';
 
 
 export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
-  // If your Access Token is expired and you have a Refresh Token
-  // `getAccessToken` will fetch you a new one using the `refresh_token` grant
-  const { accessToken } = await getAccessToken(req, res);
+  const session = getSession(req, res);
 
-  const response = await fetch(`${process.env.AUTH0_ISSUER_BASE_URL}/userinfo`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
-  });
-  const userinfo = await response.json();
-  res.status(200).json(userinfo);
+  if (session){
+    const user = await auth0Api.info(session.accessToken);
+    const transformedUser = transformUser(user);
+    
+    session.user = {
+      initialised: true,
+      ...session.user,
+      ...transformedUser,
+    };
+
+    res.status(200).json(session.user);
+  } else {
+     // Should be auth because of withApiAuthRequired
+     res.status(401).json({ error: 'User not authenticated' });
+  }
 });
