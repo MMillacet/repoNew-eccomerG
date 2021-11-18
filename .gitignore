@@ -1,5 +1,6 @@
 .vscode
 .next
+.env.local
 dist
 node_modules
 yarn-error.log

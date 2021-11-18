@@ -1,32 +1,35 @@
-import { withApiAuthRequired, getAccessToken } from "@auth0/nextjs-auth0";
-import axios, { AxiosRequestConfig } from "axios";
+import { withApiAuthRequired, getAccessToken, getSession } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
+import auth0Api from "../../../api/auth0";
 
 export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
-    // If your Access Token is expired and you have a Refresh Token
-    // `getAccessToken` will fetch you a new one using the `refresh_token` grant
-    const { accessToken } = await getAccessToken(req, res, {
-        // scopes: ["update:users"],
-    });
-  
-    console.log(accessToken);
+    
+    const session = await getSession(req, res);
+    
+    if (session) {
+        const { accessToken, user } = session;
 
-    const user = req.body;
-    console.log({user});
-  
-    const config: AxiosRequestConfig = {
-        method: 'PATCH',
-        url: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/me`,
-        headers: { authorization: `Bearer ${accessToken}`, 'content-type': 'application/json' },
-        data: { 
-            user_metadata: 
-            {
-                name: user.name,
-                phone: user.phone
-            }
+        const metadata = {
+            name: req.body.name,
+            phone: req.body.phone,
         }
-    };
-    const response = await axios(config);
-    console.log({ response });
-    res.status(200).json(response);
+    
+        try {
+            const response = await auth0Api.patch(user.sub, metadata, accessToken);
+            
+            session.user = {
+                ...session.user,
+                ...metadata
+            };
+
+            res.status(200).json(response.data);
+        } catch (error) {
+            console.log(error);
+            // todo: refactor this to return appropiate error codes
+            res.status(500).json(error);
+        }
+    } else {
+        // Should be auth because of withApiAuthRequired
+        res.status(401).json({ error: 'User not authenticated' });
+    }
   });
