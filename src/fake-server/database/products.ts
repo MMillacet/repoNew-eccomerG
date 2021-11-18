@@ -453,7 +453,7 @@ function makeAttributes(defs?: IProductAttributeDef[]): IProductAttribute[] {
     }).filter((x) => x !== null) as IProductAttribute[];
 }
 
-const productsData: IProduct[] = productsDef.map((productDef) => ({
+const productsData: any[] = productsDef.map((productDef) => ({
     id: getId(),
     name: productDef.name,
     sku: '83690/32',
