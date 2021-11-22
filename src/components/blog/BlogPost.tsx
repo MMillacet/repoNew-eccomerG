@@ -23,7 +23,10 @@ function BlogPost(props: BlogPostProps) {
     });
 
     const relatedPostsList = dataBlogPosts.slice(0, 2).map((relatedPost) => (
-        <div key={relatedPost.id} className="related-posts__item post-card post-card--layout--related">
+        <div
+            key={relatedPost.id}
+            className="related-posts__item post-card post-card--layout--related"
+        >
             <div className="post-card__image">
                 <AppLink href="/">
                     <img src={relatedPost.image} alt="" />
@@ -44,14 +47,20 @@ function BlogPost(props: BlogPostProps) {
                 <div className="post-header__categories">
                     <AppLink href="/">Latest news</AppLink>
                 </div>
-                <h1 className="post-header__title">Morbi Interdum Velit Quis Magna Placerat Lobortis Eget</h1>
+                <h1 className="post-header__title">
+                    Morbi Interdum Velit Quis Magna Placerat Lobortis Eget
+                </h1>
                 <div className="post-header__meta">
                     <div className="post-header__meta-item">
                         By
                         <AppLink href="/">Jessica Moore</AppLink>
                     </div>
-                    <div className="post-header__meta-item"><AppLink href="/">November 30, 2018</AppLink></div>
-                    <div className="post-header__meta-item"><AppLink href="/">4 Comments</AppLink></div>
+                    <div className="post-header__meta-item">
+                        <AppLink href="/">November 30, 2018</AppLink>
+                    </div>
+                    <div className="post-header__meta-item">
+                        <AppLink href="/">4 Comments</AppLink>
+                    </div>
                 </div>
             </div>
 
@@ -64,25 +73,25 @@ function BlogPost(props: BlogPostProps) {
             <div className={postClasses}>
                 <p>
                     Vestibulum sagittis justo sit amet nisl semper, et pulvinar elit maximus. Morbi
-                    interdum velit quis magna placerat lobortis eget pharetra magna. Nulla
-                    tristique sollicitudin turpis, eget maximus risus faucibus non. Nulla
-                    vestibulum ipsum risus, vitae maximus nunc bibendum quis.
+                    interdum velit quis magna placerat lobortis eget pharetra magna. Nulla tristique
+                    sollicitudin turpis, eget maximus risus faucibus non. Nulla vestibulum ipsum
+                    risus, vitae maximus nunc bibendum quis.
                 </p>
                 <p>
                     raesent eu consequat nibh. Quisque
-                    <i>ullamcorper</i>
-                    , augue eu fringillasodales, leo metus volutpat risus, at suscipit ipsum
-                    diam eget sem. Maecenas dictum elit in enim molestie,
-                    <AppLink href="/">vel sollicitudin erat ultricies</AppLink>
-                    . Sed risus tellus, molestie finibus
-                    dui quis, suscipit consequat ex.
+                    <i>ullamcorper</i>, augue eu fringillasodales, leo metus volutpat risus, at
+                    suscipit ipsum diam eget sem. Maecenas dictum elit in enim molestie,
+                    <AppLink href="/">vel sollicitudin erat ultricies</AppLink>. Sed risus tellus,
+                    molestie finibus dui quis, suscipit consequat ex.
                 </p>
                 <blockquote>
                     <p>
                         Sed a dictum elit. In iaculis porttitor luctus. Maecenas ultricies dolor et
                         semper placerat. Proin at lectus felis.
                     </p>
-                    <p><cite>John Mcarthy</cite></p>
+                    <p>
+                        <cite>John Mcarthy</cite>
+                    </p>
                 </blockquote>
                 <p>
                     Vivamus in nisi at turpis rhoncus feugiat. Mauris scelerisque non ante et
@@ -119,36 +128,33 @@ function BlogPost(props: BlogPostProps) {
                     Phasellus ut elit vestibulum, dignissim mi non, suscipit ex. Praesent eu
                     consequat nibh. Quisque ullamcorper, augue eu fringilla sodales, leo metus
                     volutpat risus,
-                    <AppLink href="/">at suscipit ipsum diam eget sem</AppLink>
-                    . Maecenas dictum elit in enim molestie,
-                    vel sollicitudin erat ultricies. Sed risus tellus, molestie finibus dui quis,
-                    suscipit consequat ex.
+                    <AppLink href="/">at suscipit ipsum diam eget sem</AppLink>. Maecenas dictum
+                    elit in enim molestie, vel sollicitudin erat ultricies. Sed risus tellus,
+                    molestie finibus dui quis, suscipit consequat ex.
                 </p>
                 <hr />
                 <h2>Nunc Dapibus Varius Ligula</h2>
                 <p>
                     Maecenas ultrices arcu ut feugiat semper. Praesent dictum tincidunt justo, ac
                     tincidunt ante fermentum at. Vestibulum non varius lectus. Cras vel elit id
-                    ligula laoreet imperdiet. Mauris quis laoreet velit. Suspendisse sed velit
-                    nec ante facilisis pharetra. Duis vitae fermentum elit. Integer ac mattis elit.
+                    ligula laoreet imperdiet. Mauris quis laoreet velit. Suspendisse sed velit nec
+                    ante facilisis pharetra. Duis vitae fermentum elit. Integer ac mattis elit.
                 </p>
-                <p>
-                    Mauris scelerisque non ante et ultrices. Donec sit amet sem lobortis:
-                </p>
+                <p>Mauris scelerisque non ante et ultrices. Donec sit amet sem lobortis:</p>
                 <ol>
                     <li>
                         Duis
-                        <strong>finibus imperdiet ultricies</strong>
-                        . Donec vel pretium turpis. In auctor euismod posuere.
+                        <strong>finibus imperdiet ultricies</strong>. Donec vel pretium turpis. In
+                        auctor euismod posuere.
                     </li>
                     <li>
                         Praesent dictum tincidunt justo, ac tincidunt ante fermentum at. Vestibulum
                         non varius lectus. Cras vel elit id ligula laoreet imperdiet.
                     </li>
                     <li>
-                        <strong>In iaculis porttitor luctus</strong>
-                        . Maecenas ultricies dolor et semper placerat. Proin at lectus felis.
-                        Quisque dapibus auctor justo id dictum.
+                        <strong>In iaculis porttitor luctus</strong>. Maecenas ultricies dolor et
+                        semper placerat. Proin at lectus felis. Quisque dapibus auctor justo id
+                        dictum.
                     </li>
                 </ol>
                 <p>
@@ -169,10 +175,18 @@ function BlogPost(props: BlogPostProps) {
                     </div>
                     <div className="post__share-links share-links">
                         <ul className="share-links__list">
-                            <li className="share-links__item share-links__item--type--like"><AppLink href="/">Like</AppLink></li>
-                            <li className="share-links__item share-links__item--type--tweet"><AppLink href="/">Tweet</AppLink></li>
-                            <li className="share-links__item share-links__item--type--pin"><AppLink href="/">Pin It</AppLink></li>
-                            <li className="share-links__item share-links__item--type--counter"><AppLink href="/">4K</AppLink></li>
+                            <li className="share-links__item share-links__item--type--like">
+                                <AppLink href="/">Like</AppLink>
+                            </li>
+                            <li className="share-links__item share-links__item--type--tweet">
+                                <AppLink href="/">Tweet</AppLink>
+                            </li>
+                            <li className="share-links__item share-links__item--type--pin">
+                                <AppLink href="/">Pin It</AppLink>
+                            </li>
+                            <li className="share-links__item share-links__item--type--counter">
+                                <AppLink href="/">4K</AppLink>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -197,9 +211,7 @@ function BlogPost(props: BlogPostProps) {
             <section className="post__section">
                 <h4 className="post__section-title">Related Posts</h4>
                 <div className="related-posts">
-                    <div className="related-posts__list">
-                        {relatedPostsList}
-                    </div>
+                    <div className="related-posts__list">{relatedPostsList}</div>
                 </div>
             </section>
 
@@ -216,15 +228,30 @@ function BlogPost(props: BlogPostProps) {
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label htmlFor="comment-first-name">First Name</label>
-                            <input type="text" className="form-control" id="comment-first-name" placeholder="First Name" />
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="comment-first-name"
+                                placeholder="First Name"
+                            />
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="comment-last-name">Last Name</label>
-                            <input type="text" className="form-control" id="comment-last-name" placeholder="Last Name" />
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="comment-last-name"
+                                placeholder="Last Name"
+                            />
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="comment-email">Email Address</label>
-                            <input type="email" className="form-control" id="comment-email" placeholder="Email Address" />
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="comment-email"
+                                placeholder="Email Address"
+                            />
                         </div>
                     </div>
                     <div className="form-group">
@@ -232,7 +259,9 @@ function BlogPost(props: BlogPostProps) {
                         <textarea className="form-control" id="comment-content" rows={6} />
                     </div>
                     <div className="form-group mt-4">
-                        <button type="submit" className="btn btn-primary btn-lg">Post Comment</button>
+                        <button type="submit" className="btn btn-primary btn-lg">
+                            Post Comment
+                        </button>
                     </div>
                 </form>
             </section>

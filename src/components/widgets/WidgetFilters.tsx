@@ -31,12 +31,15 @@ function WidgetFilters(props: WidgetFiltersProps) {
     const shopSetFilterValue = useShopSetFilterValueThunk();
     const shopResetFilters = useShopResetFiltersThunk();
 
-    const handleValueChange = useCallback(({ filter, value }: FilterChangeValueEvent) => {
-        shopSetFilterValue(
-            filter.slug,
-            isDefaultFilterValue(filter, value) ? null : serializeFilterValue(filter, value),
-        ).then();
-    }, [shopSetFilterValue]);
+    const handleValueChange = useCallback(
+        ({ filter, value }: FilterChangeValueEvent) => {
+            shopSetFilterValue(
+                filter.slug,
+                isDefaultFilterValue(filter, value) ? null : serializeFilterValue(filter, value),
+            ).then();
+        },
+        [shopSetFilterValue],
+    );
 
     const filtersList = filters.map((filter) => {
         const renderFilter: RenderFilterFn = ({ toggle, setItemRef, setContentRef }) => (
@@ -47,7 +50,11 @@ function WidgetFilters(props: WidgetFiltersProps) {
                 </button>
                 <div className="filter__body" ref={setContentRef}>
                     <div className="filter__container">
-                        <Filter data={filter} value={values[filter.slug]} onChangeValue={handleValueChange} />
+                        <Filter
+                            data={filter}
+                            value={values[filter.slug]}
+                            onChangeValue={handleValueChange}
+                        />
                     </div>
                 </div>
             </div>
@@ -69,9 +76,7 @@ function WidgetFilters(props: WidgetFiltersProps) {
         <div className={classes}>
             <h4 className="widget-filters__title widget__title">{title}</h4>
 
-            <div className="widget-filters__list">
-                {filtersList}
-            </div>
+            <div className="widget-filters__list">{filtersList}</div>
 
             <div className="widget-filters__actions d-flex mb-n2">
                 <button

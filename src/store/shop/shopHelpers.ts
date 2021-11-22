@@ -60,9 +60,11 @@ export function buildQuery(options: IListOptions, filters: IFilterValues) {
         params.sort = options.sort;
     }
 
-    Object.keys(filters).filter((x) => x !== 'category' && !!filters[x]).forEach((filterSlug) => {
-        params[`filter_${filterSlug}`] = filters[filterSlug];
-    });
+    Object.keys(filters)
+        .filter((x) => x !== 'category' && !!filters[x])
+        .forEach((filterSlug) => {
+            params[`filter_${filterSlug}`] = filters[filterSlug];
+        });
 
     return queryString.stringify(params, { encode: false });
 }
@@ -72,7 +74,8 @@ export default async function getShopPageData(
     context: GetServerSidePropsContext,
     slug?: string,
 ): Promise<void> {
-    const categorySlug = slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
+    const categorySlug =
+        slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
 
     if (typeof context.req.url === 'string') {
         const query = queryString.stringify(queryString.parseUrl(context.req.url).query);

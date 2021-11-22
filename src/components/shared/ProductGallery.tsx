@@ -1,11 +1,5 @@
 // react
-import {
-    MouseEvent,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -110,14 +104,17 @@ function ProductGallery(props: ProductGalleryProps) {
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
 
-    const getIndexDependOnDir = useCallback((index: number) => {
-        // we need to invert index id direction === 'rtl' due to react-slick bug
-        if (direction === 'rtl') {
-            return images.length - 1 - index;
-        }
+    const getIndexDependOnDir = useCallback(
+        (index: number) => {
+            // we need to invert index id direction === 'rtl' due to react-slick bug
+            if (direction === 'rtl') {
+                return images.length - 1 - index;
+            }
 
-        return index;
-    }, [direction, images]);
+            return index;
+        },
+        [direction, images],
+    );
 
     const openPhotoswipe = (index: number) => {
         if (!createGalleryRef.current) {
@@ -129,8 +126,10 @@ function ProductGallery(props: ProductGalleryProps) {
                 throw Error('Image ref is null');
             }
 
-            const width = (tag.dataset.width ? parseFloat(tag.dataset.width) : null) || tag.naturalWidth;
-            const height = (tag.dataset.height ? parseFloat(tag.dataset.height) : null) || tag.naturalHeight;
+            const width =
+                (tag.dataset.width ? parseFloat(tag.dataset.width) : null) || tag.naturalWidth;
+            const height =
+                (tag.dataset.height ? parseFloat(tag.dataset.height) : null) || tag.naturalHeight;
 
             return {
                 src: images[index],
@@ -187,10 +186,7 @@ function ProductGallery(props: ProductGalleryProps) {
             galleryRef.current = createGallery(items, options);
             galleryRef.current.listen('beforeChange', () => {
                 if (galleryRef.current && slickFeaturedRef.current) {
-                    slickFeaturedRef.current.slickGoTo(
-                        galleryRef.current.getCurrentIndex(),
-                        true,
-                    );
+                    slickFeaturedRef.current.slickGoTo(galleryRef.current.getCurrentIndex(), true);
                 }
             });
             galleryRef.current.listen('destroy', () => {
@@ -249,13 +245,16 @@ function ProductGallery(props: ProductGalleryProps) {
     }, []);
 
     // componentWillUnmount
-    useEffect(() => () => {
-        if (galleryRef.current) {
-            galleryRef.current.destroy();
-        }
+    useEffect(
+        () => () => {
+            if (galleryRef.current) {
+                galleryRef.current.destroy();
+            }
 
-        unmountedRef.current = true;
-    }, []);
+            unmountedRef.current = true;
+        },
+        [],
+    );
 
     useEffect(() => {
         // this is necessary to reset the transition state,
@@ -293,7 +292,9 @@ function ProductGallery(props: ProductGalleryProps) {
                     className="product-image__img"
                     src={image}
                     alt=""
-                    ref={(element) => { imagesRefs.current[index] = element; }}
+                    ref={(element) => {
+                        imagesRefs.current[index] = element;
+                    }}
                     data-width="700"
                     data-height="700"
                 />
@@ -314,7 +315,11 @@ function ProductGallery(props: ProductGalleryProps) {
                 className={classes}
             >
                 <div className="product-image__body">
-                    <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
+                    <img
+                        className="product-image__img product-gallery__carousel-image"
+                        src={image}
+                        alt=""
+                    />
                 </div>
             </button>
         );
@@ -325,7 +330,11 @@ function ProductGallery(props: ProductGalleryProps) {
             <div className="product-gallery">
                 <div className="product-gallery__featured">
                     {layout !== 'quickview' && (
-                        <button type="button" className="product-gallery__zoom" onClick={handleZoomButtonClick}>
+                        <button
+                            type="button"
+                            className="product-gallery__zoom"
+                            onClick={handleZoomButtonClick}
+                        >
                             <ZoomIn24Svg />
                         </button>
                     )}
@@ -339,9 +348,7 @@ function ProductGallery(props: ProductGalleryProps) {
                     </GoldfarbSlick>
                 </div>
                 <div className="product-gallery__carousel">
-                    <GoldfarbSlick {...slickSettingsThumbnails[layout]}>
-                        {thumbnails}
-                    </GoldfarbSlick>
+                    <GoldfarbSlick {...slickSettingsThumbnails[layout]}>{thumbnails}</GoldfarbSlick>
                 </div>
             </div>
         </div>

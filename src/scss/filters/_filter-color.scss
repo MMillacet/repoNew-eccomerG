@@ -3,11 +3,10 @@
 */
 @import '../variables';
 
-
 $local-margin: 4px;
 
-
-.filter-color {}
+.filter-color {
+}
 .filter-color__list {
     padding: 2px 0;
     display: flex;

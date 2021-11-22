@@ -12,9 +12,11 @@ export const useLocale = () => useAppSelector(localeSelector);
 
 export function useLanguage(): ILanguage;
 // eslint-disable-next-line no-redeclare
-export function useLanguage<T extends(lang: ILanguage) => any>(selector: T): ReturnType<T>;
+export function useLanguage<T extends (lang: ILanguage) => any>(selector: T): ReturnType<T>;
 // eslint-disable-next-line no-redeclare
-export function useLanguage<T extends(lang: ILanguage) => any>(selector?: T): (ILanguage | ReturnType<T>) {
+export function useLanguage<T extends (lang: ILanguage) => any>(
+    selector?: T,
+): ILanguage | ReturnType<T> {
     return useAppSelector((state) => {
         const locale = localeSelector(state);
         const language = languages.find((x) => x.locale === locale);

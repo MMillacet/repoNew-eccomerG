@@ -5,9 +5,7 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
-$local-transition-duration: .25s;
-
+$local-transition-duration: 0.25s;
 
 .departments {
     width: 255px;
@@ -42,7 +40,7 @@ $local-transition-duration: .25s;
     position: absolute;
     top: calc(50% - 7px);
     fill: $departments-icon-color;
-    transition: fill .2s;
+    transition: fill 0.2s;
 
     @include direction {
         #{$inset-inline-start}: 16px;
@@ -52,7 +50,7 @@ $local-transition-duration: .25s;
     position: absolute;
     top: calc(50% - 3px);
     fill: $departments-icon-color;
-    transition: fill .2s, transform .2s;
+    transition: fill 0.2s, transform 0.2s;
 
     @include direction {
         #{$inset-inline-end}: 13px;
@@ -92,7 +90,7 @@ $local-transition-duration: .25s;
         color: inherit;
         font-size: 14px;
         line-height: 16px;
-        letter-spacing: .02em;
+        letter-spacing: 0.02em;
     }
 }
 .departments__item--menu {
@@ -147,7 +145,8 @@ $local-transition-duration: .25s;
     height: 0;
     opacity: 0;
 
-    transition: height $local-transition-duration ease-in-out, opacity $local-transition-duration ease-in-out;
+    transition: height $local-transition-duration ease-in-out,
+        opacity $local-transition-duration ease-in-out;
 }
 
 .departments:not(.departments--fixed) {
@@ -164,7 +163,6 @@ $local-transition-duration: .25s;
 }
 .departments--fixed {
     .departments__button {
-
     }
 }
 .departments--opened {
@@ -182,9 +180,6 @@ $local-transition-duration: .25s;
         overflow: hidden;
     }
 }
-
-
-
 
 @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
     .departments {

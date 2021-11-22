@@ -12,7 +12,7 @@ import { IColorFilter, IColorFilterValue } from '../../interfaces/filter';
 export interface FilterCheckProps {
     data: IColorFilter;
     value: IColorFilterValue;
-    onChangeValue?: (event: { filter: IColorFilter, value: IColorFilterValue }) => void;
+    onChangeValue?: (event: { filter: IColorFilter; value: IColorFilterValue }) => void;
 }
 
 function FilterColor(props: FilterCheckProps) {
@@ -62,9 +62,7 @@ function FilterColor(props: FilterCheckProps) {
 
     return (
         <div className="filter-color">
-            <div className="filter-color__list">
-                {itemsList}
-            </div>
+            <div className="filter-color__list">{itemsList}</div>
         </div>
     );
 }

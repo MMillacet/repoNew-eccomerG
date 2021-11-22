@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .nav-panel {
     height: $nav-panel-height;
     background: $nav-panel-bg;
@@ -54,7 +53,6 @@
         #{$margin-inline-start}: auto;
     }
 }
-
 
 @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
     .nav-panel__nav-links {

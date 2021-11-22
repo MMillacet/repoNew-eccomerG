@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .site-header {
     position: relative;
     z-index: 100;
@@ -65,7 +64,6 @@
 .site-header__nav-panel {
     height: $nav-panel-height;
 }
-
 
 @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
     .site-header__logo {

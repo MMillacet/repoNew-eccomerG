@@ -6,7 +6,6 @@
 @import '../mixins/card';
 @import '../mixins/direction';
 
-
 .document {
     @include card();
     padding: 85px 200px 120px;
@@ -21,7 +20,6 @@
     line-height: 22px;
     color: $body-font-muted-color;
 }
-
 
 @media (max-width: breakpoint(lg-end)) {
     .document {

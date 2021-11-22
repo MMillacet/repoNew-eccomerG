@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .view-options {
     display: flex;
     align-items: center;
@@ -41,7 +40,6 @@
     }
 }
 
-
 @media (max-width: breakpoint(md-end)) {
     .view-options {
         flex-wrap: wrap;
@@ -68,7 +66,6 @@
     }
 }
 
-
 @media (max-width: 474px) {
     .view-options__legend {
         width: 100%;
@@ -92,7 +89,6 @@
         }
     }
 }
-
 
 .view-options--offcanvas--mobile {
     @media (min-width: breakpoint(lg-start)) {

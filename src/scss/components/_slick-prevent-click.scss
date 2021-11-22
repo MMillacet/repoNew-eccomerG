@@ -3,8 +3,8 @@
 */
 @import '../variables';
 
-
-.slick-prevent-click {}
+.slick-prevent-click {
+}
 .slick-prevent-click--active {
     .slick-list:before {
         position: absolute;

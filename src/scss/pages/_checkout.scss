@@ -4,15 +4,16 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
-.checkout {}
+.checkout {
+}
 .checkout__totals {
     font-size: 15px;
     line-height: 19px;
     width: 100%;
     margin-bottom: 40px;
 
-    th, td {
+    th,
+    td {
         padding: 4px 0;
     }
 
@@ -68,9 +69,6 @@
     }
 }
 
-
-
-
 .payment-methods {
     margin-bottom: 30px;
 }
@@ -99,7 +97,7 @@
     padding: 8px 14px;
     font-size: 15px;
     font-weight: $font-weight-medium;
-    letter-spacing: .01em;
+    letter-spacing: 0.01em;
     cursor: pointer;
     margin-bottom: 0;
 }
@@ -111,7 +109,7 @@
 .payment-methods__item-container {
     overflow: hidden;
     height: 0;
-    transition: height .2s;
+    transition: height 0.2s;
 }
 .payment-methods__item-description {
     font-size: 15px;
@@ -119,7 +117,8 @@
     padding: 2px 16px 13px 16px;
 }
 .payment-methods__item--active {
-    &, &:hover {
+    &,
+    &:hover {
         background: $payment-methods-active-bg;
         border: $payment-methods-active-border;
     }

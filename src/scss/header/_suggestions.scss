@@ -4,8 +4,8 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
-.suggestions {}
+.suggestions {
+}
 .suggestions__list {
     list-style: none;
     margin: 0;
@@ -92,7 +92,6 @@
         #{$margin-inline-start}: 14px;
     }
 }
-
 
 .suggestions--location--header {
     color: $header-search-suggestions-font-color;

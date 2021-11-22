@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .product-tabs {
     margin-top: 36px;
 }
@@ -32,7 +31,7 @@
     color: inherit;
     font-weight: $font-weight-medium;
     border-radius: 3px 3px 0 0;
-    transition: all .15s;
+    transition: all 0.15s;
 
     &:focus {
         outline: none;
@@ -73,15 +72,13 @@
     overflow: hidden;
     height: 0;
     opacity: 0;
-    transition: opacity .5s;
+    transition: opacity 0.5s;
 }
 .product-tabs__pane--active {
     overflow: visible;
     height: auto;
     opacity: 1;
 }
-
-
 
 .product-tabs--layout--sidebar {
     .product-tabs__item {
@@ -91,10 +88,6 @@
         padding: 48px 50px;
     }
 }
-
-
-
-
 
 @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
     .product-tabs__content {

@@ -11,9 +11,9 @@ const auth0Api = {
             method: 'PATCH',
             url: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/${userId}`,
             headers: { authorization: `Bearer ${accessToken}`, 'content-type': 'application/json' },
-            data: { 
-                user_metadata
-            }
+            data: {
+                user_metadata,
+            },
         };
         return axios(config);
     },
@@ -26,7 +26,7 @@ const auth0Api = {
         const response = await axios(config);
 
         return response.data;
-    }
-}
+    },
+};
 
 export default auth0Api;

@@ -3,11 +3,9 @@
 */
 @import '../variables';
 
-
 $local-circle-size: 16px;
 $local-inner-circle-size: 6px;
-$local-transition-duration: .2s;
-
+$local-transition-duration: 0.2s;
 
 .input-radio {
     display: inline-block;
@@ -31,26 +29,24 @@ $local-transition-duration: .2s;
     display: block;
     width: $local-circle-size;
     height: $local-circle-size;
-    border-radius: $local-circle-size * .5;
+    border-radius: $local-circle-size * 0.5;
     background: $input-radio-circle-bg;
     box-shadow: $input-radio-circle-shadow;
-    transition: background $local-transition-duration,
-                box-shadow $local-transition-duration;
+    transition: background $local-transition-duration, box-shadow $local-transition-duration;
 
     &::after {
         display: block;
         content: '';
         position: absolute;
-        left: ($local-circle-size - $local-inner-circle-size) * .5;
-        top: ($local-circle-size - $local-inner-circle-size) * .5;
+        left: ($local-circle-size - $local-inner-circle-size) * 0.5;
+        top: ($local-circle-size - $local-inner-circle-size) * 0.5;
         width: $local-inner-circle-size;
         height: $local-inner-circle-size;
-        border-radius: $local-inner-circle-size * .5;
+        border-radius: $local-inner-circle-size * 0.5;
         background: $input-radio-inner-circle-color;
         transform: scale(0);
-        transition: background $local-transition-duration,
-                    transform $local-transition-duration,
-                    visibility 0s $local-transition-duration;
+        transition: background $local-transition-duration, transform $local-transition-duration,
+            visibility 0s $local-transition-duration;
         visibility: hidden;
     }
 }

@@ -8,7 +8,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 import blockContent from './blockContent';
 import category from './category';
 import post from './post';
-import author from './author';
+import teamMember from './teamMember';
 import home from './home';
 import nuestrasMarcas from './nuestrasMarcas';
 import header from './header';
@@ -29,7 +29,7 @@ export default createSchema({
     types: schemaTypes.concat([
         // The following are document types which will appear
         // in the studio.
-        author,
+        teamMember,
         banner,
         blockContent,
         category,

@@ -30,20 +30,20 @@ function ShopPageCart() {
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
 
-    const updateQuantities = () => (
-        cartUpdateQuantities(quantities.map((x) => ({
-            ...x,
-            value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-        })))
-    );
+    const updateQuantities = () =>
+        cartUpdateQuantities(
+            quantities.map((x) => ({
+                ...x,
+                value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+            })),
+        );
 
-    const cartNeedUpdate = () => (
+    const cartNeedUpdate = () =>
         quantities.filter((x) => {
             const item = cart.items.find((item) => item.id === x.itemId);
 
             return item && item.quantity !== x.value && x.value !== '';
-        }).length > 0
-    );
+        }).length > 0;
 
     const getItemQuantity = (item: CartItem) => {
         const quantity = quantities.find((x) => x.itemId === item.id);
@@ -92,7 +92,11 @@ function ShopPageCart() {
                 image = (
                     <div className="product-image">
                         <AppLink href={url.product(item.product)} className="product-image__body">
-                            <img className="product-image__img" src={item.product.images[0]} alt="" />
+                            <img
+                                className="product-image__img"
+                                src={item.product.images[0]}
+                                alt=""
+                            />
                         </AppLink>
                     </div>
                 );
@@ -127,11 +131,12 @@ function ShopPageCart() {
 
             return (
                 <tr key={item.id} className="cart-table__row">
-                    <td className="cart-table__column cart-table__column--image">
-                        {image}
-                    </td>
+                    <td className="cart-table__column cart-table__column--image">{image}</td>
                     <td className="cart-table__column cart-table__column--product">
-                        <AppLink href={url.product(item.product)} className="cart-table__product-name">
+                        <AppLink
+                            href={url.product(item.product)}
+                            className="cart-table__product-name"
+                        >
                             {item.product.name}
                         </AppLink>
                         {options}
@@ -139,7 +144,10 @@ function ShopPageCart() {
                     <td className="cart-table__column cart-table__column--price" data-title="Price">
                         <CurrencyFormat value={item.price} />
                     </td>
-                    <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
+                    <td
+                        className="cart-table__column cart-table__column--quantity"
+                        data-title="Quantity"
+                    >
                         <InputNumber
                             onChange={(quantity) => handleChangeQuantity(item, quantity)}
                             value={getItemQuantity(item)}
@@ -161,7 +169,9 @@ function ShopPageCart() {
                 <thead className="cart__totals-header">
                     <tr>
                         <th>Subtotal</th>
-                        <td><CurrencyFormat value={cart.subtotal} /></td>
+                        <td>
+                            <CurrencyFormat value={cart.subtotal} />
+                        </td>
                     </tr>
                 </thead>
                 <tbody className="cart__totals-body">
@@ -199,7 +209,12 @@ function ShopPageCart() {
                     });
 
                     return (
-                        <button type="button" onClick={run} className={classes} disabled={!cartNeedUpdate()}>
+                        <button
+                            type="button"
+                            onClick={run}
+                            className={classes}
+                            disabled={!cartNeedUpdate()}
+                        >
                             Update Cart
                         </button>
                     );
@@ -213,23 +228,43 @@ function ShopPageCart() {
                     <table className="cart__table cart-table">
                         <thead className="cart-table__head">
                             <tr className="cart-table__row">
-                                <th className="cart-table__column cart-table__column--image">Image</th>
-                                <th className="cart-table__column cart-table__column--product">Product</th>
-                                <th className="cart-table__column cart-table__column--price">Price</th>
-                                <th className="cart-table__column cart-table__column--quantity">Quantity</th>
-                                <th className="cart-table__column cart-table__column--total">Total</th>
-                                <th className="cart-table__column cart-table__column--remove" aria-label="Remove" />
+                                <th className="cart-table__column cart-table__column--image">
+                                    Image
+                                </th>
+                                <th className="cart-table__column cart-table__column--product">
+                                    Product
+                                </th>
+                                <th className="cart-table__column cart-table__column--price">
+                                    Price
+                                </th>
+                                <th className="cart-table__column cart-table__column--quantity">
+                                    Quantity
+                                </th>
+                                <th className="cart-table__column cart-table__column--total">
+                                    Total
+                                </th>
+                                <th
+                                    className="cart-table__column cart-table__column--remove"
+                                    aria-label="Remove"
+                                />
                             </tr>
                         </thead>
-                        <tbody className="cart-table__body">
-                            {cartItems}
-                        </tbody>
+                        <tbody className="cart-table__body">{cartItems}</tbody>
                     </table>
                     <div className="cart__actions">
                         <form className="cart__coupon-form">
-                            <label htmlFor="input-coupon-code" className="sr-only">Password</label>
-                            <input type="text" className="form-control" id="input-coupon-code" placeholder="Coupon Code" />
-                            <button type="submit" className="btn btn-primary">Apply Coupon</button>
+                            <label htmlFor="input-coupon-code" className="sr-only">
+                                Password
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="input-coupon-code"
+                                placeholder="Coupon Code"
+                            />
+                            <button type="submit" className="btn btn-primary">
+                                Apply Coupon
+                            </button>
                         </form>
                         <div className="cart__buttons">
                             <AppLink href="/" className="btn btn-light">
@@ -249,7 +284,9 @@ function ShopPageCart() {
                                         <tfoot className="cart__totals-footer">
                                             <tr>
                                                 <th>Total</th>
-                                                <td><CurrencyFormat value={cart.total} /></td>
+                                                <td>
+                                                    <CurrencyFormat value={cart.total} />
+                                                </td>
                                             </tr>
                                         </tfoot>
                                     </table>

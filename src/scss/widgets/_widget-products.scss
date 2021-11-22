@@ -5,7 +5,6 @@
 @import '../mixins/card';
 @import '../mixins/direction';
 
-
 .widget-products {
     @include card();
     padding: 20px;
@@ -39,7 +38,7 @@
 
     a {
         color: inherit;
-        transition: .15s;
+        transition: 0.15s;
     }
     a:hover {
         color: $link-hover-color;

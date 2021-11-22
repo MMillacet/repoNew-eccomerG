@@ -4,9 +4,7 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
-$local-transition-duration: .3s;
-
+$local-transition-duration: 0.3s;
 
 .mobilemenu {
     visibility: hidden;
@@ -47,7 +45,9 @@ $local-transition-duration: .3s;
 
     @include direction {
         #{$inset-inline-start}: 0;
-        transform: translateX(calc(-100% * #{$transform-direction} - 30px * #{$transform-direction}));
+        transform: translateX(
+            calc(-100% * #{$transform-direction} - 30px * #{$transform-direction})
+        );
     }
 }
 .mobilemenu__header {
@@ -73,7 +73,7 @@ $local-transition-duration: .3s;
     justify-content: center;
     cursor: pointer;
     fill: $mobilemenu-close-button-default-color;
-    transition: fill .2s;
+    transition: fill 0.2s;
 
     @include direction {
         #{$border-inline-start}: 1px solid $mobilemenu-divider-color;
@@ -93,13 +93,12 @@ $local-transition-duration: .3s;
     -webkit-overflow-scrolling: touch;
 }
 
-
 .mobilemenu--open {
     visibility: visible;
     transition-delay: 0s;
 
     .mobilemenu__backdrop {
-        opacity: .9;
+        opacity: 0.9;
     }
 
     .mobilemenu__body {

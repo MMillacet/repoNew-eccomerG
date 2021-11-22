@@ -27,7 +27,7 @@ export default {
             name: 'phone',
             title: 'Phone Number',
             type: 'string',
-            validation: Rule => Rule.custom(number=>!number||!isNaN(number))
+            validation: (Rule) => Rule.custom((number) => !number || !isNaN(number)),
         },
     ],
 };

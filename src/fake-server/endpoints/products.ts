@@ -74,8 +74,8 @@ export function getProductsList(
     filters.forEach((filter) => filter.calc(filters));
 
     // Apply filters to products list.
-    items = items.filter(
-        (product) => filters.reduce<boolean>((mr, filter) => mr && filter.test(product), true),
+    items = items.filter((product) =>
+        filters.reduce<boolean>((mr, filter) => mr && filter.test(product), true),
     );
 
     const page = options.page || 1;
@@ -140,8 +140,8 @@ export function getSuggestions(query: string, options: GetSuggestionsOptions) {
     const limit = options.limit || 5;
 
     return Promise.resolve(
-        productsData.filter(
-            (x) => x.name.toLowerCase().includes(query.toLowerCase()),
-        ).slice(0, limit),
+        productsData
+            .filter((x) => x.name.toLowerCase().includes(query.toLowerCase()))
+            .slice(0, limit),
     );
 }

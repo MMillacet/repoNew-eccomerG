@@ -4,7 +4,6 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 .compare-table {
     width: 100%;
     border-collapse: separate;
@@ -68,7 +67,8 @@
         vertical-align: top;
     }
 
-    td, th {
+    td,
+    th {
         padding: 14px 16px;
     }
 }

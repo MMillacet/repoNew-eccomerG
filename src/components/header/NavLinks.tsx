@@ -28,9 +28,8 @@ function NavLinks() {
             const itemOffsetLeft = item.offsetLeft;
 
             if (direction === 'rtl') {
-                const itemPosition = containerWidth - (
-                    itemOffsetLeft + item.getBoundingClientRect().width
-                );
+                const itemPosition =
+                    containerWidth - (itemOffsetLeft + item.getBoundingClientRect().width);
 
                 const megamenuPosition = Math.round(
                     Math.min(itemPosition, containerWidth - megamenuWidth),
@@ -67,7 +66,9 @@ function NavLinks() {
 
         if (item.submenu && item.submenu.type === 'megamenu') {
             submenu = (
-                <div className={`nav-links__megamenu nav-links__megamenu--size--${item.submenu.menu.size}`}>
+                <div
+                    className={`nav-links__megamenu nav-links__megamenu--size--${item.submenu.menu.size}`}
+                >
                     <Megamenu menu={item.submenu.menu} />
                 </div>
             );
@@ -90,11 +91,7 @@ function NavLinks() {
         );
     });
 
-    return (
-        <ul className="nav-links__list">
-            {linksList}
-        </ul>
-    );
+    return <ul className="nav-links__list">{linksList}</ul>;
 }
 
 export default NavLinks;

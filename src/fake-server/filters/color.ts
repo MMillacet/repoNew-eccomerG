@@ -46,40 +46,53 @@ export default class ColorFilterBuilder extends AbstractFilterBuilder<IColorFilt
             return true;
         }
 
-        return this.value.reduce<boolean>((result, value) => (
-            result || this.extractItems(product).map((x) => x.slug).includes(value)
-        ), false);
+        return this.value.reduce<boolean>(
+            (result, value) =>
+                result ||
+                this.extractItems(product)
+                    .map((x) => x.slug)
+                    .includes(value),
+            false,
+        );
     }
 
     makeItems(products: IProduct[], value?: string): void {
-        products.forEach((product) => this.extractItems(product).forEach((item) => {
-            if (!this.items.find((x) => x.slug === item.slug)) {
-                this.items.push(item);
-            }
-        }));
+        products.forEach((product) =>
+            this.extractItems(product).forEach((item) => {
+                if (!this.items.find((x) => x.slug === item.slug)) {
+                    this.items.push(item);
+                }
+            }),
+        );
 
         this.value = parseValue(value);
     }
 
     calc(filters: AbstractFilterBuilder[]): void {
-        const products = productsData.filter(
-            (product) => filters.reduce<boolean>(
+        const products = productsData.filter((product) =>
+            filters.reduce<boolean>(
                 (isMatched, filter) => isMatched && (filter === this || filter.test(product)),
                 true,
             ),
         );
 
-        this.items = this.items.map((item) => {
-            const count = products.reduce((acc, product) => {
-                const match = this.extractItems(product).map((x) => x.slug).includes(item.slug);
+        this.items = this.items
+            .map((item) => {
+                const count = products.reduce((acc, product) => {
+                    const match = this.extractItems(product)
+                        .map((x) => x.slug)
+                        .includes(item.slug);
 
-                return acc + (match ? 1 : 0);
-            }, 0);
+                    return acc + (match ? 1 : 0);
+                }, 0);
 
-            return { ...item, count };
-        }).sort((a, b) => (
-            colors.findIndex((x) => x.slug === a.slug) - colors.findIndex((x) => x.slug === b.slug)
-        ));
+                return { ...item, count };
+            })
+            .sort(
+                (a, b) =>
+                    colors.findIndex((x) => x.slug === a.slug) -
+                    colors.findIndex((x) => x.slug === b.slug),
+            );
     }
 
     build(): IColorFilter {

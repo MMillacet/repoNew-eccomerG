@@ -6,6 +6,6 @@ const create = async (order: any) => {
     const { data } = await axios(config);
 
     return data;
-}
+};
 
 export default { create };

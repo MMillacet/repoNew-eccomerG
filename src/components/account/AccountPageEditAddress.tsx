@@ -41,9 +41,7 @@ export default function AccountPageEditAddress() {
 
                         <div className="form-group">
                             <label htmlFor="checkout-company-name">
-                                Company Name
-                                {' '}
-                                <span className="text-muted">(Optional)</span>
+                                Company Name <span className="text-muted">(Optional)</span>
                             </label>
                             <input
                                 type="text"
@@ -54,7 +52,10 @@ export default function AccountPageEditAddress() {
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-country">Country</label>
-                            <select id="checkout-country" className="form-control form-control-select2">
+                            <select
+                                id="checkout-country"
+                                className="form-control form-control-select2"
+                            >
                                 <option>Select a country...</option>
                                 <option>United States</option>
                                 <option>Russia</option>
@@ -76,39 +77,22 @@ export default function AccountPageEditAddress() {
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-address">
-                                Apartment, suite, unit etc.
-                                {' '}
+                                Apartment, suite, unit etc.{' '}
                                 <span className="text-muted">(Optional)</span>
                             </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="checkout-address"
-                            />
+                            <input type="text" className="form-control" id="checkout-address" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-city">Town / City</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="checkout-city"
-                            />
+                            <input type="text" className="form-control" id="checkout-city" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-state">State / County</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="checkout-state"
-                            />
+                            <input type="text" className="form-control" id="checkout-state" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-postcode">Postcode / ZIP</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="checkout-postcode"
-                            />
+                            <input type="text" className="form-control" id="checkout-postcode" />
                         </div>
 
                         <div className="form-row">
@@ -133,7 +117,9 @@ export default function AccountPageEditAddress() {
                         </div>
 
                         <div className="form-group mt-3 mb-0">
-                            <button className="btn btn-primary" type="button">Save</button>
+                            <button className="btn btn-primary" type="button">
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>

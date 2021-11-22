@@ -5,8 +5,8 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
-.order-success {}
+.order-success {
+}
 .order-success__body {
     max-width: 690px;
     margin: 0 auto;
@@ -61,7 +61,7 @@
         top: 0;
 
         @include direction {
-            #{$inset-inline-end}: -1px
+            #{$inset-inline-end}: -1px;
         }
     }
 }
@@ -77,7 +77,6 @@
     line-height: 16px;
     font-weight: $font-weight-medium;
 }
-
 
 @media (max-width: breakpoint(sm-end)) {
     .order-success__header {

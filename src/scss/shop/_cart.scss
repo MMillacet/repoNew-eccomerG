@@ -6,8 +6,8 @@
 @import '../mixins/buttons';
 @import '../mixins/direction';
 
-
-.cart {}
+.cart {
+}
 .cart__actions {
     margin-top: 1.75rem;
     display: flex;
@@ -21,7 +21,7 @@
         flex-shrink: 0;
 
         @include direction {
-            #{$margin-inline-start}: .5rem;
+            #{$margin-inline-start}: 0.5rem;
         }
     }
 }
@@ -32,7 +32,7 @@
 }
 .cart__update-button {
     @include direction {
-        #{$margin-inline-start}: .5rem;
+        #{$margin-inline-start}: 0.5rem;
     }
 }
 .cart__totals {
@@ -45,7 +45,8 @@
         text-decoration: underline;
     }
 
-    th, td {
+    th,
+    td {
         vertical-align: top;
         padding: 6px 0;
     }
@@ -97,7 +98,6 @@
     font-size: 15px;
 }
 
-
 @media (min-width: breakpoint(md-start)) and (max-width: breakpoint(md-end)) {
     .cart__actions {
         margin-top: 1.5rem;
@@ -118,7 +118,7 @@
     }
     .cart__update-button {
         order: -1;
-        margin-bottom: .75rem;
+        margin-bottom: 0.75rem;
 
         @include direction {
             #{$margin-inline-start}: 0;

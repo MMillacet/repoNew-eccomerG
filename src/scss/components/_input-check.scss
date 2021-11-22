@@ -3,11 +3,9 @@
 */
 @import '../variables';
 
-
 $local-box-size: 16px;
 $local-border-radius: 1.2px;
-$local-transition-duration: .15s;
-
+$local-transition-duration: 0.15s;
 
 .input-check {
     display: inline-block;
@@ -34,8 +32,7 @@ $local-transition-duration: .15s;
     border-radius: $local-border-radius;
     background: $input-check-box-bg;
     box-shadow: $input-check-box-shadow;
-    transition: background $local-transition-duration,
-                box-shadow $local-transition-duration;
+    transition: background $local-transition-duration, box-shadow $local-transition-duration;
 }
 .input-check__icon {
     pointer-events: none;
@@ -44,9 +41,8 @@ $local-transition-duration: .15s;
     top: 5px;
     fill: $input-check-icon-color;
     transform: scale(0);
-    transition: fill $local-transition-duration,
-                transform $local-transition-duration,
-                visibility 0s $local-transition-duration;
+    transition: fill $local-transition-duration, transform $local-transition-duration,
+        visibility 0s $local-transition-duration;
 }
 .input-check__input:checked ~ {
     .input-check__box {

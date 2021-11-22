@@ -4,7 +4,6 @@
 @import '../variables';
 @import '../functions';
 
-
 .block-map {
     margin-bottom: 10px;
 }
@@ -46,7 +45,6 @@
         height: 100%;
     }
 }
-
 
 @media (max-width: breakpoint(lg-end)) {
     .block-map__body {

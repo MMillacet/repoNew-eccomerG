@@ -5,8 +5,8 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
-.footer-contacts {}
+.footer-contacts {
+}
 .footer-contacts__title {
     margin-bottom: 25px;
 }
@@ -50,8 +50,6 @@
         #{$margin-inline-end}: 2px;
     }
 }
-
-
 
 @media (max-width: breakpoint(sm-end)) {
     .footer-contacts {

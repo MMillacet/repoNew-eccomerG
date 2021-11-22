@@ -40,9 +40,7 @@ function SocialLinks(props: SocialLinksProps) {
 
     return (
         <div className={classes}>
-            <ul className="social-links__list">
-                {items}
-            </ul>
+            <ul className="social-links__list">{items}</ul>
         </div>
     );
 }

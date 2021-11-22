@@ -4,7 +4,6 @@
 @import '../variables';
 @import '../functions';
 
-
 .dashboard {
     display: flex;
     flex-wrap: wrap;
@@ -14,7 +13,6 @@
     margin-top: 24px;
     width: 100%;
 }
-
 
 @media (min-width: breakpoint(md-start)) {
     .dashboard__profile,

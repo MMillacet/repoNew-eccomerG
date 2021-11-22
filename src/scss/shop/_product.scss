@@ -6,10 +6,10 @@
 @import '../mixins/hacks';
 @import '../mixins/direction';
 
-
-.product {}
+.product {
+}
 .product__content {
-    display:-ms-grid;
+    display: -ms-grid;
     display: grid;
     -ms-grid-columns: 50% 50%;
     grid-template-columns: [gallery] calc(50% - 20px) [info] calc(50% - 20px);
@@ -70,7 +70,7 @@
 
     a {
         color: inherit;
-        transition: color .2s;
+        transition: color 0.2s;
     }
     a:hover {
         color: $link-hover-color;
@@ -134,7 +134,7 @@
 
     a {
         color: inherit;
-        transition: color .2s;
+        transition: color 0.2s;
     }
     a:hover {
         color: $link-hover-color;
@@ -148,7 +148,7 @@
     margin-bottom: 14px;
     font-size: 28px;
     font-weight: $font-weight-bold;
-    letter-spacing: -.03em;
+    letter-spacing: -0.03em;
     color: $price-color;
 }
 .product__new-price {
@@ -200,7 +200,6 @@
     margin-top: 2px;
     margin-bottom: 2px;
 }
-
 
 @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
     .product__name {
@@ -258,9 +257,7 @@
     }
 }
 
-
 @import 'product--layout--columnar';
-
 
 .product--layout--sidebar {
     @media (min-width: breakpoint(lg-start)) {
@@ -289,7 +286,6 @@
         }
     }
 }
-
 
 .product--layout--quickview {
     @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {

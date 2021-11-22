@@ -30,9 +30,7 @@ function IndicatorSearch() {
         </Fragment>
     );
 
-    const searchDropdown = (
-        <Search context="indicator" inputRef={inputRef} onClose={handleClose} />
-    );
+    const searchDropdown = <Search context="indicator" inputRef={inputRef} onClose={handleClose} />;
 
     return (
         <Indicator

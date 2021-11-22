@@ -11,11 +11,11 @@ import MobileHeader from './mobile/MobileHeader';
 import MobileMenu from './mobile/MobileMenu';
 import Quickview from './shared/Quickview';
 
-export interface LayoutProps extends PropsWithChildren<{}>{
+export interface LayoutProps extends PropsWithChildren<{}> {
     headerLayout: HeaderLayout;
 }
 
-function Layout(props : LayoutProps) {
+function Layout(props: LayoutProps) {
     const { children, headerLayout } = props;
 
     return (
@@ -35,9 +35,7 @@ function Layout(props : LayoutProps) {
                     <Header layout={headerLayout} />
                 </header>
 
-                <div className="site__body">
-                    {children}
-                </div>
+                <div className="site__body">{children}</div>
 
                 <footer className="site__footer">
                     <Footer />

@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 
 // third-party
 import classNames from 'classnames';
+import { useUser } from '@auth0/nextjs-auth0';
 
 // application
 import AppLink from '../shared/AppLink';
@@ -12,7 +13,6 @@ import CurrencyFormat from '../shared/CurrencyFormat';
 import url from '../../services/url';
 import { IProduct } from '../../interfaces/product';
 import { useCartAddItem } from '../../store/cart/cartHooks';
-import { useUser } from '@auth0/nextjs-auth0';
 
 export interface SuggestionsProps {
     context: 'header' | 'mobile-header' | 'indicator';
@@ -21,71 +21,72 @@ export interface SuggestionsProps {
 }
 
 function Suggestions(props: SuggestionsProps) {
-    const {
-        context,
-        className,
-        products,
-    } = props;
+    const { context, className, products } = props;
     const rootClasses = classNames(`suggestions suggestions--location--${context}`, className);
     const cartAddItem = useCartAddItem();
-    
+
     const { user } = useUser();
 
-    const list = (products && products.map((product) => (
-        <li key={product.id} className="suggestions__item">
-            {product.images && product.images.length > 0 && (
-                <div className="suggestions__item-image product-image">
-                    <div className="product-image__body">
-                        <img className="product-image__img" src={product.images[0]} alt="" />
+    const list =
+        products &&
+        products.map((product) => (
+            <li key={product.id} className="suggestions__item">
+                {product.images && product.images.length > 0 && (
+                    <div className="suggestions__item-image product-image">
+                        <div className="product-image__body">
+                            <img className="product-image__img" src={product.images[0]} alt="" />
+                        </div>
                     </div>
+                )}
+                <div className="suggestions__item-info">
+                    <AppLink href={url.product(product)} className="suggestions__item-name">
+                        {product.title}
+                    </AppLink>
+                    <div className="suggestions__item-meta"> {product.category} </div>
                 </div>
-            )}
-            <div className="suggestions__item-info">
-                <AppLink href={url.product(product)} className="suggestions__item-name">
-                    {product.title}
-                </AppLink>
-                <div className="suggestions__item-meta"> {product.category} </div>
-            </div>
 
-            {user && <div className="suggestions__item-price">
-                {product.compareAtPrice && (
-                    <Fragment>
-                        <span className="suggestions__item-price-new"><CurrencyFormat value={product.price} /></span>
-                        {' '}
-                        <span className="suggestions__item-price-old"><CurrencyFormat value={product.compareAtPrice} /></span>
-                    </Fragment>
+                {user && (
+                    <div className="suggestions__item-price">
+                        {product.compareAtPrice && (
+                            <Fragment>
+                                <span className="suggestions__item-price-new">
+                                    <CurrencyFormat value={product.price} />
+                                </span>{' '}
+                                <span className="suggestions__item-price-old">
+                                    <CurrencyFormat value={product.compareAtPrice} />
+                                </span>
+                            </Fragment>
+                        )}
+
+                        {!product.compareAtPrice && <CurrencyFormat value={product.price} />}
+                    </div>
                 )}
 
-                {!product.compareAtPrice && (<CurrencyFormat value={product.price} />)}
-            </div>}
-
-            {user && context === 'header' && (
-                <div className="suggestions__item-actions">
-                    <AsyncAction
-                        action={() => cartAddItem(product)}
-                        render={({ run, loading }) => (
-                            <button
-                                type="button"
-                                onClick={run}
-                                title="Add to cart"
-                                className={classNames('btn btn-primary btn-sm btn-svg-icon', {
-                                    'btn-loading': loading,
-                                })}
-                            >
-                                <Cart16Svg />
-                            </button>
-                        )}
-                    />
-                </div>
-            )}
-        </li>
-    )));
+                {user && context === 'header' && (
+                    <div className="suggestions__item-actions">
+                        <AsyncAction
+                            action={() => cartAddItem(product)}
+                            render={({ run, loading }) => (
+                                <button
+                                    type="button"
+                                    onClick={run}
+                                    title="Add to cart"
+                                    className={classNames('btn btn-primary btn-sm btn-svg-icon', {
+                                        'btn-loading': loading,
+                                    })}
+                                >
+                                    <Cart16Svg />
+                                </button>
+                            )}
+                        />
+                    </div>
+                )}
+            </li>
+        ));
 
     return (
         <div className={rootClasses}>
-            <ul className="suggestions__list">
-                {list}
-            </ul>
+            <ul className="suggestions__list">{list}</ul>
         </div>
     );
 }

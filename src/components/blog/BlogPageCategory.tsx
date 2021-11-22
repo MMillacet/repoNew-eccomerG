@@ -45,7 +45,7 @@ function BlogPageCategory(props: BlogPageCategoryProps) {
     }
 
     const postsList = dataBlogPosts.map((post) => {
-        const layoutMap: {[layout: string]: PostCardLayout} = {
+        const layoutMap: { [layout: string]: PostCardLayout } = {
             classic: 'grid-lg',
             grid: 'grid-nl',
             list: 'list-nl',
@@ -72,10 +72,10 @@ function BlogPageCategory(props: BlogPageCategoryProps) {
                     <div className="col-12 col-lg-8">
                         <div className="block">
                             <div className="posts-view">
-                                <div className={`posts-view__list posts-list posts-list--layout--${layout}`}>
-                                    <div className="posts-list__body">
-                                        {postsList}
-                                    </div>
+                                <div
+                                    className={`posts-view__list posts-list posts-list--layout--${layout}`}
+                                >
+                                    <div className="posts-list__body">{postsList}</div>
                                 </div>
                                 <div className="posts-view__pagination">
                                     <Pagination

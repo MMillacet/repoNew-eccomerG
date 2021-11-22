@@ -2,11 +2,7 @@ import AbstractFilterBuilder from './abstract';
 import { ICategoryFilter, ICategoryFilterValue } from '../../interfaces/filter';
 import { IProduct } from '../../interfaces/product';
 import { IShopCategory } from '../../interfaces/category';
-import {
-    categoriesListData,
-    categoriesTreeData,
-    prepareCategory,
-} from '../database/categories';
+import { categoriesListData, categoriesTreeData, prepareCategory } from '../database/categories';
 
 export default class CategoryFilterBuilder extends AbstractFilterBuilder<ICategoryFilter> {
     value: ICategoryFilterValue = null;

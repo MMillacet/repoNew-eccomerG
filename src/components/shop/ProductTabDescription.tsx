@@ -4,14 +4,14 @@ function ProductTabDescription() {
             <h3>Product Full Description</h3>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum, diam
-                non iaculis finibus, ipsum arcu sollicitudin dolor, ut cursus sapien sem sed
-                purus. Donec vitae fringilla tortor, sed fermentum nunc. Suspendisse sodales turpis
-                dolor, at rutrum dolor tristique id. Quisque pellentesque ullamcorper felis, eget
-                gravida mi elementum a. Maecenas consectetur volutpat ante, sit amet molestie urna
-                luctus in. Nulla eget dolor semper urna malesuada dictum. Duis eleifend
-                pellentesque dui et finibus. Pellentesque dapibus dignissim augue. Etiam odio est,
-                sodales ac aliquam id, iaculis eget lacus. Aenean porta, ante vitae suscipit
-                pulvinar, purus dui interdum tellus, sed dapibus mi mauris vitae tellus.
+                non iaculis finibus, ipsum arcu sollicitudin dolor, ut cursus sapien sem sed purus.
+                Donec vitae fringilla tortor, sed fermentum nunc. Suspendisse sodales turpis dolor,
+                at rutrum dolor tristique id. Quisque pellentesque ullamcorper felis, eget gravida
+                mi elementum a. Maecenas consectetur volutpat ante, sit amet molestie urna luctus
+                in. Nulla eget dolor semper urna malesuada dictum. Duis eleifend pellentesque dui et
+                finibus. Pellentesque dapibus dignissim augue. Etiam odio est, sodales ac aliquam
+                id, iaculis eget lacus. Aenean porta, ante vitae suscipit pulvinar, purus dui
+                interdum tellus, sed dapibus mi mauris vitae tellus.
             </p>
             <h3>Etiam lacus lacus mollis in mattis</h3>
             <p>

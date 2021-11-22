@@ -7,13 +7,12 @@
 @import '../mixins/hacks';
 @import '../mixins/direction';
 
-
 .product--layout--columnar {
     @media (min-width: breakpoint(lg-start)) {
         $local-info-padding: 30px;
 
         .product__content {
-            -ms-grid-columns: 380px auto  260px;
+            -ms-grid-columns: 380px auto 260px;
             grid-template-columns: [gallery] 380px [info] auto [sidebar] 260px;
             grid-template-rows: auto auto auto auto;
             grid-column-gap: 0;
@@ -132,8 +131,8 @@
                 width: 100%;
 
                 @include direction {
-                    #{$padding-inline-start}: .5rem;
-                    #{$padding-inline-end}: .5rem;
+                    #{$padding-inline-start}: 0.5rem;
+                    #{$padding-inline-end}: 0.5rem;
                 }
             }
         }
@@ -148,7 +147,7 @@
     }
     @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
         .product__content {
-            -ms-grid-columns: 320px auto  200px;
+            -ms-grid-columns: 320px auto 200px;
             grid-template-columns: [gallery] 320px [info] auto [sidebar] 200px;
         }
         .product__sidebar {

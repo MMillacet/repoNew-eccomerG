@@ -297,11 +297,13 @@ export function prepareCategory<T extends IBaseCategory>(category: T, depth?: nu
         children = category.children && category.children.map((x) => prepareCategory(x, depth - 1));
     }
 
-    return JSON.parse(JSON.stringify({
-        ...category,
-        parent: category.parent ? prepareCategory(category.parent) : null,
-        children,
-    }));
+    return JSON.parse(
+        JSON.stringify({
+            ...category,
+            parent: category.parent ? prepareCategory(category.parent) : null,
+            children,
+        }),
+    );
 }
 
 export const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categoriesDef);

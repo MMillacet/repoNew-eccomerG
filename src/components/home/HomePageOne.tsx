@@ -43,12 +43,15 @@ function HomePageOne(props: HomePageOneProps) {
      * Featured products.
      */
     const featuredProducts = useProductTabs(
-        useMemo(() => [
-            { id: 1, name: 'All', categorySlug: undefined },
-            { id: 2, name: 'Power Tools', categorySlug: 'power-tools' },
-            { id: 3, name: 'Hand Tools', categorySlug: 'hand-tools' },
-            { id: 4, name: 'Plumbing', categorySlug: 'plumbing' },
-        ], []),
+        useMemo(
+            () => [
+                { id: 1, name: 'All', categorySlug: undefined },
+                { id: 2, name: 'Power Tools', categorySlug: 'power-tools' },
+                { id: 3, name: 'Hand Tools', categorySlug: 'hand-tools' },
+                { id: 4, name: 'Plumbing', categorySlug: 'plumbing' },
+            ],
+            [],
+        ),
         (tab) => shopApi.getPopularProducts({ limit: 8, category: tab.categorySlug }),
         initData?.featuredProducts,
     );
@@ -56,20 +59,25 @@ function HomePageOne(props: HomePageOneProps) {
     /**
      * Bestsellers.
      */
-    const bestsellers = useDeferredData(() => (
-        shopApi.getPopularProducts({ limit: 7 })
-    ), [], initData?.bestsellers);
+    const bestsellers = useDeferredData(
+        () => shopApi.getPopularProducts({ limit: 7 }),
+        [],
+        initData?.bestsellers,
+    );
 
     /**
      * Latest products.
      */
     const latestProducts = useProductTabs(
-        useMemo(() => [
-            { id: 1, name: 'All', categorySlug: undefined },
-            { id: 2, name: 'Power Tools', categorySlug: 'power-tools' },
-            { id: 3, name: 'Hand Tools', categorySlug: 'hand-tools' },
-            { id: 4, name: 'Plumbing', categorySlug: 'plumbing' },
-        ], []),
+        useMemo(
+            () => [
+                { id: 1, name: 'All', categorySlug: undefined },
+                { id: 2, name: 'Power Tools', categorySlug: 'power-tools' },
+                { id: 3, name: 'Hand Tools', categorySlug: 'hand-tools' },
+                { id: 4, name: 'Plumbing', categorySlug: 'plumbing' },
+            ],
+            [],
+        ),
         (tab) => shopApi.getLatestProducts({ limit: 8, category: tab.categorySlug }),
         initData?.latestProducts,
     );
@@ -77,22 +85,27 @@ function HomePageOne(props: HomePageOneProps) {
     /**
      * Product columns.
      */
-    const columns = initData?.productColumns || useProductColumns(
-        useMemo(() => [
-            {
-                title: 'Top Rated Products',
-                source: () => shopApi.getTopRatedProducts({ limit: 3 }),
-            },
-            {
-                title: 'Special Offers',
-                source: () => shopApi.getDiscountedProducts({ limit: 3 }),
-            },
-            {
-                title: 'Bestsellers',
-                source: () => shopApi.getPopularProducts({ limit: 3 }),
-            },
-        ], []),
-    );
+    const columns =
+        initData?.productColumns ||
+        useProductColumns(
+            useMemo(
+                () => [
+                    {
+                        title: 'Top Rated Products',
+                        source: () => shopApi.getTopRatedProducts({ limit: 3 }),
+                    },
+                    {
+                        title: 'Special Offers',
+                        source: () => shopApi.getDiscountedProducts({ limit: 3 }),
+                    },
+                    {
+                        title: 'Bestsellers',
+                        source: () => shopApi.getPopularProducts({ limit: 3 }),
+                    },
+                ],
+                [],
+            ),
+        );
 
     return (
         <Fragment>
@@ -100,57 +113,99 @@ function HomePageOne(props: HomePageOneProps) {
                 <title>{`Home Page One — ${theme.name}`}</title>
             </Head>
 
-            {useMemo(() => <BlockSlideShow withDepartments />, [])}
+            {useMemo(
+                () => (
+                    <BlockSlideShow withDepartments />
+                ),
+                [],
+            )}
 
-            {useMemo(() => <BlockFeatures />, [])}
+            {useMemo(
+                () => (
+                    <BlockFeatures />
+                ),
+                [],
+            )}
 
-            {useMemo(() => (
-                <BlockProductsCarousel
-                    title="Featured Products"
-                    layout="grid-4"
-                    products={featuredProducts.data}
-                    loading={featuredProducts.isLoading}
-                    groups={featuredProducts.tabs}
-                    onGroupClick={featuredProducts.handleTabChange}
-                />
-            ), [featuredProducts])}
+            {useMemo(
+                () => (
+                    <BlockProductsCarousel
+                        title="Featured Products"
+                        layout="grid-4"
+                        products={featuredProducts.data}
+                        loading={featuredProducts.isLoading}
+                        groups={featuredProducts.tabs}
+                        onGroupClick={featuredProducts.handleTabChange}
+                    />
+                ),
+                [featuredProducts],
+            )}
 
-            {useMemo(() => <BlockBanner />, [])}
+            {useMemo(
+                () => (
+                    <BlockBanner />
+                ),
+                [],
+            )}
 
-            {useMemo(() => (
-                <BlockProducts
-                    title="Bestsellers"
-                    layout="large-first"
-                    featuredProduct={bestsellers.data[0]}
-                    products={bestsellers.data.slice(1, 7)}
-                />
-            ), [bestsellers.data])}
+            {useMemo(
+                () => (
+                    <BlockProducts
+                        title="Bestsellers"
+                        layout="large-first"
+                        featuredProduct={bestsellers.data[0]}
+                        products={bestsellers.data.slice(1, 7)}
+                    />
+                ),
+                [bestsellers.data],
+            )}
 
-            {useMemo(() => (
-                <BlockCategories
-                    title="Popular Categories"
-                    layout="classic"
-                    categories={dataShopBlockCategories}
-                />
-            ), [])}
+            {useMemo(
+                () => (
+                    <BlockCategories
+                        title="Popular Categories"
+                        layout="classic"
+                        categories={dataShopBlockCategories}
+                    />
+                ),
+                [],
+            )}
 
-            {useMemo(() => (
-                <BlockProductsCarousel
-                    title="New Arrivals"
-                    layout="horizontal"
-                    rows={2}
-                    products={latestProducts.data}
-                    loading={latestProducts.isLoading}
-                    groups={latestProducts.tabs}
-                    onGroupClick={latestProducts.handleTabChange}
-                />
-            ), [latestProducts])}
+            {useMemo(
+                () => (
+                    <BlockProductsCarousel
+                        title="New Arrivals"
+                        layout="horizontal"
+                        rows={2}
+                        products={latestProducts.data}
+                        loading={latestProducts.isLoading}
+                        groups={latestProducts.tabs}
+                        onGroupClick={latestProducts.handleTabChange}
+                    />
+                ),
+                [latestProducts],
+            )}
 
-            {useMemo(() => <BlockPosts title="Latest News" layout="list-sm" posts={dataBlogPosts} />, [])}
+            {useMemo(
+                () => (
+                    <BlockPosts title="Latest News" layout="list-sm" posts={dataBlogPosts} />
+                ),
+                [],
+            )}
 
-            {useMemo(() => <BlockBrands />, [])}
+            {useMemo(
+                () => (
+                    <BlockBrands />
+                ),
+                [],
+            )}
 
-            {useMemo(() => <BlockProductColumns columns={columns} />, [columns])}
+            {useMemo(
+                () => (
+                    <BlockProductColumns columns={columns} />
+                ),
+                [columns],
+            )}
         </Fragment>
     );
 }

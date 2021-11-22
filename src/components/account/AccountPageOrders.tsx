@@ -25,13 +25,7 @@ function AccountPageOrders() {
             <td>{order.date}</td>
             <td>{order.status}</td>
             <td>
-                <CurrencyFormat value={order.total} />
-                {' '}
-                for
-                {' '}
-                {order.quantity}
-                {' '}
-                item(s)
+                <CurrencyFormat value={order.total} /> for {order.quantity} item(s)
             </td>
         </tr>
     ));
@@ -57,9 +51,7 @@ function AccountPageOrders() {
                                 <th>Total</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {ordersList}
-                        </tbody>
+                        <tbody>{ordersList}</tbody>
                     </table>
                 </div>
             </div>

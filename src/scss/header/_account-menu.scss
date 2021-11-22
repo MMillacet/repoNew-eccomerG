@@ -5,7 +5,6 @@
 @import '../mixins/hacks';
 @import '../mixins/direction';
 
-
 .account-menu {
     box-shadow: $account-menu-shadow;
     background: $account-menu-bg;
@@ -18,7 +17,7 @@
 
     // without it IE renders a blurred menu
     @include only-ie() {
-        box-shadow: 0 0 0 1px rgba(#000, .15);
+        box-shadow: 0 0 0 1px rgba(#000, 0.15);
     }
 }
 .account-menu__form {
@@ -48,7 +47,7 @@
 
     a {
         color: $account-menu-font-alt-color;
-        transition: color .1s;
+        transition: color 0.1s;
     }
     a:hover {
         color: inherit;
@@ -71,7 +70,7 @@
     display: flex;
     align-items: center;
     padding: 0 7px;
-    transition: background .1s, color .1s;
+    transition: background 0.1s, color 0.1s;
 
     @include direction {
         #{$inset-inline-end}: $local-offset;

@@ -9,10 +9,7 @@ function addItem(state: WishlistState, product: IProduct): WishlistState {
 
     if (itemIndex === -1) {
         return {
-            items: [
-                ...state.items,
-                JSON.parse(JSON.stringify(product)),
-            ],
+            items: [...state.items, JSON.parse(JSON.stringify(product))],
         };
     }
 
@@ -33,14 +30,14 @@ export const WISHLIST_NAMESPACE = 'wishlist';
 
 function wishlistBaseReducer(state = initialState, action: WishlistAction) {
     switch (action.type) {
-    case WISHLIST_ADD_ITEM:
-        return addItem(state, action.product);
+        case WISHLIST_ADD_ITEM:
+            return addItem(state, action.product);
 
-    case WISHLIST_REMOVE_ITEM:
-        return removeItem(state, action.productId);
+        case WISHLIST_REMOVE_ITEM:
+            return removeItem(state, action.productId);
 
-    default:
-        return state;
+        default:
+            return state;
     }
 }
 

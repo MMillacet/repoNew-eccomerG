@@ -3,14 +3,13 @@
 */
 @import '../variables';
 
-
 $local-tag-margin: 2px;
 $local-tag-padding: 3px 8px 2px;
 $local-lg-tag-margin: 3px;
 $local-lg-tag-padding: 6px 10px 5px;
 
-
-.tags {}
+.tags {
+}
 .tags__list {
     display: flex;
     flex-wrap: wrap;
@@ -27,7 +26,7 @@ $local-lg-tag-padding: 6px 10px 5px;
         border-radius: $tags-border-radius;
         padding: $local-tag-padding;
         margin: $local-tag-margin;
-        transition: all .15s;
+        transition: all 0.15s;
     }
     a:focus,
     a:hover {
@@ -36,7 +35,6 @@ $local-lg-tag-padding: 6px 10px 5px;
         color: $tags-hover-font-color;
     }
 }
-
 
 .tags--lg {
     .tags__list {

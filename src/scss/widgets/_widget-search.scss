@@ -4,9 +4,7 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 $local-height: 48px;
-
 
 .widget-search {
     height: $local-height;
@@ -17,7 +15,7 @@ $local-height: 48px;
 }
 .widget-search__input {
     box-shadow: $widget-search-input-default-shadow;
-    transition: box-shadow .2s;
+    transition: box-shadow 0.2s;
     border-radius: 2px;
     height: 100%;
     width: 100%;
@@ -55,7 +53,7 @@ $local-height: 48px;
     border: none;
     padding: 0;
     fill: $widget-search-button-default-color;
-    transition: fill .2s;
+    transition: fill 0.2s;
 
     @include direction {
         #{$inset-inline-end}: 0;

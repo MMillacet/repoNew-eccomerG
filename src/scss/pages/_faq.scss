@@ -4,8 +4,8 @@
 @import '../variables';
 @import '../functions';
 
-
-.faq {}
+.faq {
+}
 .faq__section {
     & + & {
         margin-top: 70px;
@@ -24,7 +24,6 @@
     border-radius: $card-border-radius;
     padding: 48px 44px;
 }
-
 
 @media (max-width: breakpoint(md-end)) {
     .faq__section + .faq__section {

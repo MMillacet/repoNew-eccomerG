@@ -8,3 +8,5 @@ declare module '*.svg' {
     // noinspection JSDuplicatedDeclaration
     export default content;
 }
+
+declare module '@sanity/block-content-to-react';

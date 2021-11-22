@@ -5,11 +5,9 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .shop-layout {
     display: flex;
 }
-
 
 @media (min-width: breakpoint(lg-start)) {
     .shop-layout__sidebar {
@@ -34,7 +32,6 @@
         }
     }
 }
-
 
 @media (max-width: breakpoint(md-end)) {
     .shop-layout {

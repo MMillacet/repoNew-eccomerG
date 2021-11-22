@@ -44,13 +44,15 @@ export function hexToRgb(hex: string): RGB {
 export function luminance(color: string) {
     let rgb = hexToRgb(color);
 
-    rgb = rgb.map((x) => x / 255).map((x) => {
-        if (x <= 0.03928) {
-            return x / 12.92;
-        }
+    rgb = rgb
+        .map((x) => x / 255)
+        .map((x) => {
+            if (x <= 0.03928) {
+                return x / 12.92;
+            }
 
-        return ((x + 0.055) / 1.055) ** 2.4;
-    }) as RGB;
+            return ((x + 0.055) / 1.055) ** 2.4;
+        }) as RGB;
 
     return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
 }

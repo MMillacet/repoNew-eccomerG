@@ -107,7 +107,11 @@ class Departments extends Component<{}, DepartmentsState> {
     handleOutsideClick = (event: MouseEvent) => {
         const { open } = this.state;
 
-        if (open && this.rootRef.current && !this.rootRef.current.contains(event.target as HTMLElement)) {
+        if (
+            open &&
+            this.rootRef.current &&
+            !this.rootRef.current.contains(event.target as HTMLElement)
+        ) {
             this.setState(() => ({
                 open: false,
             }));
@@ -140,7 +144,11 @@ class Departments extends Component<{}, DepartmentsState> {
                     </div>
                 </div>
 
-                <button type="button" className="departments__button" onClick={this.handleButtonClick}>
+                <button
+                    type="button"
+                    className="departments__button"
+                    onClick={this.handleButtonClick}
+                >
                     <Menu18x14Svg className="departments__button-icon" />
                     Shop By Category
                     <ArrowRoundedDown9x6Svg className="departments__button-arrow" />

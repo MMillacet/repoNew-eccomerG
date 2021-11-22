@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .not-found {
     text-align: center;
 }
@@ -38,7 +37,6 @@
         #{$margin-inline-end}: 10px;
     }
 }
-
 
 @media (max-width: breakpoint(md-end)) {
     .not-found__404 {

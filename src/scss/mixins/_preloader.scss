@@ -1,6 +1,5 @@
 @import '../variables';
 
-
 @mixin preloader-animation() {
     @keyframes preloader-animation {
         from {
@@ -13,23 +12,27 @@
 }
 
 @mixin preloader-size($size) {
-    left: calc(50% - #{$size * .5});
-    top: calc(50% - #{$size * .5});
+    left: calc(50% - #{$size * 0.5});
+    top: calc(50% - #{$size * 0.5});
     width: $size;
     height: $size;
-    border-radius: $size * .5;
+    border-radius: $size * 0.5;
 }
 
-
-@mixin preloader($size: null, $thickness: $preloader-thickness, $color-1: $preloader-color-1, $color-2: $preloader-color-2) {
+@mixin preloader(
+    $size: null,
+    $thickness: $preloader-thickness,
+    $color-1: $preloader-color-1,
+    $color-2: $preloader-color-2
+) {
     display: block;
     content: '';
     position: absolute;
     border: $thickness solid $color-1;
     border-top-color: $color-2;
-    transition: border-color .1s;
+    transition: border-color 0.1s;
     animation-name: preloader-animation;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 

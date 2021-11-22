@@ -5,8 +5,8 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
-.footer-newsletter {}
+.footer-newsletter {
+}
 .footer-newsletter__title {
     margin-bottom: 25px;
 }
@@ -36,8 +36,6 @@
         #{$margin-inline-start}: 6px;
     }
 }
-
-
 
 @media (max-width: breakpoint(md-end)) {
     .footer-newsletter {

@@ -11,7 +11,9 @@ type ApplyClientStateAction<T> = {
     state: T;
 };
 
-function isApplyClientStateAction<T extends any>(action: Action): action is ApplyClientStateAction<T> {
+function isApplyClientStateAction<T extends any>(
+    action: Action,
+): action is ApplyClientStateAction<T> {
     return action.type === APPLY_CLIENT_STATE;
 }
 
@@ -31,7 +33,7 @@ export type StateFrom = StateFromServer | StateFromClient;
 export function withClientState<
     T extends AppReducer<any, any>,
     S extends ReturnType<T>,
-    R extends S & { stateFrom: StateFrom }
+    R extends S & { stateFrom: StateFrom },
 >(
     reducer: T extends AppReducer<ReturnType<T> & { stateFrom: any }, any>
         ? AppReducer<ReturnType<T> & { stateFrom: never }, any>

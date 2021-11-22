@@ -4,8 +4,8 @@
 @import '../variables';
 @import '../functions';
 
-
-.page-header {}
+.page-header {
+}
 .page-header__container {
     padding-bottom: 32px;
 }
@@ -19,7 +19,6 @@
         margin-bottom: 0;
     }
 }
-
 
 @media (min-width: breakpoint(md-start)) and (max-width: breakpoint(md-end)) {
     .page-header__title {

@@ -63,10 +63,16 @@ function ProductsView(props: ProductsViewProps) {
         return null;
     }
 
-    const filtersCount = Object.keys(filterValues).map((x) => filterValues[x]).filter((x) => x).length;
+    const filtersCount = Object.keys(filterValues)
+        .map((x) => filterValues[x])
+        .filter((x) => x).length;
     const viewModesDef: ViewMode[] = [
         { key: 'grid', title: 'Grid', icon: <LayoutGrid16x16Svg /> },
-        { key: 'grid-with-features', title: 'Grid With Features', icon: <LayoutGridWithDetails16x16Svg /> },
+        {
+            key: 'grid-with-features',
+            title: 'Grid With Features',
+            icon: <LayoutGridWithDetails16x16Svg />,
+        },
         { key: 'list', title: 'List', icon: <LayoutList16x16Svg /> },
     ];
     const viewModes = viewModesDef.map((viewMode) => {
@@ -110,17 +116,21 @@ function ProductsView(props: ProductsViewProps) {
                 <div className="products-view__options">
                     <div className={viewOptionsClasses}>
                         <div className="view-options__filters-button">
-                            <button type="button" className="filters-button" onClick={openSidebarFn}>
+                            <button
+                                type="button"
+                                className="filters-button"
+                                onClick={openSidebarFn}
+                            >
                                 <Filters16Svg className="filters-button__icon" />
                                 <span className="filters-button__title">Filters</span>
-                                {!!filtersCount && <span className="filters-button__counter">{filtersCount}</span>}
+                                {!!filtersCount && (
+                                    <span className="filters-button__counter">{filtersCount}</span>
+                                )}
                             </button>
                         </div>
                         <div className="view-options__layout">
                             <div className="layout-switcher">
-                                <div className="layout-switcher__list">
-                                    {viewModes}
-                                </div>
+                                <div className="layout-switcher__list">{viewModes}</div>
                             </div>
                         </div>
                         <div className="view-options__legend">
@@ -166,9 +176,7 @@ function ProductsView(props: ProductsViewProps) {
                     data-layout={layout !== 'list' ? grid : layout}
                     data-with-features={layout === 'grid-with-features' ? 'true' : 'false'}
                 >
-                    <div className="products-list__body">
-                        {productsListItems}
-                    </div>
+                    <div className="products-list__body">{productsListItems}</div>
                 </div>
 
                 <div className="products-view__pagination">
@@ -186,11 +194,7 @@ function ProductsView(props: ProductsViewProps) {
             <div className="products-view__empty">
                 <div className="products-view__empty-title">No matching items</div>
                 <div className="products-view__empty-subtitle">Try resetting the filters</div>
-                <button
-                    type="button"
-                    className="btn btn-primary btn-sm"
-                    onClick={shopResetFilters}
-                >
+                <button type="button" className="btn btn-primary btn-sm" onClick={shopResetFilters}>
                     Reset filters
                 </button>
             </div>

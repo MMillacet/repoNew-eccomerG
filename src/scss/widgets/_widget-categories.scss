@@ -5,9 +5,7 @@
 @import '../mixins/card';
 @import '../mixins/direction';
 
-
-$local-expand-transition-duration: .2s;
-
+$local-expand-transition-duration: 0.2s;
 
 .widget-categories {
     @include card();
@@ -35,7 +33,7 @@ $local-expand-transition-duration: .2s;
         padding-top: 7px;
         padding-bottom: 7px;
         fill: $widget-categories-arrow-color;
-        transition: .15s color;
+        transition: 0.15s color;
         flex-grow: 1;
 
         @include direction {
@@ -71,10 +69,10 @@ $local-expand-transition-duration: .2s;
     padding: 0;
     background: $widget-categories-expander-default-bg;
     color: $widget-categories-expander-default-font-color;
-    transition: all .2s;
+    transition: all 0.2s;
 
     @include direction {
-        #{$margin-inline-end}: (($local-size - $local-icon-size) * .5) * -1;
+        #{$margin-inline-end}: (($local-size - $local-icon-size) * 0.5) * -1;
     }
 
     &:focus,
@@ -101,14 +99,14 @@ $local-expand-transition-duration: .2s;
         top: calc(50% - 1px);
 
         @include direction {
-            #{$inset-inline-start}: calc(50% - #{$local-icon-size * .5});
+            #{$inset-inline-start}: calc(50% - #{$local-icon-size * 0.5});
         }
     }
 
     &::after {
         width: 2px;
         height: $local-icon-size;
-        top: calc(50% - #{$local-icon-size * .5});
+        top: calc(50% - #{$local-icon-size * 0.5});
         transition: transform $local-expand-transition-duration;
 
         @include direction {
@@ -123,9 +121,8 @@ $local-expand-transition-duration: .2s;
     visibility: hidden;
     font-size: 15px;
     line-height: 26px;
-    transition: height $local-expand-transition-duration,
-                opacity $local-expand-transition-duration,
-                visibility 0s $local-expand-transition-duration;
+    transition: height $local-expand-transition-duration, opacity $local-expand-transition-duration,
+        visibility 0s $local-expand-transition-duration;
 
     ul {
         list-style: none;
@@ -158,7 +155,7 @@ $local-expand-transition-duration: .2s;
 
     a {
         color: inherit;
-        transition: .15s color;
+        transition: 0.15s color;
 
         &:hover {
             color: $link-hover-color;
@@ -178,7 +175,6 @@ $local-expand-transition-duration: .2s;
         transition-delay: 0s, 0s, 0s;
     }
 }
-
 
 .widget-categories--location--shop {
     padding: $widget-shop-padding;

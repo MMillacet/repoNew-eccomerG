@@ -62,10 +62,12 @@ const goldfarbApi = {
             data.products = data.products.map((product: any) => ({
                 id: product.code,
                 slug: product.code,
-                images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.code}_0.jpg`],
+                images: [
+                    `https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.code}_0.jpg`,
+                ],
                 ...product,
             }));
-    
+
             return data;
         } catch (error) {
             console.log(error);
@@ -97,12 +99,12 @@ const goldfarbApi = {
     },
 
     getProductsList: async () => {
-        const config: AxiosRequestConfig ={
+        const config: AxiosRequestConfig = {
             baseURL,
             url: '/goldfarb/ProductsList',
             method: 'get',
-        }
-        
+        };
+
         const { data } = await axios(config);
 
         return data;
@@ -112,7 +114,7 @@ const goldfarbApi = {
      * Documents
      **/
 
-     invoice: async (docNum: string, cardcode: string) => {
+    invoice: async (docNum: string, cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: `/goldfarb/Invoice?docNum=${docNum}&cardcode=${cardcode}`,
@@ -120,11 +122,10 @@ const goldfarbApi = {
         };
 
         const { data } = await axios(config);
-    
+
         return data;
     },
-    
-    
+
     invoiceReturn: async (docNum: string, cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
@@ -132,10 +133,10 @@ const goldfarbApi = {
             method: 'get',
         };
         const { data } = await axios(config);
-    
+
         return data;
     },
-    
+
     recipe: async (docNum: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
@@ -144,7 +145,7 @@ const goldfarbApi = {
         };
 
         const { data } = await axios(config);
-    
+
         return data;
     },
 

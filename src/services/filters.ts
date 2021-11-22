@@ -40,9 +40,7 @@ const CheckFilterHandler: IFilterHandler = {
 
         return value.join(',');
     },
-    deserialize: (value) => (
-        value ? value.split(',') : []
-    ),
+    deserialize: (value) => (value ? value.split(',') : []),
     isDefaultValue: (filter, value) => {
         if (!isCheckFilterValue(value)) {
             throw Error('Provide a valid "check" filter value!');
@@ -61,9 +59,7 @@ const ColorFilterHandler: IFilterHandler = {
 
         return value.join(',');
     },
-    deserialize: (value: string) => (
-        value ? value.split(',') : []
-    ),
+    deserialize: (value: string) => (value ? value.split(',') : []),
     isDefaultValue: (filter, value) => {
         if (!isColorFilterValue(value)) {
             throw Error('Provide a valid "check" filter value!');
@@ -107,9 +103,7 @@ const RangeFilterHandler: IFilterHandler = {
 
         return value.join('-');
     },
-    deserialize: (value: string) => (
-        value ? value.split('-').map(parseFloat) : undefined
-    ),
+    deserialize: (value: string) => (value ? value.split('-').map(parseFloat) : undefined),
     isDefaultValue: (filter, value) => {
         if (filter.type !== 'range') {
             throw Error('Provide a "range" filter!');
@@ -131,12 +125,16 @@ const RangeFilterHandler: IFilterHandler = {
 
 function getFilterHandler<T extends IFilter>(filter: T): IFilterHandler<T, T['value']> | null {
     switch (filter.type) {
-    case 'check': return CheckFilterHandler;
-    case 'color': return ColorFilterHandler;
-    case 'radio': return RadioFilterHandler;
-    case 'range': return RangeFilterHandler;
-    default:
-        return null;
+        case 'check':
+            return CheckFilterHandler;
+        case 'color':
+            return ColorFilterHandler;
+        case 'radio':
+            return RadioFilterHandler;
+        case 'range':
+            return RangeFilterHandler;
+        default:
+            return null;
     }
 }
 
@@ -158,14 +156,23 @@ export function getFilterDefaultValue<T extends IFilter>(filter: T): T['value'] 
     return getExistsFilterHandler(filter).getDefaultValue(filter);
 }
 
-export function serializeFilterValue<T extends IFilter>(filter: T, value: T['value']): string | null {
+export function serializeFilterValue<T extends IFilter>(
+    filter: T,
+    value: T['value'],
+): string | null {
     return getExistsFilterHandler(filter).serialize(value);
 }
 
-export function deserializeFilterValue<T extends IFilter = IFilter>(filter: T, value: string): T['value'] {
+export function deserializeFilterValue<T extends IFilter = IFilter>(
+    filter: T,
+    value: string,
+): T['value'] {
     return getExistsFilterHandler(filter).deserialize(value);
 }
 
-export function getFilterValue<T extends IFilter = IFilter>(filter: T, currentSerializedValue: string): T['value'] {
+export function getFilterValue<T extends IFilter = IFilter>(
+    filter: T,
+    currentSerializedValue: string,
+): T['value'] {
     return deserializeFilterValue(filter, currentSerializedValue) || getFilterDefaultValue(filter);
 }

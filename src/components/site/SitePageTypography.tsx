@@ -101,10 +101,12 @@ function SitePageTypography() {
                             </p>
                             <blockquote>
                                 <p>
-                                    Suspendisse tempor orci non sapien ullamcorper dapibus. At
-                                    velit diam. Donec pharetra nec enim blandit vulputate.
+                                    Suspendisse tempor orci non sapien ullamcorper dapibus. At velit
+                                    diam. Donec pharetra nec enim blandit vulputate.
                                 </p>
-                                <p><cite>Adam Taylor</cite></p>
+                                <p>
+                                    <cite>Adam Taylor</cite>
+                                </p>
                             </blockquote>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
@@ -125,8 +127,8 @@ function SitePageTypography() {
                                     Morbi dignissim hendrerit ligula, quis rutrum risus ultrices eu
                                 </li>
                                 <li>
-                                    Nullam dapibus id mauris dignissim dignissim.
-                                    Sed ut metus mauris.
+                                    Nullam dapibus id mauris dignissim dignissim. Sed ut metus
+                                    mauris.
                                 </li>
                                 <li>
                                     Nulla mollis justo faucibus, laoreet tortor ac, ornare arcu.
@@ -152,8 +154,8 @@ function SitePageTypography() {
                                     Morbi dignissim hendrerit ligula, quis rutrum risus ultrices eu
                                 </li>
                                 <li>
-                                    Nullam dapibus id mauris dignissim dignissim.
-                                    Sed ut metus mauris.
+                                    Nullam dapibus id mauris dignissim dignissim. Sed ut metus
+                                    mauris.
                                 </li>
                                 <li>
                                     Nulla mollis justo faucibus, laoreet tortor ac, ornare arcu.
@@ -171,14 +173,12 @@ function SitePageTypography() {
                             <h3>Text Styles</h3>
                             <p>
                                 Lorem ipsum
-                                <strong>bold text</strong>
-                                , consectetur
-                                <em>italic text</em>
-                                . Donec facilisis
+                                <strong>bold text</strong>, consectetur
+                                <em>italic text</em>. Donec facilisis
                                 <del>line through</del>
                                 neque ut purus fermentum, ac
-                                <AppLink href={url.home()}>link</AppLink>
-                                . Vivamus venenatis viverra iaculis.
+                                <AppLink href={url.home()}>link</AppLink>. Vivamus venenatis viverra
+                                iaculis.
                             </p>
                         </div>
                     </div>

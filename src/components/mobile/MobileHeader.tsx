@@ -1,11 +1,5 @@
 // react
-import {
-    useEffect,
-    useRef,
-    useState,
-    memo,
-    useCallback,
-} from 'react';
+import { useEffect, useRef, useState, memo, useCallback } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -27,7 +21,9 @@ function MobileHeader() {
     const [searchOpen, setSearchOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const cart = useCart();
-    const { items: { length: wishlistCount } } = useWishlist();
+    const {
+        items: { length: wishlistCount },
+    } = useWishlist();
     const mobileMenuOpen = useMobileMenuOpen();
 
     useEffect(() => {
@@ -53,7 +49,11 @@ function MobileHeader() {
             <div className="mobile-header__panel">
                 <div className="container">
                     <div className="mobile-header__body">
-                        <button type="button" className="mobile-header__menu-button" onClick={mobileMenuOpen}>
+                        <button
+                            type="button"
+                            className="mobile-header__menu-button"
+                            onClick={mobileMenuOpen}
+                        >
                             <Menu18x14Svg />
                         </button>
                         <AppLink href={url.home()} className="mobile-header__logo">

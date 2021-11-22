@@ -9,7 +9,6 @@ import { ImageAsset } from '@sanity/types';
 import AppLink from '../shared/AppLink';
 import departmentsService from '../../services/departmentsService';
 import GoldfarbSlick from '../shared/GoldfarbSlick';
-import { useDirection } from '../../store/locale/localeHooks';
 import { useMedia } from '../../services/hooks';
 import { SanityLink } from '../../custom-sanity-types/link';
 
@@ -34,60 +33,8 @@ const slickSettings = {
     slidesToScroll: 1,
 };
 
-const slides = [
-    {
-        title: 'Big choice of<br>Plumbing products',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.',
-        image_classic: {
-            ltr: '/images/slides/slide-1-ltr.jpg',
-            rtl: '/images/slides/slide-1-rtl.jpg',
-        },
-        image_full: {
-            ltr: '/images/slides/slide-1-full-ltr.jpg',
-            rtl: '/images/slides/slide-1-full-rtl.jpg',
-        },
-        image_mobile: {
-            ltr: '/images/slides/slide-1-mobile.jpg',
-            rtl: '/images/slides/slide-1-mobile.jpg',
-        },
-    },
-    {
-        title: 'Screwdrivers<br>Professional Tools',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.',
-        image_classic: {
-            ltr: '/images/slides/slide-2-ltr.jpg',
-            rtl: '/images/slides/slide-2-rtl.jpg',
-        },
-        image_full: {
-            ltr: '/images/slides/slide-2-full-ltr.jpg',
-            rtl: '/images/slides/slide-2-full-rtl.jpg',
-        },
-        image_mobile: {
-            ltr: '/images/slides/slide-2-mobile.jpg',
-            rtl: '/images/slides/slide-2-mobile.jpg',
-        },
-    },
-    {
-        title: 'One more<br>Unique header',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.',
-        image_classic: {
-            ltr: '/images/slides/slide-3-ltr.jpg',
-            rtl: '/images/slides/slide-3-rtl.jpg',
-        },
-        image_full: {
-            ltr: '/images/slides/slide-3-full-ltr.jpg',
-            rtl: '/images/slides/slide-3-full-rtl.jpg',
-        },
-        image_mobile: {
-            ltr: '/images/slides/slide-3-mobile.jpg',
-            rtl: '/images/slides/slide-3-mobile.jpg',
-        },
-    },
-];
-
 function BlockSlideShow(props: BlockSlideShowProps) {
     const { withDepartments = false } = props;
-    const direction = useDirection();
     const departmentsAreaRef = useRef<HTMLDivElement | null>(null);
     const isDesktop = useMedia('(min-width: 992px)');
 
@@ -143,24 +90,31 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                     // todo: move to class
                     style={{ background: '#FFFFFF90', padding: '20px' }}
                 >
-                    <div
-                        className="block-slideshow__slide-title"
-                        dangerouslySetInnerHTML={{ __html: slide.title }}
-                    />
-                    <div
-                        className="block-slideshow__slide-text"
-                        dangerouslySetInnerHTML={{ __html: slide.subtitle }}
-                    />
-                    <div className="block-slideshow__slide-button">
-                        <AppLink
-                            href={
-                                slide.link?.url || (slide.link?.phone && `tel:${slide.link?.phone}`)
-                            }
-                            className="btn btn-primary btn-lg"
-                        >
-                            {slide.link?.text}
-                        </AppLink>
-                    </div>
+                    {slide.title && (
+                        <div
+                            className="block-slideshow__slide-title"
+                            dangerouslySetInnerHTML={{ __html: slide.title }}
+                        />
+                    )}
+                    {slide.subtitle && (
+                        <div
+                            className="block-slideshow__slide-text"
+                            dangerouslySetInnerHTML={{ __html: slide.subtitle }}
+                        />
+                    )}
+                    {slide.link?.text && (
+                        <div className="block-slideshow__slide-button">
+                            <AppLink
+                                href={
+                                    slide.link?.url ||
+                                    (slide.link?.phone && `tel:${slide.link?.phone}`)
+                                }
+                                className="btn btn-primary btn-lg"
+                            >
+                                {slide.link?.text}
+                            </AppLink>
+                        </div>
+                    )}
                 </div>
             </div>
         );

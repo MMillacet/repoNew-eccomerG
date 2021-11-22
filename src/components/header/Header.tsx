@@ -1,9 +1,6 @@
 // react
 import { memo } from 'react';
 
-// third-party
-import { FormattedMessage } from 'react-intl';
-
 // application
 import AppLink from '../shared/AppLink';
 // import LogoSvg from '../../svg/logo.svg';
@@ -25,7 +22,9 @@ function Header(props: HeaderProps) {
         bannerSection = (
             <div className="site-header__middle container">
                 <div className="site-header__logo">
-                    <AppLink href="/"><img src="/images/logos/goldfarb-logo.png" alt="" /></AppLink>
+                    <AppLink href="/">
+                        <img src="/images/logos/goldfarb-logo.png" alt="" />
+                    </AppLink>
                 </div>
                 <div className="site-header__search">
                     <Search context="header" />

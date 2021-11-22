@@ -6,11 +6,10 @@ import { useState } from 'react';
 import { IUser } from '../../interfaces/user';
 
 export interface AccountPageProfileProps {
-    user: IUser
+    user: IUser;
 }
 
 export default function AccountPageProfile(props: AccountPageProfileProps) {
-
     const { user } = props;
 
     const [name, setName] = useState(user.name);
@@ -18,18 +17,18 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-    
+
         const res = await fetch('/api/user/update', {
             body: JSON.stringify({
                 name: event.target.name.value,
                 phone: event.target.phone.value,
             }),
             headers: { 'Content-Type': 'application/json' },
-            method: 'PATCH'
+            method: 'PATCH',
         });
 
         await res.json();
-    }
+    };
 
     return (
         <div className="card">
@@ -51,7 +50,7 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                                 type="text"
                                 className="form-control"
                                 value={name}
-                                onChange={e => setName(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -71,7 +70,7 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                                 type="text"
                                 className="form-control"
                                 value={phone}
-                                onChange={e => setPhone(e.target.value)}
+                                onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -85,7 +84,9 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                             />
                         </div>
                         <div className="form-group mt-5 mb-0">
-                            <button type="submit" className="btn btn-primary">Save</button>
+                            <button type="submit" className="btn btn-primary">
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>

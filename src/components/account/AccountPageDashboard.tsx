@@ -16,21 +16,12 @@ export default function AccountPageDashboard() {
     const orders = dataAccountOrders.slice(0, 3).map((order) => (
         <tr key={order.id}>
             <td>
-                <AppLink href={url.accountOrder({ id: 5 })}>
-                    #
-                    {order.id}
-                </AppLink>
+                <AppLink href={url.accountOrder({ id: 5 })}>#{order.id}</AppLink>
             </td>
             <td>{order.date}</td>
             <td>{order.status}</td>
             <td>
-                <CurrencyFormat value={order.total} />
-                {' '}
-                for
-                {' '}
-                {order.quantity}
-                {' '}
-                item(s)
+                <CurrencyFormat value={order.total} /> for {order.quantity} item(s)
             </td>
         </tr>
     ));
@@ -62,9 +53,7 @@ export default function AccountPageDashboard() {
                     <div className="address-card__row">
                         {address.country}
                         <br />
-                        {address.postcode}
-                        ,
-                        {address.city}
+                        {address.postcode},{address.city}
                         <br />
                         {address.address}
                     </div>
@@ -97,9 +86,7 @@ export default function AccountPageDashboard() {
                                     <th>Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {orders}
-                            </tbody>
+                            <tbody>{orders}</tbody>
                         </table>
                     </div>
                 </div>

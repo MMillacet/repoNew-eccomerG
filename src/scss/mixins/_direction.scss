@@ -1,22 +1,22 @@
 @import '../variables';
 
 @function local-define-direction-variables($direction) {
-    $inline-start:              if($direction == ltr, left, right)       !global;
-    $inline-end:                if($direction == ltr, right, left)       !global;
-    $transform-direction:       if($direction == ltr, 1, -1)             !global;
+    $inline-start: if($direction == ltr, left, right) !global;
+    $inline-end: if($direction == ltr, right, left) !global;
+    $transform-direction: if($direction == ltr, 1, -1) !global;
 
-    $margin-inline-start:       margin- + $inline-start                  !global;
-    $margin-inline-end:         margin- + $inline-end                    !global;
-    $padding-inline-start:      padding- + $inline-start                 !global;
-    $padding-inline-end:        padding- + $inline-end                   !global;
-    $inset-inline-start:        $inline-start                            !global;
-    $inset-inline-end:          $inline-end                              !global;
-    $border-inline-start:       border- + $inline-start                  !global;
-    $border-inline-end:         border- + $inline-end                    !global;
-    $border-start-start-radius: border-top- + $inline-start + -radius    !global;
-    $border-start-end-radius:   border-top- + $inline-end + -radius      !global;
-    $border-end-start-radius:   border-bottom- + $inline-start + -radius !global;
-    $border-end-end-radius:     border-bottom- + $inline-end + -radius   !global;
+    $margin-inline-start: margin- + $inline-start !global;
+    $margin-inline-end: margin- + $inline-end !global;
+    $padding-inline-start: padding- + $inline-start !global;
+    $padding-inline-end: padding- + $inline-end !global;
+    $inset-inline-start: $inline-start !global;
+    $inset-inline-end: $inline-end !global;
+    $border-inline-start: border- + $inline-start !global;
+    $border-inline-end: border- + $inline-end !global;
+    $border-start-start-radius: border-top- + $inline-start + -radius !global;
+    $border-start-end-radius: border-top- + $inline-end + -radius !global;
+    $border-end-start-radius: border-bottom- + $inline-start + -radius !global;
+    $border-end-end-radius: border-bottom- + $inline-end + -radius !global;
 
     @return null;
 }
@@ -44,7 +44,7 @@
 
 @mixin direction() {
     @if ($both-directions == true) {
-        html[dir=#{$direction}] & {
+        html[dir='#{$direction}'] & {
             @content;
         }
 
@@ -52,7 +52,7 @@
         $direction: if($original-direction == ltr, rtl, ltr) !global;
         $_: local-define-direction-variables($direction);
 
-        html[dir=#{$direction}] & {
+        html[dir='#{$direction}'] & {
             @content;
         }
 

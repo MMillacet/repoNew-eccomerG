@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .typography {
     line-height: 1.625;
 
@@ -13,21 +12,27 @@
         text-decoration: underline;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin-top: 1.75em;
-        margin-bottom: .75em;
+        margin-bottom: 0.75em;
     }
 
     p {
         margin-bottom: 1.5em;
     }
 
-    ol, ul {
+    ol,
+    ul {
         margin: 1.7em 0;
     }
 
     li {
-        margin-bottom: .7em;
+        margin-bottom: 0.7em;
     }
 
     > *:first-child {
@@ -38,10 +43,10 @@
     }
 
     a > img {
-        transition: opacity .2s;
+        transition: opacity 0.2s;
     }
     a:hover > img {
-        opacity: .8;
+        opacity: 0.8;
     }
 
     img {
@@ -65,7 +70,7 @@
         position: relative;
         width: $size;
         height: $size;
-        border-radius: $size * .5;
+        border-radius: $size * 0.5;
         border: none;
         background: $typography-hr-color;
         margin: 2.5em auto;
@@ -101,7 +106,7 @@
         font-style: italic;
 
         cite {
-            margin-top: -.5em;
+            margin-top: -0.5em;
             color: $typography-cite-color;
             display: block;
             font-size: 15px;
@@ -121,18 +126,23 @@
     }
 }
 
-
 @media (max-width: breakpoint(md-end)) {
     .typography {
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             margin-top: 1.25em;
-            margin-bottom: .5em;
+            margin-bottom: 0.5em;
         }
     }
 }
 @media (max-width: breakpoint(sm-end)) {
     .typography {
-        ol, ul {
+        ol,
+        ul {
             margin: 1.5em 0;
         }
     }
@@ -152,7 +162,6 @@
         }
     }
 }
-
 
 .typography--expanded {
     @media (min-width: breakpoint(lg-start)) {

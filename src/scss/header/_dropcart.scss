@@ -5,7 +5,6 @@
 @import '../mixins/hacks';
 @import '../mixins/direction';
 
-
 .dropcart {
     font-size: 15px;
     width: 320px;
@@ -16,7 +15,7 @@
 
     // without it IE renders a blurred menu
     @include only-ie() {
-        box-shadow: 0 0 0 1px rgba(#000, .15);
+        box-shadow: 0 0 0 1px rgba(#000, 0.15);
     }
 }
 .dropcart__empty {
@@ -44,7 +43,7 @@
 
     a {
         color: inherit;
-        transition: .15s;
+        transition: 0.15s;
     }
     a:hover {
         color: $link-hover-color;

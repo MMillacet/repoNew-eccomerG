@@ -20,7 +20,6 @@ import Suggestions from './Suggestions';
 import { IProduct } from '../../interfaces/product';
 import goldfarbApi from '../../api/goldfarb';
 
-
 export interface SearchProps {
     context: 'header' | 'mobile-header' | 'indicator';
     className?: string;
@@ -29,12 +28,7 @@ export interface SearchProps {
 }
 
 function Search(props: SearchProps) {
-    const {
-        context,
-        className,
-        inputRef,
-        onClose,
-    } = props;
+    const { context, className, inputRef, onClose } = props;
     const [cancelFn, setCancelFn] = useState(() => () => {});
     const [suggestionsOpen, setSuggestionsOpen] = useState(false);
     const [hasSuggestions, setHasSuggestions] = useState(false);
@@ -73,7 +67,6 @@ function Search(props: SearchProps) {
         setSuggestionsOpen(true);
     };
 
-
     const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
         let canceled = false;
         let timer: ReturnType<typeof setTimeout>;
@@ -91,17 +84,16 @@ function Search(props: SearchProps) {
             setHasSuggestions(false);
         } else {
             timer = setTimeout(() => {
-                if( canceled) return;
+                if (canceled) return;
 
-                goldfarbApi.getProductsSearch({ term: query }).then(({products})  => {
-                    
-                    const top5codes = products.slice(0, 5).map((p: { code: string; }) => p.code);
+                goldfarbApi.getProductsSearch({ term: query }).then(({ products }) => {
+                    const top5codes = products.slice(0, 5).map((p: { code: string }) => p.code);
 
                     goldfarbApi.getProductsLookup({ itemcodes: top5codes }).then(({ products }) => {
                         setSuggestedProducts(products);
                         setHasSuggestions(products.length > 0);
                         setSuggestionsOpen(true);
-                    })                    
+                    });
                 });
             }, 250);
         }
@@ -135,12 +127,18 @@ function Search(props: SearchProps) {
         'search--has-suggestions': hasSuggestions,
     });
 
-    const closeButton = context !== 'mobile-header' ? '' : (
-        <button className="search__button search__button--type--close" type="button" onClick={close}>
-            <Cross20Svg />
-        </button>
-    );
-
+    const closeButton =
+        context !== 'mobile-header' ? (
+            ''
+        ) : (
+            <button
+                className="search__button search__button--type--close"
+                type="button"
+                onClick={close}
+            >
+                <Cross20Svg />
+            </button>
+        );
 
     return (
         <div className={rootClasses} ref={wrapperRef} onBlur={handleBlur}>
@@ -166,7 +164,11 @@ function Search(props: SearchProps) {
                     <div className="search__border" />
                 </form>
 
-                <Suggestions className="search__suggestions" context={context} products={suggestedProducts} />
+                <Suggestions
+                    className="search__suggestions"
+                    context={context}
+                    products={suggestedProducts}
+                />
             </div>
         </div>
     );

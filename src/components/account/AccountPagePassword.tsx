@@ -47,7 +47,9 @@ export default function AccountPagePassword() {
                         </div>
 
                         <div className="form-group mt-5 mb-0">
-                            <button type="button" className="btn btn-primary">Change</button>
+                            <button type="button" className="btn btn-primary">
+                                Change
+                            </button>
                         </div>
                     </div>
                 </div>

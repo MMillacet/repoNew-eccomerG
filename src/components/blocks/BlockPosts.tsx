@@ -67,11 +67,7 @@ const slickSettings: BlockPostsSlickProps = {
 };
 
 function BlockPosts(props: BlockPostsProps) {
-    const {
-        title,
-        layout = 'list-sm',
-        posts = [],
-    } = props;
+    const { title, layout = 'list-sm', posts = [] } = props;
     const slickRef = useRef<Slick | null>(null);
 
     const handleNextClick = () => {
@@ -99,10 +95,7 @@ function BlockPosts(props: BlockPostsProps) {
                 />
 
                 <div className="block-posts__slider">
-                    <GoldfarbSlick
-                        ref={slickRef}
-                        {...slickSettings[layout]}
-                    >
+                    <GoldfarbSlick ref={slickRef} {...slickSettings[layout]}>
                         {postsList}
                     </GoldfarbSlick>
                 </div>

@@ -5,8 +5,8 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
-.post-header {}
+.post-header {
+}
 .post-header__categories {
     display: flex;
 
@@ -24,14 +24,14 @@
 }
 .post-header__meta {
     font-size: 14px;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
     color: $post-meta-font-color;
     display: flex;
     flex-wrap: wrap;
 
     a {
         color: inherit;
-        transition: color .2s;
+        transition: color 0.2s;
     }
     a:hover {
         color: $link-hover-color;
@@ -57,7 +57,7 @@
         top: 8px;
 
         @include direction {
-            #{$inset-inline-end}: -($local-gutter-size * .5 + 2px);
+            #{$inset-inline-end}: -($local-gutter-size * 0.5 + 2px);
         }
     }
     &:last-child {
@@ -71,7 +71,6 @@
     }
 }
 
-
 .post-header--layout--classic {
     .post-header__categories {
         margin-bottom: 12px;
@@ -83,7 +82,6 @@
     .post-header__meta {
         margin-bottom: 30px;
     }
-
 
     @media (max-width: breakpoint(lg-end)) {
         .post-header__title {
@@ -114,7 +112,6 @@
     }
 }
 
-
 .post-header--layout--full {
     width: 640px;
     max-width: 100%;
@@ -133,7 +130,6 @@
         margin-top: 24px;
         justify-content: center;
     }
-
 
     @media (max-width: breakpoint(sm-end)) {
         padding: 10px 0 24px;

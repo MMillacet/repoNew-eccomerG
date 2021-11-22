@@ -23,9 +23,7 @@ export default function AccountPageAddresses() {
                     <div className="address-card__row">
                         {address.country}
                         <br />
-                        {address.postcode}
-                        ,
-                        {address.city}
+                        {address.postcode},{address.city}
                         <br />
                         {address.address}
                     </div>

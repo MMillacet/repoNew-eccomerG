@@ -62,7 +62,10 @@ const shopApi = {
     /**
      * Returns category by slug.
      */
-    getCategoryBySlug: (slug: string, options: GetCategoryBySlugOptions = {}): Promise<IShopCategory> => {
+    getCategoryBySlug: (
+        slug: string,
+        options: GetCategoryBySlugOptions = {},
+    ): Promise<IShopCategory> => {
         /**
          * This is what your API endpoint might look like:
          *
@@ -82,13 +85,18 @@ const shopApi = {
      * Returns product.
      */
     getProductBySlug: async (slug: string): Promise<IProduct> => {
-        const { products: [product, ] } = await productsApi.lookup([slug]);
+        const {
+            products: [product],
+        } = await productsApi.lookup([slug]);
         return product;
     },
     /**
      * Returns array of related products.
      */
-    getRelatedProducts: (slug: string, options: GetRelatedProductsOptions = {}): Promise<IProduct[]> => {
+    getRelatedProducts: (
+        slug: string,
+        options: GetRelatedProductsOptions = {},
+    ): Promise<IProduct[]> => {
         /**
          * This is what your API endpoint might look like:
          *
@@ -107,7 +115,10 @@ const shopApi = {
     /**
      * Return products list.
      */
-    getProductsList: (options: IListOptions = {}, filters: IFilterValues = {}): Promise<IProductsList> => {
+    getProductsList: (
+        options: IListOptions = {},
+        filters: IFilterValues = {},
+    ): Promise<IProductsList> => {
         /**
          * This is what your API endpoint might look like:
          *

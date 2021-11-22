@@ -9,7 +9,9 @@ function ProductTabReviews() {
     const reviewsList = dataShopProductReviews.map((review, index) => (
         <li key={index} className="reviews-list__item">
             <div className="review">
-                <div className="review__avatar"><img src={review.avatar} alt="" /></div>
+                <div className="review__avatar">
+                    <img src={review.avatar} alt="" />
+                </div>
                 <div className=" review__content">
                     <div className=" review__author">{review.author}</div>
                     <div className=" review__rating">
@@ -28,9 +30,7 @@ function ProductTabReviews() {
                 <h3 className="reviews-view__header">Customer Reviews</h3>
 
                 <div className="reviews-list">
-                    <ol className="reviews-list__content">
-                        {reviewsList}
-                    </ol>
+                    <ol className="reviews-list__content">{reviewsList}</ol>
                     <div className="reviews-list__pagination">
                         <Pagination current={1} siblings={2} total={10} />
                     </div>
@@ -54,11 +54,21 @@ function ProductTabReviews() {
                             </div>
                             <div className="form-group col-md-4">
                                 <label htmlFor="review-author">Your Name</label>
-                                <input type="text" className="form-control" id="review-author" placeholder="Your Name" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="review-author"
+                                    placeholder="Your Name"
+                                />
                             </div>
                             <div className="form-group col-md-4">
                                 <label htmlFor="review-email">Email Address</label>
-                                <input type="text" className="form-control" id="review-email" placeholder="Email Address" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="review-email"
+                                    placeholder="Email Address"
+                                />
                             </div>
                         </div>
                         <div className="form-group">
@@ -66,7 +76,9 @@ function ProductTabReviews() {
                             <textarea className="form-control" id="review-text" rows={6} />
                         </div>
                         <div className="form-group mb-0">
-                            <button type="submit" className="btn btn-primary btn-lg">Post Your Review</button>
+                            <button type="submit" className="btn btn-primary btn-lg">
+                                Post Your Review
+                            </button>
                         </div>
                     </div>
                 </div>

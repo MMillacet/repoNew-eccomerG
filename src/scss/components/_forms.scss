@@ -5,7 +5,6 @@
 @import '../svg';
 @import '../mixins/direction';
 
-
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -16,7 +15,7 @@
 }
 .form-check-input {
     position: absolute;
-    margin-top: .1875rem;
+    margin-top: 0.1875rem;
 
     @include direction {
         #{$margin-inline-start}: -1.5rem;
@@ -29,7 +28,6 @@
     }
 }
 
-
 .form-control {
     border-radius: 2px;
     line-height: 1.25;
@@ -37,13 +35,12 @@
 .form-control-sm {
     height: calc(1.875rem + 2px);
     line-height: 1.25;
-    padding: .3125rem .5rem;
+    padding: 0.3125rem 0.5rem;
 }
 .form-control-lg {
     height: calc(2.75rem + 2px);
     line-height: 1.25;
 }
-
 
 .form-control:valid,
 .form-control.is-valid,
@@ -51,7 +48,6 @@
 .form-control.is-invalid {
     background-image: none;
 }
-
 
 // select
 @mixin local-select-define-size($size: '') {
@@ -82,14 +78,14 @@ select.form-control {
     background-size: 5px 10px;
 
     @include direction {
-        background-position: $inline-end .75rem center;
-        #{$padding-inline-end}: calc(.75rem * 2 + 5px);
+        background-position: $inline-end 0.75rem center;
+        #{$padding-inline-end}: calc(0.75rem * 2 + 5px);
     }
 }
 @include local-select-define-size('sm') {
     @include direction {
-        background-position: $inline-end .5rem center;
-        #{$padding-inline-end}: calc(.5rem * 2 + 5px);
+        background-position: $inline-end 0.5rem center;
+        #{$padding-inline-end}: calc(0.5rem * 2 + 5px);
     }
 }
 @include local-select-define-size('lg') {

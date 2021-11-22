@@ -4,8 +4,8 @@
 @import '../variables';
 @import '../functions';
 
-
-.block-banner {}
+.block-banner {
+}
 .block-banner__body {
     position: relative;
     display: block;
@@ -25,11 +25,18 @@
     height: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: -1;
+    z-index: 0;
 }
 .block-banner__image--mobile {
     display: none;
 }
+.block-banner__title,
+.block-banner__text,
+.block-banner__button {
+    position: absolute;
+    z-index: 1;
+}
+
 .block-banner__title {
     padding-top: 28px;
     font-size: 30px;
@@ -45,7 +52,6 @@
 .block-banner__mobile-br {
     display: none;
 }
-
 
 @media (max-width: breakpoint(sm-end)) {
     .block-banner__body {
@@ -63,6 +69,7 @@
         width: 220px;
         margin-left: auto;
         margin-right: auto;
+        z-index: 1;
     }
     .block-banner__title {
         padding-top: 48px;

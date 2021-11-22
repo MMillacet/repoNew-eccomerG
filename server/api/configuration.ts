@@ -6,13 +6,13 @@ const exchangeRate = async () => {
     const { data } = await axios(config);
 
     return data;
-}
+};
 
 const minTransportCharge = async () => {
     const config = axiosConfig.minTransportCharge();
     const { data } = await axios(config);
 
     return data;
-}
+};
 
 export default { exchangeRate, minTransportCharge };

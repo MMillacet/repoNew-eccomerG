@@ -30,12 +30,7 @@ export interface GoldfarbSlickInnerProps extends SlickProps {
 }
 
 function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
-    const {
-        children,
-        forwardRef,
-        beforeChange,
-        ...otherProps
-    } = props;
+    const { children, forwardRef, beforeChange, ...otherProps } = props;
     const { responsive, slidesToShow } = otherProps;
     const direction = useDirection();
     const slickRef = useRef<Slick | null>(null);
@@ -45,9 +40,7 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
     const slickPrevRef = useRef<() => void>(() => {});
     const [firstRender, setFirstRender] = useState(true);
 
-    const getSlidesCount = () => (
-        Children.toArray(children).length
-    );
+    const getSlidesCount = () => Children.toArray(children).length;
 
     const getSlidesToShow = () => {
         const { responsive, slidesToShow } = props;
@@ -99,17 +92,8 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
         const activeSlides = [];
         const slidesCount = getSlidesCount();
 
-        const firstSlide = Math.max(
-            0,
-            Math.min(
-                slidesCount - slidesToShow,
-                currentIndex,
-            ),
-        );
-        const lastSlide = Math.min(
-            slidesCount,
-            firstSlide + slidesToShow,
-        );
+        const firstSlide = Math.max(0, Math.min(slidesCount - slidesToShow, currentIndex));
+        const lastSlide = Math.min(slidesCount, firstSlide + slidesToShow);
 
         for (let i = firstSlide; i < lastSlide; i += 1) {
             activeSlides.push(i);
@@ -134,8 +118,7 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
 
             // Thank you Pythagoras.
             const distance = Math.sqrt(
-                (Math.abs(downX - moveEvent.screenX) ** 2)
-                + (Math.abs(downY - moveEvent.screenY) ** 2),
+                Math.abs(downX - moveEvent.screenX) ** 2 + Math.abs(downY - moveEvent.screenY) ** 2,
             );
 
             if (moveEvent.cancelable && distance > 3) {
@@ -228,9 +211,7 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
                     return;
                 }
 
-                const query = [
-                    `(max-width: ${options.breakpoint}px)`,
-                ];
+                const query = [`(max-width: ${options.breakpoint}px)`];
 
                 if (responsive.length - 1 !== index) {
                     query.push(`(min-width: ${responsive[index + 1].breakpoint}.02px)`);
@@ -321,11 +302,7 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
     });
 
     return (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-        <div
-            className={classes}
-            onMouseDown={onMousedown}
-        >
+        <div className={classes} onMouseDown={onMousedown}>
             <Slick
                 {...otherProps}
                 rtl={direction === 'rtl'}
@@ -339,14 +316,13 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
     );
 }
 
-export default forwardRef<Slick, GoldfarbSlickProps>(
-    (props, ref) => {
-        const { children } = props;
+// eslint-disable-next-line react/display-name
+export default forwardRef<Slick, GoldfarbSlickProps>((props, ref) => {
+    const { children } = props;
 
-        return (
-            <GoldfarbSlickInner forwardRef={ref} {...props}>
-                {children}
-            </GoldfarbSlickInner>
-        );
-    },
-);
+    return (
+        <GoldfarbSlickInner forwardRef={ref} {...props}>
+            {children}
+        </GoldfarbSlickInner>
+    );
+});

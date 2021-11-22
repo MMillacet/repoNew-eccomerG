@@ -1,10 +1,5 @@
 // react
-import {
-    ComponentType,
-    useEffect,
-    useMemo,
-    Fragment,
-} from 'react';
+import { ComponentType, useEffect, useMemo, Fragment } from 'react';
 // third-party
 import { AppProps } from 'next/app';
 import { IntlProvider } from 'react-intl';
@@ -21,11 +16,11 @@ import '../scss/index.scss';
 
 export type GoldfarbAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
-        Layout: ComponentType
-    }
+        Layout: ComponentType;
+    };
 };
 
-function GoldfarbApp({ Component, pageProps, router }: GoldfarbAppProps) {
+function GoldfarbApp({ Component, pageProps }: GoldfarbAppProps) {
     // const headerLayout = router.pathname === '/home-two' ? 'compact' : 'default';
     const headerLayout = 'default';
     const applyClientState = useApplyClientState();
@@ -44,7 +39,11 @@ function GoldfarbApp({ Component, pageProps, router }: GoldfarbAppProps) {
 
         setTimeout(() => {
             const onTransitionEnd = (event: Event) => {
-                if (event instanceof TransitionEvent && event.propertyName === 'opacity' && preloader.parentNode) {
+                if (
+                    event instanceof TransitionEvent &&
+                    event.propertyName === 'opacity' &&
+                    preloader.parentNode
+                ) {
                     preloader.parentNode.removeChild(preloader);
                 }
             };
@@ -92,9 +91,7 @@ function GoldfarbApp({ Component, pageProps, router }: GoldfarbAppProps) {
 
     return (
         <IntlProvider locale={locale} messages={messages}>
-            <UserProvider>
-                {content}
-            </UserProvider>
+            <UserProvider>{content}</UserProvider>
         </IntlProvider>
     );
 }

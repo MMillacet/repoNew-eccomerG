@@ -4,8 +4,8 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
-.product-gallery {}
+.product-gallery {
+}
 .product-gallery__featured {
     position: relative;
     box-shadow: $product-gallery-item-default-shadow;
@@ -28,13 +28,11 @@
     top: 0;
     background: $product-gallery-zoom-button-normal-bg-color;
     fill: $product-gallery-zoom-button-normal-icon-color;
-    transition:
-        background .2s,
-        fill .2s;
+    transition: background 0.2s, fill 0.2s;
 
     @include direction {
         #{$inset-inline-end}: 0;
-        #{$border-start-end-radius}: $product-gallery-item-border-radius + .5px;
+        #{$border-start-end-radius}: $product-gallery-item-border-radius + 0.5px;
         #{$border-end-start-radius}: 2px;
         transform: scaleX($transform-direction);
     }

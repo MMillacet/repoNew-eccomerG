@@ -32,22 +32,26 @@ function ShopPageCompare() {
     if (items.length) {
         const attributes: {
             name: string;
-            values: {[productId: number]: string};
+            values: { [productId: number]: string };
         }[] = [];
 
-        items.forEach((product) => product.attributes.forEach((productAttribute) => {
-            let attribute = attributes.find((x) => x.name === productAttribute.name);
+        items.forEach((product) =>
+            product.attributes.forEach((productAttribute) => {
+                let attribute = attributes.find((x) => x.name === productAttribute.name);
 
-            if (!attribute) {
-                attribute = {
-                    name: productAttribute.name,
-                    values: {},
-                };
-                attributes.push(attribute);
-            }
+                if (!attribute) {
+                    attribute = {
+                        name: productAttribute.name,
+                        values: {},
+                    };
+                    attributes.push(attribute);
+                }
 
-            attribute.values[product.id] = productAttribute.values.map((x) => x.name).join(', ');
-        }));
+                attribute.values[product.id] = productAttribute.values
+                    .map((x) => x.name)
+                    .join(', ');
+            }),
+        );
 
         const productInfoRow = items.map((product) => {
             let image;
@@ -87,7 +91,11 @@ function ShopPageCompare() {
             let badge;
 
             if (product.availability === 'in-stock') {
-                badge = <span className="compare-table__product-badge badge badge-success">In Stock</span>;
+                badge = (
+                    <span className="compare-table__product-badge badge badge-success">
+                        In Stock
+                    </span>
+                );
             }
 
             return <td key={product.id}>{badge}</td>;
@@ -105,15 +113,16 @@ function ShopPageCompare() {
                     'btn-loading': loading,
                 });
 
-                return <button type="button" onClick={run} className={classes}>Add To Cart</button>;
+                return (
+                    <button type="button" onClick={run} className={classes}>
+                        Add To Cart
+                    </button>
+                );
             };
 
             return (
                 <td key={product.id}>
-                    <AsyncAction
-                        action={() => cartAddItem(product)}
-                        render={renderButton}
-                    />
+                    <AsyncAction action={() => cartAddItem(product)} render={renderButton} />
                 </td>
             );
         });
@@ -137,7 +146,11 @@ function ShopPageCompare() {
                     'btn-loading': loading,
                 });
 
-                return <button type="button" onClick={run} className={classes}>Remove</button>;
+                return (
+                    <button type="button" onClick={run} className={classes}>
+                        Remove
+                    </button>
+                );
             };
 
             return (
@@ -192,9 +205,13 @@ function ShopPageCompare() {
             <div className="block block-empty">
                 <div className="container">
                     <div className="block-empty__body">
-                        <div className="block-empty__message">You have not chosen any products to compare!</div>
+                        <div className="block-empty__message">
+                            You have not chosen any products to compare!
+                        </div>
                         <div className="block-empty__actions">
-                            <AppLink href="/" className="btn btn-primary btn-sm">Continue</AppLink>
+                            <AppLink href="/" className="btn btn-primary btn-sm">
+                                Continue
+                            </AppLink>
                         </div>
                     </div>
                 </div>

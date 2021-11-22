@@ -6,7 +6,10 @@ const exchangeRate: RequestHandler = async (req: Request, res: Response) => {
         const response = await configurationApi.exchangeRate();
         res.send(response.data);
     } catch (error: any) {
-        res.status(400).send({ reason: 'Ha ocurrido un error al conectarse a Goldfarb', description: error.message });
+        res.status(400).send({
+            reason: 'Ha ocurrido un error al conectarse a Goldfarb',
+            description: error.message,
+        });
     }
 };
 
@@ -15,7 +18,10 @@ const minTransportCharge: RequestHandler = async (req: Request, res: Response) =
         const response = await configurationApi.minTransportCharge();
         res.send(response.data);
     } catch (error: any) {
-        res.status(400).send({ reason: 'Ha ocurrido un error al conectarse a Goldfarb', description: error.message });
+        res.status(400).send({
+            reason: 'Ha ocurrido un error al conectarse a Goldfarb',
+            description: error.message,
+        });
     }
 };
 

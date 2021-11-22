@@ -21,12 +21,14 @@ function DropdownCurrency() {
     const currency = useCurrency();
     const currencyChange = useCurrencyChange();
 
-    const currencies: DropdownCurrencyItem[] = useMemo(() => (
-        dataShopCurrencies.map(((eachCurrency) => ({
-            title: `${eachCurrency.symbol} ${eachCurrency.name}`,
-            currency: eachCurrency,
-        })))
-    ), []);
+    const currencies: DropdownCurrencyItem[] = useMemo(
+        () =>
+            dataShopCurrencies.map((eachCurrency) => ({
+                title: `${eachCurrency.symbol} ${eachCurrency.name}`,
+                currency: eachCurrency,
+            })),
+        [],
+    );
 
     const title = (
         <Fragment>

@@ -59,15 +59,19 @@ function WidgetCategories(props: WidgetCategoriesProps) {
             );
         };
 
-        return <Collapse key={category.id} toggleClass="widget-categories__item--open" render={renderCategory} />;
+        return (
+            <Collapse
+                key={category.id}
+                toggleClass="widget-categories__item--open"
+                render={renderCategory}
+            />
+        );
     });
 
     return (
         <div className={`widget-categories widget-categories--location--${location} widget`}>
             <h4 className="widget__title">Categories</h4>
-            <ul className="widget-categories__list">
-                {categoriesList}
-            </ul>
+            <ul className="widget-categories__list">{categoriesList}</ul>
         </div>
     );
 }

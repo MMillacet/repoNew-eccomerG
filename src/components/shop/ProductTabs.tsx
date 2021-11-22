@@ -49,17 +49,17 @@ function ProductTabs(props: ProductTabsProps) {
             'product-tabs__pane--active': currentTab === tab.key,
         });
 
-        return <div key={tab.key} className={classes}>{tab.content}</div>;
+        return (
+            <div key={tab.key} className={classes}>
+                {tab.content}
+            </div>
+        );
     });
 
     return (
         <div className={classes}>
-            <div className="product-tabs__list">
-                {tabsButtons}
-            </div>
-            <div className="product-tabs__content">
-                {tabsContent}
-            </div>
+            <div className="product-tabs__list">{tabsButtons}</div>
+            <div className="product-tabs__content">{tabsContent}</div>
         </div>
     );
 }

@@ -7,9 +7,18 @@ function WidgetNewsletter() {
                 quis ipsum tristique lobortis. Nulla vitae est blandit rutrum.
             </div>
             <form className="widget-newsletter__form" action="">
-                <label htmlFor="widget-newsletter-email" className="sr-only">Email Address</label>
-                <input id="widget-newsletter-email" type="text" className="form-control" placeholder="Email Address" />
-                <button type="submit" className="btn btn-primary mt-3">Subscribe</button>
+                <label htmlFor="widget-newsletter-email" className="sr-only">
+                    Email Address
+                </label>
+                <input
+                    id="widget-newsletter-email"
+                    type="text"
+                    className="form-control"
+                    placeholder="Email Address"
+                />
+                <button type="submit" className="btn btn-primary mt-3">
+                    Subscribe
+                </button>
             </form>
         </div>
     );

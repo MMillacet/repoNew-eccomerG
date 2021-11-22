@@ -4,7 +4,6 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 .pagination {
     margin-bottom: 0;
     padding: 0;
@@ -76,4 +75,3 @@
     background: $pagination-disabled-bg;
     color: $pagination-disabled-font-color;
 }
-

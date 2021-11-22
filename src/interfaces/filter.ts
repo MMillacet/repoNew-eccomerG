@@ -47,9 +47,4 @@ export interface IColorFilter extends IBaseFilter {
     items: IColorFilterItem[];
 }
 
-export type IFilter =
-    ICategoryFilter |
-    IRangeFilter |
-    ICheckFilter |
-    IRadioFilter |
-    IColorFilter;
+export type IFilter = ICategoryFilter | IRangeFilter | ICheckFilter | IRadioFilter | IColorFilter;

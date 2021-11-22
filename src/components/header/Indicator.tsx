@@ -1,10 +1,5 @@
 // react
-import {
-    ReactNode,
-    MouseEvent as ReactMouseEvent,
-    createRef,
-    Component,
-} from 'react';
+import { ReactNode, MouseEvent as ReactMouseEvent, createRef, Component } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -64,7 +59,11 @@ class Indicator extends Component<IndicatorProps, IndicatorState> {
     handleOutsideClick = (event: MouseEvent) => {
         const { open } = this.state;
 
-        if (this.wrapperRef.current && !this.wrapperRef.current.contains(event.target as HTMLElement) && open) {
+        if (
+            this.wrapperRef.current &&
+            !this.wrapperRef.current.contains(event.target as HTMLElement) &&
+            open
+        ) {
             this.close();
         }
     };
@@ -123,18 +122,18 @@ class Indicator extends Component<IndicatorProps, IndicatorState> {
             );
         } else {
             buttonElement = (
-                <button type="button" className="indicator__button" onClick={this.handleButtonClick}>
+                <button
+                    type="button"
+                    className="indicator__button"
+                    onClick={this.handleButtonClick}
+                >
                     {title}
                 </button>
             );
         }
 
         if (dropdown) {
-            dropdownElement = (
-                <div className="indicator__dropdown">
-                    {dropdown}
-                </div>
-            );
+            dropdownElement = <div className="indicator__dropdown">{dropdown}</div>;
         }
 
         const classes = classNames(`indicator indicator--trigger--click ${className}`, {

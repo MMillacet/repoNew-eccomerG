@@ -45,7 +45,7 @@ export default class RangeFilterBuilder extends AbstractFilterBuilder<IRangeFilt
     }
 
     // eslint-disable-next-line class-methods-use-this
-    calc() { }
+    calc() {}
 
     extractValue(product: IProduct): number {
         if (this.slug === 'price') {

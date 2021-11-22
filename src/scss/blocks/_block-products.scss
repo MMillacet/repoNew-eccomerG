@@ -6,11 +6,10 @@
 @import '../mixins/product-card';
 @import '../mixins/direction';
 
-
 $local-product-margin: 5px;
 
-
-.block-products {}
+.block-products {
+}
 .block-products__body {
     display: flex;
 }
@@ -45,7 +44,6 @@ $local-product-margin: 5px;
     }
 }
 
-
 .block-products__list-item {
     .product-card {
         @include product-card-grid();
@@ -58,7 +56,6 @@ $local-product-margin: 5px;
         }
     }
 }
-
 
 @media (min-width: breakpoint(lg-start)) {
     .block-products__featured-item {

@@ -28,7 +28,9 @@ function DepartmentsLinks() {
 
         if (department.submenu && department.submenu.type === 'megamenu') {
             submenu = (
-                <div className={`departments__megamenu departments__megamenu--${department.submenu.menu.size}`}>
+                <div
+                    className={`departments__megamenu departments__megamenu--${department.submenu.menu.size}`}
+                >
                     <Megamenu menu={department.submenu.menu} location="department" />
                 </div>
             );
@@ -45,11 +47,7 @@ function DepartmentsLinks() {
         );
     });
 
-    return (
-        <ul className="departments__links">
-            {linksList}
-        </ul>
-    );
+    return <ul className="departments__links">{linksList}</ul>;
 }
 
 export default DepartmentsLinks;

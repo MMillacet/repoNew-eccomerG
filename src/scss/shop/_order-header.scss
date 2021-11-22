@@ -46,7 +46,6 @@
     }
 }
 
-
 @media (min-width: breakpoint(md-start)) and (max-width: breakpoint(md-end)) {
     .order-header {
         padding: 1.375rem 1.5rem 1.25rem;
@@ -59,7 +58,7 @@
 }
 @media (max-width: 440px) {
     .order-header__actions {
-        margin-bottom: .875rem;
+        margin-bottom: 0.875rem;
 
         @include direction {
             float: none;

@@ -37,7 +37,9 @@ export function shopInit(
     };
 }
 
-export function shopFetchCategorySuccess(category: IShopCategory | null): ShopFetchCategorySuccessAction {
+export function shopFetchCategorySuccess(
+    category: IShopCategory | null,
+): ShopFetchCategorySuccessAction {
     return {
         type: SHOP_FETCH_CATEGORY_SUCCESS,
         category,
@@ -50,7 +52,9 @@ export function shopFetchProductsListStart(): ShopFetchProductsListStartAction {
     };
 }
 
-export function shopFetchProductsListSuccess(productsList: IProductsList): ShopFetchProductsListSuccessAction {
+export function shopFetchProductsListSuccess(
+    productsList: IProductsList,
+): ShopFetchProductsListSuccessAction {
     return {
         type: SHOP_FETCH_PRODUCTS_LIST_SUCCESS,
         productsList,
@@ -79,12 +83,16 @@ export function shopSetFilterValue(filter: string, value: string | null): ShopSe
     };
 }
 
-export function shopFetchCategoryThunk(categorySlug: string | null): ShopThunkAction<Promise<void>> {
+export function shopFetchCategoryThunk(
+    categorySlug: string | null,
+): ShopThunkAction<Promise<void>> {
     return async (dispatch) => {
         let canceled = false;
 
         cancelPreviousCategoryRequest();
-        cancelPreviousCategoryRequest = () => { canceled = true; };
+        cancelPreviousCategoryRequest = () => {
+            canceled = true;
+        };
 
         let request: Promise<IShopCategory | null>;
 
@@ -109,7 +117,9 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
         let canceled = false;
 
         cancelPreviousProductsListRequest();
-        cancelPreviousProductsListRequest = () => { canceled = true; };
+        cancelPreviousProductsListRequest = () => {
+            canceled = true;
+        };
 
         dispatch(shopFetchProductsListStart());
 
@@ -131,14 +141,20 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
     };
 }
 
-export function shopSetOptionValueThunk(option: string, value: string): ShopThunkAction<Promise<void>> {
+export function shopSetOptionValueThunk(
+    option: string,
+    value: string,
+): ShopThunkAction<Promise<void>> {
     return async (dispatch) => {
         dispatch(shopSetOptionValue(option, value));
         await dispatch(shopFetchProductsListThunk());
     };
 }
 
-export function shopSetFilterValueThunk(filter: string, value: string | null): ShopThunkAction<Promise<void>> {
+export function shopSetFilterValueThunk(
+    filter: string,
+    value: string | null,
+): ShopThunkAction<Promise<void>> {
     return async (dispatch) => {
         dispatch(shopSetFilterValue(filter, value));
         await dispatch(shopFetchProductsListThunk());

@@ -6,7 +6,6 @@
 @import '../mixins/card';
 @import '../mixins/direction';
 
-
 @mixin local-offcanvas() {
     border: none;
     padding-top: 0;
@@ -21,7 +20,6 @@
         border-width: 1px;
     }
 }
-
 
 .widget-filters {
     @include card();
@@ -47,11 +45,9 @@
     }
 }
 
-
 .widget-filters--offcanvas--always {
     @include local-offcanvas;
 }
-
 
 .widget-filters--offcanvas--mobile {
     @media (max-width: breakpoint(md-end)) {

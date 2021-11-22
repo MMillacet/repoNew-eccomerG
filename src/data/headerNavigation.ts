@@ -88,7 +88,10 @@ const dataHeaderNavigation: INav = [
                     title: 'Shop Grid',
                     url: '/shop/category-grid-3-columns-sidebar',
                     children: [
-                        { title: '3 Columns Sidebar', url: '/shop/category-grid-3-columns-sidebar' },
+                        {
+                            title: '3 Columns Sidebar',
+                            url: '/shop/category-grid-3-columns-sidebar',
+                        },
                         { title: '4 Columns Full', url: '/shop/category-grid-4-columns-full' },
                         { title: '5 Columns Full', url: '/shop/category-grid-5-columns-full' },
                     ],
@@ -125,12 +128,20 @@ const dataHeaderNavigation: INav = [
                 { title: 'Order History', url: '/account/orders' },
                 {
                     title: 'Order Details',
-                    url: { href: '/account/orders/[orderId]', as: '/account/orders/5', prefetch: false },
+                    url: {
+                        href: '/account/orders/[orderId]',
+                        as: '/account/orders/5',
+                        prefetch: false,
+                    },
                 },
                 { title: 'Address Book', url: '/account/addresses' },
                 {
                     title: 'Edit Address',
-                    url: { href: '/account/addresses/[addressId]', as: '/account/addresses/5', prefetch: false },
+                    url: {
+                        href: '/account/addresses/[addressId]',
+                        as: '/account/addresses/5',
+                        prefetch: false,
+                    },
                 },
                 { title: 'Change Password', url: '/account/password' },
             ],

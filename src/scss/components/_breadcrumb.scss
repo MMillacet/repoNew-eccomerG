@@ -4,9 +4,7 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 $local-padding: 12px;
-
 
 .breadcrumb {
     background: transparent;
@@ -25,7 +23,7 @@ $local-padding: 12px;
 
     a {
         color: $breadcrumb-link-default-color;
-        transition: color .15s;
+        transition: color 0.15s;
     }
     a:hover {
         color: $breadcrumb-link-hover-color;

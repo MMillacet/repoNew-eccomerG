@@ -33,9 +33,12 @@ function WidgetProducts(props: WidgetProductsProps) {
         if (product.compareAtPrice) {
             price = (
                 <Fragment>
-                    <span className="widget-products__new-price"><CurrencyFormat value={product.price} /></span>
-                    {' '}
-                    <span className="widget-products__old-price"><CurrencyFormat value={product.compareAtPrice} /></span>
+                    <span className="widget-products__new-price">
+                        <CurrencyFormat value={product.price} />
+                    </span>{' '}
+                    <span className="widget-products__old-price">
+                        <CurrencyFormat value={product.compareAtPrice} />
+                    </span>
                 </Fragment>
             );
         } else {
@@ -49,9 +52,7 @@ function WidgetProducts(props: WidgetProductsProps) {
                     <div className="widget-products__name">
                         <AppLink href={url.product(product)}>{product.name}</AppLink>
                     </div>
-                    <div className="widget-products__prices">
-                        {price}
-                    </div>
+                    <div className="widget-products__prices">{price}</div>
                 </div>
             </div>
         );
@@ -60,9 +61,7 @@ function WidgetProducts(props: WidgetProductsProps) {
     return (
         <div className="widget-products widget">
             <h4 className="widget__title">{title}</h4>
-            <div className="widget-products__list">
-                {productsList}
-            </div>
+            <div className="widget-products__list">{productsList}</div>
         </div>
     );
 }

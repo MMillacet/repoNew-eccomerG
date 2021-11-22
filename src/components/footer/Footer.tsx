@@ -52,15 +52,20 @@ const Footer: FunctionComponent = () => {
 
                 <div className="site-footer__bottom">
                     <div className="site-footer__copyright">
-                        Powered by
-                        {' '}
-                        <a href="https://reactjs.org/" rel="noopener noreferrer" target="_blank">React</a>
+                        Powered by{' '}
+                        <a href="https://reactjs.org/" rel="noopener noreferrer" target="_blank">
+                            React
+                        </a>
                         {' and '}
-                        <a href="https://nextjs.org/" rel="noopener noreferrer" target="_blank">NEXT.js</a>
-                        {' '}
-                        — Design by
-                        {' '}
-                        <a href={theme.author.profile_url} target="_blank" rel="noopener noreferrer">
+                        <a href="https://nextjs.org/" rel="noopener noreferrer" target="_blank">
+                            NEXT.js
+                        </a>{' '}
+                        — Design by{' '}
+                        <a
+                            href={theme.author.profile_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             {theme.author.name}
                         </a>
                     </div>

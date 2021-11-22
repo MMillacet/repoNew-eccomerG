@@ -4,8 +4,8 @@
 @import '../variables';
 @import '../functions';
 
-
-.contact-us {}
+.contact-us {
+}
 .contact-us__map {
     position: relative;
     height: 440px;
@@ -22,7 +22,6 @@
         position: absolute;
     }
 }
-
 
 @media (max-width: breakpoint(lg-end)) {
     .contact-us__map {

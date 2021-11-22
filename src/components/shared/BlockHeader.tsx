@@ -20,14 +20,7 @@ export interface BlockHeaderProps<T extends BlockHeaderGroup> {
 }
 
 function BlockHeader<T extends BlockHeaderGroup>(props: BlockHeaderProps<T>) {
-    const {
-        title,
-        arrows,
-        groups = [],
-        onPrev,
-        onNext,
-        onGroupClick = () => {},
-    } = props;
+    const { title, arrows, groups = [], onPrev, onNext, onGroupClick = () => {} } = props;
 
     let groupsList;
 
@@ -46,11 +39,7 @@ function BlockHeader<T extends BlockHeaderGroup>(props: BlockHeaderProps<T>) {
             );
         });
 
-        groupsList = (
-            <ul className="block-header__groups-list">
-                {groupsList}
-            </ul>
-        );
+        groupsList = <ul className="block-header__groups-list">{groupsList}</ul>;
     }
 
     return (
@@ -60,10 +49,18 @@ function BlockHeader<T extends BlockHeaderGroup>(props: BlockHeaderProps<T>) {
             {groupsList}
             {arrows && (
                 <div className="block-header__arrows-list">
-                    <button className="block-header__arrow block-header__arrow--left" type="button" onClick={onPrev}>
+                    <button
+                        className="block-header__arrow block-header__arrow--left"
+                        type="button"
+                        onClick={onPrev}
+                    >
                         <ArrowRoundedLeft7x11Svg />
                     </button>
-                    <button className="block-header__arrow block-header__arrow--right" type="button" onClick={onNext}>
+                    <button
+                        className="block-header__arrow block-header__arrow--right"
+                        type="button"
+                        onClick={onNext}
+                    >
                         <ArrowRoundedRight7x11Svg />
                     </button>
                 </div>

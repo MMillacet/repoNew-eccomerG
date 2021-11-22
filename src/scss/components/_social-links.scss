@@ -3,11 +3,10 @@
 */
 @import '../variables';
 
-
 $local-gutter: 7px;
 
-
-.social-links {}
+.social-links {
+}
 .social-links__list {
     list-style: none;
     padding: 0;
@@ -27,7 +26,7 @@ $local-gutter: 7px;
     justify-content: center;
     width: 34px;
     height: 34px;
-    transition: all .2s;
+    transition: all 0.2s;
     background: $social-links-bg-color;
 
     &,
@@ -36,10 +35,9 @@ $local-gutter: 7px;
     }
 
     &:hover {
-        opacity: .8;
+        opacity: 0.8;
     }
 }
-
 
 .social-links--shape--circle {
     .social-links__link {
@@ -52,7 +50,6 @@ $local-gutter: 7px;
     }
 }
 
-
 @each $type, $link in $social-links {
     .social-links__link--type--#{$type} {
         @if (map_get($link, bg-color) != $social-links-bg-color) {
@@ -64,6 +61,5 @@ $local-gutter: 7px;
                 color: map_get($link, font-color);
             }
         }
-
     }
 }

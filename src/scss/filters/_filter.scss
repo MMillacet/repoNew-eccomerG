@@ -4,13 +4,12 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 $local-title-vertical-padding: 6px;
 $local-title-horizontal-padding: 10px;
-$local-transition-duration: .2s;
+$local-transition-duration: 0.2s;
 
-
-.filter {}
+.filter {
+}
 .filter__title {
     display: block;
     border: none;
@@ -24,7 +23,7 @@ $local-transition-duration: .2s;
     line-height: 18px;
     border-radius: 2px;
     margin: 0 #{-$local-title-horizontal-padding};
-    transition: background-color .2s, fill .2s;
+    transition: background-color 0.2s, fill 0.2s;
     background: $filter-title-default-bg;
     fill: $filter-title-default-arrow-color;
 
@@ -34,7 +33,7 @@ $local-transition-duration: .2s;
 
     &:focus,
     &:hover {
-        transition-duration: .1s, .1s;
+        transition-duration: 0.1s, 0.1s;
         background: $filter-title-hover-bg;
         fill: $filter-title-hover-arrow-color;
     }
@@ -58,9 +57,8 @@ $local-transition-duration: .2s;
     visibility: hidden;
     height: 0;
     opacity: 0;
-    transition: height $local-transition-duration,
-                opacity $local-transition-duration,
-                visibility 0s $local-transition-duration;
+    transition: height $local-transition-duration, opacity $local-transition-duration,
+        visibility 0s $local-transition-duration;
 }
 .filter__container {
     padding: 10px $widget-shop-padding 16px;

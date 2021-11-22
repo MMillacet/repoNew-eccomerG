@@ -61,13 +61,13 @@ export interface ShopResetFiltersAction {
 }
 
 export type ShopAction =
-    ShopHydrateAction |
-    ShopInitAction |
-    ShopFetchCategorySuccessAction |
-    ShopFetchProductsListStartAction |
-    ShopFetchProductsListSuccessAction |
-    ShopSetOptionValueAction |
-    ShopSetFilterValueAction |
-    ShopResetFiltersAction;
+    | ShopHydrateAction
+    | ShopInitAction
+    | ShopFetchCategorySuccessAction
+    | ShopFetchProductsListStartAction
+    | ShopFetchProductsListSuccessAction
+    | ShopSetOptionValueAction
+    | ShopSetFilterValueAction
+    | ShopResetFiltersAction;
 
 export type ShopThunkAction<T = void> = AppAction<ShopAction, T>;

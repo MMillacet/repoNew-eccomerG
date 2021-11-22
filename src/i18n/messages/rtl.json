@@ -1,10 +1,10 @@
 {
-  "topbar.aboutUs": "About Us",
-  "topbar.contacts": "Contacts",
-  "topbar.storeLocation": "Store Location",
-  "topbar.trackOrder": "Track Order",
-  "topbar.blog": "Blog",
-  "topbar.myAccount": "My Account",
-  "topbar.currency": "Currency",
-  "topbar.language": "Language"
+    "topbar.aboutUs": "About Us",
+    "topbar.contacts": "Contacts",
+    "topbar.storeLocation": "Store Location",
+    "topbar.trackOrder": "Track Order",
+    "topbar.blog": "Blog",
+    "topbar.myAccount": "My Account",
+    "topbar.currency": "Currency",
+    "topbar.language": "Language"
 }

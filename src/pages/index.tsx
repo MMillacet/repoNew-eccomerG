@@ -1,11 +1,11 @@
 // third-party
 import { useUser } from '@auth0/nextjs-auth0';
-import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetStaticProps } from 'next';
 import { useEffect } from 'react';
-import goldfarbApi from '../api/goldfarb';
 
 // application
 import sanityApi from '../api/sanity';
+import goldfarbApi from '../api/goldfarb';
 import HomePageTwo, { InitData } from '../components/home/HomePageTwo';
 
 export interface PageProps {
@@ -17,10 +17,10 @@ function Page(props: PageProps) {
 
     const fetchUserInfo = async () => {
         await fetch('/api/user/info');
-    }
+    };
 
     useEffect(() => {
-        if(user && !user.initialised) {
+        if (user && !user.initialised) {
             fetchUserInfo();
         }
     }, [user]);
@@ -54,5 +54,3 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 };
 
 export default Page;
-
-

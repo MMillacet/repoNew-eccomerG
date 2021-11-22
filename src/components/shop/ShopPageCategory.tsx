@@ -1,11 +1,5 @@
 // react
-import {
-    Fragment,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
@@ -43,7 +37,9 @@ export interface ShopPageCategoryProps {
 function ShopPageCategory(props: ShopPageCategoryProps) {
     const { columns, viewMode, sidebarPosition = 'start' } = props;
     const offcanvas = columns === 3 ? 'mobile' : 'always';
-    const productsViewGrid = `grid-${columns}-${columns > 3 ? 'full' : 'sidebar'}` as ProductsViewGrid;
+    const productsViewGrid = `grid-${columns}-${
+        columns > 3 ? 'full' : 'sidebar'
+    }` as ProductsViewGrid;
 
     // shop
     const shopState = useShop();
@@ -59,27 +55,32 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
     // Replace current url.
     useEffect(() => {
         const query = buildQuery(shopState.options, shopState.filters);
-        const href = queryString.stringifyUrl({
-            ...queryString.parseUrl(router.asPath),
-            query: queryString.parse(query),
-        }, { encode: false });
+        const href = queryString.stringifyUrl(
+            {
+                ...queryString.parseUrl(router.asPath),
+                query: queryString.parse(query),
+            },
+            { encode: false },
+        );
 
-        router.replace(href, href, {
-            shallow: true,
-        }).then(() => {
-            // This is necessary for the "History API" to work.
-            window.history.replaceState(
-                {
-                    ...window.history.state,
-                    options: {
-                        ...window.history.state.options,
-                        shallow: false,
+        router
+            .replace(href, href, {
+                shallow: true,
+            })
+            .then(() => {
+                // This is necessary for the "History API" to work.
+                window.history.replaceState(
+                    {
+                        ...window.history.state,
+                        options: {
+                            ...window.history.state.options,
+                            shallow: false,
+                        },
                     },
-                },
-                '',
-                href,
-            );
-        });
+                    '',
+                    href,
+                );
+            });
     }, [shopState.options, shopState.filters]);
 
     // Load latest products.
@@ -103,20 +104,26 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
         };
     }, [offcanvas]);
 
-    const sidebarComponent = useMemo(() => (
-        <CategorySidebar open={sidebarOpen} closeFn={closeSidebarFn} offcanvas={offcanvas}>
-            <CategorySidebarItem>
-                <WidgetFilters title="Filters" offcanvas={offcanvas} />
-            </CategorySidebarItem>
-            {offcanvas !== 'always' && (
-                <CategorySidebarItem className="d-none d-lg-block">
-                    <WidgetProducts title="Latest Products" products={latestProducts} />
+    const sidebarComponent = useMemo(
+        () => (
+            <CategorySidebar open={sidebarOpen} closeFn={closeSidebarFn} offcanvas={offcanvas}>
+                <CategorySidebarItem>
+                    <WidgetFilters title="Filters" offcanvas={offcanvas} />
                 </CategorySidebarItem>
-            )}
-        </CategorySidebar>
-    ), [sidebarOpen, closeSidebarFn, offcanvas, latestProducts]);
+                {offcanvas !== 'always' && (
+                    <CategorySidebarItem className="d-none d-lg-block">
+                        <WidgetProducts title="Latest Products" products={latestProducts} />
+                    </CategorySidebarItem>
+                )}
+            </CategorySidebar>
+        ),
+        [sidebarOpen, closeSidebarFn, offcanvas, latestProducts],
+    );
 
-    if (shopState.categoryIsLoading || (shopState.productsListIsLoading && !shopState.productsList)) {
+    if (
+        shopState.categoryIsLoading ||
+        (shopState.productsListIsLoading && !shopState.productsList)
+    ) {
         return <BlockLoader />;
     }
 
@@ -154,11 +161,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
             </div>
         );
     } else {
-        const sidebar = (
-            <div className="shop-layout__sidebar">
-                {sidebarComponent}
-            </div>
-        );
+        const sidebar = <div className="shop-layout__sidebar">{sidebarComponent}</div>;
 
         content = (
             <div className="container">

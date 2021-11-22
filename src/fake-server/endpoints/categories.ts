@@ -10,12 +10,13 @@ export interface GetCategoryBySlugOptions {
 }
 
 export function getCategories(options: GetCategoriesOptions = {}): Promise<IShopCategory[]> {
-    return Promise.resolve(
-        categoriesTreeData.map((x) => prepareCategory(x, options.depth)),
-    );
+    return Promise.resolve(categoriesTreeData.map((x) => prepareCategory(x, options.depth)));
 }
 
-export function getCategoryBySlug(slug: string, options: GetCategoryBySlugOptions = {}): Promise<IShopCategory> {
+export function getCategoryBySlug(
+    slug: string,
+    options: GetCategoryBySlugOptions = {},
+): Promise<IShopCategory> {
     const category = categoriesListData.find((x) => x.slug === slug);
 
     return category ? Promise.resolve(prepareCategory(category, options.depth)) : Promise.reject();

@@ -19,11 +19,13 @@ function BlockCategories(props: BlockCategoriesProps) {
         const classes = `block-categories__item category-card category-card--layout--${layout}`;
         const { children }: { children?: ICategory[] } = category;
 
-        const subcategories = children && children.map((sub, subIndex) => (
-            <li key={subIndex}>
-                <AppLink href={url.category(sub)}>{sub.name}</AppLink>
-            </li>
-        ));
+        const subcategories =
+            children &&
+            children.map((sub, subIndex) => (
+                <li key={subIndex}>
+                    <AppLink href={url.category(sub)}>{sub.name}</AppLink>
+                </li>
+            ));
 
         return (
             <div key={index} className={classes}>
@@ -37,9 +39,7 @@ function BlockCategories(props: BlockCategoriesProps) {
                         <div className=" category-card__name">
                             <AppLink href={url.category(category)}>{category.name}</AppLink>
                         </div>
-                        <ul className="category-card__links">
-                            {subcategories}
-                        </ul>
+                        <ul className="category-card__links">{subcategories}</ul>
                         <div className="category-card__all">
                             <AppLink href={url.category(category)}>Show All</AppLink>
                         </div>
@@ -53,13 +53,13 @@ function BlockCategories(props: BlockCategoriesProps) {
     });
 
     return (
-        <div className={`block block--highlighted block-categories block-categories--layout--${layout}`}>
+        <div
+            className={`block block--highlighted block-categories block-categories--layout--${layout}`}
+        >
             <div className="container">
                 <BlockHeader title={title} />
 
-                <div className="block-categories__list">
-                    {categoriesList}
-                </div>
+                <div className="block-categories__list">{categoriesList}</div>
             </div>
         </div>
     );

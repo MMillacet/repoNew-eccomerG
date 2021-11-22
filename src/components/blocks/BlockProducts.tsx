@@ -13,12 +13,7 @@ export interface BlockProductsProps {
 }
 
 function BlockProducts(props: BlockProductsProps) {
-    const {
-        title,
-        featuredProduct,
-        layout = 'large-first',
-        products = [],
-    } = props;
+    const { title, featuredProduct, layout = 'large-first', products = [] } = props;
 
     let large;
     let smalls;
@@ -40,11 +35,7 @@ function BlockProducts(props: BlockProductsProps) {
             </div>
         ));
 
-        smalls = (
-            <div className="block-products__list">
-                {productsList}
-            </div>
-        );
+        smalls = <div className="block-products__list">{productsList}</div>;
     }
 
     return (

@@ -6,9 +6,7 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 $item-padding: 14px;
-
 
 .nav-links {
     height: 100%;
@@ -30,7 +28,7 @@ $item-padding: 14px;
         height: 100%;
         font-size: 15px;
         line-height: 1;
-        letter-spacing: .02em;
+        letter-spacing: 0.02em;
         font-weight: $nav-links-item-font-weight;
         color: $nav-links-item-default-font-color;
 
@@ -47,7 +45,7 @@ $item-padding: 14px;
             display: flex;
             align-items: center;
             background: transparent;
-            transition: background-color .2s;
+            transition: background-color 0.2s;
             padding: 0 $item-padding;
             height: $nav-links-item-height;
             border-radius: $nav-links-item-border-radius;
@@ -66,7 +64,7 @@ $item-padding: 14px;
         }
 
         & > span {
-            transition-duration: .1s;
+            transition-duration: 0.1s;
         }
     }
     &:hover .nav-links__menu,
@@ -104,14 +102,13 @@ $item-padding: 14px;
     transform-origin: top;
     transform: rotateX(45deg);
     opacity: 0;
-    transition: transform .2s, opacity .2s;
+    transition: transform 0.2s, opacity 0.2s;
 }
 .nav-links__megamenu {
     @include direction {
         #{$inset-inline-start}: 0;
     }
 }
-
 
 .nav-links__megamenu--size--xs {
     width: math.div(2, 12) * 100%;
@@ -131,7 +128,6 @@ $item-padding: 14px;
 .nav-links__megamenu--size--xl {
     width: 100%;
 }
-
 
 @media (min-width: breakpoint(lg-start)) and (max-width: breakpoint(lg-end)) {
     $item-padding: 10px;

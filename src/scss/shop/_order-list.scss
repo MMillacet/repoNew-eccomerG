@@ -7,7 +7,6 @@
 @import '../mixins/direction';
 @import '../mixins/utils';
 
-
 .order-list {
     a {
         color: inherit;
@@ -90,11 +89,10 @@
         transform: skewX(-20deg);
 
         @include direction {
-            #{$inset-inline-end}: math.floor($local-gutter * .5);
+            #{$inset-inline-end}: math.floor($local-gutter * 0.5);
         }
     }
 }
-
 
 @media (min-width: breakpoint(sm-start)) {
     .order-list {
@@ -177,7 +175,6 @@
     }
 }
 
-
 @media (max-width: breakpoint(xs-end)) {
     .order-list {
         table,
@@ -225,7 +222,7 @@
 
     .order-list__products {
         tr {
-            @include local-padding-y(.75rem);
+            @include local-padding-y(0.75rem);
 
             display: flex;
             flex-wrap: wrap;
@@ -258,8 +255,8 @@
         }
         .order-list__column-quantity,
         .order-list__column-total {
-            margin-top: .625rem;
-            margin-bottom: -.125rem;
+            margin-top: 0.625rem;
+            margin-bottom: -0.125rem;
         }
     }
     .order-list__subtotals {

@@ -32,7 +32,7 @@ const lookup: RequestHandler = async (req: Request, res: Response) => {
 const search: RequestHandler = async (req: Request, res: Response) => {
     try {
         const { options } = req.body;
-        const response = await productsApi.search(options)
+        const response = await productsApi.search(options);
         res.send(response.data);
     } catch (error: any) {
         res.status(400).send({
@@ -41,7 +41,5 @@ const search: RequestHandler = async (req: Request, res: Response) => {
         });
     }
 };
-
-
 
 export default { latest, lookup, search };

@@ -6,7 +6,6 @@
 @import '../mixins/product-card';
 @import '../mixins/preloader';
 
-
 .block-products-carousel {
     .slick-track {
         padding-bottom: 56px;
@@ -53,7 +52,7 @@
     background: $block-products-carousel-preloader-bg;
     opacity: 0;
     visibility: hidden;
-    transition: opacity .3s, visibility 0s .3s;
+    transition: opacity 0.3s, visibility 0s 0.3s;
 
     &:after {
         @include preloader(100px);
@@ -89,13 +88,12 @@
     }
 }
 
-
-.block-products-carousel[data-layout^="grid-"] {
+.block-products-carousel[data-layout^='grid-'] {
     .product-card {
         @include product-card-grid();
     }
 }
-.block-products-carousel[data-layout="grid-4"] {
+.block-products-carousel[data-layout='grid-4'] {
     .product-card {
         @include product-card-grid-nl();
     }
@@ -106,7 +104,7 @@
         }
     }
 }
-.block-products-carousel[data-layout="grid-4-sm"] {
+.block-products-carousel[data-layout='grid-4-sm'] {
     @media (min-width: 480px) {
         .product-card {
             @include product-card-grid-sm();
@@ -118,7 +116,7 @@
         }
     }
 }
-.block-products-carousel[data-layout="grid-5"] {
+.block-products-carousel[data-layout='grid-5'] {
     @media (min-width: 480px) {
         .product-card {
             @include product-card-grid-sm();
@@ -131,8 +129,7 @@
     }
 }
 
-
-.block-products-carousel[data-layout="horizontal"] {
+.block-products-carousel[data-layout='horizontal'] {
     .product-card {
         @include product-card-horizontal();
     }

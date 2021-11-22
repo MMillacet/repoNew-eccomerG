@@ -16,12 +16,7 @@ export interface CategorySidebarProps extends PropsWithChildren<{}> {
 }
 
 function CategorySidebar(props: CategorySidebarProps) {
-    const {
-        children,
-        open,
-        closeFn,
-        offcanvas = 'mobile',
-    } = props;
+    const { children, open, closeFn, offcanvas = 'mobile' } = props;
 
     const classes = classNames('block block-sidebar', {
         'block-sidebar--open': open,
@@ -42,7 +37,13 @@ function CategorySidebar(props: CategorySidebarProps) {
                     closeFn();
                 }
                 // this is necessary to avoid the transition hiding the sidebar
-                if (!open && media.matches && changedByMedia && backdropRef.current && bodyRef.current) {
+                if (
+                    !open &&
+                    media.matches &&
+                    changedByMedia &&
+                    backdropRef.current &&
+                    bodyRef.current
+                ) {
                     const backdrop = backdropRef.current;
                     const body = bodyRef.current;
 
@@ -91,7 +92,6 @@ function CategorySidebar(props: CategorySidebarProps) {
     return (
         <div className={classes}>
             {/* eslint-disable-next-line max-len */}
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
             <div className="block-sidebar__backdrop" ref={backdropRef} onClick={closeFn} />
             <div className="block-sidebar__body" ref={bodyRef}>
                 <div className="block-sidebar__header">

@@ -5,9 +5,7 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
-$local-transition-duration: .3s;
-
+$local-transition-duration: 0.3s;
 
 @mixin local-offcanvas() {
     visibility: hidden;
@@ -50,7 +48,8 @@ $local-transition-duration: .3s;
 
         @include direction {
             #{$inset-inline-start}: 0;
-            transform: translateX(#{-100% * $transform-direction}) translateX(#{-30px * $transform-direction});
+            transform: translateX(#{-100% * $transform-direction})
+                translateX(#{-30px * $transform-direction});
         }
     }
     .block-sidebar__header {
@@ -62,7 +61,7 @@ $local-transition-duration: .3s;
         transition-delay: 0s;
 
         .block-sidebar__backdrop {
-            opacity: .9;
+            opacity: 0.9;
         }
 
         .block-sidebar__body {
@@ -73,8 +72,8 @@ $local-transition-duration: .3s;
     }
 }
 
-
-.block-sidebar {}
+.block-sidebar {
+}
 .block-sidebar__item + .block-sidebar__item {
     margin-top: 30px;
 }
@@ -111,7 +110,6 @@ $local-transition-duration: .3s;
     }
 }
 
-
 .block-sidebar__header {
     height: $mobilemenu-header-height + 1px;
     flex-shrink: 0;
@@ -135,7 +133,7 @@ $local-transition-duration: .3s;
     justify-content: center;
     cursor: pointer;
     fill: $mobilemenu-close-button-default-color;
-    transition: fill .2s;
+    transition: fill 0.2s;
 
     @include direction {
         #{$border-inline-start}: 1px solid $mobilemenu-divider-color;
@@ -150,11 +148,9 @@ $local-transition-duration: .3s;
     }
 }
 
-
 .block-sidebar--offcanvas--always {
     @include local-offcanvas;
 }
-
 
 .block-sidebar--offcanvas--mobile {
     @media (max-width: breakpoint(md-end)) {

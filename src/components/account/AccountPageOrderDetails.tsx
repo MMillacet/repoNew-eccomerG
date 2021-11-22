@@ -27,14 +27,8 @@ export default function AccountPageOrderDetails() {
                     </div>
                     <h5 className="order-header__title">Order #3857</h5>
                     <div className="order-header__subtitle">
-                        Was placed on
-                        {' '}
-                        <mark className="order-header__date">19 October, 2020</mark>
-                        {' '}
-                        and is currently
-                        {' '}
-                        <mark className="order-header__status">On hold</mark>
-                        .
+                        Was placed on <mark className="order-header__date">19 October, 2020</mark>{' '}
+                        and is currently <mark className="order-header__status">On hold</mark>.
                     </div>
                 </div>
                 <div className="card-divider" />
@@ -90,7 +84,9 @@ export default function AccountPageOrderDetails() {
                 <div className="col-sm-6 col-12 px-2">
                     <div className="card address-card address-card--featured">
                         <div className="address-card__body">
-                            <div className="address-card__badge address-card__badge--muted">Shipping Address</div>
+                            <div className="address-card__badge address-card__badge--muted">
+                                Shipping Address
+                            </div>
                             <div className="address-card__name">Helena Garcia</div>
                             <div className="address-card__row">
                                 Random Federation
@@ -105,7 +101,9 @@ export default function AccountPageOrderDetails() {
                             </div>
                             <div className="address-card__row">
                                 <div className="address-card__row-title">Email Address</div>
-                                <div className="address-card__row-content">goldfarb@example.com</div>
+                                <div className="address-card__row-content">
+                                    goldfarb@example.com
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -113,7 +111,9 @@ export default function AccountPageOrderDetails() {
                 <div className="col-sm-6 col-12 px-2 mt-sm-0 mt-3">
                     <div className="card address-card address-card--featured">
                         <div className="address-card__body">
-                            <div className="address-card__badge address-card__badge--muted">Billing Address</div>
+                            <div className="address-card__badge address-card__badge--muted">
+                                Billing Address
+                            </div>
                             <div className="address-card__name">Helena Garcia</div>
                             <div className="address-card__row">
                                 Random Federation
@@ -128,7 +128,9 @@ export default function AccountPageOrderDetails() {
                             </div>
                             <div className="address-card__row">
                                 <div className="address-card__row-title">Email Address</div>
-                                <div className="address-card__row-content">goldfarb@example.com</div>
+                                <div className="address-card__row-content">
+                                    goldfarb@example.com
+                                </div>
                             </div>
                         </div>
                     </div>

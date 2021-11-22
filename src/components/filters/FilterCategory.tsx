@@ -26,7 +26,10 @@ function FilterCategory(props: FilterCheckProps) {
         return (
             <Fragment key={category.id}>
                 {getCategoryParents(category).map((parent) => (
-                    <li key={parent.id} className="filter-categories__item filter-categories__item--parent">
+                    <li
+                        key={parent.id}
+                        className="filter-categories__item filter-categories__item--parent"
+                    >
                         <ArrowRoundedLeft6x9Svg className="filter-categories__arrow" />
                         <AppLink href={url.category(parent)}>{parent.name}</AppLink>
                     </li>
@@ -34,11 +37,15 @@ function FilterCategory(props: FilterCheckProps) {
                 <li className={itemClasses}>
                     <AppLink href={url.category(category)}>{category.name}</AppLink>
                 </li>
-                {category.children && category.children.map((child) => (
-                    <li key={child.id} className="filter-categories__item filter-categories__item--child">
-                        <AppLink href={url.category(child)}>{child.name}</AppLink>
-                    </li>
-                ))}
+                {category.children &&
+                    category.children.map((child) => (
+                        <li
+                            key={child.id}
+                            className="filter-categories__item filter-categories__item--child"
+                        >
+                            <AppLink href={url.category(child)}>{child.name}</AppLink>
+                        </li>
+                    ))}
             </Fragment>
         );
     });
@@ -54,9 +61,7 @@ function FilterCategory(props: FilterCheckProps) {
 
     return (
         <div className="filter-categories">
-            <ul className="filter-categories__list">
-                {categoriesList}
-            </ul>
+            <ul className="filter-categories__list">{categoriesList}</ul>
         </div>
     );
 }

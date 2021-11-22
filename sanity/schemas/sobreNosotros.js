@@ -9,6 +9,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'subtitle',
+            title: 'Subtitle',
+            type: 'string',
+        },
+        {
             name: 'banner',
             title: 'Imagen Encabezado',
             type: 'banner',
@@ -22,7 +27,7 @@ export default {
             name: 'nuestroEquipo',
             title: 'Nuestro Equipo',
             type: 'array',
-            of: [{ type: 'reference', to: { type: 'author' } }],
+            of: [{ type: 'reference', to: { type: 'teamMember' } }],
         },
     ],
     preview: {

@@ -7,13 +7,12 @@ import Head from 'next/head';
 // application
 import shopApi from '../../api/shop';
 import { IProduct } from '../../interfaces/product';
-import { useDeferredData, useProductColumns, useProductTabs } from '../../services/hooks';
+import { useDeferredData, useProductTabs } from '../../services/hooks';
 
 // blocks
-import BlockBanner, { BlockBannerItem } from '../blocks/BlockBanner';
 import BlockBrands from '../blocks/BlockBrands';
 import BlockFeatures from '../blocks/BlockFeatures';
-import BlockProductColumns, { BlockProductColumnsItem } from '../blocks/BlockProductColumns';
+import { BlockProductColumnsItem } from '../blocks/BlockProductColumns';
 import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
@@ -66,48 +65,6 @@ function HomePageTwo(props: HomePageOneProps) {
         [],
         initData?.bestsellers,
     );
-
-    /**
-     * Latest products.
-     */
-    const latestProducts = useProductTabs(
-        useMemo(
-            () => [
-                { id: 1, name: 'All', categorySlug: undefined },
-                { id: 2, name: 'Power Tools', categorySlug: 'power-tools' },
-                { id: 3, name: 'Hand Tools', categorySlug: 'hand-tools' },
-                { id: 4, name: 'Plumbing', categorySlug: 'plumbing' },
-            ],
-            [],
-        ),
-        (tab) => shopApi.getLatestProducts({ limit: 8, category: tab.categorySlug }),
-        initData?.latestProducts,
-    );
-
-    /**
-     * Product columns.
-     */
-    const columns =
-        initData?.productColumns ||
-        useProductColumns(
-            useMemo(
-                () => [
-                    {
-                        title: 'Top Rated Products',
-                        source: () => shopApi.getTopRatedProducts({ limit: 3 }),
-                    },
-                    {
-                        title: 'Special Offers',
-                        source: () => shopApi.getDiscountedProducts({ limit: 3 }),
-                    },
-                    {
-                        title: 'Bestsellers',
-                        source: () => shopApi.getPopularProducts({ limit: 3 }),
-                    },
-                ],
-                [],
-            ),
-        );
 
     return (
         <Fragment>

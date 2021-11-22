@@ -1,10 +1,5 @@
 import { IProduct } from '../../interfaces/product';
-import {
-    CartItem,
-    CartItemOption,
-    CartState,
-    CartTotal,
-} from './cartTypes';
+import { CartItem, CartItemOption, CartState, CartTotal } from './cartTypes';
 import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
@@ -22,9 +17,11 @@ function findItemIndex(items: CartItem[], product: IProduct, options: CartItemOp
 
         for (let i = 0; i < options.length; i += 1) {
             const option = options[i];
-            const itemOption = item.options.find((itemOption) => (
-                itemOption.optionId === option.optionId && itemOption.valueId === option.valueId
-            ));
+            const itemOption = item.options.find(
+                (itemOption) =>
+                    itemOption.optionId === option.optionId &&
+                    itemOption.valueId === option.valueId,
+            );
 
             if (!itemOption) {
                 return false;
@@ -76,14 +73,17 @@ function addItem(state: CartState, product: IProduct, options: CartItemOption[],
 
     if (itemIndex === -1) {
         lastItemId += 1;
-        newItems = [...state.items, {
-            id: lastItemId,
-            product: JSON.parse(JSON.stringify(product)),
-            options: JSON.parse(JSON.stringify(options)),
-            price: product.price,
-            total: product.price * quantity,
-            quantity,
-        }];
+        newItems = [
+            ...state.items,
+            {
+                id: lastItemId,
+                product: JSON.parse(JSON.stringify(product)),
+                options: JSON.parse(JSON.stringify(options)),
+                price: product.price,
+                total: product.price * quantity,
+                quantity,
+            },
+        ];
     } else {
         const item = state.items[itemIndex];
 
@@ -181,17 +181,17 @@ export const CART_NAMESPACE = 'cart';
 
 function cartBaseReducer(state = initialState, action: CartAction): CartState {
     switch (action.type) {
-    case CART_ADD_ITEM:
-        return addItem(state, action.product, action.options, action.quantity);
+        case CART_ADD_ITEM:
+            return addItem(state, action.product, action.options, action.quantity);
 
-    case CART_REMOVE_ITEM:
-        return removeItem(state, action.itemId);
+        case CART_REMOVE_ITEM:
+            return removeItem(state, action.itemId);
 
-    case CART_UPDATE_QUANTITIES:
-        return updateQuantities(state, action.quantities);
+        case CART_UPDATE_QUANTITIES:
+            return updateQuantities(state, action.quantities);
 
-    default:
-        return state;
+        default:
+            return state;
     }
 }
 

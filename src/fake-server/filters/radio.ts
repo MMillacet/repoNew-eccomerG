@@ -9,22 +9,29 @@ export default class RadioFilterBuilder extends AbstractFilterBuilder {
     value: IRadioFilterValue = null;
 
     test(product: IProduct): boolean {
-        return this.value !== null && this.extractItems(product).map((x) => x.slug).includes(this.value);
+        return (
+            this.value !== null &&
+            this.extractItems(product)
+                .map((x) => x.slug)
+                .includes(this.value)
+        );
     }
 
     makeItems(products: IProduct[], value?: string): void {
-        products.forEach((product) => this.extractItems(product).forEach((item) => {
-            if (!this.items.find((x) => x.slug === item.slug)) {
-                this.items.push(item);
-            }
-        }));
+        products.forEach((product) =>
+            this.extractItems(product).forEach((item) => {
+                if (!this.items.find((x) => x.slug === item.slug)) {
+                    this.items.push(item);
+                }
+            }),
+        );
 
         this.value = value || this.items[0].slug;
     }
 
     calc(filters: AbstractFilterBuilder[]): void {
-        const products = productsData.filter(
-            (product) => filters.reduce<boolean>(
+        const products = productsData.filter((product) =>
+            filters.reduce<boolean>(
                 (isMatched, filter) => isMatched && (filter === this || filter.test(product)),
                 true,
             ),
@@ -32,7 +39,9 @@ export default class RadioFilterBuilder extends AbstractFilterBuilder {
 
         this.items = this.items.map((item) => {
             const count = products.reduce((acc, product) => {
-                const match = this.extractItems(product).map((x) => x.slug).includes(item.slug);
+                const match = this.extractItems(product)
+                    .map((x) => x.slug)
+                    .includes(item.slug);
 
                 return acc + (match ? 1 : 0);
             }, 0);
@@ -53,9 +62,7 @@ export default class RadioFilterBuilder extends AbstractFilterBuilder {
 
     extractItems(product: IProduct): IBaseFilterItem[] {
         if (this.slug === 'discount') {
-            const items = [
-                { slug: 'any', name: 'Any', count: 0 },
-            ];
+            const items = [{ slug: 'any', name: 'Any', count: 0 }];
 
             if (product.compareAtPrice) {
                 items.push({ slug: 'yes', name: 'Yes', count: 0 });

@@ -30,9 +30,7 @@ function WidgetPosts(props: WidgetPostsProps) {
     return (
         <div className="widget-posts widget">
             <h4 className="widget__title">Latest Posts</h4>
-            <div className="widget-posts__list">
-                {postsList}
-            </div>
+            <div className="widget-posts__list">{postsList}</div>
         </div>
     );
 }

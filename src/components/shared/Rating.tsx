@@ -21,9 +21,7 @@ function Rating(props: RatingProps) {
 
     return (
         <div className="rating">
-            <div className="rating__body">
-                {stars}
-            </div>
+            <div className="rating__body">{stars}</div>
         </div>
     );
 }

@@ -3,13 +3,11 @@
 */
 @import '../variables';
 
-
 $local-box-size: 22px;
 $local-box-disabled-size: 22px;
 $local-stick-length: 34px;
 $local-border-radius: 1.2px;
-$local-transition-duration: .15s;
-
+$local-transition-duration: 0.15s;
 
 .input-check-color {
     display: inline-block;
@@ -38,8 +36,8 @@ $local-transition-duration: .15s;
 }
 .input-check-color__icon {
     position: absolute;
-    left: (4px + ($local-box-size - 20px) * .5);
-    top: (5px + ($local-box-size - 20px) * .5);
+    left: (4px + ($local-box-size - 20px) * 0.5);
+    top: (5px + ($local-box-size - 20px) * 0.5);
     fill: $input-check-color-arrow-light-color;
     transform: scale(0);
     transition: transform $local-transition-duration;
@@ -55,11 +53,11 @@ $local-transition-duration: .15s;
 .input-check-color__input:disabled ~ {
     .input-check-color__box {
         position: relative;
-        left: ($local-box-size - $local-box-disabled-size) * .5;
-        top: ($local-box-size - $local-box-disabled-size) * .5;
+        left: ($local-box-size - $local-box-disabled-size) * 0.5;
+        top: ($local-box-size - $local-box-disabled-size) * 0.5;
         width: $local-box-disabled-size;
         height: $local-box-disabled-size;
-        opacity: .5;
+        opacity: 0.5;
         cursor: default;
     }
     .input-check-color__stick {
@@ -70,13 +68,12 @@ $local-transition-duration: .15s;
         border-radius: 1px;
         height: $local-stick-length;
         left: calc(50% - 1px);
-        top: ($local-box-size - $local-stick-length) * .5;
+        top: ($local-box-size - $local-stick-length) * 0.5;
         background: $input-check-color-stick-color;
         transform: rotateZ(45deg);
         transform-origin: center center;
     }
 }
-
 
 .input-check-color--light {
     .input-check-color__icon {

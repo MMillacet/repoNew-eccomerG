@@ -32,7 +32,11 @@ function MobileLinks(props: MobileLinksProps) {
 
                 if (link.children && link.children.length > 0) {
                     arrow = (
-                        <button className="mobile-links__item-toggle" type="button" onClick={toggle}>
+                        <button
+                            className="mobile-links__item-toggle"
+                            type="button"
+                            onClick={toggle}
+                        >
                             <ArrowRoundedDown12x7Svg className="mobile-links__item-arrow" />
                         </button>
                     );
@@ -89,11 +93,7 @@ function MobileLinks(props: MobileLinksProps) {
         return <li key={index}>{item}</li>;
     });
 
-    return (
-        <ul className={`mobile-links mobile-links--level--${level}`}>
-            {linksList}
-        </ul>
-    );
+    return <ul className={`mobile-links mobile-links--level--${level}`}>{linksList}</ul>;
 }
 
 export default MobileLinks;

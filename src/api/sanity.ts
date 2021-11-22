@@ -28,10 +28,39 @@ const sanityApi = {
                 }
             }[0]
         `;
-        const result = await client.fetch(query);
-        return result;
+        try {
+            const result = await client.fetch(query);
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`${error}`);
+        }
     },
-
+    getAboutUsContent: async () => {
+        const query = `
+            *[_type == "sobreNosotros"]{
+                ...,
+                banner {
+                    ...,
+                    "image": image.asset->
+                },
+                nuestroEquipo[] -> {
+                    "id": _id,
+                    name,
+                    role,
+                    bio,
+                    "image": image.asset->
+                }
+            }[0]
+        `;
+        try {
+            const result = await client.fetch(query);
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`${error}`);
+        }
+    },
 };
 
 export default sanityApi;

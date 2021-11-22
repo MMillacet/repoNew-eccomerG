@@ -4,10 +4,8 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
-$local-transition-duration: .2s;
+$local-transition-duration: 0.2s;
 $local-button-padding: 10px;
-
 
 .topbar-dropdown {
     position: relative;
@@ -19,7 +17,7 @@ $local-button-padding: 10px;
     padding: 0;
     cursor: pointer;
     position: relative;
-    transition: all .1s;
+    transition: all 0.1s;
     background: $topbar-dropdown-bg;
     color: $topbar-dropdown-font-color;
     fill: $topbar-dropdown-arrow-color;
@@ -49,9 +47,8 @@ $local-button-padding: 10px;
     transform-origin: top;
     transform: rotateX(60deg);
     opacity: 0;
-    transition: transform $local-transition-duration,
-                opacity $local-transition-duration,
-                visibility 0s $local-transition-duration;
+    transition: transform $local-transition-duration, opacity $local-transition-duration,
+        visibility 0s $local-transition-duration;
 
     @include direction {
         #{$inset-inline-end}: 0;

@@ -1,7 +1,6 @@
 @import '../functions';
 @import 'direction';
 
-
 @mixin post-card-grid() {
     .post-card__info {
         display: flex;
@@ -117,7 +116,6 @@
         }
     }
 }
-
 
 @mixin post-card-list() {
     display: flex;

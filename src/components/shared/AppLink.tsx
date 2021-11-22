@@ -30,7 +30,11 @@ function AppLink(props: AppLinkProps) {
     let link;
 
     if (!isLink(href) || (isSimpleLink(href) && isExternal(href))) {
-        link = <a href={href} {...anchorProps}>{children}</a>;
+        link = (
+            <a href={href} {...anchorProps}>
+                {children}
+            </a>
+        );
     } else {
         const linkProps: LinkProps = typeof href === 'string' ? { href } : href;
 

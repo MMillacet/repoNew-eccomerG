@@ -6,7 +6,6 @@
 @import '../mixins/card';
 @import '../mixins/direction';
 
-
 .post-author {
     @include card();
     padding: 22px;
@@ -42,7 +41,6 @@
 .post__related-posts {
     margin-top: 50px;
 }
-
 
 @media (max-width: breakpoint(xs-end)) {
     .post-author {

@@ -3,7 +3,6 @@ import { ImageAsset } from '@sanity/types';
 
 // application
 import { SanityLink } from '../../custom-sanity-types/link';
-import AppLink from '../shared/AppLink';
 
 export interface BlockBannerItem {
     title: string;
@@ -19,7 +18,7 @@ export default function BlockBanner(props: BlockBannerProps) {
     return (
         <div className="block block-banner">
             <div className="container">
-                <AppLink href="/" className="block-banner__body">
+                <div className="block-banner__body">
                     <div
                         className="block-banner__image block-banner__image--desktop"
                         style={{
@@ -34,11 +33,14 @@ export default function BlockBanner(props: BlockBannerProps) {
                     />
                     <div className="block-banner__title">{props?.banner?.title}</div>
                     <div className="block-banner__text">{props?.banner?.subtitle}</div>
-                    <div className="block-banner__button">
-                        <span className="btn btn-sm btn-primary">
-                        {props?.banner?.link?.text}</span>
-                    </div>
-                </AppLink>
+                    {props?.banner?.link?.text && (
+                        <div className="block-banner__button">
+                            <span className="btn btn-sm btn-primary">
+                                {props?.banner?.link?.text}
+                            </span>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

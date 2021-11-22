@@ -2,7 +2,6 @@
 // .fake-svg-icon
 */
 
-
 /* this needs only to avoid slow performance on Microsoft Edge while rendering huge amount of svg*/
 .fake-svg-icon {
     font-family: 'goldfarb' !important;
@@ -23,7 +22,7 @@
     font-size: 16px;
 
     &::before {
-        content: "\e904";
+        content: '\e904';
     }
 }
 .fake-svg-icon--compare-16 {
@@ -32,6 +31,6 @@
     font-size: 16px;
 
     &::before {
-        content: "\e901";
+        content: '\e901';
     }
 }

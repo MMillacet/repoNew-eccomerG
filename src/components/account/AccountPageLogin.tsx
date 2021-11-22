@@ -68,12 +68,18 @@ export default function AccountPageLogin() {
                                                         <Check9x7Svg className="input-check__icon" />
                                                     </span>
                                                 </span>
-                                                <label className="form-check-label" htmlFor="login-remember">
+                                                <label
+                                                    className="form-check-label"
+                                                    htmlFor="login-remember"
+                                                >
                                                     Remember Me
                                                 </label>
                                             </div>
                                         </div>
-                                        <button type="submit" className="btn btn-primary mt-2 mt-md-3 mt-lg-4">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary mt-2 mt-md-3 mt-lg-4"
+                                        >
                                             Login
                                         </button>
                                     </form>
@@ -104,7 +110,9 @@ export default function AccountPageLogin() {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="register-confirm">Repeat Password</label>
+                                            <label htmlFor="register-confirm">
+                                                Repeat Password
+                                            </label>
                                             <input
                                                 id="register-confirm"
                                                 type="password"
@@ -112,7 +120,10 @@ export default function AccountPageLogin() {
                                                 placeholder="Password"
                                             />
                                         </div>
-                                        <button type="submit" className="btn btn-primary mt-2 mt-md-3 mt-lg-4">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary mt-2 mt-md-3 mt-lg-4"
+                                        >
                                             Register
                                         </button>
                                     </form>

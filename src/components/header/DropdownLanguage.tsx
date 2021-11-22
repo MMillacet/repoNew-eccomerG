@@ -20,13 +20,15 @@ function DropdownLanguage() {
     const language = useLanguage();
     const localeChange = useLocaleChange();
 
-    const items: DropdownLanguageItem[] = useMemo(() => (
-        languages.map((eachLanguage) => ({
-            title: eachLanguage.name,
-            language: eachLanguage,
-            icon: eachLanguage.icon,
-        }))
-    ), []);
+    const items: DropdownLanguageItem[] = useMemo(
+        () =>
+            languages.map((eachLanguage) => ({
+                title: eachLanguage.name,
+                language: eachLanguage,
+                icon: eachLanguage.icon,
+            })),
+        [],
+    );
 
     const title = (
         <Fragment>

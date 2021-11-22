@@ -3,9 +3,7 @@
 */
 @import '../variables';
 
-
 $local-item-margin: 3px;
-
 
 .input-radio-label {
     display: block;
@@ -33,11 +31,11 @@ $local-item-margin: 3px;
         cursor: pointer;
         display: block;
         height: 32px;
-        padding: .3125rem 1rem;
+        padding: 0.3125rem 1rem;
         border-radius: 2px;
         background: $input-radio-label-default-bg;
         color: $input-radio-label-default-font-color;
-        transition: background-color .2s, color .2s;
+        transition: background-color 0.2s, color 0.2s;
     }
 
     input:not(:checked):not(:disabled) {
@@ -52,14 +50,14 @@ $local-item-margin: 3px;
             cursor: default;
             background: $input-radio-label-active-bg;
             color: $input-radio-label-active-font-color;
-            transition-duration: .08s, .08s;
+            transition-duration: 0.08s, 0.08s;
         }
     }
 
     input:disabled {
         ~ span {
             cursor: default;
-            opacity: .5;
+            opacity: 0.5;
         }
     }
 }

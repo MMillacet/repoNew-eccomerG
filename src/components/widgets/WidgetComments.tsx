@@ -18,7 +18,9 @@ function WidgetComments(props: WidgetCommentsProps) {
                 <div className="widget-comments__date">{comment.date}</div>
                 <div className="widget-comments__name">
                     On
-                    <AppLink href="/" title={comment.postTitle}>{comment.postTitle}</AppLink>
+                    <AppLink href="/" title={comment.postTitle}>
+                        {comment.postTitle}
+                    </AppLink>
                 </div>
             </div>
         </li>
@@ -27,9 +29,7 @@ function WidgetComments(props: WidgetCommentsProps) {
     return (
         <div className="widget-comments widget">
             <h4 className="widget__title">Latest Comments</h4>
-            <ul className="widget-comments__list">
-                {commentsList}
-            </ul>
+            <ul className="widget-comments__list">{commentsList}</ul>
         </div>
     );
 }

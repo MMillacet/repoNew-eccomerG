@@ -4,9 +4,7 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 $local-item-margin: 0;
-
 
 .topbar {
     height: $topbar-height;
@@ -36,7 +34,7 @@ $local-item-margin: 0;
 }
 .topbar__item-value {
     color: $topbar-dropdown-value-color;
-    transition: all .1s;
+    transition: all 0.1s;
 }
 .topbar__spring {
     flex-grow: 1;

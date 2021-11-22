@@ -5,9 +5,7 @@
 @import '../svg';
 @import '../mixins/direction';
 
-
-$local-suggestion-transition: .2s;
-
+$local-suggestion-transition: 0.2s;
 
 @mixin local-input-focus-state() {
     @if ($header-type == white) {
@@ -21,7 +19,6 @@ $local-suggestion-transition: .2s;
         }
     }
 }
-
 
 .search--location--header {
     .search__body {
@@ -40,7 +37,7 @@ $local-suggestion-transition: .2s;
         width: 100%;
         height: 100%;
         border-radius: $header-search-border-radius;
-        transition: box-shadow .15s, background .15s;
+        transition: box-shadow 0.15s, background 0.15s;
     }
     .search__categories {
         margin: 2px;
@@ -50,7 +47,7 @@ $local-suggestion-transition: .2s;
         background-color: transparent;
         color: $header-search-input-default-font-color;
         font-size: 14px;
-        transition: background-color .2s;
+        transition: background-color 0.2s;
         max-width: 30%;
         cursor: pointer;
         border-radius: 0;
@@ -79,7 +76,7 @@ $local-suggestion-transition: .2s;
         width: 1px;
         flex-grow: 1;
         font-size: 15px;
-        transition: color .15s;
+        transition: color 0.15s;
         color: $header-search-input-default-font-color;
 
         &::placeholder {
@@ -138,7 +135,7 @@ $local-suggestion-transition: .2s;
         align-items: center;
         justify-content: center;
         fill: $header-search-input-default-icon-color;
-        transition: fill .15s;
+        transition: fill 0.15s;
 
         &:hover,
         &:focus {
@@ -166,8 +163,7 @@ $local-suggestion-transition: .2s;
             visibility: hidden;
             opacity: 0;
             pointer-events: none;
-            transition:
-                opacity $local-suggestion-transition,
+            transition: opacity $local-suggestion-transition,
                 visibility 0s $local-suggestion-transition;
         }
         &.search--has-suggestions.search--suggestions-open {
@@ -199,7 +195,7 @@ $local-suggestion-transition: .2s;
             }
 
             &:hover {
-                background-color: rgba(#000, .05);
+                background-color: rgba(#000, 0.05);
             }
         }
         .search__suggestions {

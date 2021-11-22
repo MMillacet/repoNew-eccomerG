@@ -40,10 +40,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
 
                                         <h6>Do you ship internationally?</h6>
@@ -52,10 +52,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
                                     </div>
                                 </div>
@@ -67,10 +67,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
 
                                         <h6>Do you ship internationally?</h6>
@@ -79,10 +79,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
                                     </div>
                                 </div>
@@ -104,10 +104,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
                                     </div>
                                 </div>
@@ -119,10 +119,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
                                     </div>
                                 </div>
@@ -144,10 +144,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
                                     </div>
                                 </div>
@@ -159,10 +159,10 @@ function SitePageFaq() {
                                             Lorem ipsum dolor sit amet conse ctetur adipisicing
                                             elit, sed do eiusmod tempor incididunt ut labore et
                                             dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                            ea commodo consequat. Duis aute irure dolor in
+                                            reprehenderit in voluptate velit esse cillum dolore eu
+                                            fugiat.
                                         </p>
                                     </div>
                                 </div>

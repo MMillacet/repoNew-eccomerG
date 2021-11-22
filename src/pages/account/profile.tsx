@@ -5,9 +5,8 @@ import AccountLayout from '../../components/account/AccountLayout';
 import AccountPageProfile from '../../components/account/AccountPageProfile';
 import { IUser } from '../../interfaces/user';
 
-
 export interface ProfileProps {
-    user: IUser
+    user: IUser;
 }
 
 function Page(props: ProfileProps) {
@@ -30,8 +29,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             },
         };
     }
-}
+    return { props: {} };
+};
 
 export default Page;
-
-

@@ -4,10 +4,8 @@
 @import '../variables';
 @import '../mixins/direction';
 
-
 $local-height: 50px;
 $local-width: 340px;
-
 
 .search--location--indicator {
     .search__body {
@@ -53,7 +51,7 @@ $local-width: 340px;
         justify-content: center;
         width: $local-height + 2px;
         fill: $indicator-search-button-default-color;
-        transition: fill .2s;
+        transition: fill 0.2s;
     }
     .search__button:hover {
         fill: $indicator-search-button-hover-color;

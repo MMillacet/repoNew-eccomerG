@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .block-header {
     display: flex;
     align-items: center;
@@ -81,7 +80,7 @@
     fill: $block-header-arrow-default-color;
     border-radius: 1.5px;
     background: $block-header-arrow-default-bg;
-    transition: all .15s;
+    transition: all 0.15s;
 
     &:focus {
         outline: none;
@@ -126,7 +125,6 @@
     }
 }
 
-
 .block-header__title + .block-header__divider {
     @include direction {
         #{$margin-inline-start}: 16px;
@@ -147,8 +145,6 @@
         #{$margin-inline-start}: 16px;
     }
 }
-
-
 
 @media (max-width: breakpoint(sm-end)) {
     .block-header {

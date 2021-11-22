@@ -1,5 +1,5 @@
 // third-party
-import { GetServerSideProps, GetStaticPropsContext } from 'next';
+import { GetStaticPropsContext } from 'next';
 import goldfarbApi from '../../../api/goldfarb';
 // application
 import ShopPageProduct from '../../../components/shop/ShopPageProduct';
@@ -12,21 +12,19 @@ export interface PageProps {
 
 export async function getStaticPaths() {
     const { products } = await goldfarbApi.getProductsList();
-  
+
     // Get the paths we want to pre-render based on posts
-    const paths = products
-    .filter((product: { itemcode: any; }) => !!product.itemcode)
-    .map((product: { itemcode: any; }) => {
-        return { params: { slug: product.itemcode }};
-    })    
-  
+    const paths = process.env.IGNORE_PRODUCT_BUILDS
+        ? []
+        : products
+              .filter((product: { itemcode: any }) => !!product.itemcode)
+              .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
+
     // { fallback: false } means other routes should 404.
-    return { paths, fallback: false }
+    return { paths, fallback: false };
 }
 
-
 export async function getStaticProps(context: GetStaticPropsContext) {
-
     let product: IProduct | null = null;
 
     if (typeof context.params?.slug === 'string') {
@@ -36,13 +34,14 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         product = products[0];
     }
 
-    return { 
-        props: { 
+    return {
+        props: {
             product,
-        } 
-    }
-  }
-
+        },
+        revalidate: 60, // In seconds
+        notFound: !product,
+    };
+}
 
 function Page({ product }: PageProps) {
     if (product === null) {

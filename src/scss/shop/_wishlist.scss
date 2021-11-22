@@ -5,7 +5,6 @@
 @import '../functions';
 @import '../mixins/direction';
 
-
 .wishlist__product-name {
     color: inherit;
 }
@@ -23,7 +22,6 @@
         #{$margin-inline-start}: 9px;
     }
 }
-
 
 @media (min-width: breakpoint(md-start)) {
     .wishlist {

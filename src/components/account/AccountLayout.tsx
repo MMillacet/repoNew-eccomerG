@@ -58,9 +58,7 @@ function AccountLayout(props: AccountLayoutProps) {
                                 <ul>{items}</ul>
                             </div>
                         </div>
-                        <div className="col-12 col-lg-9 mt-4 mt-lg-0">
-                            {children}
-                        </div>
+                        <div className="col-12 col-lg-9 mt-4 mt-lg-0">{children}</div>
                     </div>
                 </div>
             </div>

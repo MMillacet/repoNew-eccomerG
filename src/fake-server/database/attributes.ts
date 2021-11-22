@@ -30,37 +30,27 @@ const attributesDef: IAttributeDef[] = [
     {
         name: 'Speed',
         slug: 'speed',
-        values: [
-            { name: '750 RPM', slug: '750-rpm' },
-        ],
+        values: [{ name: '750 RPM', slug: '750-rpm' }],
     },
     {
         name: 'Power Source',
         slug: 'power-source',
-        values: [
-            { name: 'Cordless-Electric', slug: 'cordless-electric' },
-        ],
+        values: [{ name: 'Cordless-Electric', slug: 'cordless-electric' }],
     },
     {
         name: 'Battery Cell Type',
         slug: 'battery-cell-type',
-        values: [
-            { name: 'Lithium', slug: 'lithium' },
-        ],
+        values: [{ name: 'Lithium', slug: 'lithium' }],
     },
     {
         name: 'Voltage',
         slug: 'voltage',
-        values: [
-            { name: '20 Volts', slug: '20-volts' },
-        ],
+        values: [{ name: '20 Volts', slug: '20-volts' }],
     },
     {
         name: 'Battery Capacity',
         slug: 'battery-capacity',
-        values: [
-            { name: '2 Ah', slug: '2-Ah' },
-        ],
+        values: [{ name: '2 Ah', slug: '2-Ah' }],
     },
 ];
 

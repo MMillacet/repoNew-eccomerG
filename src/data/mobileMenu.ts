@@ -53,9 +53,21 @@ const dataMobileMenu: IMobileMenu = [
                 title: 'Shop Grid',
                 url: '/shop/category-grid-3-columns-sidebar',
                 children: [
-                    { type: 'link', title: '3 Columns Sidebar', url: '/shop/category-grid-3-columns-sidebar' },
-                    { type: 'link', title: '4 Columns Full', url: '/shop/category-grid-4-columns-full' },
-                    { type: 'link', title: '5 Columns Full', url: '/shop/category-grid-5-columns-full' },
+                    {
+                        type: 'link',
+                        title: '3 Columns Sidebar',
+                        url: '/shop/category-grid-3-columns-sidebar',
+                    },
+                    {
+                        type: 'link',
+                        title: '4 Columns Full',
+                        url: '/shop/category-grid-4-columns-full',
+                    },
+                    {
+                        type: 'link',
+                        title: '5 Columns Full',
+                        url: '/shop/category-grid-5-columns-full',
+                    },
                 ],
             },
             { type: 'link', title: 'Shop List', url: '/shop/category-list' },
@@ -91,13 +103,21 @@ const dataMobileMenu: IMobileMenu = [
             {
                 type: 'link',
                 title: 'Order Details',
-                url: { href: '/account/orders/[orderId]', as: '/account/orders/5', prefetch: false },
+                url: {
+                    href: '/account/orders/[orderId]',
+                    as: '/account/orders/5',
+                    prefetch: false,
+                },
             },
             { type: 'link', title: 'Address Book', url: '/account/addresses' },
             {
                 type: 'link',
                 title: 'Edit Address',
-                url: { href: '/account/addresses/[addressId]', as: '/account/addresses/5', prefetch: false },
+                url: {
+                    href: '/account/addresses/[addressId]',
+                    as: '/account/addresses/5',
+                    prefetch: false,
+                },
             },
             { type: 'link', title: 'Change Password', url: '/account/password' },
         ],
