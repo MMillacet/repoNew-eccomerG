@@ -94,6 +94,18 @@ const goldfarbApi = {
         return data;
     },
 
+    getProductsList: async () => {
+        const config: AxiosRequestConfig ={
+            baseURL,
+            url: '/goldfarb/ProductsList',
+            method: 'get',
+        }
+        
+        const { data } = await axios(config);
+
+        return data;
+    },
+
     /**
      * Documents
      **/
