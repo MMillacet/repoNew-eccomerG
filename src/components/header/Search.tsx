@@ -16,45 +16,10 @@ import { useRouter } from 'next/router';
 // application
 import Cross20Svg from '../../svg/cross-20.svg';
 import Search20Svg from '../../svg/search-20.svg';
-import shopApi, { GetSuggestionsOptions } from '../../api/shop';
 import Suggestions from './Suggestions';
-import { ICategory } from '../../interfaces/category';
 import { IProduct } from '../../interfaces/product';
+import goldfarbApi from '../../api/goldfarb';
 
-type CategoryWithDepth = ICategory & {depth: number};
-
-function useCategories() {
-    const [categories, setCategories] = useState<CategoryWithDepth[]>([]);
-
-    useEffect(() => {
-        let canceled = false;
-
-        const treeToList = (categories: ICategory[], depth = 0): CategoryWithDepth[] => (
-            categories.reduce(
-                (result: CategoryWithDepth[], category) => [
-                    ...result,
-                    { depth, ...category },
-                    ...treeToList(category.children || [], depth + 1),
-                ],
-                [],
-            )
-        );
-
-        shopApi.getCategories({ depth: 1 }).then((categories: ICategory[]) => {
-            if (canceled) {
-                return;
-            }
-
-            setCategories(treeToList(categories));
-        });
-
-        return () => {
-            canceled = true;
-        };
-    }, [setCategories]);
-
-    return categories;
-}
 
 export interface SearchProps {
     context: 'header' | 'mobile-header' | 'indicator';
@@ -75,8 +40,6 @@ function Search(props: SearchProps) {
     const [hasSuggestions, setHasSuggestions] = useState(false);
     const [suggestedProducts, setSuggestedProducts] = useState<IProduct[]>([]);
     const [query, setQuery] = useState('');
-    const [category, setCategory] = useState('[all]');
-    const categories = useCategories();
     const wrapperRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const close = useCallback(() => {
@@ -110,9 +73,6 @@ function Search(props: SearchProps) {
         setSuggestionsOpen(true);
     };
 
-    const handleChangeCategory = (event: ChangeEvent<HTMLSelectElement>) => {
-        setCategory(event.target.value);
-    };
 
     const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
         let canceled = false;
@@ -131,22 +91,19 @@ function Search(props: SearchProps) {
             setHasSuggestions(false);
         } else {
             timer = setTimeout(() => {
-                const options: GetSuggestionsOptions = { limit: 5 };
+                if( canceled) return;
 
-                if (category !== '[all]') {
-                    options.category = category;
-                }
+                goldfarbApi.getProductsSearch({ term: query }).then(({products})  => {
+                    
+                    const top5codes = products.slice(0, 5).map((p: { code: string; }) => p.code);
 
-                shopApi.getSuggestions(query, options).then((products) => {
-                    if (canceled) {
-                        return;
-                    }
-
-                    setSuggestedProducts(products);
-                    setHasSuggestions(products.length > 0);
-                    setSuggestionsOpen(true);
+                    goldfarbApi.getProductsLookup({ itemcodes: top5codes }).then(({ products }) => {
+                        setSuggestedProducts(products);
+                        setHasSuggestions(products.length > 0);
+                        setSuggestionsOpen(true);
+                    })                    
                 });
-            }, 100);
+            }, 250);
         }
 
         setCancelFn(() => newCancelFn);
@@ -184,29 +141,11 @@ function Search(props: SearchProps) {
         </button>
     );
 
-    const categoryOptions = categories.map((category) => (
-        <option key={category.slug} value={category.slug}>
-            {'\u00A0'.repeat(4 * category.depth)}
-            {category.name}
-        </option>
-    ));
 
     return (
         <div className={rootClasses} ref={wrapperRef} onBlur={handleBlur}>
             <div className="search__body">
                 <form className="search__form" action="">
-                    {context === 'header' && (
-                        <select
-                            className="search__categories"
-                            aria-label="Category"
-                            value={category}
-                            onFocus={close}
-                            onChange={handleChangeCategory}
-                        >
-                            <option value="[all]">All Categories</option>
-                            {categoryOptions}
-                        </select>
-                    )}
                     <input
                         ref={inputRef}
                         onChange={handleChangeQuery}
@@ -215,8 +154,8 @@ function Search(props: SearchProps) {
                         value={query}
                         className="search__input"
                         name="search"
-                        placeholder="Search over 10,000 products"
-                        aria-label="Site search"
+                        placeholder="Producto o numero de articulo..."
+                        aria-label="Buscador"
                         type="text"
                         autoComplete="off"
                     />

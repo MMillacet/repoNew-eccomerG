@@ -8,11 +8,11 @@ export interface LookupOptions {
 }
 
 export interface SearchOptions {
-    family: string;
-    category: string;
-    subcategory: string;
-    term: string;
-    orderBy: string;
+    family?: string;
+    category?: string;
+    subcategory?: string;
+    term?: string;
+    orderBy?: string;
 }
 
 const goldfarbApi = {
@@ -76,6 +76,8 @@ const goldfarbApi = {
     },
 
     getProductsSearch: async (options: SearchOptions) => {
+        // price-high-to-low or price-low-to-high
+        options.orderBy = options.orderBy || 'relevance';
         const config: AxiosRequestConfig = options.family
             ? {
                   baseURL,

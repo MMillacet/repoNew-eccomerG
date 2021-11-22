@@ -213,11 +213,11 @@
       $header-search-height:                         42px                                                      !default;
       $header-search-border-radius:                  3px                                                       !default;
       // input default
-      $header-search-input-default-bg:               transparent                                               !default;
+      $header-search-input-default-bg:               $light-color                                          !default;
       $header-search-input-default-border-color:     #e5e5e5                                                   !default;
       $header-search-input-default-shadow:           0 0 0 2px $header-search-input-default-border-color inset !default;
       $header-search-input-default-placeholder:      #999                                                      !default;
-      $header-search-input-default-font-color:       inherit                                                   !default;
+      $header-search-input-default-font-color:       $light-opposite-color                                      !default;
       $header-search-input-default-icon-color:       #bfbfbf                                                   !default;
       $header-search-input-default-icon-hover-color: $accent-color                                             !default;
       $header-search-input-default-arrows-color:     #4d4d4d                                                   !default;

@@ -12,6 +12,7 @@ import CurrencyFormat from '../shared/CurrencyFormat';
 import url from '../../services/url';
 import { IProduct } from '../../interfaces/product';
 import { useCartAddItem } from '../../store/cart/cartHooks';
+import { useUser } from '@auth0/nextjs-auth0';
 
 export interface SuggestionsProps {
     context: 'header' | 'mobile-header' | 'indicator';
@@ -27,6 +28,8 @@ function Suggestions(props: SuggestionsProps) {
     } = props;
     const rootClasses = classNames(`suggestions suggestions--location--${context}`, className);
     const cartAddItem = useCartAddItem();
+    
+    const { user } = useUser();
 
     const list = (products && products.map((product) => (
         <li key={product.id} className="suggestions__item">
@@ -39,11 +42,12 @@ function Suggestions(props: SuggestionsProps) {
             )}
             <div className="suggestions__item-info">
                 <AppLink href={url.product(product)} className="suggestions__item-name">
-                    {product.name}
+                    {product.title}
                 </AppLink>
-                <div className="suggestions__item-meta">SKU: 83690/32</div>
+                <div className="suggestions__item-meta"> {product.category} </div>
             </div>
-            <div className="suggestions__item-price">
+
+            {user && <div className="suggestions__item-price">
                 {product.compareAtPrice && (
                     <Fragment>
                         <span className="suggestions__item-price-new"><CurrencyFormat value={product.price} /></span>
@@ -53,8 +57,9 @@ function Suggestions(props: SuggestionsProps) {
                 )}
 
                 {!product.compareAtPrice && (<CurrencyFormat value={product.price} />)}
-            </div>
-            {context === 'header' && (
+            </div>}
+
+            {user && context === 'header' && (
                 <div className="suggestions__item-actions">
                     <AsyncAction
                         action={() => cartAddItem(product)}
