@@ -1,5 +1,7 @@
 Goldfarb E-Commerce
 
+![image](https://user-images.githubusercontent.com/50899946/143028761-60a4b625-c738-41b1-a238-7f13cedbd46e.png)
+
 ## Desarrollo local
 
 -   Instalar [Docker](https://docs.docker.com/get-docker/)
