@@ -100,6 +100,9 @@ const url = {
     terms: (): ILinkProps => ({
         href: '/site/terms',
     }),
+    faq: (): ILinkProps => ({
+        href: '/site/faq',
+    }),
 };
 
 export default url;

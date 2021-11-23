@@ -24,6 +24,12 @@
     border-radius: $card-border-radius;
     padding: 48px 44px;
 }
+.faq__section-faq {
+    padding-bottom: 48px;
+}
+.faq__section-faq:last-child {
+    padding-bottom: 0px;
+}
 
 @media (max-width: breakpoint(md-end)) {
     .faq__section + .faq__section {
@@ -34,5 +40,11 @@
     }
     .faq__section-column + .faq__section-column {
         margin-top: 1.5em;
+    }
+    .faq__section-faq {
+        padding-bottom: 28px;
+    }
+    .faq__section-faq:last-child {
+        padding-bottom: 0px;
     }
 }

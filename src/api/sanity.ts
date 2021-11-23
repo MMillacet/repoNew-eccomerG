@@ -61,6 +61,26 @@ const sanityApi = {
             throw new Error(`${error}`);
         }
     },
+    getFAQContent: async () => {
+        const query = `
+            *[_type == "preguntasFrecuentes"]{
+                ...,
+                preguntas[] {
+                      "id": _key,
+                      "question": pregunta,
+                      "answer": respuesta
+                  }
+            }[0]
+        `;
+        try {
+            const result = await client.fetch(query);
+            console.log('faq', result);
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`${error}`);
+        }
+    },
 };
 
 export default sanityApi;
