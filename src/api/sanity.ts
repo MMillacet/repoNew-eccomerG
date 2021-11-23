@@ -81,6 +81,30 @@ const sanityApi = {
             throw new Error(`${error}`);
         }
     },
+    getHowToPurchaseContent: async () => {
+        const query = `
+            *[_type == "comoComprar"]{
+                ...,
+                client {
+                    ...,
+                    paymentMethods[] -> {
+                      "id": _id,
+                      name,
+                      description,
+                      "logo": logo.asset->
+                  }
+                }
+            }[0]
+        `;
+        try {
+            const result = await client.fetch(query);
+            console.log('faq', result);
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`${error}`);
+        }
+    },
 };
 
 export default sanityApi;

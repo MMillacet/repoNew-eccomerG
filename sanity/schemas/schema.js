@@ -19,6 +19,12 @@ import preguntasFrecuentes from './preguntasFrecuentes';
 import sobreNosotros from './sobreNosotros';
 import link from './link';
 import banner from './banner';
+import comoComprar from './comoComprar';
+import medioDePago from './medioDePago';
+import section from './section';
+import clientSection from './clientSection';
+import notClientSection from './notClientSection';
+import comoComprarV2 from './comoComprar';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -43,6 +49,11 @@ export default createSchema({
         preguntaRespuesta,
         preguntasFrecuentes,
         sobreNosotros,
+        comoComprar,
+        medioDePago,
+        section,
+        clientSection,
+        notClientSection,
         // When added to this list, object types can be used as
         // { type: 'typename' } in other document schemas
     ]),

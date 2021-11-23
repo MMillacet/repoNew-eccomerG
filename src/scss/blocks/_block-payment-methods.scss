@@ -1,0 +1,43 @@
+/*
+// .block-payment-methods
+*/
+@import '../variables';
+@import '../functions';
+@import '../mixins/card';
+
+.block-payment-methods {
+    .slick-track {
+        display: flex;
+        align-items: center;
+    }
+}
+.row {
+    .block-payment-methods {
+        width: 100%;
+    }
+}
+.block-payment-methods__slider {
+    @include card();
+
+    .slick-slide > div > div {
+        vertical-align: middle;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.block-payment-methods__item {
+    padding: 24px 24px;
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: breakpoint(sm-end)) {
+    .block-payment-methods__item {
+        padding: 20px 24px;
+    }
+}
