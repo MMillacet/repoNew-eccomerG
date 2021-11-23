@@ -12,7 +12,7 @@ export interface PageProps {
 // noinspection JSUnusedGlobalSymbols
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => ({
     props: {
-        product: await shopApi.getProductBySlug('brandix-screwdriver-screw1500acc'),
+        product: await shopApi.getProductById('21254'),
     },
 });
 

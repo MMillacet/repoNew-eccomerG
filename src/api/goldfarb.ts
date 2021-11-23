@@ -1,4 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import products from '../../server/api/products';
+import { nameToSlug } from './helpers/utils';
 
 const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
@@ -42,11 +44,22 @@ const goldfarbApi = {
         return data;
     },
 
+
     /**
      * Products
      **/
+     getFamilies: async () => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/goldfarb/getFamilies',
+            method: 'GET',
+        };
+        const { data } = await axios(config);
 
-    getProductsLookup: async (options: LookupOptions) => {
+        return data;
+    },
+
+    getProductsLookup: async (options: LookupOptions) : Promise<{ products: any[] }> => {
         options.cardcode = options.cardcode || '4000092';
 
         const config: AxiosRequestConfig = {
@@ -60,11 +73,11 @@ const goldfarbApi = {
             const { data } = await axios(config);
 
             data.products = data.products.map((product: any) => ({
-                id: product.code,
-                slug: product.code,
-                images: [
-                    `https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.code}_0.jpg`,
-                ],
+                id: Number(product.code),
+                slug: nameToSlug(product.title),
+                images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.code}_0.jpg`],
+                availability: product.hasStock ? 'in-stock' : 'out-of-stock',
+                // compareAtPrice: product.discount > 0 ? product.price * (1 - (product.discount / 100 )) : undefined,
                 ...product,
             }));
 

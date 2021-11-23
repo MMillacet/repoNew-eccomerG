@@ -201,41 +201,41 @@ $topbar-dropdown-hover-font-color: $light-opposite-color !default;
 $topbar-dropdown-hover-value-color: $topbar-dropdown-value-color !default;
 $topbar-dropdown-hover-arrow-color: #999 !default;
 
-// ----------------------------------------
-// -- .search--location--header
-// ----------------------------------------
-$header-search-height: 42px !default;
-$header-search-border-radius: 3px !default;
-// input default
-$header-search-input-default-bg: $light-color !default;
-$header-search-input-default-border-color: #e5e5e5 !default;
-$header-search-input-default-shadow: 0 0 0 2px $header-search-input-default-border-color inset !default;
-$header-search-input-default-placeholder: #999 !default;
-$header-search-input-default-font-color: $light-opposite-color !default;
-$header-search-input-default-icon-color: #bfbfbf !default;
-$header-search-input-default-icon-hover-color: $accent-color !default;
-$header-search-input-default-arrows-color: #4d4d4d !default;
-// input hover
-$header-search-input-hover-bg: $header-search-input-default-bg !default;
-$header-search-input-hover-shadow: 0 0 0 2px #d4d4d4 inset !default;
-$header-search-input-hover-placeholder: $header-search-input-default-placeholder !default;
-$header-search-input-hover-font-color: $header-search-input-default-font-color !default;
-$header-search-input-hover-icon-color: $header-search-input-default-icon-color !default;
-$header-search-input-hover-icon-hover-color: $header-search-input-default-icon-hover-color !default;
-// input hover
-$header-search-input-focus-bg: $header-search-input-hover-bg !default;
-$header-search-input-focus-shadow: 0 0 0 2px $accent-color inset !default;
-$header-search-input-focus-placeholder: $header-search-input-hover-placeholder !default;
-$header-search-input-focus-font-color: $header-search-input-hover-font-color !default;
-$header-search-input-focus-icon-color: $header-search-input-hover-icon-color !default;
-$header-search-input-focus-icon-hover-color: $header-search-input-hover-icon-hover-color !default;
-// suggestion
-$header-search-suggestions-bg: $light-color !default;
-$header-search-suggestions-shadow: 0 1px 15px rgba(#000, 0.2) !default;
-$header-search-suggestions-divider-color: rgba(#000, 0.08) !default;
-$header-search-suggestions-font-color: $light-opposite-color !default;
-$header-search-suggestions-muted-font-color: $light-opposite-muted-color !default;
-$header-search-suggestions-item-hover-bg: rgba(#000, 0.03) !default;
+   // ----------------------------------------
+   // -- .search--location--header
+   // ----------------------------------------
+      $header-search-height:                         42px                                                      !default;
+      $header-search-border-radius:                  3px                                                       !default;
+      // input default
+      $header-search-input-default-bg:               $light-color                                          !default;
+      $header-search-input-default-border-color:     #e5e5e5                                                   !default;
+      $header-search-input-default-shadow:           0 0 0 2px $header-search-input-default-border-color inset !default;
+      $header-search-input-default-placeholder:      #999                                                      !default;
+      $header-search-input-default-font-color:       $light-opposite-color                                      !default;
+      $header-search-input-default-icon-color:       #bfbfbf                                                   !default;
+      $header-search-input-default-icon-hover-color: $accent-color                                             !default;
+      $header-search-input-default-arrows-color:     #4d4d4d                                                   !default;
+      // input hover
+      $header-search-input-hover-bg:                 $header-search-input-default-bg                           !default;
+      $header-search-input-hover-shadow:             0 0 0 2px #d4d4d4 inset                                   !default;
+      $header-search-input-hover-placeholder:        $header-search-input-default-placeholder                  !default;
+      $header-search-input-hover-font-color:         $header-search-input-default-font-color                   !default;
+      $header-search-input-hover-icon-color:         $header-search-input-default-icon-color                   !default;
+      $header-search-input-hover-icon-hover-color:   $header-search-input-default-icon-hover-color             !default;
+      // input hover
+      $header-search-input-focus-bg:                 $header-search-input-hover-bg                             !default;
+      $header-search-input-focus-shadow:             0 0 0 2px $accent-color inset                             !default;
+      $header-search-input-focus-placeholder:        $header-search-input-hover-placeholder                    !default;
+      $header-search-input-focus-font-color:         $header-search-input-hover-font-color                     !default;
+      $header-search-input-focus-icon-color:         $header-search-input-hover-icon-color                     !default;
+      $header-search-input-focus-icon-hover-color:   $header-search-input-hover-icon-hover-color               !default;
+      // suggestion
+      $header-search-suggestions-bg:                 $light-color                                              !default;
+      $header-search-suggestions-shadow:             0 1px 15px rgba(#000, .2)                                 !default;
+      $header-search-suggestions-divider-color:      rgba(#000, .08)                                           !default;
+      $header-search-suggestions-font-color:         $light-opposite-color                                     !default;
+      $header-search-suggestions-muted-font-color:   $light-opposite-muted-color                               !default;
+      $header-search-suggestions-item-hover-bg:      rgba(#000, .03)                                           !default;
 
 // ----------------------------------------
 // -- .search--location--indicator

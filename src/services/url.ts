@@ -32,9 +32,9 @@ const url = {
         as: `/shop/catalog/${category.slug}`,
     }),
 
-    product: (product: { slug: string }): ILinkProps => ({
+    product: (product: { id: number }): ILinkProps => ({
         href: '/shop/products/[slug]',
-        as: `/shop/products/${product.slug}`,
+        as: `/shop/products/${product.id}`,
     }),
 
     wishlist: (): ILinkProps => ({

@@ -20,6 +20,7 @@ import Suggestions from './Suggestions';
 import { IProduct } from '../../interfaces/product';
 import goldfarbApi from '../../api/goldfarb';
 
+
 export interface SearchProps {
     context: 'header' | 'mobile-header' | 'indicator';
     className?: string;
@@ -67,6 +68,7 @@ function Search(props: SearchProps) {
         setSuggestionsOpen(true);
     };
 
+
     const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
         let canceled = false;
         let timer: ReturnType<typeof setTimeout>;
@@ -84,16 +86,17 @@ function Search(props: SearchProps) {
             setHasSuggestions(false);
         } else {
             timer = setTimeout(() => {
-                if (canceled) return;
+                if( canceled) return;
 
-                goldfarbApi.getProductsSearch({ term: query }).then(({ products }) => {
-                    const top5codes = products.slice(0, 5).map((p: { code: string }) => p.code);
+                goldfarbApi.getProductsSearch({ term: query }).then(({products})  => {
+                    
+                    const top5codes = products.slice(0, 5).map((p: { code: string; }) => p.code);
 
                     goldfarbApi.getProductsLookup({ itemcodes: top5codes }).then(({ products }) => {
                         setSuggestedProducts(products);
                         setHasSuggestions(products.length > 0);
                         setSuggestionsOpen(true);
-                    });
+                    })                    
                 });
             }, 250);
         }
@@ -139,6 +142,7 @@ function Search(props: SearchProps) {
                 <Cross20Svg />
             </button>
         );
+
 
     return (
         <div className={rootClasses} ref={wrapperRef} onBlur={handleBlur}>

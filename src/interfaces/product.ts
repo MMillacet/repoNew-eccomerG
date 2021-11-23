@@ -42,7 +42,6 @@ export interface IProduct {
     category: string;
     subcategory: string;
     hasBought: boolean;
-    brand2: string;
     tax: number;
 }
 

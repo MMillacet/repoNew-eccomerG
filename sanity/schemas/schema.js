@@ -1,7 +1,9 @@
 // First, we must import the schema creator
+  /* eslint-disable import/no-unresolved */
 import createSchema from 'part:@sanity/base/schema-creator';
 
 // Then import schema types from any plugins that might expose them
+  /* eslint-disable import/no-unresolved */
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 // We import object and document schemas

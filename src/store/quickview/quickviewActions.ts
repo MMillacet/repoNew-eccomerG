@@ -24,7 +24,7 @@ export function quickviewClose(): QuickviewCloseAction {
     };
 }
 
-export function quickviewOpen(productSlug: string): QuickviewThunkAction<Promise<void>> {
+export function quickviewOpen(productId: string): QuickviewThunkAction<Promise<void>> {
     return (dispatch) => {
         cancelPreviousRequest();
 
@@ -32,7 +32,7 @@ export function quickviewOpen(productSlug: string): QuickviewThunkAction<Promise
             let canceled = false;
             // sending request to server, timeout is used as a stub
             const timer = setTimeout(() => {
-                shopApi.getProductBySlug(productSlug).then((product) => {
+                shopApi.getProductById(productId).then((product) => {
                     if (canceled) {
                         return;
                     }

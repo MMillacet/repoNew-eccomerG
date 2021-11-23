@@ -17,6 +17,8 @@ import {
     getTopRatedProducts,
 } from '../fake-server/endpoints/products';
 import productsApi from '../../server/api/products';
+import goldfarbApi from './goldfarb';
+import { familiesToCategories, makeShopCategory, prepareCategory, walkTree } from './helpers/category';
 
 export interface GetCategoriesOptions {
     depth?: number;
@@ -44,20 +46,11 @@ const shopApi = {
     /**
      * Returns array of categories.
      */
-    getCategories: (options: GetCategoriesOptions = {}): Promise<IShopCategory[]> => {
-        /**
-         * This is what your API endpoint might look like:
-         *
-         * https://example.com/api/categories.json?depth=2
-         *
-         * where:
-         * - 2 = options.depth
-         */
-        // return fetch(`https://example.com/api/categories.json?${qs.stringify(options)}`)
-        //     .then((response) => response.json());
-
-        // This is for demonstration purposes only. Remove it and use the code above.
-        return getCategories(options);
+    getCategories: async (options: GetCategoriesOptions = {}): Promise<IShopCategory[]> => {
+        const families = await goldfarbApi.getFamilies();
+        const categories = familiesToCategories(families);
+        const [categoriesTreeData, ] = walkTree(makeShopCategory, categories);
+        return categoriesTreeData.map((x) => prepareCategory(x, options.depth));
     },
     /**
      * Returns category by slug.
@@ -84,10 +77,8 @@ const shopApi = {
     /**
      * Returns product.
      */
-    getProductBySlug: async (slug: string): Promise<IProduct> => {
-        const {
-            products: [product],
-        } = await productsApi.lookup([slug]);
+    getProductById: async (id: string): Promise<IProduct> => {
+        const { products: [product, ] } = await goldfarbApi.getProductsLookup({ itemcodes: [id] });
         return product;
     },
     /**

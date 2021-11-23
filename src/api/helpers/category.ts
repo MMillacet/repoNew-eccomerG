@@ -1,0 +1,75 @@
+
+import { IBaseCategory, IShopCategory } from '../../interfaces/category';
+import { makeIdGenerator, nameToSlug } from './utils';
+import { ICategoryDef } from '../interfaces/categories';
+
+const getId = makeIdGenerator();
+
+type MakeFn<T extends IBaseCategory = IBaseCategory> = (def: ICategoryDef) => T;
+
+export function makeShopCategory(def: ICategoryDef): IShopCategory {
+    return {
+        type: 'shop',
+        id: getId(),
+        name: def.name,
+        slug: def.slug || nameToSlug(def.name),
+        image: def.image,
+        items: def.items || 0,
+        customFields: {},
+        parent: undefined,
+        children: [],
+    };
+}
+
+export function walkTree<T extends IBaseCategory = IBaseCategory>(
+    makeFn: MakeFn<T>,
+    defs: ICategoryDef[],
+    parent?: T,
+): [T[], T[]] {
+    let list: T[] = [];
+
+    const tree = defs.map((def) => {
+        const category: T = makeFn(def);
+
+        const [childrenTree, childrenList] = walkTree(makeFn, def.children || [], category);
+
+        category.parent = parent;
+        category.children = childrenTree;
+        list = [...list, category, ...childrenList];
+
+        return category;
+    });
+
+    return [tree, list];
+}
+
+export function prepareCategory<T extends IBaseCategory>(category: T, depth?: number): T {
+    let children;
+
+    if (depth && depth > 0) {
+        children = category.children && category.children.map((x) => prepareCategory(x, depth - 1));
+    }
+
+    return JSON.parse(JSON.stringify({
+        ...category,
+        parent: category.parent ? prepareCategory(category.parent) : null,
+        children,
+    }));
+}
+
+export const familiesToCategories = (families: any[]) => {
+    const categories = families.map(family => ({
+            name: family.name,
+            slug: nameToSlug(family.name),
+            children: family.categories.map((category: { name: string; subcategories: any[]; }) => ({
+                name: category.name,
+                slug: nameToSlug(category.name),
+                children: category.subcategories.map((subcategory: string) => ({
+                    name: subcategory,
+                    slug: nameToSlug(subcategory),
+                })),
+            }))
+        })
+    )
+    return categories;
+}
