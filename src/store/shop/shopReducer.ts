@@ -16,6 +16,7 @@ import {
 
 const initialState: ShopState = {
     init: false,
+    cardcode: null,
     categorySlug: null,
     categoryIsLoading: true,
     category: null,
@@ -23,6 +24,7 @@ const initialState: ShopState = {
     productsList: null,
     options: {},
     filters: {},
+    search: null,
 };
 
 function shopReducerSetFilterValue(state: ShopState, action: ShopSetFilterValueAction): ShopState {
@@ -51,7 +53,12 @@ function shopReducer(state = initialState, action: ShopAction): ShopState {
         case SHOP_INIT:
             return {
                 ...initialState,
+                // search?family={family}
+                // family
+                // subcategory
                 categorySlug: action.categorySlug,
+                cardcode: action.cardcode,
+                search: action.search,
                 options: action.options,
                 filters: action.filters,
             };

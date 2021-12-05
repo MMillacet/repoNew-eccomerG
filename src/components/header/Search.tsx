@@ -82,7 +82,7 @@ function Search(props: SearchProps) {
 
         setQuery(query);
 
-        if (query === '') {
+        if (query.length < 4) {
             setHasSuggestions(false);
         } else {
             timer = setTimeout(() => {
@@ -92,13 +92,15 @@ function Search(props: SearchProps) {
                     
                     const top5codes = products.slice(0, 5).map((p: { code: string; }) => p.code);
 
-                    goldfarbApi.getProductsLookup({ itemcodes: top5codes }).then(({ products }) => {
-                        setSuggestedProducts(products);
-                        setHasSuggestions(products.length > 0);
-                        setSuggestionsOpen(true);
-                    })                    
+                    goldfarbApi
+                        .getProductsLookup2({ itemcodes: top5codes })
+                        .then(({ products }) => {
+                            setSuggestedProducts(products);
+                            setHasSuggestions(products.length > 0);
+                            setSuggestionsOpen(true);
+                        });
                 });
-            }, 250);
+            }, 100);
         }
 
         setCancelFn(() => newCancelFn);
@@ -147,7 +149,7 @@ function Search(props: SearchProps) {
     return (
         <div className={rootClasses} ref={wrapperRef} onBlur={handleBlur}>
             <div className="search__body">
-                <form className="search__form" action="">
+                <form className="search__form" action="/shop/category-list">
                     <input
                         ref={inputRef}
                         onChange={handleChangeQuery}

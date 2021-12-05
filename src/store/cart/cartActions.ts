@@ -20,7 +20,7 @@ export function cartAddItemSuccess(
     options: CartItemOption[] = [],
     quantity = 1,
 ): CartAddItemAction {
-    toast.success(`Product "${product.name}" added to cart!`, { theme: 'colored' });
+    toast.success(`Product "${product.title}" added to cart!`, { theme: 'colored' });
 
     return {
         type: CART_ADD_ITEM,

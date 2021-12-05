@@ -26,6 +26,8 @@ export interface ShopHydrateAction {
 export interface ShopInitAction {
     type: typeof SHOP_INIT;
     categorySlug: string | null;
+    cardcode: string | null;
+    search: string | null;
     options: IListOptions;
     filters: IFilterValues;
 }

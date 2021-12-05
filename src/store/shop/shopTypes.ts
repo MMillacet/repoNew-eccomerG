@@ -7,6 +7,7 @@ export const SHOP_NAMESPACE = 'shop';
 
 export interface ShopState {
     init: boolean;
+    cardcode: string | null;
     categorySlug: string | null;
     categoryIsLoading: boolean;
     category: ICategory | null;
@@ -14,4 +15,5 @@ export interface ShopState {
     productsList: IProductsList | null;
     options: IListOptions;
     filters: IFilterValues;
+    search: string | null;
 }

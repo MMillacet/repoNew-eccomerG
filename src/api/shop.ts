@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,arrow-body-style */
 // noinspection ES6UnusedImports
 import qs from 'query-string';
-import { getCategories, getCategoryBySlug } from '../fake-server/endpoints/categories';
 import { IShopCategory } from '../interfaces/category';
 import { IProduct, IProductsList } from '../interfaces/product';
 import { IFilterValues, IListOptions } from '../interfaces/list';
@@ -10,15 +9,19 @@ import {
     getFeaturedProducts,
     getLatestProducts,
     getPopularProducts,
-    getProductBySlug,
-    getProductsList,
     getRelatedProducts,
     getSuggestions,
     getTopRatedProducts,
 } from '../fake-server/endpoints/products';
-import productsApi from '../../server/api/products';
+
 import goldfarbApi from './goldfarb';
-import { familiesToCategories, makeShopCategory, prepareCategory, walkTree } from './helpers/category';
+import {
+    familiesToCategories,
+    makeShopCategory,
+    prepareCategory,
+    walkTree,
+} from './helpers/category';
+import { getProductsList } from './helpers/products';
 
 export interface GetCategoriesOptions {
     depth?: number;
@@ -49,36 +52,26 @@ const shopApi = {
     getCategories: async (options: GetCategoriesOptions = {}): Promise<IShopCategory[]> => {
         const families = await goldfarbApi.getFamilies();
         const categories = familiesToCategories(families);
-        const [categoriesTreeData, ] = walkTree(makeShopCategory, categories);
+        const [categoriesTreeData, _] = walkTree(makeShopCategory, categories);
         return categoriesTreeData.map((x) => prepareCategory(x, options.depth));
     },
     /**
      * Returns category by slug.
      */
-    getCategoryBySlug: (
-        slug: string,
-        options: GetCategoryBySlugOptions = {},
-    ): Promise<IShopCategory> => {
-        /**
-         * This is what your API endpoint might look like:
-         *
-         * https://example.com/api/categories/power-tools.json?depth=2
-         *
-         * where:
-         * - power-tools = slug
-         * - 2           = options.depth
-         */
-        // return fetch(`https://example.com/api/categories/${slug}.json?${qs.stringify(options)}`)
-        //     .then((response) => response.json());
-
-        // This is for demonstration purposes only. Remove it and use the code above.
-        return getCategoryBySlug(slug, options);
+    getCategoryBySlug: async (slug: string): Promise<IShopCategory> => {
+        const families = await goldfarbApi.getFamilies();
+        const categories = familiesToCategories(families);
+        const [_, categoriesListData] = walkTree(makeShopCategory, categories);
+        const category = categoriesListData.find((x) => x.slug === slug);
+        return category ? Promise.resolve(prepareCategory(category, 2)) : Promise.reject();
     },
     /**
      * Returns product.
      */
     getProductById: async (id: string): Promise<IProduct> => {
-        const { products: [product, ] } = await goldfarbApi.getProductsLookup({ itemcodes: [id] });
+        const {
+            products: [product],
+        } = await goldfarbApi.getProductsLookup({ itemcodes: [id] });
         return product;
     },
     /**
@@ -106,33 +99,13 @@ const shopApi = {
     /**
      * Return products list.
      */
-    getProductsList: (
+    getProductsList: async (
+        cardcode: string | null,
+        search: string | null,
         options: IListOptions = {},
         filters: IFilterValues = {},
     ): Promise<IProductsList> => {
-        /**
-         * This is what your API endpoint might look like:
-         *
-         * https://example.com/api/products.json?page=2&limit=12&sort=name_desc&filter_category=screwdriwers&filter_price=500-1000
-         *
-         * where:
-         * - page            = options.page
-         * - limit           = options.limit
-         * - sort            = options.sort
-         * - filter_category = filters.category
-         * - filter_price    = filters.price
-         */
-        // const params = { ...options };
-        //
-        // Object.keys(filters).forEach((slug) => {
-        //     params[`filter_${slug}`] = filters[slug];
-        // });
-        //
-        // return fetch(`https://example.com/api/products.json?${qs.stringify(params)}`)
-        //     .then((response) => response.json());
-
-        // This is for demonstration purposes only. Remove it and use the code above.
-        return getProductsList(options, filters);
+        return getProductsList(cardcode, search, options, filters);
     },
     /**
      * Returns array of featured products.

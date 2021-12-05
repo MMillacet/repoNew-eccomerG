@@ -128,7 +128,7 @@ function Product(props: ProductProps) {
                             )}
                         </li>
                         <li>
-                            Brand: <AppLink href="/">{product.brand}</AppLink>
+                            Brand: <AppLink href="/">{product.brand?.name}</AppLink>
                         </li>
                         <li>SKU: {product.id}</li>
                     </ul>
@@ -142,68 +142,6 @@ function Product(props: ProductProps) {
                     <div className="product__prices">{prices}</div>
 
                     <form className="product__options">
-                        {/* <div className="form-group product__option">
-                            <div className="product__option-label">Color</div>
-                            <div className="input-radio-color">
-                                <div className="input-radio-color__list">
-                                    <label
-                                        className="input-radio-color__item input-radio-color__item--white"
-                                        style={{ color: '#fff' }}
-                                        data-toggle="tooltip"
-                                        title="White"
-                                    >
-                                        <input type="radio" name="color" />
-                                        <span />
-                                    </label>
-                                    <label
-                                        className="input-radio-color__item"
-                                        style={{ color: '#003C7E' }}
-                                        data-toggle="tooltip"
-                                        title="Yellow"
-                                    >
-                                        <input type="radio" name="color" />
-                                        <span />
-                                    </label>
-                                    <label
-                                        className="input-radio-color__item"
-                                        style={{ color: '#ff4040' }}
-                                        data-toggle="tooltip"
-                                        title="Red"
-                                    >
-                                        <input type="radio" name="color" />
-                                        <span />
-                                    </label>
-                                    <label
-                                        className="input-radio-color__item input-radio-color__item--disabled"
-                                        style={{ color: '#4080ff' }}
-                                        data-toggle="tooltip"
-                                        title="Blue"
-                                    >
-                                        <input type="radio" name="color" disabled />
-                                        <span />
-                                    </label>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="form-group product__option">
-                            <div className="product__option-label">Material</div>
-                            <div className="input-radio-label">
-                                <div className="input-radio-label__list">
-                                    <label>
-                                        <input type="radio" name="material" />
-                                        <span>Metal</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="material" />
-                                        <span>Wood</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="material" disabled />
-                                        <span>Plastic</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div> */}
                         <div className="form-group product__option">
                             <label htmlFor="product-quantity" className="product__option-label">
                                 Quantity

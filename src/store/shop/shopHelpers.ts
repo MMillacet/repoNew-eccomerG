@@ -2,6 +2,7 @@
 import queryString from 'query-string';
 import { GetServerSidePropsContext } from 'next';
 import { Store } from 'redux';
+import { getSession } from '@auth0/nextjs-auth0';
 // application
 import { AppDispatch } from '../types';
 import { IFilterValues, IListOptions } from '../../interfaces/list';
@@ -25,6 +26,14 @@ export function parseQueryOptions(query: string) {
     return optionValues;
 }
 
+export function parseQuerySearch(query: string): string | null {
+    const queryObject = queryString.parse(query);
+    if (typeof queryObject.search === 'string') {
+        return queryObject.search;
+    }
+    return null;
+}
+
 export function parseQueryFilters(query: string) {
     const queryObject = queryString.parse(query);
     const filterValues: IFilterValues = {};
@@ -37,6 +46,7 @@ export function parseQueryFilters(query: string) {
             return;
         }
 
+        // eslint-disable-next-line prefer-destructuring
         const filterSlug = mr[1];
 
         filterValues[filterSlug] = value;
@@ -45,7 +55,7 @@ export function parseQueryFilters(query: string) {
     return filterValues;
 }
 
-export function buildQuery(options: IListOptions, filters: IFilterValues) {
+export function buildQuery(options: IListOptions, filters: IFilterValues, search?: string | null) {
     const params: { [key: string]: any } = {};
 
     if (options.page !== 1) {
@@ -58,6 +68,10 @@ export function buildQuery(options: IListOptions, filters: IFilterValues) {
 
     if (options.sort !== 'default') {
         params.sort = options.sort;
+    }
+
+    if (search) {
+        params.search = search;
     }
 
     Object.keys(filters)
@@ -74,15 +88,22 @@ export default async function getShopPageData(
     context: GetServerSidePropsContext,
     slug?: string,
 ): Promise<void> {
+    const { req, res } = context;
+
+    const session = await getSession(req, res);
+
+    const cardcode = session?.user?.cardcode || null;
+
     const categorySlug =
         slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
 
     if (typeof context.req.url === 'string') {
         const query = queryString.stringify(queryString.parseUrl(context.req.url).query);
+        const search = parseQuerySearch(query);
         const options = parseQueryOptions(query);
         const filters = parseQueryFilters(query);
         const dispatch = store.dispatch as AppDispatch;
 
-        await dispatch(shopInitThunk(categorySlug, options, filters));
+        await dispatch(shopInitThunk(categorySlug, cardcode, search, options, filters));
     }
 }

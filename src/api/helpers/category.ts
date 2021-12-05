@@ -1,4 +1,3 @@
-
 import { IBaseCategory, IShopCategory } from '../../interfaces/category';
 import { makeIdGenerator, nameToSlug } from './utils';
 import { ICategoryDef } from '../interfaces/categories';
@@ -50,26 +49,27 @@ export function prepareCategory<T extends IBaseCategory>(category: T, depth?: nu
         children = category.children && category.children.map((x) => prepareCategory(x, depth - 1));
     }
 
-    return JSON.parse(JSON.stringify({
-        ...category,
-        parent: category.parent ? prepareCategory(category.parent) : null,
-        children,
-    }));
+    return JSON.parse(
+        JSON.stringify({
+            ...category,
+            parent: category.parent ? prepareCategory(category.parent) : null,
+            children,
+        }),
+    );
 }
 
 export const familiesToCategories = (families: any[]) => {
-    const categories = families.map(family => ({
-            name: family.name,
-            slug: nameToSlug(family.name),
-            children: family.categories.map((category: { name: string; subcategories: any[]; }) => ({
-                name: category.name,
-                slug: nameToSlug(category.name),
-                children: category.subcategories.map((subcategory: string) => ({
-                    name: subcategory,
-                    slug: nameToSlug(subcategory),
-                })),
-            }))
-        })
-    )
+    const categories = families.map((family) => ({
+        name: family.name,
+        slug: nameToSlug(family.name),
+        children: family.categories.map((category: { name: string; subcategories: any[] }) => ({
+            name: category.name,
+            slug: nameToSlug(category.name),
+            children: category.subcategories.map((subcategory: string) => ({
+                name: subcategory,
+                slug: nameToSlug(subcategory),
+            })),
+        })),
+    }));
     return categories;
-}
+};

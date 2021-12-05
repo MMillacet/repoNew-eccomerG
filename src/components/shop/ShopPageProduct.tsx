@@ -102,7 +102,7 @@ function ShopPageProduct(props: ShopPageProductProps) {
     const breadcrumb = [
         { title: 'Home', url: url.home() },
         { title: 'Shop', url: url.catalog() },
-        { title: product.name, url: url.product(product) },
+        { title: product.title, url: url.product(product) },
     ];
 
     let content;

@@ -11,7 +11,7 @@ import {
 } from './compareActionTypes';
 
 export function compareAddItemSuccess(product: IProduct): CompareAddItemAction {
-    toast.success(`Product "${product.name}" added to compare!`, { theme: 'colored' });
+    toast.success(`Product "${product.title}" added to compare!`, { theme: 'colored' });
 
     return {
         type: COMPARE_ADD_ITEM,

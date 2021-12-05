@@ -54,7 +54,7 @@ module.exports = {
         ],
         'max-len': [
             'error',
-            120,
+            140,
             2,
             {
                 ignoreUrls: true,

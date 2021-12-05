@@ -26,12 +26,16 @@ let cancelPreviousProductsListRequest = () => {};
 
 export function shopInit(
     categorySlug: string | null,
+    cardcode: string | null,
+    search: string | null,
     options: IListOptions = {},
     filters: IFilterValues = {},
 ): ShopInitAction {
     return {
         type: SHOP_INIT,
         categorySlug,
+        cardcode,
+        search,
         options,
         filters,
     };
@@ -88,7 +92,6 @@ export function shopFetchCategoryThunk(
 ): ShopThunkAction<Promise<void>> {
     return async (dispatch) => {
         let canceled = false;
-
         cancelPreviousCategoryRequest();
         cancelPreviousCategoryRequest = () => {
             canceled = true;
@@ -101,13 +104,10 @@ export function shopFetchCategoryThunk(
         } else {
             request = Promise.resolve(null);
         }
-
         const category = await request;
-
         if (canceled) {
             return;
         }
-
         dispatch(shopFetchCategorySuccess(category));
     };
 }
@@ -125,13 +125,20 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
 
         const shopState = getState()[SHOP_NAMESPACE];
 
+        const { cardcode, search } = shopState;
+
         let { filters } = shopState;
 
         if (shopState.categorySlug !== null) {
             filters = { ...filters, category: shopState.categorySlug };
         }
 
-        const productsList = await shopApi.getProductsList(shopState.options, filters);
+        const productsList = await shopApi.getProductsList(
+            cardcode,
+            search,
+            shopState.options,
+            filters,
+        );
 
         if (canceled) {
             return;
@@ -170,12 +177,13 @@ export function shopResetFiltersThunk(): ShopThunkAction<Promise<void>> {
 
 export function shopInitThunk(
     categorySlug: string | null,
+    cardcode: string | null,
+    search: string | null,
     options: IListOptions = {},
     filters: IFilterValues = {},
 ): ShopThunkAction<Promise<void>> {
     return async (dispatch) => {
-        dispatch(shopInit(categorySlug, options, filters));
-
+        dispatch(shopInit(categorySlug, cardcode, search, options, filters));
         await Promise.all([
             dispatch(shopFetchCategoryThunk(categorySlug)),
             dispatch(shopFetchProductsListThunk()),
