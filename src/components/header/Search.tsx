@@ -97,7 +97,7 @@ function Search(props: SearchProps) {
                             setSuggestionsOpen(true);
                         });
                 });
-            }, 100);
+            }, 200);
         }
 
         setCancelFn(() => newCancelFn);

@@ -5,6 +5,7 @@ import { ReactNode, useState } from 'react';
 import classNames from 'classnames';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
 import Filters16Svg from '../../svg/filters-16.svg';
 import LayoutGrid16x16Svg from '../../svg/layout-grid-16x16.svg';
 import LayoutGridWithDetails16x16Svg from '../../svg/layout-grid-with-details-16x16.svg';
@@ -52,6 +53,8 @@ function ProductsView(props: ProductsViewProps) {
     const productsList = useShopProductsList();
     const options = useShopOptions();
     const filterValues = useShopFilterValues();
+
+    const { user } = useUser();
 
     const handlePageChange = useSetOption('page', parseFloat);
     const handleSortChange = useSetOption('sort', (event) => event.target.value);
@@ -138,7 +141,7 @@ function ProductsView(props: ProductsViewProps) {
                         </div>
                         <div className="view-options__divider" />
                         <div className="view-options__control">
-                            <label htmlFor="view-options-sort">Sort By</label>
+                            <label htmlFor="view-options-sort">Ordenar por</label>
                             <div>
                                 <select
                                     id="view-options-sort"
@@ -146,14 +149,20 @@ function ProductsView(props: ProductsViewProps) {
                                     value={options.sort || productsList.sort}
                                     onChange={handleSortChange}
                                 >
-                                    <option value="default">Default</option>
-                                    <option value="name_asc">Name (A-Z)</option>
-                                    <option value="name_desc">Name (Z-A)</option>
+                                    <option value="default">Relevancia</option>
+                                    <option value="name_asc">Nombre (A-Z)</option>
+                                    <option value="name_desc">Nombre (Z-A)</option>
+                                    {user && (
+                                        <option value="price_asc">Precio (menor a mayor)</option>
+                                    )}
+                                    {user && (
+                                        <option value="price_desc">Precio (mayor a menor)</option>
+                                    )}
                                 </select>
                             </div>
                         </div>
                         <div className="view-options__control">
-                            <label htmlFor="view-options-limit">Show</label>
+                            <label htmlFor="view-options-limit">Mostrar</label>
                             <div>
                                 <select
                                     id="view-options-limit"
