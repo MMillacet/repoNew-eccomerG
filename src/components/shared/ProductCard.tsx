@@ -62,6 +62,7 @@ function ProductCard(props: ProductCardProps) {
                     <img
                         className="product-image__img"
                         src={`https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.id}_0.jpg`}
+                        // src={`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${product.id}.jpg`}
                         alt=""
                     />
                 </AppLink>
