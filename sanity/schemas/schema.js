@@ -26,7 +26,6 @@ import medioDePago from './medioDePago';
 import section from './section';
 import clientSection from './clientSection';
 import notClientSection from './notClientSection';
-import comoComprarV2 from './comoComprar';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({

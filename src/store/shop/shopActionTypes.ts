@@ -6,6 +6,7 @@ import { IFilterValues, IListOptions } from '../../interfaces/list';
 import { IProductsList } from '../../interfaces/product';
 import { IShopCategory } from '../../interfaces/category';
 import { SHOP_NAMESPACE, ShopState } from './shopTypes';
+import { ISearchOptions } from '../../interfaces/search';
 
 export const SHOP_HYDRATE = HYDRATE;
 export const SHOP_INIT = 'SHOP_INIT';
@@ -26,10 +27,9 @@ export interface ShopHydrateAction {
 export interface ShopInitAction {
     type: typeof SHOP_INIT;
     categorySlug: string | null;
-    cardcode: string | null;
-    search: string | null;
     options: IListOptions;
     filters: IFilterValues;
+    searchOptions: ISearchOptions;
 }
 
 export interface ShopFetchCategorySuccessAction {

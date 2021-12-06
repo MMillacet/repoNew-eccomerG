@@ -2,44 +2,56 @@ import AbstractFilterBuilder from './abstract';
 import { ICategoryFilter, ICategoryFilterValue } from '../../interfaces/filter';
 import { IProduct } from '../../interfaces/product';
 import { IShopCategory } from '../../interfaces/category';
-// import { prepareCategory } from '../helpers/category';
+import { prepareCategory } from '../helpers/category';
+
+const productHasCategory = (product: IProduct, category: string): boolean =>
+    product.family?.toLowerCase() === category ||
+    product.category?.toLowerCase() === category ||
+    product.subcategory?.toLowerCase() === category;
 
 export default class CategoryFilterBuilder extends AbstractFilterBuilder<ICategoryFilter> {
     value: ICategoryFilterValue = null;
 
     items: IShopCategory[] = [];
 
-    test() {
+    categoriesData: any;
+
+    constructor(slug: string, name: string, categoriesData: any) {
+        super(slug, name);
+        this.categoriesData = categoriesData;
+    }
+
+    test(product: IProduct) {
         if (this.value === null) {
             return true;
         }
 
-        // return product.categories.reduce((acc, category) => (
-        //     acc || category.slug === this.value
-        // ), false);
-
-        return true;
+        return productHasCategory(product, this.value);
     }
 
     makeItems(products: IProduct[], value?: string): void {
+        this.productsData = products;
         this.value = value || null;
 
-        // const category = categoriesListData.find((x) => x.slug === value);
-        // // const categoryHasProductsFn = (x) => categoryHasProducts(x, productsData);
-        // const categoryHasProductsFn = () => true;
+        const { categoriesListData, categoriesTreeData } = this.categoriesData;
 
-        // if (category) {
-        //     this.items = [prepareCategory(category, 1)].map((x) => ({
-        //         ...x,
-        //         children: x.children === undefined ? [] : x.children.filter(categoryHasProductsFn),
-        //     }));
-        // } else {
-        //     this.items = categoriesTreeData
-        //         .map((x) => prepareCategory(x))
-        //         .filter(categoryHasProductsFn);
-        // }
-        this.items = [];
+        const category = categoriesListData.find((x: { slug: string }) => x.slug === value);
+        const categoryHasProductsFn = (x: IShopCategory) => this.categoryHasProducts(x, products);
+
+        if (category) {
+            this.items = [prepareCategory(category, 1)].map((x) => ({
+                ...x,
+                children: x.children === undefined ? [] : x.children.filter(categoryHasProductsFn),
+            }));
+        } else {
+            this.items = categoriesTreeData
+                .map((x: any) => prepareCategory(x))
+                .filter(categoryHasProductsFn);
+        }
     }
+
+    categoryHasProducts = (category: IShopCategory, products: IProduct[]) =>
+        products.reduce((acc, product) => acc || productHasCategory(product, category.slug), false);
 
     // eslint-disable-next-line class-methods-use-this
     calc(): void {}

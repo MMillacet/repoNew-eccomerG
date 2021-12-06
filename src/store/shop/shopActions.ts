@@ -20,24 +20,23 @@ import {
     ShopSetOptionValueAction,
     ShopThunkAction,
 } from './shopActionTypes';
+import { ISearchOptions } from '../../interfaces/search';
 
 let cancelPreviousCategoryRequest = () => {};
 let cancelPreviousProductsListRequest = () => {};
 
 export function shopInit(
     categorySlug: string | null,
-    cardcode: string | null,
-    search: string | null,
     options: IListOptions = {},
     filters: IFilterValues = {},
+    searchOptions: ISearchOptions = {},
 ): ShopInitAction {
     return {
         type: SHOP_INIT,
         categorySlug,
-        cardcode,
-        search,
         options,
         filters,
+        searchOptions,
     };
 }
 
@@ -125,20 +124,28 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
 
         const shopState = getState()[SHOP_NAMESPACE];
 
-        const { cardcode, search } = shopState;
+        const { category, searchOptions } = shopState;
 
         let { filters } = shopState;
 
+        const searchOpts = { ...searchOptions };
+
         if (shopState.categorySlug !== null) {
             filters = { ...filters, category: shopState.categorySlug };
+
+            // category can come from search params or from slug
+            if (category && category.level) {
+                if (category.level === 'family') {
+                    searchOpts.family = category.name;
+                } else if (category.level === 'category') {
+                    searchOpts.category = category.name;
+                } else if (category.level === 'subcategory') {
+                    searchOpts.subcategory = category.name;
+                }
+            }
         }
 
-        const productsList = await shopApi.getProductsList(
-            cardcode,
-            search,
-            shopState.options,
-            filters,
-        );
+        const productsList = await shopApi.getProductsList(shopState.options, filters, searchOpts);
 
         if (canceled) {
             return;
@@ -177,16 +184,17 @@ export function shopResetFiltersThunk(): ShopThunkAction<Promise<void>> {
 
 export function shopInitThunk(
     categorySlug: string | null,
-    cardcode: string | null,
-    search: string | null,
     options: IListOptions = {},
     filters: IFilterValues = {},
+    searchOptions: ISearchOptions = {},
 ): ShopThunkAction<Promise<void>> {
     return async (dispatch) => {
-        dispatch(shopInit(categorySlug, cardcode, search, options, filters));
-        await Promise.all([
-            dispatch(shopFetchCategoryThunk(categorySlug)),
-            dispatch(shopFetchProductsListThunk()),
-        ]);
+        dispatch(shopInit(categorySlug, options, filters, searchOptions));
+        await dispatch(shopFetchCategoryThunk(categorySlug));
+        await dispatch(shopFetchProductsListThunk());
+        // await Promise.all([
+        //     dispatch(shopFetchCategoryThunk(categorySlug)),
+        //     dispatch(shopFetchProductsListThunk()),
+        // ]);
     };
 }

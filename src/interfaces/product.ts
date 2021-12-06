@@ -31,6 +31,7 @@ export interface IProduct {
     // goldfarb
     code: string;
     price: number;
+    finalPrice: number; // price converted to pesos, useful for price sorting
     discount: number;
     currency: string;
     unitMult: string;

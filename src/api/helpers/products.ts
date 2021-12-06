@@ -1,9 +1,12 @@
-// import CategoryFilterBuilder from '../filters/category';
+import queryString from 'query-string';
+import CategoryFilterBuilder from '../filters/category';
 import CheckFilterBuilder from '../filters/check';
 // import RadioFilterBuilder from '../filters/radio';
 import RangeFilterBuilder from '../filters/range';
-import { IProduct, IProductsList } from '../interfaces/product';
 import goldfarbApi from '../goldfarb';
+import { ISearchOptions } from '../../interfaces/search';
+import { IShopCategory } from '../../interfaces/category';
+import { IProduct, IProductsList } from '../../interfaces/product';
 
 export interface GetProductsOptions {
     limit?: number;
@@ -20,36 +23,43 @@ export interface GetProductsListFilters {
     [filterSlug: string]: string;
 }
 
-const searchCache: { [term: string]: IProduct[] } = {};
+const searchCache: { [query: string]: IProduct[] } = {};
 
 export async function getProductsList(
-    cardcode: string | null,
-    search: string | null,
     options: GetProductsListOptions = {},
     filterValues: GetProductsListFilters = {},
+    searchOptions: ISearchOptions = {},
+    categoriesData: { categoriesTreeData: IShopCategory[]; categoriesListData: IShopCategory[] },
 ): Promise<IProductsList> {
     const filters = [
-        // new CategoryFilterBuilder('category', 'Categories'),
+        new CategoryFilterBuilder('category', 'Categories', categoriesData),
         new RangeFilterBuilder('price', 'Price'),
         new CheckFilterBuilder('brand', 'Brand'),
         // new RadioFilterBuilder('discount', 'Discount'),
     ];
+
+    const { term, cardcode, family, category, subcategory } = searchOptions;
 
     let searchProducts;
 
     // only cache in client side
     const isBrowser = typeof window !== 'undefined';
 
+    const cacheKey = queryString.stringify(searchOptions);
+
     // Try to gather search results from cache, otherwise fetch them from the API
-    if (isBrowser && search && searchCache[search]) {
-        searchProducts = searchCache[search];
+    if (isBrowser && cacheKey && searchCache[cacheKey]) {
+        searchProducts = searchCache[cacheKey];
     } else {
         const { products } = await goldfarbApi.getProductsSearch2(
-            search || '',
+            term,
             cardcode || '400092',
             'relevance',
+            family,
+            category,
+            subcategory,
         );
-        if (isBrowser && search) searchCache[search] = products;
+        if (isBrowser && cacheKey) searchCache[cacheKey] = products;
         searchProducts = products;
     }
 

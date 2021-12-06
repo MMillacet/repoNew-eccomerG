@@ -6,6 +6,7 @@ import { getSession } from '@auth0/nextjs-auth0';
 // application
 import { AppDispatch } from '../types';
 import { IFilterValues, IListOptions } from '../../interfaces/list';
+import { ISearchOptions } from '../../interfaces/search';
 import { RootState } from '../root/rootTypes';
 import { shopInitThunk } from './shopActions';
 
@@ -26,12 +27,24 @@ export function parseQueryOptions(query: string) {
     return optionValues;
 }
 
-export function parseQuerySearch(query: string): string | null {
+export function parseQuerySearchOptions(query: string) {
     const queryObject = queryString.parse(query);
-    if (typeof queryObject.search === 'string') {
-        return queryObject.search;
+    const searchOptionValues: ISearchOptions = {};
+
+    if (typeof queryObject.term === 'string') {
+        searchOptionValues.term = queryObject.term;
     }
-    return null;
+    if (typeof queryObject.family === 'string') {
+        searchOptionValues.family = queryObject.family;
+    }
+    if (typeof queryObject.category === 'string') {
+        searchOptionValues.category = queryObject.category;
+    }
+    if (typeof queryObject.subcategory === 'string') {
+        searchOptionValues.subcategory = queryObject.subcategory;
+    }
+
+    return searchOptionValues;
 }
 
 export function parseQueryFilters(query: string) {
@@ -55,7 +68,11 @@ export function parseQueryFilters(query: string) {
     return filterValues;
 }
 
-export function buildQuery(options: IListOptions, filters: IFilterValues, search?: string | null) {
+export function buildQuery(
+    options: IListOptions,
+    filters: IFilterValues,
+    searchOptions: ISearchOptions,
+) {
     const params: { [key: string]: any } = {};
 
     if (options.page !== 1) {
@@ -70,8 +87,20 @@ export function buildQuery(options: IListOptions, filters: IFilterValues, search
         params.sort = options.sort;
     }
 
-    if (search) {
-        params.search = search;
+    if (searchOptions.term) {
+        params.term = searchOptions.term;
+    }
+
+    if (searchOptions.family) {
+        params.family = searchOptions.family;
+    }
+
+    if (searchOptions.category) {
+        params.category = searchOptions.category;
+    }
+
+    if (searchOptions.subcategory) {
+        params.subcategory = searchOptions.subcategory;
     }
 
     Object.keys(filters)
@@ -99,11 +128,12 @@ export default async function getShopPageData(
 
     if (typeof context.req.url === 'string') {
         const query = queryString.stringify(queryString.parseUrl(context.req.url).query);
-        const search = parseQuerySearch(query);
         const options = parseQueryOptions(query);
         const filters = parseQueryFilters(query);
+        const searchOptions = parseQuerySearchOptions(query);
+        searchOptions.cardcode = cardcode; // This doesn't come from the query string
         const dispatch = store.dispatch as AppDispatch;
 
-        await dispatch(shopInitThunk(categorySlug, cardcode, search, options, filters));
+        await dispatch(shopInitThunk(categorySlug, options, filters, searchOptions));
     }
 }

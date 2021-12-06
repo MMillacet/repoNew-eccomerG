@@ -20,7 +20,6 @@ import Suggestions from './Suggestions';
 import { IProduct } from '../../interfaces/product';
 import goldfarbApi from '../../api/goldfarb';
 
-
 export interface SearchProps {
     context: 'header' | 'mobile-header' | 'indicator';
     className?: string;
@@ -68,7 +67,6 @@ function Search(props: SearchProps) {
         setSuggestionsOpen(true);
     };
 
-
     const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
         let canceled = false;
         let timer: ReturnType<typeof setTimeout>;
@@ -86,11 +84,10 @@ function Search(props: SearchProps) {
             setHasSuggestions(false);
         } else {
             timer = setTimeout(() => {
-                if( canceled) return;
+                if (canceled) return;
 
-                goldfarbApi.getProductsSearch({ term: query }).then(({products})  => {
-                    
-                    const top5codes = products.slice(0, 5).map((p: { code: string; }) => p.code);
+                goldfarbApi.getProductsSearch({ term: query }).then(({ products }) => {
+                    const top5codes = products.slice(0, 5).map((p: { code: string }) => p.code);
 
                     goldfarbApi
                         .getProductsLookup2({ itemcodes: top5codes })
@@ -145,7 +142,6 @@ function Search(props: SearchProps) {
             </button>
         );
 
-
     return (
         <div className={rootClasses} ref={wrapperRef} onBlur={handleBlur}>
             <div className="search__body">
@@ -157,7 +153,7 @@ function Search(props: SearchProps) {
                         onKeyDown={handleKeyDown}
                         value={query}
                         className="search__input"
-                        name="search"
+                        name="term"
                         placeholder="Producto o numero de articulo..."
                         aria-label="Buscador"
                         type="text"

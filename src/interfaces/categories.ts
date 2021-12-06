@@ -4,4 +4,5 @@ export interface ICategoryDef {
     image?: string;
     items?: number;
     children?: ICategoryDef[];
+    level: string;
 }

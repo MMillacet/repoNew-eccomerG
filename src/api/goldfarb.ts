@@ -75,6 +75,7 @@ const goldfarbApi = {
             data.products = data.products.map((product: any) => ({
                 id: Number(product.code),
                 slug: product.code,
+                subcategory: product.subCategory,
                 images: [
                     `https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.code}_0.jpg`,
                 ],
@@ -114,6 +115,7 @@ const goldfarbApi = {
                 id: Number(product.itemCode),
                 code: product.itemCode,
                 slug: product.itemCode,
+                subcategory: product.subCategory,
                 images: [
                     `https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.itemCode}_0.jpg`,
                 ],
@@ -157,15 +159,30 @@ const goldfarbApi = {
         return data;
     },
 
-    getProductsSearch2: async (term: string, cardcode: string, orderby: string) => {
+    getProductsSearch2: async (
+        term: string = '',
+        cardcode: string,
+        orderby: string,
+        family?: string,
+        category?: string,
+        subcategory?: string,
+    ) => {
         // price-high-to-low or price-low-to-high
         // eslint-disable-next-line no-param-reassign
         orderby = orderby || 'relevance';
 
         const config: AxiosRequestConfig = {
             baseURL,
-            url: `/web/ProductSearch?term=${term}&orderby=${orderby}&cardcode=${cardcode}`,
+            url: '/web/ProductSearch',
             method: 'get',
+            params: {
+                term,
+                orderby,
+                cardcode,
+                family,
+                category,
+                subcategory,
+            },
         };
 
         const { data } = await axios(config);
@@ -174,6 +191,7 @@ const goldfarbApi = {
             id: Number(product.itemCode),
             code: product.itemCode,
             slug: product.itemCode,
+            subcategory: product.subCategory,
             images: [
                 `https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.itemCode}_0.jpg`,
             ],

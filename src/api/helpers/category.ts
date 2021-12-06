@@ -1,6 +1,6 @@
 import { IBaseCategory, IShopCategory } from '../../interfaces/category';
 import { makeIdGenerator, nameToSlug } from './utils';
-import { ICategoryDef } from '../interfaces/categories';
+import { ICategoryDef } from '../../interfaces/categories';
 
 const getId = makeIdGenerator();
 
@@ -17,6 +17,7 @@ export function makeShopCategory(def: ICategoryDef): IShopCategory {
         customFields: {},
         parent: undefined,
         children: [],
+        level: def.level,
     };
 }
 
@@ -62,12 +63,15 @@ export const familiesToCategories = (families: any[]) => {
     const categories = families.map((family) => ({
         name: family.name,
         slug: nameToSlug(family.name),
+        level: 'family',
         children: family.categories.map((category: { name: string; subcategories: any[] }) => ({
             name: category.name,
             slug: nameToSlug(category.name),
+            level: 'category',
             children: category.subcategories.map((subcategory: string) => ({
                 name: subcategory,
                 slug: nameToSlug(subcategory),
+                level: 'subcategory',
             })),
         })),
     }));

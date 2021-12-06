@@ -22,6 +22,7 @@ import {
     walkTree,
 } from './helpers/category';
 import { getProductsList } from './helpers/products';
+import { ISearchOptions } from '../interfaces/search';
 
 export interface GetCategoriesOptions {
     depth?: number;
@@ -45,23 +46,35 @@ export type GetSuggestionsOptions = {
     category?: string;
 };
 
+let categoryDataCache: {
+    categoriesTreeData: IShopCategory[];
+    categoriesListData: IShopCategory[];
+} | null = null;
+
+const getCategoriesData = async () => {
+    if (!categoryDataCache) {
+        const families = await goldfarbApi.getFamilies();
+        const categories = familiesToCategories(families);
+        const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categories);
+        categoryDataCache = { categoriesTreeData, categoriesListData };
+    }
+
+    return categoryDataCache;
+};
+
 const shopApi = {
     /**
      * Returns array of categories.
      */
     getCategories: async (options: GetCategoriesOptions = {}): Promise<IShopCategory[]> => {
-        const families = await goldfarbApi.getFamilies();
-        const categories = familiesToCategories(families);
-        const [categoriesTreeData, _] = walkTree(makeShopCategory, categories);
+        const { categoriesTreeData } = await getCategoriesData();
         return categoriesTreeData.map((x) => prepareCategory(x, options.depth));
     },
     /**
      * Returns category by slug.
      */
     getCategoryBySlug: async (slug: string): Promise<IShopCategory> => {
-        const families = await goldfarbApi.getFamilies();
-        const categories = familiesToCategories(families);
-        const [_, categoriesListData] = walkTree(makeShopCategory, categories);
+        const { categoriesListData } = await getCategoriesData();
         const category = categoriesListData.find((x) => x.slug === slug);
         return category ? Promise.resolve(prepareCategory(category, 2)) : Promise.reject();
     },
@@ -100,12 +113,12 @@ const shopApi = {
      * Return products list.
      */
     getProductsList: async (
-        cardcode: string | null,
-        search: string | null,
         options: IListOptions = {},
         filters: IFilterValues = {},
+        searchOptions: ISearchOptions = {},
     ): Promise<IProductsList> => {
-        return getProductsList(cardcode, search, options, filters);
+        const categoriesData = await getCategoriesData();
+        return getProductsList(options, filters, searchOptions, categoriesData);
     },
     /**
      * Returns array of featured products.

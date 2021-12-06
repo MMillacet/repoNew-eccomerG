@@ -2,18 +2,18 @@
 import { ICategory } from '../../interfaces/category';
 import { IFilterValues, IListOptions } from '../../interfaces/list';
 import { IProductsList } from '../../interfaces/product';
+import { ISearchOptions } from '../../interfaces/search';
 
 export const SHOP_NAMESPACE = 'shop';
 
 export interface ShopState {
     init: boolean;
-    cardcode: string | null;
     categorySlug: string | null;
-    categoryIsLoading: boolean;
     category: ICategory | null;
+    categoryIsLoading: boolean;
     productsListIsLoading: boolean;
     productsList: IProductsList | null;
     options: IListOptions;
     filters: IFilterValues;
-    search: string | null;
+    searchOptions: ISearchOptions;
 }

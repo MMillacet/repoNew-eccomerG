@@ -54,7 +54,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
 
     // Replace current url.
     useEffect(() => {
-        const query = buildQuery(shopState.options, shopState.filters, shopState.search);
+        const query = buildQuery(shopState.options, shopState.filters, shopState.searchOptions);
         const href = queryString.stringifyUrl(
             {
                 ...queryString.parseUrl(router.asPath),
@@ -81,7 +81,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
                     href,
                 );
             });
-    }, [shopState.options, shopState.filters, shopState.search]);
+    }, [shopState.options, shopState.filters, shopState.searchOptions]);
 
     // Load latest products.
     useEffect(() => {

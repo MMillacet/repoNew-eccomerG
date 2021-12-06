@@ -16,15 +16,14 @@ import {
 
 const initialState: ShopState = {
     init: false,
-    cardcode: null,
+    category: null,
     categorySlug: null,
     categoryIsLoading: true,
-    category: null,
     productsListIsLoading: true,
     productsList: null,
     options: {},
     filters: {},
-    search: null,
+    searchOptions: {},
 };
 
 function shopReducerSetFilterValue(state: ShopState, action: ShopSetFilterValueAction): ShopState {
@@ -53,12 +52,8 @@ function shopReducer(state = initialState, action: ShopAction): ShopState {
         case SHOP_INIT:
             return {
                 ...initialState,
-                // search?family={family}
-                // family
-                // subcategory
                 categorySlug: action.categorySlug,
-                cardcode: action.cardcode,
-                search: action.search,
+                searchOptions: action.searchOptions,
                 options: action.options,
                 filters: action.filters,
             };
