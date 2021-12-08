@@ -51,7 +51,13 @@ function ShopPageProduct(props: ShopPageProductProps) {
 
             setRelatedProducts(products);
         });
+        shopApi.getRelatedProducts(product.slug, { limit: 8 }).then((products) => {
+            if (canceled) {
+                return;
+            }
 
+            setRelatedProducts(products);
+        });
         return () => {
             canceled = true;
         };

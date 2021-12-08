@@ -17,6 +17,7 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
+import useRealTimeProduct from '../../hooks/useRealTimeProduct';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -27,6 +28,8 @@ export interface ProductProps {
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
+    const { realTimeProduct } = useRealTimeProduct(product?.id);
+
     const [quantity, setQuantity] = useState<number | string>(1);
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
@@ -46,7 +49,7 @@ function Product(props: ProductProps) {
         prices = (
             <Fragment>
                 <span className="product__new-price">
-                    <CurrencyFormat value={product.price} />
+                    <CurrencyFormat value={realTimeProduct?.price || 0} />
                 </span>{' '}
                 <span className="product__old-price">
                     <CurrencyFormat value={product.compareAtPrice} />
@@ -54,7 +57,7 @@ function Product(props: ProductProps) {
             </Fragment>
         );
     } else {
-        prices = <CurrencyFormat value={product.price} />;
+        prices = <CurrencyFormat value={realTimeProduct?.price || 0} />;
     }
 
     return (
@@ -110,7 +113,9 @@ function Product(props: ProductProps) {
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
                     </div>
-                    <div className="product__description">{product.description}</div>
+                    <div className="product__description">
+                        {realTimeProduct?.description || product.description}
+                    </div>
                     <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
@@ -121,7 +126,7 @@ function Product(props: ProductProps) {
                     <ul className="product__meta">
                         <li className="product__meta-availability">
                             Availability:{' '}
-                            {product.hasStock ? (
+                            {realTimeProduct?.hasStock ? (
                                 <span className="text-success">In Stock</span>
                             ) : (
                                 <span className="text-muted">Out Of Stock</span>
@@ -139,7 +144,7 @@ function Product(props: ProductProps) {
                         Availability: <span className="text-success">In Stock</span>
                     </div>
 
-                    <div className="product__prices">{prices}</div>
+                    {realTimeProduct && <div className="product__prices">{prices}</div>}
 
                     <form className="product__options">
                         <div className="form-group product__option">
@@ -222,32 +227,7 @@ function Product(props: ProductProps) {
                     </form>
                 </div>
 
-                <div className="product__footer">
-                    {/* <div className="product__tags tags">
-                        <div className="tags__list">
-                            <AppLink href="/">Mounts</AppLink>
-                            <AppLink href="/">Electrodes</AppLink>
-                            <AppLink href="/">Chainsaws</AppLink>
-                        </div>
-                    </div> */}
-
-                    <div className="product__share-links share-links">
-                        <ul className="share-links__list">
-                            <li className="share-links__item share-links__item--type--like">
-                                <AppLink href="/">Like</AppLink>
-                            </li>
-                            <li className="share-links__item share-links__item--type--tweet">
-                                <AppLink href="/">Tweet</AppLink>
-                            </li>
-                            <li className="share-links__item share-links__item--type--pin">
-                                <AppLink href="/">Pin It</AppLink>
-                            </li>
-                            <li className="share-links__item share-links__item--type--counter">
-                                <AppLink href="/">4K</AppLink>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div className="product__footer"></div>
             </div>
         </div>
     );

@@ -5,8 +5,8 @@ import { useState } from 'react';
 import classNames from 'classnames';
 
 // application
-import ProductTabDescription from './ProductTabDescription';
-import ProductTabSpecification from './ProductTabSpecification';
+// import ProductTabDescription from './ProductTabDescription';
+// import ProductTabSpecification from './ProductTabSpecification';
 import ProductTabReviews from './ProductTabReviews';
 
 export interface ProductTabsProps {
@@ -22,8 +22,8 @@ function ProductTabs(props: ProductTabsProps) {
     });
 
     const tabs = [
-        { key: 'description', title: 'Description', content: <ProductTabDescription /> },
-        { key: 'specification', title: 'Specification', content: <ProductTabSpecification /> },
+        // { key: 'description', title: 'Description', content: <ProductTabDescription /> },
+        // { key: 'specification', title: 'Specification', content: <ProductTabSpecification /> },
         { key: 'reviews', title: 'Reviews', content: <ProductTabReviews /> },
     ];
 
