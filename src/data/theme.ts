@@ -1,14 +1,14 @@
 export default {
     name: 'Goldfarb',
     fullName: 'Goldfarb',
-    url: 'https://themeforest.net/item/goldfarb-tools-store-react-ecommerce-template/23909258',
+    url: '',
     author: {
-        name: 'Kos',
-        profile_url: 'https://themeforest.net/user/kos9',
+        name: 'Nicolas Saul',
+        profile_url: '',
     },
     contacts: {
-        address: '715 Fake Street, New York 10021 USA',
-        email: 'goldfarb@example.com',
-        phone: '(800) 060-0730',
+        address: 'Pantaleon Perez 4881 - C.P. 12100',
+        email: 'contacto@goldfarb.com.uy',
+        phone: '(598) 2524 4447',
     },
 };

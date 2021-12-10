@@ -16,7 +16,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
     if (result.state === 'B') {
         res.status(200).json({ orderId: result.message });
     } else {
-        console.error({error: result })
+        console.error({ error: result });
         res.status(500).json({ error: result });
     }
 });

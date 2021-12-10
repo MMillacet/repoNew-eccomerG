@@ -1,8 +1,9 @@
 // react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
+import axios from 'axios';
 
 // application
 import AppLink from '../shared/AppLink';
@@ -10,34 +11,57 @@ import CurrencyFormat from '../shared/CurrencyFormat';
 import Pagination from '../shared/Pagination';
 import url from '../../services/url';
 
-// data stubs
-import dataAccountOrders from '../../data/accountOrders';
-import theme from '../../data/theme';
+const limit = 12;
 
 function AccountPageOrders() {
-    const [page, setPage] = useState(1);
+    const [orders, setOrders] = useState<any>(null);
+    const [page, setPage] = useState<any>(1);
+    const [items, setItems] = useState<any>([]);
 
-    const ordersList = dataAccountOrders.map((order) => (
-        <tr key={order.id}>
-            <td>
-                <AppLink href={url.accountOrder(order)}>{`#${order.id}`}</AppLink>
-            </td>
-            <td>{order.date}</td>
-            <td>{order.status}</td>
-            <td>
-                <CurrencyFormat value={order.total} /> for {order.quantity} item(s)
-            </td>
-        </tr>
-    ));
+    const handlePageChange = (page: number) => {
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const items = orders.slice(start, end);
+        setPage(page);
+        setItems(items);
+    };
+
+    useEffect(() => {
+        const getOrders = async () => {
+            const { data }: any = await axios.get('/api/orders/history');
+            console.log(data);
+            setOrders(data);
+            setItems(data.slice(0, limit));
+        };
+
+        getOrders();
+    }, []);
+
+    const ordersList = items?.map((item: any, i: number) => {
+        const date = new Date(item.docDate);
+        const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        const orderStatus = item.Pedido === 'Borrador' ? 'Pendiente' : 'Procesando';
+
+        return (
+            <tr key={i}>
+                <td>{item?.docNum && <AppLink href={''}>{`#${item.docNum}`}</AppLink>}</td>
+                <td>{dateString}</td>
+                <td>{orderStatus}</td>
+                <td>
+                    <CurrencyFormat value={item.totalPedido} />
+                </td>
+            </tr>
+        );
+    });
 
     return (
         <div className="card">
             <Head>
-                <title>{`Order History — ${theme.name}`}</title>
+                <title>{`Historial de pedidos`}</title>
             </Head>
 
             <div className="card-header">
-                <h5>Order History</h5>
+                <h5>Historial de pedidos</h5>
             </div>
             <div className="card-divider" />
             <div className="card-table">
@@ -45,9 +69,9 @@ function AccountPageOrders() {
                     <table>
                         <thead>
                             <tr>
-                                <th>Order</th>
-                                <th>Date</th>
-                                <th>Status</th>
+                                <th>Pedido</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -57,7 +81,11 @@ function AccountPageOrders() {
             </div>
             <div className="card-divider" />
             <div className="card-footer">
-                <Pagination current={page} total={3} onPageChange={setPage} />
+                <Pagination
+                    current={page}
+                    total={Math.ceil(ordersList?.length / limit)}
+                    onPageChange={handlePageChange}
+                />
             </div>
         </div>
     );

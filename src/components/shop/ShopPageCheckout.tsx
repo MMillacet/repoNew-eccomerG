@@ -86,12 +86,12 @@ function ShopPageCheckout() {
         try {
             const res = await axios.post('/api/orders/create', { order });
             setOrderSuccessMessage(
-                `Tu pedido fue realizado correctamente, orden: ${res.data.orderId}`,
+                `Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`,
             );
             emptyCart();
         } catch(error) {
             setOrderFailedMessage(
-                'Hubo un problema para procesar su orden. Por favor vuelva a intentar.',
+                'Hubo un problema para procesar su pedido. Por favor vuelva a intentar.',
             );
         }
     };
@@ -300,7 +300,7 @@ function ShopPageCheckout() {
                             <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
                                 <div className="card mb-0">
                                     <div className="card-body">
-                                        <h3 className="card-title">Tu Orden</h3>
+                                        <h3 className="card-title">Tu Pedido</h3>
 
                                         {cartTable}
 

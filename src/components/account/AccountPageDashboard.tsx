@@ -2,17 +2,18 @@
 import Head from 'next/head';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import url from '../../services/url';
 
 // data stubs
-import dataAccountAddresses from '../../data/accountAddresses';
 import dataAccountOrders from '../../data/accountOrders';
-import theme from '../../data/theme';
 
 export default function AccountPageDashboard() {
-    const address = dataAccountAddresses[0];
+    const { user } = useUser() as any;
+    const { clientHeader }: any = user || {};
+
     const orders = dataAccountOrders.slice(0, 3).map((order) => (
         <tr key={order.id}>
             <td>
@@ -29,7 +30,7 @@ export default function AccountPageDashboard() {
     return (
         <div className="dashboard">
             <Head>
-                <title>{`My Account — ${theme.name}`}</title>
+                <title>{`My Account — ${user?.name}`}</title>
             </Head>
 
             <div className="dashboard__profile card profile-card">
@@ -37,8 +38,8 @@ export default function AccountPageDashboard() {
                     <div className="profile-card__avatar">
                         <img src="/images/avatars/avatar-3.jpg" alt="" />
                     </div>
-                    <div className="profile-card__name">Helena Garcia</div>
-                    <div className="profile-card__email">goldfarb@example.com</div>
+                    <div className="profile-card__name">{user?.name}</div>
+                    <div className="profile-card__email">{user?.email}</div>
                     <div className="profile-card__edit">
                         <AppLink href={url.accountProfile()} className="btn btn-secondary btn-sm">
                             Edit Profile
@@ -47,32 +48,32 @@ export default function AccountPageDashboard() {
                 </div>
             </div>
             <div className="dashboard__address card address-card address-card--featured">
-                {address.default && <div className="address-card__badge">Default Address</div>}
+                {clientHeader?.address[0]?.address && (
+                    <div className="address-card__badge">Dirección por defecto</div>
+                )}
                 <div className="address-card__body">
-                    <div className="address-card__name">{`${address.firstName} ${address.lastName}`}</div>
+                    <div className="address-card__name">{clientHeader?.address[0]?.address}</div>
                     <div className="address-card__row">
-                        {address.country}
+                        {clientHeader?.address[0]?.street}
                         <br />
-                        {address.postcode},{address.city}
+                        {clientHeader?.address[0]?.city}
                         <br />
-                        {address.address}
                     </div>
+                    <br />
                     <div className="address-card__row">
-                        <div className="address-card__row-title">Phone Number</div>
-                        <div className="address-card__row-content">{address.phone}</div>
+                        <div className="address-card__row-title">Numero de telefono</div>
+                        <div className="address-card__row-content">{user?.phone}</div>
                     </div>
+                    <br />
                     <div className="address-card__row">
-                        <div className="address-card__row-title">Email Address</div>
-                        <div className="address-card__row-content">{address.email}</div>
-                    </div>
-                    <div className="address-card__footer">
-                        <AppLink href={url.accountAddress({ id: 5 })}>Edit Address</AppLink>
+                        <div className="address-card__row-title">Email</div>
+                        <div className="address-card__row-content">{user?.email}</div>
                     </div>
                 </div>
             </div>
             <div className="dashboard__orders card">
                 <div className="card-header">
-                    <h5>Recent Orders</h5>
+                    <h5>Pedidos recientes</h5>
                 </div>
                 <div className="card-divider" />
                 <div className="card-table">

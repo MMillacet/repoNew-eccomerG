@@ -274,6 +274,38 @@ const goldfarbApi = {
 
         return data;
     },
+
+    getOrderHistory: async (cardcode: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/goldfarb/OrdersHistory',
+            method: 'get',
+            params: {
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    /**
+     * Account
+     * */
+
+    getAccountStatus: async (cardcode: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/goldfarb/ClientState',
+            method: 'get',
+            params: {
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
 };
 
 export default goldfarbApi;
