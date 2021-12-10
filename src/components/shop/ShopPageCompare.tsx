@@ -115,7 +115,7 @@ function ShopPageCompare() {
 
                 return (
                     <button type="button" onClick={run} className={classes}>
-                        Add To Cart
+                        Agregar al carro
                     </button>
                 );
             };
@@ -170,23 +170,23 @@ function ShopPageCompare() {
                         <table className="compare-table">
                             <tbody>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>Producto</th>
                                     {productInfoRow}
                                 </tr>
                                 <tr>
-                                    <th>Rating</th>
+                                    <th>Puntacion</th>
                                     {ratingRow}
                                 </tr>
                                 <tr>
-                                    <th>Availability</th>
+                                    <th>Disponibilidad</th>
                                     {availabilityRow}
                                 </tr>
                                 <tr>
-                                    <th>Price</th>
+                                    <th>Precio</th>
                                     {priceRow}
                                 </tr>
                                 <tr>
-                                    <th>Add To Cart</th>
+                                    <th>Agregar al carro</th>
                                     {addToCartRow}
                                 </tr>
                                 {attributeRows}

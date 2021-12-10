@@ -27,9 +27,9 @@ export interface CartTotal {
 export interface Cart {
     items: CartItem[];
     quantity: number;
-    subtotal: number;
-    totals: CartTotal[];
-    total: number;
+    subtotal: { [currency: string]: number };
+    totals: { [currency: string]: CartTotal[] };
+    total: { [currency: string]: number };
 }
 
 export interface CartState extends Cart {

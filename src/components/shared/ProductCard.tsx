@@ -74,17 +74,17 @@ function ProductCard(props: ProductCardProps) {
         price = (
             <div className="product-card__prices">
                 <span className="product-card__new-price">
-                    <CurrencyFormat value={product.price} />
+                    <CurrencyFormat value={product.price} currency={product.currency} />
                 </span>{' '}
                 <span className="product-card__old-price">
-                    <CurrencyFormat value={product.compareAtPrice} />
+                    <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
                 </span>
             </div>
         );
     } else {
         price = (
             <div className="product-card__prices">
-                <CurrencyFormat value={product.price} />
+                <CurrencyFormat value={product.price} currency={product.currency} />
             </div>
         );
     }
@@ -129,7 +129,7 @@ function ProductCard(props: ProductCardProps) {
             </div>
             <div className="product-card__actions">
                 <div className="product-card__availability">
-                    Availability:
+                    Disponibilidad:
                     <span className="text-success">In Stock</span>
                 </div>
                 {price}
@@ -148,7 +148,7 @@ function ProductCard(props: ProductCardProps) {
                                         },
                                     )}
                                 >
-                                    Add To Cart
+                                    Agregar al carro
                                 </button>
                                 <button
                                     type="button"
@@ -160,7 +160,7 @@ function ProductCard(props: ProductCardProps) {
                                         },
                                     )}
                                 >
-                                    Add To Cart
+                                    Agregar al carro
                                 </button>
                             </Fragment>
                         )}

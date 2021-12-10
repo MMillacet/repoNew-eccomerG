@@ -79,7 +79,9 @@ function InputNumber(props: InputNumberProps) {
             } else {
                 const value = parseFloat(event.target.value);
 
-                onChange(Number.isNaN(value) ? min || 0 : value);
+                if (value % step === 0) {
+                    onChange(Number.isNaN(value) ? min || 0 : value);
+                }
             }
         }
     };

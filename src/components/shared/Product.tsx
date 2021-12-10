@@ -49,15 +49,15 @@ function Product(props: ProductProps) {
         prices = (
             <Fragment>
                 <span className="product__new-price">
-                    <CurrencyFormat value={realTimeProduct?.price || 0} />
+                    <CurrencyFormat value={realTimeProduct.price} currency={realTimeProduct.currency} />
                 </span>{' '}
                 <span className="product__old-price">
-                    <CurrencyFormat value={product.compareAtPrice} />
+                    <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
                 </span>
             </Fragment>
         );
     } else {
-        prices = <CurrencyFormat value={realTimeProduct?.price || 0} />;
+        prices = <CurrencyFormat value={realTimeProduct.price} currency={product.currency} />;
     }
 
     return (
@@ -125,11 +125,11 @@ function Product(props: ProductProps) {
                     </ul>
                     <ul className="product__meta">
                         <li className="product__meta-availability">
-                            Availability:{' '}
+                            Disponibilidad:{' '}
                             {realTimeProduct?.hasStock ? (
-                                <span className="text-success">In Stock</span>
+                                <span className="text-success">En stock</span>
                             ) : (
-                                <span className="text-muted">Out Of Stock</span>
+                                <span className="text-muted">Sin stock</span>
                             )}
                         </li>
                         <li>
@@ -141,7 +141,7 @@ function Product(props: ProductProps) {
 
                 <div className="product__sidebar">
                     <div className="product__availability">
-                        Availability: <span className="text-success">In Stock</span>
+                        Disponibilidad: <span className="text-success">En stock</span>
                     </div>
 
                     {realTimeProduct && <div className="product__prices">{prices}</div>}
@@ -149,7 +149,7 @@ function Product(props: ProductProps) {
                     <form className="product__options">
                         <div className="form-group product__option">
                             <label htmlFor="product-quantity" className="product__option-label">
-                                Quantity
+                                Cantidad
                             </label>
                             <div className="product__actions">
                                 <div className="product__actions-item">
@@ -158,7 +158,8 @@ function Product(props: ProductProps) {
                                         aria-label="Quantity"
                                         className="product__quantity"
                                         size="lg"
-                                        min={1}
+                                        min={product.unitMult}
+                                        step={product.unitMult}
                                         value={quantity}
                                         onChange={setQuantity}
                                     />
@@ -175,7 +176,7 @@ function Product(props: ProductProps) {
                                                     'btn-loading': loading,
                                                 })}
                                             >
-                                                Add to cart
+                                                Agregar al carro
                                             </button>
                                         )}
                                     />

@@ -4,10 +4,13 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     CART_UPDATE_QUANTITIES,
+    CART_EMPTY,
     CartAction,
     CartItemQuantity,
 } from './cartActionTypes';
 import { withClientState } from '../client';
+
+const currencies = ['$', 'U$'];
 
 function findItemIndex(items: CartItem[], product: IProduct, options: CartItemOption[]): number {
     return items.findIndex((item) => {
@@ -32,8 +35,15 @@ function findItemIndex(items: CartItem[], product: IProduct, options: CartItemOp
     });
 }
 
-function calcSubtotal(items: CartItem[]): number {
-    return items.reduce((subtotal, item) => subtotal + item.total, 0);
+function calcPriceWithDiscount(product: IProduct): number {
+    return product.discount ? product.price * (1 - product.discount / 100) : product.price;
+}
+
+function calcSubtotal(items: CartItem[], currency: string = '$'): number {
+    return items.reduce(
+        (subtotal, item) => (item.product.currency === currency ? subtotal + item.total : subtotal),
+        0,
+    );
 }
 
 function calcQuantity(items: CartItem[]): number {
@@ -44,12 +54,20 @@ function calcTotal(subtotal: number, totals: CartTotal[]): number {
     return totals.reduce((acc, extraLine) => acc + extraLine.price, subtotal);
 }
 
-function calcTotals(items: CartItem[]): CartTotal[] {
+function calcTotals(items: CartItem[], currency: string): CartTotal[] {
     if (items.length === 0) {
         return [];
     }
 
-    const subtotal = calcSubtotal(items);
+    if (currency !== '$') {
+        return [
+            {
+                type: 'tax',
+                title: 'Tax',
+                price: calcSubtotal(items, currency) * 0.2,
+            },
+        ];
+    }
 
     return [
         {
@@ -60,15 +78,41 @@ function calcTotals(items: CartItem[]): CartTotal[] {
         {
             type: 'tax',
             title: 'Tax',
-            price: subtotal * 0.2,
+            price: calcSubtotal(items, currency) * 0.2,
         },
     ];
+}
+
+function calcAllTotals(items: CartItem[]) {
+    const subtotal = currencies.reduce((acc: { [currency: string]: number }, currency: string) => {
+        acc[currency] = calcSubtotal(items, currency);
+        return acc;
+    }, {});
+
+    const totals = currencies.reduce(
+        (acc: { [currency: string]: CartTotal[] }, currency: string) => {
+            acc[currency] = calcTotals(items, currency);
+            return acc;
+        },
+        {},
+    );
+
+    const total = currencies.reduce((acc: { [currency: string]: number }, currency: string) => {
+        acc[currency] = calcTotal(subtotal[currency], totals[currency]);
+        return acc;
+    }, {});
+
+    return {
+        subtotal,
+        totals,
+        total,
+    };
 }
 
 function addItem(state: CartState, product: IProduct, options: CartItemOption[], quantity: number) {
     const itemIndex = findItemIndex(state.items, product, options);
 
-    let newItems;
+    let newItems: CartItem[];
     let { lastItemId } = state;
 
     if (itemIndex === -1) {
@@ -80,7 +124,7 @@ function addItem(state: CartState, product: IProduct, options: CartItemOption[],
                 product: JSON.parse(JSON.stringify(product)),
                 options: JSON.parse(JSON.stringify(options)),
                 price: product.price,
-                total: product.price * quantity,
+                total: calcPriceWithDiscount(product) * quantity,
                 quantity,
             },
         ];
@@ -92,24 +136,20 @@ function addItem(state: CartState, product: IProduct, options: CartItemOption[],
             {
                 ...item,
                 quantity: item.quantity + quantity,
-                total: (item.quantity + quantity) * item.price,
+                total: (item.quantity + quantity) * calcPriceWithDiscount(product),
             },
             ...state.items.slice(itemIndex + 1),
         ];
     }
 
-    const subtotal = calcSubtotal(newItems);
-    const totals = calcTotals(newItems);
-    const total = calcTotal(subtotal, totals);
+    const allTotals = calcAllTotals(newItems);
 
     return {
         ...state,
         lastItemId,
-        subtotal,
-        totals,
-        total,
         items: newItems,
         quantity: calcQuantity(newItems),
+        ...allTotals,
     };
 }
 
@@ -117,17 +157,13 @@ function removeItem(state: CartState, itemId: number) {
     const { items } = state;
     const newItems = items.filter((item) => item.id !== itemId);
 
-    const subtotal = calcSubtotal(newItems);
-    const totals = calcTotals(newItems);
-    const total = calcTotal(subtotal, totals);
+    const allTotals = calcAllTotals(newItems);
 
     return {
         ...state,
         items: newItems,
         quantity: calcQuantity(newItems),
-        subtotal,
-        totals,
-        total,
+        ...allTotals,
     };
 }
 
@@ -146,22 +182,18 @@ function updateQuantities(state: CartState, quantities: CartItemQuantity[]) {
         return {
             ...item,
             quantity: quantity.value,
-            total: quantity.value * item.price,
+            total: quantity.value * calcPriceWithDiscount(item.product),
         };
     });
 
     if (needUpdate) {
-        const subtotal = calcSubtotal(newItems);
-        const totals = calcTotals(newItems);
-        const total = calcTotal(subtotal, totals);
+        const allTotals = calcAllTotals(newItems);
 
         return {
             ...state,
             items: newItems,
             quantity: calcQuantity(newItems),
-            subtotal,
-            totals,
-            total,
+            ...allTotals,
         };
     }
 
@@ -172,9 +204,18 @@ const initialState: CartState = {
     lastItemId: 0,
     quantity: 0,
     items: [],
-    subtotal: 0,
-    totals: [],
-    total: 0,
+    subtotal: {
+        $: 0,
+        U$: 0,
+    },
+    totals: {
+        $: [],
+        U$: [],
+    },
+    total: {
+        $: 0,
+        U$: 0,
+    },
 };
 
 export const CART_NAMESPACE = 'cart';
@@ -189,6 +230,8 @@ function cartBaseReducer(state = initialState, action: CartAction): CartState {
 
         case CART_UPDATE_QUANTITIES:
             return updateQuantities(state, action.quantities);
+        case CART_EMPTY:
+            return initialState;
 
         default:
             return state;

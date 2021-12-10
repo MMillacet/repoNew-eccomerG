@@ -50,15 +50,23 @@ function Suggestions(props: SuggestionsProps) {
                         {product.compareAtPrice && (
                             <Fragment>
                                 <span className="suggestions__item-price-new">
-                                    <CurrencyFormat value={product.price} />
+                                    <CurrencyFormat
+                                        value={product.price}
+                                        currency={product.currency}
+                                    />
                                 </span>{' '}
                                 <span className="suggestions__item-price-old">
-                                    <CurrencyFormat value={product.compareAtPrice} />
+                                    <CurrencyFormat
+                                        value={product.compareAtPrice}
+                                        currency={product.currency}
+                                    />
                                 </span>
                             </Fragment>
                         )}
 
-                        {!product.compareAtPrice && <CurrencyFormat value={product.price} />}
+                        {!product.compareAtPrice && (
+                            <CurrencyFormat value={product.price} currency={product.currency} />
+                        )}
                     </div>
                 )}
 
@@ -70,7 +78,7 @@ function Suggestions(props: SuggestionsProps) {
                                 <button
                                     type="button"
                                     onClick={run}
-                                    title="Add to cart"
+                                    title="Agregar al carro"
                                     className={classNames('btn btn-primary btn-sm btn-svg-icon', {
                                         'btn-loading': loading,
                                     })}

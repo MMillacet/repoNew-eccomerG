@@ -1,7 +1,7 @@
 // Some settings automatically inherited from .editorconfig
 
 module.exports = {
-    printWidth: 100, // https://github.com/airbnb/javascript#19.13
+    printWidth: 140, // https://github.com/airbnb/javascript#19.13
     tabWidth: 4, // https://github.com/airbnb/javascript#19.1
     useTabs: false, // https://github.com/airbnb/javascript#19.1
     semi: true, // https://github.com/airbnb/javascript#21.1

@@ -1,6 +1,7 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import auth0Api from '../../../api/auth0';
+import goldfarbApi from '../../../api/goldfarb';
 import { transformUser } from '../../../services/user';
 
 export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -10,10 +11,13 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
         const user = await auth0Api.info(session.accessToken);
         const transformedUser = transformUser(user);
 
+        const clientHeader = await goldfarbApi.getOrderHeader(transformedUser.cardcode);
+
         session.user = {
             initialised: true,
             ...session.user,
             ...transformedUser,
+            clientHeader,
         };
 
         res.status(200).json(session.user);

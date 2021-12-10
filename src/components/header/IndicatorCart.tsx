@@ -14,33 +14,25 @@ import Indicator from './Indicator';
 import url from '../../services/url';
 import { useCart, useCartRemoveItem } from '../../store/cart/cartHooks';
 
+const currencies = ['$', 'U$'];
+
 function IndicatorCart() {
     const cart = useCart();
     const cartRemoveItem = useCartRemoveItem();
     let dropdown;
     let totals;
 
-    if (cart.totals.length > 0) {
-        totals = cart.totals.map((total, index) => (
-            <tr key={index}>
-                <th>{total.title}</th>
-                <td>
-                    <CurrencyFormat value={total.price} />
-                </td>
-            </tr>
-        ));
-
-        totals = (
-            <Fragment>
+    if (cart.totals.$.length > 0) {
+        totals = currencies.map((currency: string) => (
+            <Fragment key={currency}>
                 <tr>
-                    <th>Subtotal</th>
+                    <th>Total {currency}</th>
                     <td>
-                        <CurrencyFormat value={cart.subtotal} />
+                        <CurrencyFormat value={cart.total[currency]} currency={currency} />
                     </td>
                 </tr>
-                {totals}
             </Fragment>
-        );
+        ));
     }
 
     const items = cart.items.map((item) => {
@@ -99,7 +91,7 @@ function IndicatorCart() {
                         <span className="dropcart__product-quantity">{item.quantity}</span>
                         {' × '}
                         <span className="dropcart__product-price">
-                            <CurrencyFormat value={item.price} />
+                            <CurrencyFormat value={item.price} currency={item.product.currency} />
                         </span>
                     </div>
                 </div>
@@ -115,24 +107,16 @@ function IndicatorCart() {
 
                 <div className="dropcart__totals">
                     <table>
-                        <tbody>
-                            {totals}
-                            <tr>
-                                <th>Total</th>
-                                <td>
-                                    <CurrencyFormat value={cart.total} />
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody>{totals}</tbody>
                     </table>
                 </div>
 
                 <div className="dropcart__buttons">
                     <AppLink href={url.cart()} className="btn btn-secondary">
-                        View Cart
+                        Ver Carro
                     </AppLink>
                     <AppLink href={url.checkout()} className="btn btn-primary">
-                        Checkout
+                        Comprar
                     </AppLink>
                 </div>
             </div>
@@ -140,7 +124,7 @@ function IndicatorCart() {
     } else {
         dropdown = (
             <div className="dropcart">
-                <div className="dropcart__empty">Your shopping cart is empty!</div>
+                <div className="dropcart__empty">El carro esta vacio!</div>
             </div>
         );
     }

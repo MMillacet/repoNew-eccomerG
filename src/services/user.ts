@@ -4,7 +4,7 @@ import { IUser } from '../interfaces/user';
 const namespace = 'https://goldfarb:us:auth0:com';
 
 // Transforms user in session object to our IUser
-const transformUser = (user: Claims): IUser => ({
+export const transformUser = (user: Claims): IUser => ({
     id: user.sub,
     email: user.email,
     name: user[`${namespace}/name`],

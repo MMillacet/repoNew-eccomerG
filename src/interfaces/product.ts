@@ -34,8 +34,8 @@ export interface IProduct {
     finalPrice: number; // price converted to pesos, useful for price sorting
     discount: number;
     currency: string;
-    unitMult: string;
-    unitsPerItem: string;
+    unitMult: number;
+    unitsPerItem: number;
     hasStock: boolean;
     title: string;
     description: string;

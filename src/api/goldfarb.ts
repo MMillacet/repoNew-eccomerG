@@ -29,6 +29,8 @@ const makeProduct = (product: any) => {
         slug: code,
         code,
         subcategory,
+        unitMult: Number(product.unitMult),
+        unitsPerItem: Number(product.unitsPerItem),
         // images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
         images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],
         availability: product.hasStock ? 'in-stock' : 'out-of-stock',
@@ -245,6 +247,20 @@ const goldfarbApi = {
     /**
      * Orders
      * */
+
+    getOrderHeader: async (cardcode: string = '400092') => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/client/header',
+            method: 'get',
+            params: {
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
 
     // todo: model order
     postOrder: async (order: any) => {

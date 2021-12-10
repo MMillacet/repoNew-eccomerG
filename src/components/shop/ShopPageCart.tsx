@@ -30,21 +30,6 @@ function ShopPageCart() {
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
 
-    const updateQuantities = () =>
-        cartUpdateQuantities(
-            quantities.map((x) => ({
-                ...x,
-                value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-            })),
-        );
-
-    const cartNeedUpdate = () =>
-        quantities.filter((x) => {
-            const item = cart.items.find((item) => item.id === x.itemId);
-
-            return item && item.quantity !== x.value && x.value !== '';
-        }).length > 0;
-
     const getItemQuantity = (item: CartItem) => {
         const quantity = quantities.find((x) => x.itemId === item.id);
 
@@ -55,30 +40,39 @@ function ShopPageCart() {
         setQuantities((prevState) => {
             const index = prevState.findIndex((x) => x.itemId === item.id);
 
-            if (index === -1) {
-                return [
-                    ...prevState,
-                    {
-                        itemId: item.id,
-                        value: quantity,
-                    },
-                ];
-            }
+            const quantities =
+                index === -1
+                    ? [
+                          ...prevState,
+                          {
+                              itemId: item.id,
+                              value: quantity,
+                              step: item.product.unitMult,
+                          },
+                      ]
+                    : [
+                          ...prevState.slice(0, index),
+                          {
+                              ...prevState[index],
+                              value: quantity,
+                              step: item.product.unitMult,
+                          },
+                          ...prevState.slice(index + 1),
+                      ];
 
-            return [
-                ...prevState.slice(0, index),
-                {
-                    ...prevState[index],
-                    value: quantity,
-                },
-                ...prevState.slice(index + 1),
-            ];
+            cartUpdateQuantities(
+                quantities.map((x) => ({
+                    ...x,
+                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                })),
+            );
+            return quantities;
         });
     };
 
     const breadcrumb = [
-        { title: 'Home', url: '' },
-        { title: 'Shopping Cart', url: '' },
+        { title: 'Inicio', url: '' },
+        { title: 'Carro', url: '' },
     ];
 
     let content;
@@ -131,18 +125,21 @@ function ShopPageCart() {
 
             return (
                 <tr key={item.id} className="cart-table__row">
+                    <td className="cart-table__column cart-table__column--code" data-title="Code">
+                        {item.product.code}
+                    </td>
                     <td className="cart-table__column cart-table__column--image">{image}</td>
                     <td className="cart-table__column cart-table__column--product">
                         <AppLink
                             href={url.product(item.product)}
                             className="cart-table__product-name"
                         >
-                            {item.product.name}
+                            {item.product.title}
                         </AppLink>
                         {options}
                     </td>
                     <td className="cart-table__column cart-table__column--price" data-title="Price">
-                        <CurrencyFormat value={item.price} />
+                        <CurrencyFormat value={item.price} currency={item.product.currency} />
                     </td>
                     <td
                         className="cart-table__column cart-table__column--quantity"
@@ -151,11 +148,18 @@ function ShopPageCart() {
                         <InputNumber
                             onChange={(quantity) => handleChangeQuantity(item, quantity)}
                             value={getItemQuantity(item)}
-                            min={1}
+                            min={item.product.unitMult}
+                            step={item.product.unitMult}
                         />
                     </td>
+                    <td
+                        className="cart-table__column cart-table__column--discount"
+                        data-title="Discount"
+                    >
+                        {item.product.discount ? `${item.product.discount}%` : ''}
+                    </td>
                     <td className="cart-table__column cart-table__column--total" data-title="Total">
-                        <CurrencyFormat value={item.total} />
+                        <CurrencyFormat value={item.total} currency={item.product.currency} />
                     </td>
                     <td className="cart-table__column cart-table__column--remove">
                         {removeButton}
@@ -164,63 +168,40 @@ function ShopPageCart() {
             );
         });
 
-        const cartTotals = cart.totals.length > 0 && (
-            <Fragment>
-                <thead className="cart__totals-header">
-                    <tr>
-                        <th>Subtotal</th>
-                        <td>
-                            <CurrencyFormat value={cart.subtotal} />
-                        </td>
-                    </tr>
-                </thead>
-                <tbody className="cart__totals-body">
-                    {cart.totals.map((extraLine, index) => {
-                        let calcShippingLink;
+        const cartTotals = (currency: string) =>
+            cart.totals[currency]?.length > 0 && (
+                <Fragment>
+                    <thead className="cart__totals-header">
+                        <tr>
+                            <th>Subtotal</th>
+                            <td>
+                                <CurrencyFormat
+                                    value={cart.subtotal[currency]}
+                                    currency={currency}
+                                />
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody className="cart__totals-body">
+                        {cart.totals[currency].map((extraLine, index) => {
+                            let calcShippingLink;
 
-                        if (extraLine.type === 'shipping') {
-                            calcShippingLink = (
-                                <div className="cart__calc-shipping">
-                                    <AppLink href="/">Calculate Shipping</AppLink>
-                                </div>
+                            return (
+                                <tr key={index}>
+                                    <th>{extraLine.title}</th>
+                                    <td>
+                                        <CurrencyFormat
+                                            value={extraLine.price}
+                                            currency={currency}
+                                        />
+                                        {calcShippingLink}
+                                    </td>
+                                </tr>
                             );
-                        }
-
-                        return (
-                            <tr key={index}>
-                                <th>{extraLine.title}</th>
-                                <td>
-                                    <CurrencyFormat value={extraLine.price} />
-                                    {calcShippingLink}
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </Fragment>
-        );
-
-        const updateCartButton = (
-            <AsyncAction
-                action={() => updateQuantities()}
-                render={({ run, loading }) => {
-                    const classes = classNames('btn btn-primary cart__update-button', {
-                        'btn-loading': loading,
-                    });
-
-                    return (
-                        <button
-                            type="button"
-                            onClick={run}
-                            className={classes}
-                            disabled={!cartNeedUpdate()}
-                        >
-                            Update Cart
-                        </button>
-                    );
-                }}
-            />
-        );
+                        })}
+                    </tbody>
+                </Fragment>
+            );
 
         content = (
             <div className="cart block">
@@ -228,17 +209,23 @@ function ShopPageCart() {
                     <table className="cart__table cart-table">
                         <thead className="cart-table__head">
                             <tr className="cart-table__row">
+                                <th className="cart-table__column cart-table__column--code">
+                                    Codigo
+                                </th>
                                 <th className="cart-table__column cart-table__column--image">
-                                    Image
+                                    Imagen
                                 </th>
                                 <th className="cart-table__column cart-table__column--product">
-                                    Product
+                                    Producto
                                 </th>
                                 <th className="cart-table__column cart-table__column--price">
-                                    Price
+                                    Precio
                                 </th>
                                 <th className="cart-table__column cart-table__column--quantity">
-                                    Quantity
+                                    Cantidad
+                                </th>
+                                <th className="cart-table__column cart-table__column--discount">
+                                    Descuento
                                 </th>
                                 <th className="cart-table__column cart-table__column--total">
                                     Total
@@ -251,41 +238,43 @@ function ShopPageCart() {
                         </thead>
                         <tbody className="cart-table__body">{cartItems}</tbody>
                     </table>
-                    <div className="cart__actions">
-                        <form className="cart__coupon-form">
-                            <label htmlFor="input-coupon-code" className="sr-only">
-                                Password
-                            </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="input-coupon-code"
-                                placeholder="Coupon Code"
-                            />
-                            <button type="submit" className="btn btn-primary">
-                                Apply Coupon
-                            </button>
-                        </form>
-                        <div className="cart__buttons">
-                            <AppLink href="/" className="btn btn-light">
-                                Continue Shopping
-                            </AppLink>
-                            {updateCartButton}
-                        </div>
-                    </div>
 
                     <div className="row justify-content-end pt-md-5 pt-4">
                         <div className="col-12 col-md-7 col-lg-6 col-xl-5">
                             <div className="card">
                                 <div className="card-body">
-                                    <h3 className="card-title">Cart Totals</h3>
+                                    <h3 className="card-title">Totales</h3>
                                     <table className="cart__totals">
-                                        {cartTotals}
+                                        {cartTotals('U$')}
                                         <tfoot className="cart__totals-footer">
                                             <tr>
-                                                <th>Total</th>
+                                                <th>Total dolares</th>
                                                 <td>
-                                                    <CurrencyFormat value={cart.total} />
+                                                    <CurrencyFormat
+                                                        value={cart.total.U$}
+                                                        currency={'U$'}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-7 col-lg-6 col-xl-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h3 className="card-title">Totales</h3>
+                                    <table className="cart__totals">
+                                        {cartTotals('$')}
+                                        <tfoot className="cart__totals-footer">
+                                            <tr>
+                                                <th>Total pesos</th>
+                                                <td>
+                                                    <CurrencyFormat
+                                                        value={cart.total.$}
+                                                        currency={'$'}
+                                                    />
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -294,7 +283,7 @@ function ShopPageCart() {
                                         href={url.checkout()}
                                         className="btn btn-primary btn-xl btn-block cart__checkout-button"
                                     >
-                                        Proceed to checkout
+                                        Comprar
                                     </AppLink>
                                 </div>
                             </div>
@@ -308,10 +297,10 @@ function ShopPageCart() {
             <div className="block block-empty">
                 <div className="container">
                     <div className="block-empty__body">
-                        <div className="block-empty__message">Your shopping cart is empty!</div>
+                        <div className="block-empty__message">Tu carro esta vacio!</div>
                         <div className="block-empty__actions">
                             <AppLink href="/" className="btn btn-primary btn-sm">
-                                Continue
+                                Continuar
                             </AppLink>
                         </div>
                     </div>

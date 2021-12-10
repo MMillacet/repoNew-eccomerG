@@ -42,3 +42,43 @@ export interface IOrderSummary {
     quantity: number;
     total: number;
 }
+
+/*
+    orderTypes = [{
+      option: 'Goldfarb envia a cliente',
+      value: 'N'
+    }, {
+      option: 'Cliente retira en Rio Negro 1617',
+      value: 'E'
+    }, {
+      option: 'Cliente retira en Ruta 5',
+      value: 'R'
+    }];
+*/
+
+export type GoldfarbOrderType = 'N' | 'E' | 'R';
+
+export interface IGoldfarbOrderHeader {
+    cardcode: string;
+    cardname: string;
+    remito: boolean;
+    tipoMov: string;
+    tipoPed: GoldfarbOrderType;
+    discount: number;
+    shipToCode: string;
+}
+
+export interface IGoldfarbOrderItem {
+    itemcode: string;
+    description: string;
+    quantity: number;
+    currency: string;
+    price: number;
+    discount: number;
+    total: number;
+}
+
+export interface IGoldfarbOrder {
+    header: IGoldfarbOrderHeader;
+    lines: IGoldfarbOrderItem[];
+}

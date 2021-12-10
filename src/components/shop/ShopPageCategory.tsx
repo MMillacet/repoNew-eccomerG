@@ -12,13 +12,10 @@ import CategorySidebar from './CategorySidebar';
 import CategorySidebarItem from './CategorySidebarItem';
 import PageHeader from '../shared/PageHeader';
 import ProductsView, { ProductsViewGrid } from './ProductsView';
-import shopApi from '../../api/shop';
 import url from '../../services/url';
 import WidgetFilters from '../widgets/WidgetFilters';
-import WidgetProducts from '../widgets/WidgetProducts';
 import { buildQuery } from '../../store/shop/shopHelpers';
 import { getCategoryParents } from '../../services/helpers';
-import { IProduct } from '../../interfaces/product';
 import { useShop } from '../../store/shop/shopHooks';
 
 // data stubs
@@ -45,7 +42,6 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
     const shopState = useShop();
 
     const router = useRouter();
-    const [latestProducts, setLatestProducts] = useState<IProduct[]>([]);
 
     // sidebar
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -83,41 +79,15 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
             });
     }, [shopState.options, shopState.filters, shopState.searchOptions]);
 
-    // Load latest products.
-    useEffect(() => {
-        let canceled = false;
-
-        if (offcanvas === 'always') {
-            setLatestProducts([]);
-        } else {
-            shopApi.getLatestProducts({ limit: 5 }).then((result) => {
-                if (canceled) {
-                    return;
-                }
-
-                setLatestProducts(result);
-            });
-        }
-
-        return () => {
-            canceled = true;
-        };
-    }, [offcanvas]);
-
     const sidebarComponent = useMemo(
         () => (
             <CategorySidebar open={sidebarOpen} closeFn={closeSidebarFn} offcanvas={offcanvas}>
                 <CategorySidebarItem>
                     <WidgetFilters title="Filters" offcanvas={offcanvas} />
                 </CategorySidebarItem>
-                {offcanvas !== 'always' && (
-                    <CategorySidebarItem className="d-none d-lg-block">
-                        <WidgetProducts title="Latest Products" products={latestProducts} />
-                    </CategorySidebarItem>
-                )}
             </CategorySidebar>
         ),
-        [sidebarOpen, closeSidebarFn, offcanvas, latestProducts],
+        [sidebarOpen, closeSidebarFn, offcanvas],
     );
 
     if (

@@ -8,17 +8,19 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     CART_UPDATE_QUANTITIES,
+    CART_EMPTY,
     CartAddItemAction,
     CartItemQuantity,
     CartRemoveItemAction,
     CartThunkAction,
+    CartEmptyAction,
     CartUpdateQuantitiesAction,
 } from './cartActionTypes';
 
 export function cartAddItemSuccess(
     product: IProduct,
     options: CartItemOption[] = [],
-    quantity = 1,
+    quantity = product.unitMult,
 ): CartAddItemAction {
     toast.success(`Product "${product.title}" added to cart!`, { theme: 'colored' });
 
@@ -46,10 +48,16 @@ export function cartUpdateQuantitiesSuccess(
     };
 }
 
+export function cartEmptySuccess(): CartEmptyAction {
+    return {
+        type: CART_EMPTY,
+    };
+}
+
 export function cartAddItem(
     product: IProduct,
     options: CartItemOption[] = [],
-    quantity = 1,
+    quantity = product.unitMult,
 ): CartThunkAction<Promise<void>> {
     // sending request to server, timeout is used as a stub
     return (dispatch) =>
@@ -57,7 +65,7 @@ export function cartAddItem(
             setTimeout(() => {
                 dispatch(cartAddItemSuccess(product, options, quantity));
                 resolve();
-            }, 500);
+            }, 100);
         });
 }
 
@@ -68,7 +76,7 @@ export function cartRemoveItem(itemId: number): CartThunkAction<Promise<void>> {
             setTimeout(() => {
                 dispatch(cartRemoveItemSuccess(itemId));
                 resolve();
-            }, 500);
+            }, 100);
         });
 }
 
@@ -81,6 +89,17 @@ export function cartUpdateQuantities(
             setTimeout(() => {
                 dispatch(cartUpdateQuantitiesSuccess(quantities));
                 resolve();
-            }, 500);
+            }, 100);
+        });
+}
+
+export function cartEmpty(): CartThunkAction<Promise<void>> {
+    // sending request to server, timeout is used as a stub
+    return (dispatch) =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                dispatch(cartEmptySuccess());
+                resolve();
+            }, 100);
         });
 }

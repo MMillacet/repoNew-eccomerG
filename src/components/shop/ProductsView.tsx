@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import { useUser } from '@auth0/nextjs-auth0';
 import Filters16Svg from '../../svg/filters-16.svg';
 import LayoutGrid16x16Svg from '../../svg/layout-grid-16x16.svg';
-import LayoutGridWithDetails16x16Svg from '../../svg/layout-grid-with-details-16x16.svg';
 import LayoutList16x16Svg from '../../svg/layout-list-16x16.svg';
 import Pagination from '../shared/Pagination';
 import ProductCard from '../shared/ProductCard';
@@ -71,11 +70,6 @@ function ProductsView(props: ProductsViewProps) {
         .filter((x) => x).length;
     const viewModesDef: ViewMode[] = [
         { key: 'grid', title: 'Grid', icon: <LayoutGrid16x16Svg /> },
-        {
-            key: 'grid-with-features',
-            title: 'Grid With Features',
-            icon: <LayoutGridWithDetails16x16Svg />,
-        },
         { key: 'list', title: 'List', icon: <LayoutList16x16Svg /> },
     ];
     const viewModes = viewModesDef.map((viewMode) => {
@@ -137,7 +131,7 @@ function ProductsView(props: ProductsViewProps) {
                             </div>
                         </div>
                         <div className="view-options__legend">
-                            {`Showing ${productsList.from}—${productsList.to} of ${productsList.total} products`}
+                            {`Mostrando ${productsList.from}—${productsList.to} de ${productsList.total} productos`}
                         </div>
                         <div className="view-options__divider" />
                         <div className="view-options__control">

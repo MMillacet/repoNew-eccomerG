@@ -207,8 +207,10 @@
         border-bottom: 1px solid $cart-table-card-border-color;
         padding: 0 20px 18px;
     }
+    .cart-table__column--code,
     .cart-table__column--price,
     .cart-table__column--quantity,
+    .cart-table__column--discount,
     .cart-table__column--total {
         display: flex;
         align-items: center;

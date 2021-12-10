@@ -145,7 +145,7 @@ function Search(props: SearchProps) {
     return (
         <div className={rootClasses} ref={wrapperRef} onBlur={handleBlur}>
             <div className="search__body">
-                <form className="search__form" action="/shop/category-list">
+                <form className="search__form" action="/shop/catalog">
                     <input
                         ref={inputRef}
                         onChange={handleChangeQuery}

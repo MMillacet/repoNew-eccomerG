@@ -51,7 +51,7 @@ function ShopPageWishlist() {
 
                 return (
                     <button type="button" onClick={run} className={classes}>
-                        Add To Cart
+                        Agregar al carro
                     </button>
                 );
             };
@@ -118,7 +118,7 @@ function ShopPageWishlist() {
                                 <th className="wishlist__column wishlist__column--price">Price</th>
                                 <th
                                     className="wishlist__column wishlist__column--tocart"
-                                    aria-label="Add to cart"
+                                    aria-label="Agregar al carro"
                                 />
                                 <th
                                     className="wishlist__column wishlist__column--remove"

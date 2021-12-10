@@ -5,6 +5,7 @@ import { AppAction } from '../types';
 export const CART_ADD_ITEM = 'CART_ADD_ITEM';
 export const CART_REMOVE_ITEM = 'CART_REMOVE_ITEM';
 export const CART_UPDATE_QUANTITIES = 'CART_UPDATE_QUANTITIES';
+export const CART_EMPTY = 'CART_EMPTY';
 
 export interface CartItemQuantity {
     itemId: number;
@@ -28,6 +29,14 @@ export interface CartUpdateQuantitiesAction {
     quantities: CartItemQuantity[];
 }
 
-export type CartAction = CartAddItemAction | CartRemoveItemAction | CartUpdateQuantitiesAction;
+export interface CartEmptyAction {
+    type: typeof CART_EMPTY;
+}
+
+export type CartAction =
+    | CartAddItemAction
+    | CartRemoveItemAction
+    | CartUpdateQuantitiesAction
+    | CartEmptyAction;
 
 export type CartThunkAction<T = void> = AppAction<CartAction, T>;
