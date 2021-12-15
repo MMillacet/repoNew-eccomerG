@@ -27,29 +27,29 @@ function IndicatorAccount() {
         <div className="account-menu">
             <AppLink href={url.accountDashboard()} className="account-menu__user">
                 <div className="account-menu__user-info">
-                    <div className="account-menu__user-name">Helena Garcia</div>
-                    <div className="account-menu__user-email">goldfarb@example.com</div>
+                    <div className="account-menu__user-name">{user?.name}</div>
+                    <div className="account-menu__user-email">{user?.email}</div>
                 </div>
             </AppLink>
             <div className="account-menu__divider" />
             <ul className="account-menu__links">
                 <li>
-                    <AppLink href={url.accountProfile()}>Edit Profile</AppLink>
+                    <AppLink href={url.accountProfile()}>Editar Perfil</AppLink>
                 </li>
                 <li>
-                    <AppLink href={url.accountOrders()}>Order History</AppLink>
+                    <AppLink href={url.accountOrders()}>Historial pedidos</AppLink>
                 </li>
                 <li>
-                    <AppLink href={url.accountAddresses()}>Addresses</AppLink>
+                    <AppLink href={url.accountAddresses()}>Direcciones</AppLink>
                 </li>
                 <li>
-                    <AppLink href={url.accountPassword()}>Password</AppLink>
+                    <AppLink href={url.accountPassword()}>Contraseña</AppLink>
                 </li>
             </ul>
             <div className="account-menu__divider" />
             <ul className="account-menu__links">
                 <li>
-                    <a href="/api/auth/logout">Logout</a>
+                    <a href="/api/auth/logout">Cerrar sesión</a>
                 </li>
             </ul>
         </div>

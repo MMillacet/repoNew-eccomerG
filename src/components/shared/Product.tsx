@@ -49,7 +49,10 @@ function Product(props: ProductProps) {
         prices = (
             <Fragment>
                 <span className="product__new-price">
-                    <CurrencyFormat value={realTimeProduct.price} currency={realTimeProduct.currency} />
+                    <CurrencyFormat
+                        value={realTimeProduct?.price}
+                        currency={realTimeProduct?.currency}
+                    />
                 </span>{' '}
                 <span className="product__old-price">
                     <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
@@ -57,7 +60,9 @@ function Product(props: ProductProps) {
             </Fragment>
         );
     } else {
-        prices = <CurrencyFormat value={realTimeProduct.price} currency={product.currency} />;
+        prices = (
+            <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
+        );
     }
 
     return (

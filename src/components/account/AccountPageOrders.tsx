@@ -9,7 +9,7 @@ import axios from 'axios';
 import AppLink from '../shared/AppLink';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import Pagination from '../shared/Pagination';
-import url from '../../services/url';
+// import url from '../../services/url';
 
 const limit = 12;
 
@@ -29,7 +29,6 @@ function AccountPageOrders() {
     useEffect(() => {
         const getOrders = async () => {
             const { data }: any = await axios.get('/api/orders/history');
-            console.log(data);
             setOrders(data);
             setItems(data.slice(0, limit));
         };

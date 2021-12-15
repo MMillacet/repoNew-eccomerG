@@ -122,10 +122,10 @@ const dataHeaderNavigation: INav = [
         submenu: {
             type: 'menu',
             menu: [
-                { title: 'Login', url: '/account/login' },
+                { title: 'Iniciar sesión', url: '/account/login' },
                 { title: 'Dashboard', url: '/account/dashboard' },
-                { title: 'Edit Profile', url: '/account/profile' },
-                { title: 'Order History', url: '/account/orders' },
+                { title: 'Editar Perfil', url: '/account/profile' },
+                { title: 'Historial pedidos', url: '/account/orders' },
                 {
                     title: 'Order Details',
                     url: {

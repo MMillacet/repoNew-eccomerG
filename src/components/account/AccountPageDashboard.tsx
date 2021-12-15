@@ -42,7 +42,7 @@ export default function AccountPageDashboard() {
                     <div className="profile-card__email">{user?.email}</div>
                     <div className="profile-card__edit">
                         <AppLink href={url.accountProfile()} className="btn btn-secondary btn-sm">
-                            Edit Profile
+                            Editar Perfil
                         </AppLink>
                     </div>
                 </div>
