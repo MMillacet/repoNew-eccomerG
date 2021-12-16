@@ -13,6 +13,8 @@ export interface PageProps {
 export async function getStaticPaths() {
     const { products } = await goldfarbApi.getProductsList();
 
+    // const paths = [{ params: { slug: '51602' } }]; // for testing
+
     // Get the paths we want to pre-render based on posts
     const paths = process.env.IGNORE_PRODUCT_BUILDS
         ? []
