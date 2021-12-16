@@ -7,7 +7,7 @@
         "dev": "nodemon server/index.ts",
         "build:server": "tsc --project tsconfig.server.json",
         "build:next": "next build",
-        "build": "npm run build:next && npm run build:server",
+        "build": "NODE_ENV=development npm run build:next",
         "start": "NODE_ENV=production node dist/index.js"
     },
     "dependencies": {
