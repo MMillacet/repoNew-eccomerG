@@ -18,5 +18,5 @@ https://goldfarb.sanity.studio/desk
 
 ## Documentacion
 
--   [Next.js documentacion](https://nextjs.org/docs) - Next.js features y API
+-   [Next.js documentacion](https://nextjs.org/docs) - Next.js features & API
 -   [Auth0 documentacion](https://auth0.com/docs/) Auth0 features
