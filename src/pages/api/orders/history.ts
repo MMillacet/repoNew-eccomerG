@@ -12,7 +12,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
         return;
     }
 
-    const result = await goldfarbApi.getOrderHistory(cardcode);
+    const result = await goldfarbApi.getOrders(cardcode);
 
     res.status(200).json(result);
 });
