@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
-import axios from 'axios';
 
 // application
 import AppLink from '../shared/AppLink';
@@ -13,8 +12,13 @@ import Pagination from '../shared/Pagination';
 
 const limit = 12;
 
-function AccountPageOrders() {
-    const [orders, setOrders] = useState<any>(null);
+export interface AccountPageOrdersProps {
+    orders: any[];
+}
+
+function AccountPageOrders(props: AccountPageOrdersProps) {
+    const { orders } = props;
+
     const [page, setPage] = useState<any>(1);
     const [items, setItems] = useState<any>([]);
 
@@ -27,14 +31,8 @@ function AccountPageOrders() {
     };
 
     useEffect(() => {
-        const getOrders = async () => {
-            const { data }: any = await axios.get('/api/orders/history');
-            setOrders(data);
-            setItems(data.slice(0, limit));
-        };
-
-        getOrders();
-    }, []);
+        setItems(orders.slice(0, limit));
+    }, [orders]);
 
     const ordersList = items?.map((item: any, i: number) => {
         const date = new Date(item.docDate);
@@ -43,7 +41,11 @@ function AccountPageOrders() {
 
         return (
             <tr key={i}>
-                <td>{item?.docNum && <AppLink href={''}>{`#${item.docNum}`}</AppLink>}</td>
+                <td>
+                    {item?.key && (
+                        <AppLink href={`/account/orders/${item.key}`}>{`#${item.key}`}</AppLink>
+                    )}
+                </td>
                 <td>{dateString}</td>
                 <td>{orderStatus}</td>
                 <td>

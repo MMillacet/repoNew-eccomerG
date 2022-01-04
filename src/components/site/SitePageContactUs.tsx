@@ -7,83 +7,76 @@ import Head from 'next/head';
 // application
 import PageHeader from '../shared/PageHeader';
 
-// blocks
-import BlockMap from '../blocks/BlockMap';
-
 // data stubs
 import theme from '../../data/theme';
 
 function SitePageContactUs() {
     const breadcrumb = [
         { title: 'Home', url: '' },
-        { title: 'Contact Us', url: '' },
+        { title: 'Contacto', url: '' },
     ];
 
     return (
         <Fragment>
             <Head>
-                <title>{`Contact Us — ${theme.name}`}</title>
+                <title>{`Contacto — ${theme.name}`}</title>
             </Head>
 
-            <BlockMap />
-
-            <PageHeader header="Contact Us" breadcrumb={breadcrumb} />
+            <PageHeader header="Contacto" breadcrumb={breadcrumb} />
 
             <div className="block">
                 <div className="container">
-                    <div className="card mb-0">
-                        <div className="card-body contact-us">
+                    <div className="card mb-0 contact-us">
+                        <div className="contact-us__map">
+                            <iframe
+                                title="Google Map"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.723799607955!2d-56.120434184763376!3d-34.86316678039317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f80b54a333ed3%3A0x2f9cc03c2c8c9b1!2sDr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%2012100%20Montevideo%2C%20Departamento%20de%20Montevideo!5e0!3m2!1sen!2suy!4v1640790050577!5m2!1sen!2suy"
+                                frameBorder="0"
+                                scrolling="no"
+                                marginHeight={0}
+                                marginWidth={0}
+                            />
+                        </div>
+                        <div className="card-body">
                             <div className="contact-us__container">
                                 <div className="row">
                                     <div className="col-12 col-lg-6 pb-4 pb-lg-0">
                                         <h4 className="contact-us__header card-title">
-                                            Our Address
+                                            Nuestra dirección
                                         </h4>
 
                                         <div className="contact-us__address">
                                             <p>
-                                                715 Fake Ave, Apt. 34, New York, NY 10021 USA
+                                                Pantaleon Perez 4881 - C.P. 12100
                                                 <br />
-                                                Email: goldfarb@example.com
+                                                Email: contacto@goldfarb.com.uy
                                                 <br />
-                                                Phone Number: +1 754 000-00-00
+                                                Telefono: (598) 2524 4447
                                             </p>
 
                                             <p>
-                                                <strong>Opening Hours</strong>
+                                                <strong>Horarios</strong>
                                                 <br />
-                                                Monday to Friday: 8am-8pm
+                                                Lunes a viernes 9:00 - 13:00
                                                 <br />
-                                                Saturday: 8am-6pm
-                                                <br />
-                                                Sunday: 10am-4pm
-                                            </p>
-
-                                            <p>
-                                                <strong>Comment</strong>
-                                                <br />
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Curabitur suscipit suscipit mi, non tempor
-                                                nulla finibus eget. Lorem ipsum dolor sit amet,
-                                                consectetur adipiscing elit.
+                                                Lunes a viernes 14:00 - 18:00
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="col-12 col-lg-6">
                                         <h4 className="contact-us__header card-title">
-                                            Leave us a Message
+                                            Déjanos un mensaje
                                         </h4>
 
                                         <form>
                                             <div className="form-row">
                                                 <div className="form-group col-md-6">
-                                                    <label htmlFor="form-name">Your Name</label>
+                                                    <label htmlFor="form-name">Tu nombre</label>
                                                     <input
                                                         type="text"
                                                         id="form-name"
                                                         className="form-control"
-                                                        placeholder="Your Name"
                                                     />
                                                 </div>
                                                 <div className="form-group col-md-6">
@@ -92,21 +85,19 @@ function SitePageContactUs() {
                                                         type="email"
                                                         id="form-email"
                                                         className="form-control"
-                                                        placeholder="Email Address"
                                                     />
                                                 </div>
                                             </div>
                                             <div className="form-group">
-                                                <label htmlFor="form-subject">Subject</label>
+                                                <label htmlFor="form-subject">Asunto</label>
                                                 <input
                                                     type="text"
                                                     id="form-subject"
                                                     className="form-control"
-                                                    placeholder="Subject"
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label htmlFor="form-message">Message</label>
+                                                <label htmlFor="form-message">Mensaje</label>
                                                 <textarea
                                                     id="form-message"
                                                     className="form-control"
@@ -114,7 +105,7 @@ function SitePageContactUs() {
                                                 />
                                             </div>
                                             <button type="submit" className="btn btn-primary">
-                                                Send Message
+                                                Enviar mensaje
                                             </button>
                                         </form>
                                     </div>

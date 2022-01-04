@@ -10,14 +10,13 @@
 .about-us__image {
     background-size: cover;
     background-position: bottom center;
-    height: 500px;
+    height: 300px;
 }
 .about-us__body {
-    background: $body-bg;
+    background: #fff4;
     min-height: 380px;
-    margin-top: -380px;
     border-radius: 4px 4px 0 0;
-    padding: 75px 92px 45px;
+    padding: 55px 80px 45px;
 }
 .about-us__title {
     text-align: center;
@@ -139,7 +138,6 @@
     }
     .about-us__body {
         min-height: 290px;
-        margin-top: -290px;
         padding: 40px;
     }
     .about-us__team {
@@ -152,7 +150,6 @@
     }
     .about-us__body {
         min-height: 290px;
-        margin-top: -290px;
         padding: 30px 24px;
     }
     .about-us__title {

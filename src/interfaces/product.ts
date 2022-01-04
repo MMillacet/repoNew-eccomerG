@@ -44,6 +44,8 @@ export interface IProduct {
     subcategory: string;
     hasBought: boolean;
     tax: number;
+    relatedItems: string[];
+    shops: any[];
 }
 
 export type IProductsList = IPaginatedList<IProduct> & IFilterableList<IProduct, IFilter>;

@@ -1,152 +1,152 @@
 import { INav } from '../interfaces/menus/nav';
 
 const dataHeaderNavigation: INav = [
-    {
-        title: 'Home',
-        url: '/',
-        submenu: {
-            type: 'menu',
-            menu: [
-                { title: 'Home 1', url: '/home-one' },
-                { title: 'Home 2', url: '/' },
-            ],
-        },
-    },
-    {
-        title: 'Megamenu',
-        url: '',
-        submenu: {
-            type: 'megamenu',
-            menu: {
-                size: 'nl',
-                columns: [
-                    {
-                        size: 6,
-                        links: [
-                            {
-                                title: 'Power Tools',
-                                url: '',
-                                children: [
-                                    { title: 'Engravers', url: '' },
-                                    { title: 'Wrenches', url: '' },
-                                    { title: 'Wall Chaser', url: '' },
-                                    { title: 'Pneumatic Tools', url: '' },
-                                ],
-                            },
-                            {
-                                title: 'Machine Tools',
-                                url: '',
-                                children: [
-                                    { title: 'Thread Cutting', url: '' },
-                                    { title: 'Chip Blowers', url: '' },
-                                    { title: 'Sharpening Machines', url: '' },
-                                    { title: 'Pipe Cutters', url: '' },
-                                    { title: 'Slotting machines', url: '' },
-                                    { title: 'Lathes', url: '' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 6,
-                        links: [
-                            {
-                                title: 'Hand Tools',
-                                url: '',
-                                children: [
-                                    { title: 'Screwdrivers', url: '' },
-                                    { title: 'Handsaws', url: '' },
-                                    { title: 'Knives', url: '' },
-                                    { title: 'Axes', url: '' },
-                                    { title: 'Multitools', url: '' },
-                                    { title: 'Paint Tools', url: '' },
-                                ],
-                            },
-                            {
-                                title: 'Garden Equipment',
-                                url: '',
-                                children: [
-                                    { title: 'Motor Pumps', url: '' },
-                                    { title: 'Chainsaws', url: '' },
-                                    { title: 'Electric Saws', url: '' },
-                                    { title: 'Brush Cutters', url: '' },
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        },
-    },
-    {
-        title: 'Shop',
-        url: '/shop/category-grid-3-columns-sidebar',
-        submenu: {
-            type: 'menu',
-            menu: [
-                {
-                    title: 'Shop Grid',
-                    url: '/shop/category-grid-3-columns-sidebar',
-                    children: [
-                        {
-                            title: '3 Columns Sidebar',
-                            url: '/shop/category-grid-3-columns-sidebar',
-                        },
-                        { title: '4 Columns Full', url: '/shop/category-grid-4-columns-full' },
-                        { title: '5 Columns Full', url: '/shop/category-grid-5-columns-full' },
-                    ],
-                },
-                { title: 'Shop List', url: '/shop/category-list' },
-                { title: 'Shop Right Sidebar', url: '/shop/category-right-sidebar' },
-                {
-                    title: 'Product',
-                    url: '/shop/product-standard',
-                    children: [
-                        { title: 'Product', url: '/shop/product-standard' },
-                        { title: 'Product Alt', url: '/shop/product-columnar' },
-                        { title: 'Product Sidebar', url: '/shop/product-sidebar' },
-                    ],
-                },
-                { title: 'Cart', url: '/shop/cart' },
-                { title: 'Checkout', url: '/shop/checkout' },
-                { title: 'Order Success', url: '/shop/checkout/success' },
-                { title: 'Wishlist', url: '/shop/wishlist' },
-                { title: 'Compare', url: '/shop/compare' },
-                { title: 'Track Order', url: '/shop/track-order' },
-            ],
-        },
-    },
-    {
-        title: 'Account',
-        url: '/account/login',
-        submenu: {
-            type: 'menu',
-            menu: [
-                { title: 'Iniciar sesión', url: '/account/login' },
-                { title: 'Dashboard', url: '/account/dashboard' },
-                { title: 'Editar Perfil', url: '/account/profile' },
-                { title: 'Historial pedidos', url: '/account/orders' },
-                {
-                    title: 'Order Details',
-                    url: {
-                        href: '/account/orders/[orderId]',
-                        as: '/account/orders/5',
-                        prefetch: false,
-                    },
-                },
-                { title: 'Address Book', url: '/account/addresses' },
-                {
-                    title: 'Edit Address',
-                    url: {
-                        href: '/account/addresses/[addressId]',
-                        as: '/account/addresses/5',
-                        prefetch: false,
-                    },
-                },
-                { title: 'Change Password', url: '/account/password' },
-            ],
-        },
-    },
+    // {
+    //     title: 'Home',
+    //     url: '/',
+    //     submenu: {
+    //         type: 'menu',
+    //         menu: [
+    //             { title: 'Home 1', url: '/home-one' },
+    //             { title: 'Home 2', url: '/' },
+    //         ],
+    //     },
+    // },
+    // {
+    //     title: 'Megamenu',
+    //     url: '',
+    //     submenu: {
+    //         type: 'megamenu',
+    //         menu: {
+    //             size: 'nl',
+    //             columns: [
+    //                 {
+    //                     size: 6,
+    //                     links: [
+    //                         {
+    //                             title: 'Power Tools',
+    //                             url: '',
+    //                             children: [
+    //                                 { title: 'Engravers', url: '' },
+    //                                 { title: 'Wrenches', url: '' },
+    //                                 { title: 'Wall Chaser', url: '' },
+    //                                 { title: 'Pneumatic Tools', url: '' },
+    //                             ],
+    //                         },
+    //                         {
+    //                             title: 'Machine Tools',
+    //                             url: '',
+    //                             children: [
+    //                                 { title: 'Thread Cutting', url: '' },
+    //                                 { title: 'Chip Blowers', url: '' },
+    //                                 { title: 'Sharpening Machines', url: '' },
+    //                                 { title: 'Pipe Cutters', url: '' },
+    //                                 { title: 'Slotting machines', url: '' },
+    //                                 { title: 'Lathes', url: '' },
+    //                             ],
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     size: 6,
+    //                     links: [
+    //                         {
+    //                             title: 'Hand Tools',
+    //                             url: '',
+    //                             children: [
+    //                                 { title: 'Screwdrivers', url: '' },
+    //                                 { title: 'Handsaws', url: '' },
+    //                                 { title: 'Knives', url: '' },
+    //                                 { title: 'Axes', url: '' },
+    //                                 { title: 'Multitools', url: '' },
+    //                                 { title: 'Paint Tools', url: '' },
+    //                             ],
+    //                         },
+    //                         {
+    //                             title: 'Garden Equipment',
+    //                             url: '',
+    //                             children: [
+    //                                 { title: 'Motor Pumps', url: '' },
+    //                                 { title: 'Chainsaws', url: '' },
+    //                                 { title: 'Electric Saws', url: '' },
+    //                                 { title: 'Brush Cutters', url: '' },
+    //                             ],
+    //                         },
+    //                     ],
+    //                 },
+    //             ],
+    //         },
+    //     },
+    // },
+    // {
+    //     title: 'Shop',
+    //     url: '/shop/category-grid-3-columns-sidebar',
+    //     submenu: {
+    //         type: 'menu',
+    //         menu: [
+    //             {
+    //                 title: 'Shop Grid',
+    //                 url: '/shop/category-grid-3-columns-sidebar',
+    //                 children: [
+    //                     {
+    //                         title: '3 Columns Sidebar',
+    //                         url: '/shop/category-grid-3-columns-sidebar',
+    //                     },
+    //                     { title: '4 Columns Full', url: '/shop/category-grid-4-columns-full' },
+    //                     { title: '5 Columns Full', url: '/shop/category-grid-5-columns-full' },
+    //                 ],
+    //             },
+    //             { title: 'Shop List', url: '/shop/category-list' },
+    //             { title: 'Shop Right Sidebar', url: '/shop/category-right-sidebar' },
+    //             {
+    //                 title: 'Product',
+    //                 url: '/shop/product-standard',
+    //                 children: [
+    //                     { title: 'Product', url: '/shop/product-standard' },
+    //                     { title: 'Product Alt', url: '/shop/product-columnar' },
+    //                     { title: 'Product Sidebar', url: '/shop/product-sidebar' },
+    //                 ],
+    //             },
+    //             { title: 'Cart', url: '/shop/cart' },
+    //             { title: 'Checkout', url: '/shop/checkout' },
+    //             { title: 'Order Success', url: '/shop/checkout/success' },
+    //             { title: 'Wishlist', url: '/shop/wishlist' },
+    //             { title: 'Compare', url: '/shop/compare' },
+    //             { title: 'Track Order', url: '/shop/track-order' },
+    //         ],
+    //     },
+    // },
+    // {
+    //     title: 'Account',
+    //     url: '/account/login',
+    //     submenu: {
+    //         type: 'menu',
+    //         menu: [
+    //             { title: 'Iniciar sesión', url: '/account/login' },
+    //             { title: 'Dashboard', url: '/account/dashboard' },
+    //             { title: 'Editar Perfil', url: '/account/profile' },
+    //             { title: 'Historial pedidos', url: '/account/orders' },
+    //             {
+    //                 title: 'Order Details',
+    //                 url: {
+    //                     href: '/account/orders/[orderId]',
+    //                     as: '/account/orders/5',
+    //                     prefetch: false,
+    //                 },
+    //             },
+    //             { title: 'Address Book', url: '/account/addresses' },
+    //             {
+    //                 title: 'Edit Address',
+    //                 url: {
+    //                     href: '/account/addresses/[addressId]',
+    //                     as: '/account/addresses/5',
+    //                     prefetch: false,
+    //                 },
+    //             },
+    //             { title: 'Change Password', url: '/account/password' },
+    //         ],
+    //     },
+    // },
     {
         title: 'Blog',
         url: '/blog/category-classic',
@@ -180,11 +180,20 @@ const dataHeaderNavigation: INav = [
         },
     },
     {
-        title: 'Buy Theme',
-        url: 'https://themeforest.net/item/goldfarb-tools-store-react-ecommerce-template/23909258',
-        props: {
-            target: '_blank',
-        },
+        title: 'HERRAMIENTAS',
+        url: '/shop/catalog/herramientas',
+    },
+    {
+        title: 'HOGAR',
+        url: '/shop/catalog/hogar',
+    },
+    {
+        title: 'PINTURAS',
+        url: '/shop/catalog/pinturas',
+    },
+    {
+        title: 'COMO COMPRAR',
+        url: '/site/how-to-purchase',
     },
 ];
 

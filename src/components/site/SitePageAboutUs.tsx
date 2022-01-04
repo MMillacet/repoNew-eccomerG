@@ -8,7 +8,6 @@ import GoldfarbSlick from '../shared/GoldfarbSlick';
 // data stubs
 import { ITeamMember } from '../../interfaces/teamMember';
 import { BlockSlideItem } from '../blocks/BlockSlideShow';
-import BlockBanner from '../blocks/BlockBanner';
 
 const slickSettings = {
     dots: true,
@@ -54,13 +53,12 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
 
             <div
                 className="about-us__image"
-                style={{ backgroundImage: 'url("/images/aboutus.jpg")' }}
+                style={{ backgroundImage: `url("${props.initData?.banner?.image?.url}")` }}
             />
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-xl-10">
                         <div className="about-us__body">
-                            <BlockBanner banner={props.initData?.banner} />
                             <h1 className="about-us__title">{props.initData?.title}</h1>
                             <h5 className="about-us__team-title">{props.initData?.subtitle}</h5>
                             <div className="about-us__text typography">

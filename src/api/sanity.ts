@@ -74,7 +74,6 @@ const sanityApi = {
         `;
         try {
             const result = await client.fetch(query);
-            console.log('faq', result);
             return result;
         } catch (error) {
             console.error(error);
@@ -98,7 +97,6 @@ const sanityApi = {
         `;
         try {
             const result = await client.fetch(query);
-            console.log('faq', result);
             return result;
         } catch (error) {
             console.error(error);

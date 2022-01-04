@@ -43,19 +43,6 @@ export interface IOrderSummary {
     total: number;
 }
 
-/*
-    orderTypes = [{
-      option: 'Goldfarb envia a cliente',
-      value: 'N'
-    }, {
-      option: 'Cliente retira en Rio Negro 1617',
-      value: 'E'
-    }, {
-      option: 'Cliente retira en Ruta 5',
-      value: 'R'
-    }];
-*/
-
 export type GoldfarbOrderType = 'N' | 'E' | 'R';
 
 export interface IGoldfarbOrderHeader {

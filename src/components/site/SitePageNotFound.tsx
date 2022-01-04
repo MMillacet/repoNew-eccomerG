@@ -20,32 +20,14 @@ function SitePageNotFound() {
                     <div className="not-found__404">Oops! Error 404</div>
 
                     <div className="not-found__content">
-                        <h1 className="not-found__title">Page Not Found</h1>
+                        <h1 className="not-found__title">Pagina no encontrada</h1>
 
                         <p className="not-found__text">
-                            We can&apos;t seem to find the page you&apos;re looking for.
-                            <br />
-                            Try to use the search.
+                            Ir a la pagina principal para empezar de nuevo.
                         </p>
 
-                        <form className="not-found__search">
-                            <input
-                                type="text"
-                                className="not-found__search-input form-control"
-                                placeholder="Search Query..."
-                            />
-                            <button
-                                type="submit"
-                                className="not-found__search-button btn btn-primary"
-                            >
-                                Search
-                            </button>
-                        </form>
-
-                        <p className="not-found__text">Or go to the home page to start over.</p>
-
                         <AppLink href={url.home()} className="btn btn-secondary btn-sm">
-                            Go To Home Page
+                            Pagina principal
                         </AppLink>
                     </div>
                 </div>

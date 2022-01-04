@@ -9,13 +9,14 @@ import ToTop from './ToTop';
 const Footer: FunctionComponent = () => {
     const informationLinks = [
         { title: 'Sobre nosotros', url: '/site/about-us' },
-        { title: 'Misión y visión', url: '/site/vision-mission' },
-        { title: 'Contactanos', url: '/site/contact-us' },
+        // { title: 'Misión y visión', url: '/site/vision-mission' },
+        { title: 'Preguntas frecuentes', url: '/site/faq' },
+        { title: 'Contacto', url: '/site/contact-us' },
         { title: 'Noticias', url: '/site/news' },
+        { title: 'Como comprar', url: '/site/how-to-purchase' },
     ];
 
     const accountLinks = [
-        { title: 'Ubicacion', url: '/site/location' },
         { title: 'Historial de pedidos', url: '/account/orders' },
         { title: 'Catálogo', url: '/catalog' },
         { title: 'Estado de cuenta', url: '/account/status' },
@@ -27,7 +28,7 @@ const Footer: FunctionComponent = () => {
                 <div className="site-footer__widgets">
                     <div className="row">
                         <div className="col-6 col-md-3 col-lg-3">
-                            <FooterLinks title="Informacion" items={informationLinks} />
+                            <FooterLinks title="Información" items={informationLinks} />
                         </div>
                         <div className="col-6 col-md-3 col-lg-3">
                             <FooterLinks title="Mi cuenta" items={accountLinks} />
@@ -39,7 +40,10 @@ const Footer: FunctionComponent = () => {
                 </div>
 
                 <div className="site-footer__bottom">
-                    <div className="site-footer__copyright">{process?.env?.NODE_ENV}</div>
+                    <div className="site-footer__copyright">
+                        © Copyright 2021 Goldfarb. Todos los derechos reservados. (
+                        {process?.env?.NODE_ENV})
+                    </div>
                 </div>
             </div>
             <ToTop />

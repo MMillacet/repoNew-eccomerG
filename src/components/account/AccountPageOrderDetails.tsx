@@ -11,7 +11,15 @@ import url from '../../services/url';
 // data stubs
 import theme from '../../data/theme';
 
-export default function AccountPageOrderDetails() {
+export interface AccountOrderDetailProps {
+    order: any;
+}
+
+export default function AccountPageOrderDetails(props: AccountOrderDetailProps) {
+    const { order } = props;
+
+    console.log(order);
+
     return (
         <Fragment>
             <Head>

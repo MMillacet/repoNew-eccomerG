@@ -6,7 +6,7 @@ import { IBrand } from '../../interfaces/brand';
 const slickSettings = {
     dots: false,
     arrows: false,
-    infinite: true,
+    infinite: false,
     speed: 400,
     slidesToShow: 6,
     slidesToScroll: 6,

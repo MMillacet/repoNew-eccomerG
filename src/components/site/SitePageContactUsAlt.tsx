@@ -7,37 +7,32 @@ import Head from 'next/head';
 // application
 import PageHeader from '../shared/PageHeader';
 
+// blocks
+import BlockMap from '../blocks/BlockMap';
+
 // data stubs
 import theme from '../../data/theme';
 
-function SitePageContactUsAlt() {
+function SitePageContactUs() {
     const breadcrumb = [
         { title: 'Home', url: '' },
-        { title: 'Contact Us', url: '' },
+        { title: 'Contacto', url: '' },
     ];
 
     return (
         <Fragment>
             <Head>
-                <title>{`Contact Us Alt — ${theme.name}`}</title>
+                <title>{`Contacto — ${theme.name}`}</title>
             </Head>
 
-            <PageHeader header="Contact Us" breadcrumb={breadcrumb} />
+            <BlockMap />
+
+            <PageHeader header="Contacto" breadcrumb={breadcrumb} />
 
             <div className="block">
                 <div className="container">
-                    <div className="card mb-0 contact-us">
-                        <div className="contact-us__map">
-                            <iframe
-                                title="Google Map"
-                                src="https://maps.google.com/maps?q=Holbrook-Palmer%20Park&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                                frameBorder="0"
-                                scrolling="no"
-                                marginHeight={0}
-                                marginWidth={0}
-                            />
-                        </div>
-                        <div className="card-body">
+                    <div className="card mb-0">
+                        <div className="card-body contact-us">
                             <div className="contact-us__container">
                                 <div className="row">
                                     <div className="col-12 col-lg-6 pb-4 pb-lg-0">
@@ -133,4 +128,4 @@ function SitePageContactUsAlt() {
     );
 }
 
-export default SitePageContactUsAlt;
+export default SitePageContactUs;

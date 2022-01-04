@@ -9,7 +9,7 @@ import SanityBlockContent from '@sanity/block-content-to-react';
 import PageHeader from '../shared/PageHeader';
 import { SanitySection } from '../../custom-sanity-types/section';
 import { SanityClientSection } from '../../custom-sanity-types/clientSection';
-import BlockPaymentMethods from '../blocks/BlockPaymentMethods';
+// import BlockPaymentMethods from '../blocks/BlockPaymentMethods';
 import url from '../../services/url';
 
 export interface InitData {
@@ -42,65 +42,94 @@ function SitePageFaq(props: SitePageFaqProps = {}) {
 
             <div className="block faq">
                 <div className="container">
-                    <div className="faq__section">
-                        <div className="faq__section-title">
-                            <h3>{initData?.notClient?.subtitle}</h3>
-                        </div>
-                        <div className="faq__section-body">
-                            <div className="row">
-                                <div className="faq__section-column col-12 ">
-                                    <div className="typography">
-                                        <SanityBlockContent blocks={initData?.notClient?.text} />
+                    <div className="row">
+                        <div
+                            className="faq__section col-sm-12 col-lg-6"
+                            style={{ marginTop: '10px' }}
+                        >
+                            <div className="faq__section-title">
+                                <h3>{initData?.notClient?.subtitle}</h3>
+                            </div>
+                            <div className="faq__section-body">
+                                <div className="row">
+                                    <div className="faq__section-column col-12 ">
+                                        <div className="typography">
+                                            <SanityBlockContent
+                                                blocks={initData?.notClient?.text}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="faq__section">
-                        <div className="faq__section-title">
-                            <h3>{initData?.client?.subtitle}</h3>
-                        </div>
-                        <div className="faq__section-body">
-                            <div className="row">
-                                <div className="faq__section-column col-12">
-                                    <SanityBlockContent blocks={initData?.client?.text} />
-                                </div>
+                        <div
+                            className="faq__section col-sm-12 col-lg-6"
+                            style={{ marginTop: '10px' }}
+                        >
+                            <div className="faq__section-title">
+                                <h3>{initData?.client?.subtitle}</h3>
                             </div>
-                            <div className="row">
-                                <div className="faq__section-column col-12">
-                                    <div
-                                        className="block-banner__image block-banner__image--desktop"
-                                        style={{
-                                            backgroundImage: `url(${initData?.client?.image})`,
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="faq__section-column col-12">
-                                    <h6>{initData?.client?.payment?.subtitle}</h6>
-
-                                    <SanityBlockContent blocks={initData?.client?.payment?.text} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <BlockPaymentMethods
-                                    paymentMethods={initData?.client?.paymentMethods}
-                                />
-                            </div>
-                            <div className="row">
-                                <div className="faq__section-column col-12">
-                                    <h6>{initData?.client?.whereToBuy?.subtitle}</h6>
-
-                                    <SanityBlockContent
-                                        blocks={initData?.client?.whereToBuy?.text}
-                                    />
+                            <div className="faq__section-body">
+                                <div className="row">
+                                    <div className="faq__section-column col-12 ">
+                                        <div className="typography">
+                                            <SanityBlockContent blocks={initData?.client?.text} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {/* <div className="faq__section col-6">
+                            <div className="faq__section-title">
+                                <h3>{initData?.client?.subtitle}</h3>
+                            </div>
+                            <div className="faq__section-body">
+                                <div className="row">
+                                    <div className="faq__section-column col-12">
+                                        <SanityBlockContent blocks={initData?.client?.text} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="faq__section-column col-12">
+                                        <div
+                                            className="block-banner__image block-banner__image--desktop"
+                                            style={{
+                                                backgroundImage: `url(${initData?.client?.image})`,
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="faq__section-column col-12">
+                                        <h6>{initData?.client?.payment?.subtitle}</h6>
+
+                                        <SanityBlockContent
+                                            blocks={initData?.client?.payment?.text}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <BlockPaymentMethods
+                                        paymentMethods={initData?.client?.paymentMethods}
+                                    />
+                                </div>
+                                <div className="row">
+                                    <div className="faq__section-column col-12">
+                                        <h6>{initData?.client?.whereToBuy?.subtitle}</h6>
+
+                                        <SanityBlockContent
+                                            blocks={initData?.client?.whereToBuy?.text}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> */}
                     </div>
-                    <div className="faq__section">
+                    {/* <div className="row">
+                        <BlockPaymentMethods paymentMethods={initData?.client?.paymentMethods} />
+                    </div> */}
+
+                    {/* <div className="faq__section">
                         <div className="faq__section-title">
                             <h3>{initData?.doubts?.subtitle}</h3>
                         </div>
@@ -111,7 +140,7 @@ function SitePageFaq(props: SitePageFaqProps = {}) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Fragment>

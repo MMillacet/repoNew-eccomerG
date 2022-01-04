@@ -5,6 +5,8 @@ import goldfarbApi from '../../../api/goldfarb';
 export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
     const session = getSession(req, res);
 
+    const orderId = req.query.orderId as string;
+
     const cardcode = session && session.user.cardcode;
 
     if (!cardcode) {
@@ -12,9 +14,13 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
         return;
     }
 
-    const result = await goldfarbApi.getOrderHistory(cardcode);
+    try {
+        const result = await goldfarbApi.getOrder(orderId, cardcode);
 
-    res.status(200).json(result);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
 });
 
 // todo delete

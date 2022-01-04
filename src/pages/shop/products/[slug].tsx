@@ -8,6 +8,7 @@ import { IProduct } from '../../../interfaces/product';
 
 export interface PageProps {
     product: IProduct | null;
+    relatedProducts: IProduct[];
 }
 
 export async function getStaticPaths() {
@@ -27,30 +28,42 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-    let product: IProduct | null = null;
-
     if (typeof context.params?.slug === 'string') {
         const { slug } = context.params;
 
-        const { products } = await goldfarbApi.getProductsLookup({ itemcodes: [slug] });
-        product = products[0];
+        const { products } = await goldfarbApi.getProductsLookup2({ itemcodes: [slug] });
+
+        // eslint-disable-next-line prefer-destructuring
+        const product = products[0];
+
+        const { products: relatedProducts } = await goldfarbApi.getProductsLookup2({
+            itemcodes: product?.relatedItems || [],
+        });
+
+        return {
+            props: {
+                product,
+                relatedProducts,
+            },
+            revalidate: 60, // In seconds
+        };
     }
 
     return {
         props: {
-            product,
+            product: null,
+            relatedProducts: [],
         },
         revalidate: 60, // In seconds
-        notFound: !product,
     };
 }
 
-function Page({ product }: PageProps) {
+function Page({ product, relatedProducts }: PageProps) {
     if (product === null) {
         return <SitePageNotFound />;
     }
 
-    return <ShopPageProduct product={product} />;
+    return <ShopPageProduct product={product} relatedProducts={relatedProducts} />;
 }
 
 export default Page;

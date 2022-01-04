@@ -18,7 +18,6 @@ import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 
 // widgets
 import WidgetCategories from '../widgets/WidgetCategories';
-import WidgetProducts from '../widgets/WidgetProducts';
 
 // data stubs
 import theme from '../../data/theme';
@@ -32,36 +31,12 @@ export interface ShopPageProductProps {
     sidebarPosition?: ShopPageProductSidebarPosition;
     // data
     product: IProduct;
+    relatedProducts: IProduct[];
 }
 
 function ShopPageProduct(props: ShopPageProductProps) {
-    const { product, layout = 'standard', sidebarPosition = 'start' } = props;
-    const [relatedProducts, setRelatedProducts] = useState<IProduct[]>([]);
+    const { product, relatedProducts, layout = 'standard', sidebarPosition = 'start' } = props;
     const [categories, setCategories] = useState<IShopCategory[]>([]);
-    const [latestProducts, setLatestProducts] = useState<IProduct[]>([]);
-
-    // Load related products.
-    useEffect(() => {
-        let canceled = false;
-
-        shopApi.getRelatedProducts(product.slug, { limit: 8 }).then((products) => {
-            if (canceled) {
-                return;
-            }
-
-            setRelatedProducts(products);
-        });
-        shopApi.getRelatedProducts(product.slug, { limit: 8 }).then((products) => {
-            if (canceled) {
-                return;
-            }
-
-            setRelatedProducts(products);
-        });
-        return () => {
-            canceled = true;
-        };
-    }, [product.slug, setRelatedProducts]);
 
     // Load categories.
     useEffect(() => {
@@ -84,30 +59,9 @@ function ShopPageProduct(props: ShopPageProductProps) {
         };
     }, [layout]);
 
-    // Load latest products.
-    useEffect(() => {
-        let canceled = false;
-
-        if (layout !== 'sidebar') {
-            setLatestProducts([]);
-        } else {
-            shopApi.getLatestProducts({ limit: 5 }).then((result) => {
-                if (canceled) {
-                    return;
-                }
-
-                setLatestProducts(result);
-            });
-        }
-
-        return () => {
-            canceled = true;
-        };
-    }, [layout]);
-
     const breadcrumb = [
-        { title: 'Home', url: url.home() },
-        { title: 'Shop', url: url.catalog() },
+        { title: 'Inicio', url: url.home() },
+        { title: 'Comprar', url: url.catalog() },
         { title: product.title, url: url.product(product) },
     ];
 
@@ -119,9 +73,6 @@ function ShopPageProduct(props: ShopPageProductProps) {
                 <div className="block block-sidebar">
                     <div className="block-sidebar__item">
                         <WidgetCategories categories={categories} location="shop" />
-                    </div>
-                    <div className="block-sidebar__item d-none d-lg-block">
-                        <WidgetProducts title="Latest Products" products={latestProducts} />
                     </div>
                 </div>
             </div>
@@ -162,7 +113,7 @@ function ShopPageProduct(props: ShopPageProductProps) {
 
                 {relatedProducts.length > 0 && (
                     <BlockProductsCarousel
-                        title="Related Products"
+                        title="Productos relacionados"
                         layout="grid-5"
                         products={relatedProducts}
                     />

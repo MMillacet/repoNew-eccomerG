@@ -275,13 +275,30 @@ const goldfarbApi = {
         return data;
     },
 
-    getOrderHistory: async (cardcode: string) => {
+    getOrder: async (orderId: string, cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/OrdersHistory',
+            url: '/web/order',
+            method: 'get',
+            params: {
+                key: orderId,
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getOrders: async (cardcode: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/orders',
             method: 'get',
             params: {
                 cardcode,
+                start: '2021-01-01',
+                end: '2021-12-31',
             },
         };
         const { data } = await axios(config);
