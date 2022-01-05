@@ -98,10 +98,10 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
     }
 
     const breadcrumb = [
-        { title: 'Home', url: url.home() },
-        { title: 'Shop', url: url.catalog() },
+        { title: 'Inicio', url: url.home() },
+        { title: 'Comprar', url: url.catalog() },
     ];
-    let pageTitle = 'Shop';
+    let pageTitle = 'Comprar';
     let content;
 
     if (shopState.category) {

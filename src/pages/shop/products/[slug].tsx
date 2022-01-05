@@ -12,16 +12,16 @@ export interface PageProps {
 }
 
 export async function getStaticPaths() {
-    const { products } = await goldfarbApi.getProductsList();
+    // const { products } = await goldfarbApi.getProductsList();
 
-    // const paths = [{ params: { slug: '51602' } }]; // for testing
+    const paths = [{ params: { slug: '22341' } }]; // for testing
 
     // Get the paths we want to pre-render based on posts
-    const paths = process.env.IGNORE_PRODUCT_BUILDS
-        ? []
-        : products
-              .filter((product: { itemcode: any }) => !!product.itemcode)
-              .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
+    // const paths = process.env.IGNORE_PRODUCT_BUILDS
+    //     ? []
+    //     : products
+    //           .filter((product: { itemcode: any }) => !!product.itemcode)
+    //           .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
 
     // { fallback: false } means other routes should 404.
     return { paths, fallback: false };
@@ -32,21 +32,22 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         const { slug } = context.params;
 
         const { products } = await goldfarbApi.getProductsLookup2({ itemcodes: [slug] });
-
         // eslint-disable-next-line prefer-destructuring
         const product = products[0];
 
-        const { products: relatedProducts } = await goldfarbApi.getProductsLookup2({
-            itemcodes: product?.relatedItems || [],
-        });
+        if (product) {
+            const { products: relatedProducts } = await goldfarbApi.getProductsLookup2({
+                itemcodes: product?.relatedItems || [],
+            });
 
-        return {
-            props: {
-                product,
-                relatedProducts,
-            },
-            revalidate: 60, // In seconds
-        };
+            return {
+                props: {
+                    product,
+                    relatedProducts,
+                },
+                revalidate: 60, // In seconds
+            };
+        }
     }
 
     return {
