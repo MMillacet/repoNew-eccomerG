@@ -43,10 +43,8 @@ function ShopPageCheckout() {
     //     }
     // };
 
-    const handleOrderTypeChange = (event: ChangeEvent<HTMLSelectElement>) =>
-        setOrderType(event.target.value);
-    const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) =>
-        setShipToCode(event.target.value);
+    const handleOrderTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setOrderType(event.target.value);
+    const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
 
     useEffect(() => {
         if (cart.stateFrom === 'client' && cart.items.length < 1 && !orderSuccessMessage) {
@@ -85,14 +83,10 @@ function ShopPageCheckout() {
         const order = createOrder();
         try {
             const res = await axios.post('/api/orders/create', { order });
-            setOrderSuccessMessage(
-                `Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`,
-            );
+            setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
             emptyCart();
-        } catch(error) {
-            setOrderFailedMessage(
-                'Hubo un problema para procesar su pedido. Por favor vuelva a intentar.',
-            );
+        } catch (error) {
+            setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }
     };
 
@@ -114,14 +108,8 @@ function ShopPageCheckout() {
         const r2 = (taxPesos || taxDollars) && (
             <tr key={2}>
                 <th>Impuestos</th>
-                <td>
-                    {taxDollars && taxDollars.price > 0 && (
-                        <CurrencyFormat value={taxDollars.price} currency={'U$'} />
-                    )}
-                </td>
-                <td>
-                    {taxPesos && taxPesos.price > 0 && <CurrencyFormat value={taxPesos.price} />}
-                </td>
+                <td>{taxDollars && taxDollars.price > 0 && <CurrencyFormat value={taxDollars.price} currency={'U$'} />}</td>
+                <td>{taxPesos && taxPesos.price > 0 && <CurrencyFormat value={taxPesos.price} />}</td>
             </tr>
         );
 
@@ -131,16 +119,8 @@ function ShopPageCheckout() {
     const cartItems = cart.items.map((item) => (
         <tr key={item.id}>
             <td>{`${item.product.title} × ${item.quantity}`}</td>
-            <td>
-                {item.product.currency === 'U$' && (
-                    <CurrencyFormat value={item.total} currency={item.product.currency} />
-                )}
-            </td>
-            <td>
-                {item.product.currency === '$' && (
-                    <CurrencyFormat value={item.total} currency={item.product.currency} />
-                )}
-            </td>
+            <td>{item.product.currency === 'U$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
+            <td>{item.product.currency === '$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
         </tr>
     ));
 
@@ -244,49 +224,34 @@ function ShopPageCheckout() {
                                         <div className="row">
                                             <div className="col-6 col-lg-6 col-xl-6">
                                                 <div className="form-group">
-                                                    <label htmlFor="checkout-country">
-                                                        Forma de entrega
-                                                    </label>
+                                                    <label htmlFor="checkout-country">Forma de entrega</label>
                                                     <select
                                                         id="checkout-orderType"
                                                         className="form-control"
                                                         value={orderType}
                                                         onChange={handleOrderTypeChange}
                                                     >
-                                                        <option value="">
-                                                            Seleccione forma de entrega...
-                                                        </option>
-                                                        <option value="N">
-                                                            Goldfarb envia a cliente
-                                                        </option>
-                                                        <option value="R">
-                                                            Cliente retira en Pantaleón Pérez
-                                                        </option>
+                                                        <option value="">Seleccione forma de entrega...</option>
+                                                        <option value="N">Goldfarb envia a cliente</option>
+                                                        <option value="R">Cliente retira en Pantaleón Pérez</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             {orderType === 'N' && (
                                                 <div className="col-6 col-lg-6 col-xl-6">
                                                     <div className="form-group">
-                                                        <label htmlFor="checkout-shipToCode">
-                                                            Dirección de entrega
-                                                        </label>
+                                                        <label htmlFor="checkout-shipToCode">Dirección de entrega</label>
                                                         <select
                                                             id="checkout-country"
                                                             className="form-control"
                                                             value={shipToCode}
                                                             onChange={handleShipToCodeChange}
                                                         >
-                                                            {clientHeader?.addresses?.map(
-                                                                (address: any) => (
-                                                                    <option
-                                                                        key={address.address}
-                                                                        value={address.address}
-                                                                    >
-                                                                        {address.street}
-                                                                    </option>
-                                                                ),
-                                                            )}
+                                                            {clientHeader?.addresses?.map((address: any) => (
+                                                                <option key={address.address} value={address.address}>
+                                                                    {address.street}
+                                                                </option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -308,11 +273,7 @@ function ShopPageCheckout() {
                                         <ul className="payment-methods__list">{payments}</ul>
                                     </div> */}
 
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary btn-xl btn-block"
-                                            onClick={handleOrderSubmit}
-                                        >
+                                        <button type="submit" className="btn btn-primary btn-xl btn-block" onClick={handleOrderSubmit}>
                                             Realizar pedido
                                         </button>
                                     </div>
@@ -326,14 +287,8 @@ function ShopPageCheckout() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
-                            {orderSuccessMessage && (
-                                <div className="alert alert-success mb-3">
-                                    {orderSuccessMessage}
-                                </div>
-                            )}
-                            {orderFailedMessage && (
-                                <div className="alert alert-danger mb-3">{orderFailedMessage}</div>
-                            )}
+                            {orderSuccessMessage && <div className="alert alert-success mb-3">{orderSuccessMessage}</div>}
+                            {orderFailedMessage && <div className="alert alert-danger mb-3">{orderFailedMessage}</div>}
                         </div>
                     </div>
                 </div>

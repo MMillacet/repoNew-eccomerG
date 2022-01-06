@@ -46,17 +46,36 @@ export interface IOrderSummary {
 export type GoldfarbOrderType = 'N' | 'E' | 'R';
 
 export interface IGoldfarbOrderHeader {
+    orderId: string;
     cardcode: string;
+    cardCode: string;
     cardname: string;
-    remito: boolean;
+    cardName: string;
+    comments: string;
+    compraID: string;
+    discount: number;
+    docDate: string;
     tipoMov: string;
     tipoPed: GoldfarbOrderType;
-    discount: number;
+    transpCode: string;
+    remito: boolean;
     shipToCode: string;
+    status: string;
+    addressExtention: {
+        city: string;
+        state: string;
+        street: string;
+    };
+    totalPesos: number;
+    totalDolares: number;
+    taxPesos: number;
+    taxDolares: number;
 }
 
 export interface IGoldfarbOrderItem {
+    lineNum: number;
     itemcode: string;
+    itemCode: string;
     description: string;
     quantity: number;
     currency: string;

@@ -41,11 +41,7 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
 
         return (
             <tr key={i}>
-                <td>
-                    {item?.key && (
-                        <AppLink href={`/account/orders/${item.key}`}>{`#${item.key}`}</AppLink>
-                    )}
-                </td>
+                <td>{item?.key && <AppLink href={`/account/orders/${item.key}`}>{`#${item.key}`}</AppLink>}</td>
                 <td>{dateString}</td>
                 <td>{orderStatus}</td>
                 <td>
@@ -82,11 +78,7 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
             </div>
             <div className="card-divider" />
             <div className="card-footer">
-                <Pagination
-                    current={page}
-                    total={Math.ceil(ordersList?.length / limit)}
-                    onPageChange={handlePageChange}
-                />
+                <Pagination current={page} total={Math.ceil(ordersList?.length / limit)} onPageChange={handlePageChange} />
             </div>
         </div>
     );

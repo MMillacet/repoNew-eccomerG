@@ -6,6 +6,7 @@ import goldfarbApi from '../../../api/goldfarb';
 import AccountLayout from '../../../components/account/AccountLayout';
 import AccountPageOrderDetails from '../../../components/account/AccountPageOrderDetails';
 import SitePageNotFound from '../../../components/site/SitePageNotFound';
+import { IGoldfarbOrder } from '../../../interfaces/order';
 
 interface IParams extends ParsedUrlQuery {
     orderId: string;
@@ -41,7 +42,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
 }
 
 export interface AccountOrderDetailProps {
-    order: any;
+    order: IGoldfarbOrder;
 }
 
 function Page({ order }: AccountOrderDetailProps) {

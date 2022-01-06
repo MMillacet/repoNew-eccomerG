@@ -1,13 +1,6 @@
 import { IProduct } from '../../interfaces/product';
 import { CartItem, CartItemOption, CartState, CartTotal } from './cartTypes';
-import {
-    CART_ADD_ITEM,
-    CART_REMOVE_ITEM,
-    CART_UPDATE_QUANTITIES,
-    CART_EMPTY,
-    CartAction,
-    CartItemQuantity,
-} from './cartActionTypes';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_UPDATE_QUANTITIES, CART_EMPTY, CartAction, CartItemQuantity } from './cartActionTypes';
 import { withClientState } from '../client';
 
 const currencies = ['$', 'U$'];
@@ -21,9 +14,7 @@ function findItemIndex(items: CartItem[], product: IProduct, options: CartItemOp
         for (let i = 0; i < options.length; i += 1) {
             const option = options[i];
             const itemOption = item.options.find(
-                (itemOption) =>
-                    itemOption.optionId === option.optionId &&
-                    itemOption.valueId === option.valueId,
+                (itemOption) => itemOption.optionId === option.optionId && itemOption.valueId === option.valueId,
             );
 
             if (!itemOption) {
@@ -40,10 +31,7 @@ function calcPriceWithDiscount(product: IProduct): number {
 }
 
 function calcSubtotal(items: CartItem[], currency: string = '$'): number {
-    return items.reduce(
-        (subtotal, item) => (item.product.currency === currency ? subtotal + item.total : subtotal),
-        0,
-    );
+    return items.reduce((subtotal, item) => (item.product.currency === currency ? subtotal + item.total : subtotal), 0);
 }
 
 function calcQuantity(items: CartItem[]): number {
@@ -89,13 +77,10 @@ function calcAllTotals(items: CartItem[]) {
         return acc;
     }, {});
 
-    const totals = currencies.reduce(
-        (acc: { [currency: string]: CartTotal[] }, currency: string) => {
-            acc[currency] = calcTotals(items, currency);
-            return acc;
-        },
-        {},
-    );
+    const totals = currencies.reduce((acc: { [currency: string]: CartTotal[] }, currency: string) => {
+        acc[currency] = calcTotals(items, currency);
+        return acc;
+    }, {});
 
     const total = currencies.reduce((acc: { [currency: string]: number }, currency: string) => {
         acc[currency] = calcTotal(subtotal[currency], totals[currency]);

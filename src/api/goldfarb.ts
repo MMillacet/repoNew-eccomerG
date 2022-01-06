@@ -275,13 +275,13 @@ const goldfarbApi = {
         return data;
     },
 
-    getOrder: async (orderId: string, cardcode: string) => {
+    getOrder: async (orderid: string, cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/order',
             method: 'get',
             params: {
-                key: orderId,
+                orderid,
                 cardcode,
             },
         };
