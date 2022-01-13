@@ -15,12 +15,7 @@ import {
 } from '../fake-server/endpoints/products';
 
 import goldfarbApi from './goldfarb';
-import {
-    familiesToCategories,
-    makeShopCategory,
-    prepareCategory,
-    walkTree,
-} from './helpers/category';
+import { familiesToCategories, makeShopCategory, prepareCategory, walkTree } from './helpers/category';
 import { getProductsList } from './helpers/products';
 import { ISearchOptions } from '../interfaces/search';
 
@@ -90,10 +85,7 @@ const shopApi = {
     /**
      * Returns array of related products.
      */
-    getRelatedProducts: (
-        slug: string,
-        options: GetRelatedProductsOptions = {},
-    ): Promise<IProduct[]> => {
+    getRelatedProducts: (slug: string, options: GetRelatedProductsOptions = {}): Promise<IProduct[]> => {
         /**
          * This is what your API endpoint might look like:
          *

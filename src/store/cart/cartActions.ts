@@ -17,11 +17,7 @@ import {
     CartUpdateQuantitiesAction,
 } from './cartActionTypes';
 
-export function cartAddItemSuccess(
-    product: IProduct,
-    options: CartItemOption[] = [],
-    quantity = product.unitMult,
-): CartAddItemAction {
+export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] = [], quantity = product.unitMult): CartAddItemAction {
     toast.success(`Product "${product.title}" added to cart!`, { theme: 'colored' });
 
     return {
@@ -39,9 +35,7 @@ export function cartRemoveItemSuccess(itemId: number): CartRemoveItemAction {
     };
 }
 
-export function cartUpdateQuantitiesSuccess(
-    quantities: CartItemQuantity[],
-): CartUpdateQuantitiesAction {
+export function cartUpdateQuantitiesSuccess(quantities: CartItemQuantity[]): CartUpdateQuantitiesAction {
     return {
         type: CART_UPDATE_QUANTITIES,
         quantities,
@@ -80,9 +74,7 @@ export function cartRemoveItem(itemId: number): CartThunkAction<Promise<void>> {
         });
 }
 
-export function cartUpdateQuantities(
-    quantities: CartItemQuantity[],
-): CartThunkAction<Promise<void>> {
+export function cartUpdateQuantities(quantities: CartItemQuantity[]): CartThunkAction<Promise<void>> {
     // sending request to server, timeout is used as a stub
     return (dispatch) =>
         new Promise((resolve) => {

@@ -48,9 +48,7 @@ export default function AccountPageDashboard() {
                 </div>
             </div>
             <div className="dashboard__address card address-card address-card--featured">
-                {clientHeader?.address[0]?.address && (
-                    <div className="address-card__badge">Dirección por defecto</div>
-                )}
+                {clientHeader?.address[0]?.address && <div className="address-card__badge">Dirección por defecto</div>}
                 <div className="address-card__body">
                     <div className="address-card__name">{clientHeader?.address[0]?.address}</div>
                     <div className="address-card__row">

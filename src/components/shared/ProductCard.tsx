@@ -70,7 +70,7 @@ function ProductCard(props: ProductCardProps) {
         );
     }
 
-    if (product.compareAtPrice) {
+    if (product.price > 0 && product.compareAtPrice) {
         price = (
             <div className="product-card__prices">
                 <span className="product-card__new-price">
@@ -81,14 +81,13 @@ function ProductCard(props: ProductCardProps) {
                 </span>
             </div>
         );
-    } else {
+    } else if (product.price > 0) {
         price = (
             <div className="product-card__prices">
                 <CurrencyFormat value={product.price} currency={product.currency} />
             </div>
         );
     }
-
     // if (product.attributes && product.attributes.length) {
     //     features = (
     //         <ul className="product-card__features-list">
@@ -141,24 +140,18 @@ function ProductCard(props: ProductCardProps) {
                                 <button
                                     type="button"
                                     onClick={run}
-                                    className={classNames(
-                                        'btn btn-primary product-card__addtocart',
-                                        {
-                                            'btn-loading': loading,
-                                        },
-                                    )}
+                                    className={classNames('btn btn-primary product-card__addtocart', {
+                                        'btn-loading': loading,
+                                    })}
                                 >
                                     Agregar al carro
                                 </button>
                                 <button
                                     type="button"
                                     onClick={run}
-                                    className={classNames(
-                                        'btn btn-secondary product-card__addtocart product-card__addtocart--list',
-                                        {
-                                            'btn-loading': loading,
-                                        },
-                                    )}
+                                    className={classNames('btn btn-secondary product-card__addtocart product-card__addtocart--list', {
+                                        'btn-loading': loading,
+                                    })}
                                 >
                                     Agregar al carro
                                 </button>
@@ -171,12 +164,9 @@ function ProductCard(props: ProductCardProps) {
                             <button
                                 type="button"
                                 onClick={run}
-                                className={classNames(
-                                    'btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist',
-                                    {
-                                        'btn-loading': loading,
-                                    },
-                                )}
+                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist', {
+                                    'btn-loading': loading,
+                                })}
                             >
                                 <Wishlist16Svg />
                             </button>
@@ -188,12 +178,9 @@ function ProductCard(props: ProductCardProps) {
                             <button
                                 type="button"
                                 onClick={run}
-                                className={classNames(
-                                    'btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare',
-                                    {
-                                        'btn-loading': loading,
-                                    },
-                                )}
+                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare', {
+                                    'btn-loading': loading,
+                                })}
                             >
                                 <Compare16Svg />
                             </button>

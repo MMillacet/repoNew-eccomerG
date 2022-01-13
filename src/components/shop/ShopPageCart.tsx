@@ -86,11 +86,7 @@ function ShopPageCart() {
                 image = (
                     <div className="product-image">
                         <AppLink href={url.product(item.product)} className="product-image__body">
-                            <img
-                                className="product-image__img"
-                                src={item.product.images[0]}
-                                alt=""
-                            />
+                            <img className="product-image__img" src={item.product.images[0]} alt="" />
                         </AppLink>
                     </div>
                 );
@@ -130,10 +126,7 @@ function ShopPageCart() {
                     </td>
                     <td className="cart-table__column cart-table__column--image">{image}</td>
                     <td className="cart-table__column cart-table__column--product">
-                        <AppLink
-                            href={url.product(item.product)}
-                            className="cart-table__product-name"
-                        >
+                        <AppLink href={url.product(item.product)} className="cart-table__product-name">
                             {item.product.title}
                         </AppLink>
                         {options}
@@ -141,10 +134,7 @@ function ShopPageCart() {
                     <td className="cart-table__column cart-table__column--price" data-title="Price">
                         <CurrencyFormat value={item.price} currency={item.product.currency} />
                     </td>
-                    <td
-                        className="cart-table__column cart-table__column--quantity"
-                        data-title="Quantity"
-                    >
+                    <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
                         <InputNumber
                             onChange={(quantity) => handleChangeQuantity(item, quantity)}
                             value={getItemQuantity(item)}
@@ -152,18 +142,13 @@ function ShopPageCart() {
                             step={item.product.unitMult}
                         />
                     </td>
-                    <td
-                        className="cart-table__column cart-table__column--discount"
-                        data-title="Discount"
-                    >
+                    <td className="cart-table__column cart-table__column--discount" data-title="Discount">
                         {item.product.discount ? `${item.product.discount}%` : ''}
                     </td>
                     <td className="cart-table__column cart-table__column--total" data-title="Total">
                         <CurrencyFormat value={item.total} currency={item.product.currency} />
                     </td>
-                    <td className="cart-table__column cart-table__column--remove">
-                        {removeButton}
-                    </td>
+                    <td className="cart-table__column cart-table__column--remove">{removeButton}</td>
                 </tr>
             );
         });
@@ -175,10 +160,7 @@ function ShopPageCart() {
                         <tr>
                             <th>Subtotal</th>
                             <td>
-                                <CurrencyFormat
-                                    value={cart.subtotal[currency]}
-                                    currency={currency}
-                                />
+                                <CurrencyFormat value={cart.subtotal[currency]} currency={currency} />
                             </td>
                         </tr>
                     </thead>
@@ -190,10 +172,7 @@ function ShopPageCart() {
                                 <tr key={index}>
                                     <th>{extraLine.title}</th>
                                     <td>
-                                        <CurrencyFormat
-                                            value={extraLine.price}
-                                            currency={currency}
-                                        />
+                                        <CurrencyFormat value={extraLine.price} currency={currency} />
                                         {calcShippingLink}
                                     </td>
                                 </tr>
@@ -209,31 +188,14 @@ function ShopPageCart() {
                     <table className="cart__table cart-table">
                         <thead className="cart-table__head">
                             <tr className="cart-table__row">
-                                <th className="cart-table__column cart-table__column--code">
-                                    Codigo
-                                </th>
-                                <th className="cart-table__column cart-table__column--image">
-                                    Imagen
-                                </th>
-                                <th className="cart-table__column cart-table__column--product">
-                                    Producto
-                                </th>
-                                <th className="cart-table__column cart-table__column--price">
-                                    Precio
-                                </th>
-                                <th className="cart-table__column cart-table__column--quantity">
-                                    Cantidad
-                                </th>
-                                <th className="cart-table__column cart-table__column--discount">
-                                    Descuento
-                                </th>
-                                <th className="cart-table__column cart-table__column--total">
-                                    Total
-                                </th>
-                                <th
-                                    className="cart-table__column cart-table__column--remove"
-                                    aria-label="Remove"
-                                />
+                                <th className="cart-table__column cart-table__column--code">Codigo</th>
+                                <th className="cart-table__column cart-table__column--image">Imagen</th>
+                                <th className="cart-table__column cart-table__column--product">Producto</th>
+                                <th className="cart-table__column cart-table__column--price">Precio</th>
+                                <th className="cart-table__column cart-table__column--quantity">Cantidad</th>
+                                <th className="cart-table__column cart-table__column--discount">Descuento</th>
+                                <th className="cart-table__column cart-table__column--total">Total</th>
+                                <th className="cart-table__column cart-table__column--remove" aria-label="Remove" />
                             </tr>
                         </thead>
                         <tbody className="cart-table__body">{cartItems}</tbody>
@@ -250,10 +212,7 @@ function ShopPageCart() {
                                             <tr>
                                                 <th>Total dolares</th>
                                                 <td>
-                                                    <CurrencyFormat
-                                                        value={cart.total.U$}
-                                                        currency={'U$'}
-                                                    />
+                                                    <CurrencyFormat value={cart.total.U$} currency={'U$'} />
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -271,18 +230,12 @@ function ShopPageCart() {
                                             <tr>
                                                 <th>Total pesos</th>
                                                 <td>
-                                                    <CurrencyFormat
-                                                        value={cart.total.$}
-                                                        currency={'$'}
-                                                    />
+                                                    <CurrencyFormat value={cart.total.$} currency={'$'} />
                                                 </td>
                                             </tr>
                                         </tfoot>
                                     </table>
-                                    <AppLink
-                                        href={url.checkout()}
-                                        className="btn btn-primary btn-xl btn-block cart__checkout-button"
-                                    >
+                                    <AppLink href={url.checkout()} className="btn btn-primary btn-xl btn-block cart__checkout-button">
                                         Comprar
                                     </AppLink>
                                 </div>

@@ -8,7 +8,6 @@ import Head from 'next/head';
 import PageHeader from '../shared/PageHeader';
 import Product from '../shared/Product';
 import ProductTabs from './ProductTabs';
-import shopApi from '../../api/shop';
 import url from '../../services/url';
 import { IProduct } from '../../interfaces/product';
 import { IShopCategory } from '../../interfaces/category';
@@ -32,6 +31,7 @@ export interface ShopPageProductProps {
     // data
     product: IProduct;
     relatedProducts: IProduct[];
+    categories: IShopCategory[];
 }
 
 function ShopPageProduct(props: ShopPageProductProps) {
@@ -40,29 +40,17 @@ function ShopPageProduct(props: ShopPageProductProps) {
 
     // Load categories.
     useEffect(() => {
-        let canceled = false;
-
         if (layout !== 'sidebar') {
             setCategories([]);
         } else {
-            shopApi.getCategories({ depth: 1 }).then((categories) => {
-                if (canceled) {
-                    return;
-                }
-
-                setCategories(categories);
-            });
+            setCategories(props.categories);
         }
-
-        return () => {
-            canceled = true;
-        };
     }, [layout]);
 
     const breadcrumb = [
         { title: 'Inicio', url: url.home() },
         { title: 'Comprar', url: url.catalog() },
-        { title: product.title, url: url.product(product) },
+        { title: product?.title, url: url.product(product) },
     ];
 
     let content;

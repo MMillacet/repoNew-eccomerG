@@ -1,4 +1,5 @@
 // react
+import { useUser } from '@auth0/nextjs-auth0';
 import { useEffect, useReducer } from 'react';
 
 // application
@@ -22,10 +23,7 @@ type ApiRequestAction = {
     payload?: any;
 };
 
-const realTimeProductReducer = (
-    state: RealTimeProductState,
-    action: ApiRequestAction,
-): RealTimeProductState => {
+const realTimeProductReducer = (state: RealTimeProductState, action: ApiRequestAction): RealTimeProductState => {
     switch (action.type) {
         case ApiRequestActionTypes.ERROR:
             return { ...state, status: 'failed', error: action.payload };
@@ -46,6 +44,8 @@ const useRealTimeProduct = (productCode: string | number | undefined): RealTimeP
         realTimeProduct: undefined,
     });
 
+    const { user } = useUser();
+
     useEffect(() => {
         const realTimeProductRequest = async () => {
             try {
@@ -53,11 +53,11 @@ const useRealTimeProduct = (productCode: string | number | undefined): RealTimeP
                     dispatch({ type: ApiRequestActionTypes.START });
                     const data = await goldfarbApi.getProductsLookup({
                         itemcodes: [`${productCode}`],
+                        cardcode: `${user?.cardcode}`,
                     });
 
                     const rtProduct = data?.products?.[0];
-                    if (rtProduct)
-                        dispatch({ type: ApiRequestActionTypes.SUCCESS, payload: rtProduct });
+                    if (rtProduct) dispatch({ type: ApiRequestActionTypes.SUCCESS, payload: rtProduct });
                 }
             } catch (error: any) {
                 dispatch({ type: ApiRequestActionTypes.ERROR, payload: error?.message });

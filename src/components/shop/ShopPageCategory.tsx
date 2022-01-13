@@ -29,6 +29,7 @@ export interface ShopPageCategoryProps {
     columns: ShopPageCategoryColumns;
     viewMode: ShopPageCategoryViewMode;
     sidebarPosition?: ShopPageCategorySidebarPosition;
+    category?: string;
 }
 
 function ShopPageCategory(props: ShopPageCategoryProps) {

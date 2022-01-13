@@ -10,10 +10,7 @@ import { IRangeFilter, IRangeFilterValue } from '../../interfaces/filter';
 import { useDirection } from '../../store/locale/localeHooks';
 
 function getFirstValidValue(...values: Array<number | null>): number | null {
-    return values.reduce(
-        (acc, value) => (acc === null && (value || value === 0) ? value : acc),
-        null,
-    );
+    return values.reduce((acc, value) => (acc === null && (value || value === 0) ? value : acc), null);
 }
 
 interface FilterRangeProps {
@@ -87,13 +84,7 @@ function FilterRange(props: FilterRangeProps) {
         () => (
             <div className="filter-price">
                 <div className="filter-price__slider" dir="ltr">
-                    <InputRange
-                        minValue={min}
-                        maxValue={max}
-                        value={{ min: from, max: to }}
-                        step={1}
-                        onChange={handleChange}
-                    />
+                    <InputRange minValue={min} maxValue={max} value={{ min: from, max: to }} step={1} onChange={handleChange} />
                 </div>
                 <div className="filter-price__title">
                     Price:{' '}

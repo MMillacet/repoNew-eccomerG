@@ -1,6 +1,6 @@
 // third-party
 import queryString from 'query-string';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
 import { Store } from 'redux';
 import { getSession } from '@auth0/nextjs-auth0';
 // application
@@ -68,11 +68,7 @@ export function parseQueryFilters(query: string) {
     return filterValues;
 }
 
-export function buildQuery(
-    options: IListOptions,
-    filters: IFilterValues,
-    searchOptions: ISearchOptions,
-) {
+export function buildQuery(options: IListOptions, filters: IFilterValues, searchOptions: ISearchOptions) {
     const params: { [key: string]: any } = {};
 
     if (options.page !== 1) {
@@ -114,26 +110,30 @@ export function buildQuery(
 
 export default async function getShopPageData(
     store: Store<RootState>,
-    context: GetServerSidePropsContext,
+    context: GetServerSidePropsContext | GetStaticPropsContext,
     slug?: string,
 ): Promise<void> {
-    const { req, res } = context;
+    const categorySlug = slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
 
-    const session = await getSession(req, res);
+    const dispatch = store.dispatch as AppDispatch;
 
-    const cardcode = session?.user?.cardcode || null;
+    if ('req' in context) {
+        if (typeof context.req.url === 'string') {
+            const { req, res } = context;
 
-    const categorySlug =
-        slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
+            const session = await getSession(req, res);
 
-    if (typeof context.req.url === 'string') {
-        const query = queryString.stringify(queryString.parseUrl(context.req.url).query);
-        const options = parseQueryOptions(query);
-        const filters = parseQueryFilters(query);
-        const searchOptions = parseQuerySearchOptions(query);
-        searchOptions.cardcode = cardcode; // This doesn't come from the query string
-        const dispatch = store.dispatch as AppDispatch;
+            const cardcode = session?.user?.cardcode || null;
 
-        await dispatch(shopInitThunk(categorySlug, options, filters, searchOptions));
+            const query = queryString.stringify(queryString.parseUrl(context.req.url).query);
+            const options = parseQueryOptions(query);
+            const filters = parseQueryFilters(query);
+            const searchOptions = parseQuerySearchOptions(query);
+            searchOptions.cardcode = cardcode; // This doesn't come from the query string
+
+            await dispatch(shopInitThunk(categorySlug, options, filters, searchOptions));
+        }
+    } else {
+        await dispatch(shopInitThunk(categorySlug, {}, {}, {}));
     }
 }

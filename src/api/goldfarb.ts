@@ -2,9 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { nameToSlug } from './helpers/utils';
 import { isProductionEnvironment } from '../services/environment';
 
-const baseURL = isProductionEnvironment
-    ? 'http://app.goldfarb.com.uy/main/api'
-    : 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = isProductionEnvironment ? 'http://app.goldfarb.com.uy/main/api' : 'http://app.goldfarb.com.uy/PruebasMain/api';
 
 export interface LookupOptions {
     itemcodes: string[];
@@ -84,9 +82,6 @@ const goldfarbApi = {
     },
 
     getProductsLookup: async (options: LookupOptions): Promise<{ products: any[] }> => {
-        // eslint-disable-next-line no-param-reassign
-        options.cardcode = options.cardcode || '4000092';
-
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/goldfarb/ProductLookup',
@@ -113,7 +108,7 @@ const goldfarbApi = {
             url: '/web/ProductLookup',
             method: 'get',
             params: {
-                cardcode: options.cardcode || '4000092',
+                cardcode: options.cardcode,
                 itemcodes: options.itemcodes.join(','),
             },
         };
@@ -153,30 +148,23 @@ const goldfarbApi = {
         return data;
     },
 
-    getProductsSearch2: async (
-        term: string = '',
-        cardcode: string,
-        orderby: string,
-        family?: string,
-        category?: string,
-        subcategory?: string,
-    ) => {
+    getProductsSearch2: async (params: {
+        term: string;
+        cardcode?: string;
+        orderby: string;
+        family?: string;
+        category?: string;
+        subcategory?: string;
+    }) => {
         // price-high-to-low or price-low-to-high
         // eslint-disable-next-line no-param-reassign
-        orderby = orderby || 'relevance';
+        params.orderby = params.orderby || 'relevance';
 
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/ProductSearch',
             method: 'get',
-            params: {
-                term,
-                orderby,
-                cardcode,
-                family,
-                category,
-                subcategory,
-            },
+            params,
         };
 
         const { data } = await axios(config);

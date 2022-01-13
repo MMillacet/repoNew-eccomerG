@@ -21,11 +21,7 @@ export function makeShopCategory(def: ICategoryDef): IShopCategory {
     };
 }
 
-export function walkTree<T extends IBaseCategory = IBaseCategory>(
-    makeFn: MakeFn<T>,
-    defs: ICategoryDef[],
-    parent?: T,
-): [T[], T[]] {
+export function walkTree<T extends IBaseCategory = IBaseCategory>(makeFn: MakeFn<T>, defs: ICategoryDef[], parent?: T): [T[], T[]] {
     let list: T[] = [];
 
     const tree = defs.map((def) => {

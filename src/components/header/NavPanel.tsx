@@ -1,6 +1,7 @@
 // application
 import AppLink from '../shared/AppLink';
 import CartIndicator from './IndicatorCart';
+// import Departments from './Departments';
 import Heart20Svg from '../../svg/heart-20.svg';
 import Indicator from './Indicator';
 import IndicatorAccount from './IndicatorAccount';
@@ -22,7 +23,7 @@ function NavPanel(props: NavPanelProps) {
     } = useWishlist();
 
     let logo = null;
-
+    // let departments = null;
     let searchIndicator;
 
     if (layout === 'compact') {
@@ -37,11 +38,20 @@ function NavPanel(props: NavPanelProps) {
         searchIndicator = <IndicatorSearch />;
     }
 
+    // if (layout === 'default') {
+    //     departments = (
+    //         <div className="nav-panel__departments">
+    //             <Departments />
+    //         </div>
+    //     );
+    // }
+
     return (
         <div className="nav-panel">
             <div className="nav-panel__container container">
                 <div className="nav-panel__row">
                     {logo}
+                    {/* {departments} */}
 
                     <div className="nav-panel__nav-links nav-links">
                         <NavLinks />

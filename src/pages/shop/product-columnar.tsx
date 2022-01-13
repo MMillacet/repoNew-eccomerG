@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => ({
 });
 
 function Page({ product }: PageProps) {
-    return <ShopPageProduct relatedProducts={[]} product={product} layout="columnar" />;
+    return <ShopPageProduct categories={[]} relatedProducts={[]} product={product} layout="columnar" />;
 }
 
 export default Page;

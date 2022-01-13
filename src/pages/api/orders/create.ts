@@ -8,9 +8,6 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
 
     const { order } = req.body;
 
-    // console.log({ order });
-    // const cardcode = session ? session.user.cardcode : '400092';
-
     const result = await goldfarbApi.postOrder(order);
 
     if (result.state === 'B') {

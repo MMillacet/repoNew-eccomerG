@@ -30,7 +30,7 @@ function Product(props: ProductProps) {
     const { product, layout } = props;
     const { realTimeProduct } = useRealTimeProduct(product?.id);
 
-    const [quantity, setQuantity] = useState<number | string>(1);
+    const [quantity, setQuantity] = useState<number>(1);
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
     const compareAddItem = useCompareAddItem();
@@ -43,16 +43,18 @@ function Product(props: ProductProps) {
         return cartAddItem(product, [], quantity);
     };
 
+    const handleChangeQuantity = (_quantity: string | number) => { 
+        const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
+        setQuantity(quantity);
+    };
+
     let prices;
 
     if (product.compareAtPrice) {
         prices = (
             <Fragment>
                 <span className="product__new-price">
-                    <CurrencyFormat
-                        value={realTimeProduct?.price}
-                        currency={realTimeProduct?.currency}
-                    />
+                    <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
                 </span>{' '}
                 <span className="product__old-price">
                     <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
@@ -60,9 +62,7 @@ function Product(props: ProductProps) {
             </Fragment>
         );
     } else {
-        prices = (
-            <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
-        );
+        prices = <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />;
     }
 
     return (
@@ -118,9 +118,7 @@ function Product(props: ProductProps) {
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
                     </div>
-                    <div className="product__description">
-                        {realTimeProduct?.description || product.description}
-                    </div>
+                    <div className="product__description">{realTimeProduct?.description || product.description}</div>
                     <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
@@ -140,7 +138,7 @@ function Product(props: ProductProps) {
                         <li>
                             Brand: <AppLink href="/">{product.brand?.name}</AppLink>
                         </li>
-                        <li>SKU: {product.id}</li>
+                        <li>SKU: {product?.id}</li>
                     </ul>
                 </div>
 
@@ -166,7 +164,7 @@ function Product(props: ProductProps) {
                                         min={product.unitMult}
                                         step={product.unitMult}
                                         value={quantity}
-                                        onChange={setQuantity}
+                                        onChange={(quantity) => handleChangeQuantity(quantity)}
                                     />
                                 </div>
                                 <div className="product__actions-item product__actions-item--addtocart">
@@ -195,12 +193,9 @@ function Product(props: ProductProps) {
                                                 data-toggle="tooltip"
                                                 title="Wishlist"
                                                 onClick={run}
-                                                className={classNames(
-                                                    'btn btn-secondary btn-svg-icon btn-lg',
-                                                    {
-                                                        'btn-loading': loading,
-                                                    },
-                                                )}
+                                                className={classNames('btn btn-secondary btn-svg-icon btn-lg', {
+                                                    'btn-loading': loading,
+                                                })}
                                             >
                                                 <Wishlist16Svg />
                                             </button>
@@ -216,12 +211,9 @@ function Product(props: ProductProps) {
                                                 data-toggle="tooltip"
                                                 title="Compare"
                                                 onClick={run}
-                                                className={classNames(
-                                                    'btn btn-secondary btn-svg-icon btn-lg',
-                                                    {
-                                                        'btn-loading': loading,
-                                                    },
-                                                )}
+                                                className={classNames('btn btn-secondary btn-svg-icon btn-lg', {
+                                                    'btn-loading': loading,
+                                                })}
                                             >
                                                 <Compare16Svg />
                                             </button>

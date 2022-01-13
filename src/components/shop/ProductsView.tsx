@@ -40,12 +40,7 @@ interface ViewMode {
 }
 
 function ProductsView(props: ProductsViewProps) {
-    const {
-        layout: propsLayout = 'grid',
-        grid = 'grid-3-sidebar',
-        offcanvas = 'mobile',
-        openSidebarFn,
-    } = props;
+    const { layout: propsLayout = 'grid', grid = 'grid-3-sidebar', offcanvas = 'mobile', openSidebarFn } = props;
     const [layout, setLayout] = useState(propsLayout);
 
     const isLoading = useShopProductsListIsLoading();
@@ -78,13 +73,7 @@ function ProductsView(props: ProductsViewProps) {
         });
 
         return (
-            <button
-                key={viewMode.key}
-                title={viewMode.title}
-                type="button"
-                className={className}
-                onClick={() => setLayout(viewMode.key)}
-            >
+            <button key={viewMode.key} title={viewMode.title} type="button" className={className} onClick={() => setLayout(viewMode.key)}>
                 {viewMode.icon}
             </button>
         );
@@ -113,16 +102,10 @@ function ProductsView(props: ProductsViewProps) {
                 <div className="products-view__options">
                     <div className={viewOptionsClasses}>
                         <div className="view-options__filters-button">
-                            <button
-                                type="button"
-                                className="filters-button"
-                                onClick={openSidebarFn}
-                            >
+                            <button type="button" className="filters-button" onClick={openSidebarFn}>
                                 <Filters16Svg className="filters-button__icon" />
                                 <span className="filters-button__title">Filters</span>
-                                {!!filtersCount && (
-                                    <span className="filters-button__counter">{filtersCount}</span>
-                                )}
+                                {!!filtersCount && <span className="filters-button__counter">{filtersCount}</span>}
                             </button>
                         </div>
                         <div className="view-options__layout">
@@ -146,12 +129,8 @@ function ProductsView(props: ProductsViewProps) {
                                     <option value="default">Relevancia</option>
                                     <option value="name_asc">Nombre (A-Z)</option>
                                     <option value="name_desc">Nombre (Z-A)</option>
-                                    {user && (
-                                        <option value="price_asc">Precio (menor a mayor)</option>
-                                    )}
-                                    {user && (
-                                        <option value="price_desc">Precio (mayor a menor)</option>
-                                    )}
+                                    {user && <option value="price_asc">Precio (menor a mayor)</option>}
+                                    {user && <option value="price_desc">Precio (mayor a menor)</option>}
                                 </select>
                             </div>
                         </div>
@@ -195,10 +174,10 @@ function ProductsView(props: ProductsViewProps) {
     } else {
         content = (
             <div className="products-view__empty">
-                <div className="products-view__empty-title">No matching items</div>
-                <div className="products-view__empty-subtitle">Try resetting the filters</div>
+                <div className="products-view__empty-title">No se encontraron productos</div>
+                <div className="products-view__empty-subtitle">Proba resetear los filtros</div>
                 <button type="button" className="btn btn-primary btn-sm" onClick={shopResetFilters}>
-                    Reset filters
+                    Resetear filtros
                 </button>
             </div>
         );
