@@ -34,9 +34,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
     const result = await sanityApi.getHomeContent();
 
     const [herramientas, loMasVendido, destacados] = await Promise.all(
-        [result.herramientas, result.loMasVendido, result.destacados].map((list) =>
-            goldfarbApi.getProductsLookup({ itemcodes: list }),
-        ),
+        [result.herramientas, result.loMasVendido, result.destacados].map((list) => goldfarbApi.getProductsLookup({ itemcodes: list })),
     );
 
     return {

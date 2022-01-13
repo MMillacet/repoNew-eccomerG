@@ -88,6 +88,11 @@ const url = {
         as: '/account/status',
     }),
 
+    accountCatalog: (): ILinkProps => ({
+        href: '/account/catalog',
+        as: '/account/catalog',
+    }),
+
     accountAddress: (address: { id: number }): ILinkProps => ({
         href: '/account/addresses/[addressId]',
         as: `/account/addresses/${address.id}`,

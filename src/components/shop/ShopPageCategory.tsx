@@ -34,9 +34,7 @@ export interface ShopPageCategoryProps {
 function ShopPageCategory(props: ShopPageCategoryProps) {
     const { columns, viewMode, sidebarPosition = 'start' } = props;
     const offcanvas = columns === 3 ? 'mobile' : 'always';
-    const productsViewGrid = `grid-${columns}-${
-        columns > 3 ? 'full' : 'sidebar'
-    }` as ProductsViewGrid;
+    const productsViewGrid = `grid-${columns}-${columns > 3 ? 'full' : 'sidebar'}` as ProductsViewGrid;
 
     // shop
     const shopState = useShop();
@@ -90,10 +88,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
         [sidebarOpen, closeSidebarFn, offcanvas],
     );
 
-    if (
-        shopState.categoryIsLoading ||
-        (shopState.productsListIsLoading && !shopState.productsList)
-    ) {
+    if (shopState.categoryIsLoading || (shopState.productsListIsLoading && !shopState.productsList)) {
         return <BlockLoader />;
     }
 
@@ -114,14 +109,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
         pageTitle = shopState.category.name;
     }
 
-    const productsView = (
-        <ProductsView
-            layout={viewMode}
-            grid={productsViewGrid}
-            offcanvas={offcanvas}
-            openSidebarFn={openSidebarFn}
-        />
-    );
+    const productsView = <ProductsView layout={viewMode} grid={productsViewGrid} offcanvas={offcanvas} openSidebarFn={openSidebarFn} />;
 
     if (columns > 3) {
         content = (

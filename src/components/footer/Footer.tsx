@@ -20,6 +20,7 @@ const Footer: FunctionComponent = () => {
         { title: 'Historial de pedidos', url: '/account/orders' },
         { title: 'Catálogo', url: '/catalog' },
         { title: 'Estado de cuenta', url: '/account/status' },
+        { title: 'Crear catalogo', url: '/account/catalog' },
     ];
 
     return (

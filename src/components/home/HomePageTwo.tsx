@@ -16,8 +16,6 @@ import { BlockProductColumnsItem } from '../blocks/BlockProductColumns';
 import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
-// data stubs
-import theme from '../../data/theme';
 import { IBrand } from '../../interfaces/brand';
 
 export interface InitData {
@@ -60,16 +58,12 @@ function HomePageTwo(props: HomePageOneProps) {
     /**
      * Bestsellers.
      */
-    const bestsellers = useDeferredData(
-        () => shopApi.getPopularProducts({ limit: 7 }),
-        [],
-        initData?.bestsellers,
-    );
+    const bestsellers = useDeferredData(() => shopApi.getPopularProducts({ limit: 7 }), [], initData?.bestsellers);
 
     return (
         <Fragment>
             <Head>
-                <title>{`Home Page Two — ${theme.name}`}</title>
+                <title>{`Goldfarb`}</title>
             </Head>
 
             {useMemo(

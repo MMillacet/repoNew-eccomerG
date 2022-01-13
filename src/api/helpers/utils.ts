@@ -9,5 +9,8 @@ export function makeIdGenerator(): () => number {
 }
 
 export function nameToSlug(name: string): string {
-    return name.toLowerCase().replace(/[^a-z0-9]/, '-').replace(/-+/, '-');
+    return name
+        .toLowerCase()
+        .replace(/[^a-z0-9]/, '-')
+        .replace(/-+/, '-');
 }

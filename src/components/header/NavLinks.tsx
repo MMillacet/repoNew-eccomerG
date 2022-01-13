@@ -28,19 +28,14 @@ function NavLinks() {
             const itemOffsetLeft = item.offsetLeft;
 
             if (direction === 'rtl') {
-                const itemPosition =
-                    containerWidth - (itemOffsetLeft + item.getBoundingClientRect().width);
+                const itemPosition = containerWidth - (itemOffsetLeft + item.getBoundingClientRect().width);
 
-                const megamenuPosition = Math.round(
-                    Math.min(itemPosition, containerWidth - megamenuWidth),
-                );
+                const megamenuPosition = Math.round(Math.min(itemPosition, containerWidth - megamenuWidth));
 
                 megamenu.style.left = '';
                 megamenu.style.right = `${megamenuPosition}px`;
             } else {
-                const megamenuPosition = Math.round(
-                    Math.min(itemOffsetLeft, containerWidth - megamenuWidth),
-                );
+                const megamenuPosition = Math.round(Math.min(itemOffsetLeft, containerWidth - megamenuWidth));
 
                 megamenu.style.right = '';
                 megamenu.style.left = `${megamenuPosition}px`;
@@ -66,9 +61,7 @@ function NavLinks() {
 
         if (item.submenu && item.submenu.type === 'megamenu') {
             submenu = (
-                <div
-                    className={`nav-links__megamenu nav-links__megamenu--size--${item.submenu.menu.size}`}
-                >
+                <div className={`nav-links__megamenu nav-links__megamenu--size--${item.submenu.menu.size}`}>
                     <Megamenu menu={item.submenu.menu} />
                 </div>
             );

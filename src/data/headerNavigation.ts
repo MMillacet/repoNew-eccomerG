@@ -147,38 +147,38 @@ const dataHeaderNavigation: INav = [
     //         ],
     //     },
     // },
-    {
-        title: 'Blog',
-        url: '/blog/category-classic',
-        submenu: {
-            type: 'menu',
-            menu: [
-                { title: 'Blog Classic', url: '/blog/category-classic' },
-                { title: 'Blog Grid', url: '/blog/category-grid' },
-                { title: 'Blog List', url: '/blog/category-list' },
-                { title: 'Blog Left Sidebar', url: '/blog/category-left-sidebar' },
-                { title: 'Post Page', url: '/blog/post-classic' },
-                { title: 'Post Without Sidebar', url: '/blog/post-full' },
-            ],
-        },
-    },
-    {
-        title: 'Pages',
-        url: '/site/about-us',
-        submenu: {
-            type: 'menu',
-            menu: [
-                { title: 'About Us', url: '/site/about-us' },
-                { title: 'Contact Us', url: '/site/contact-us' },
-                { title: 'Contact Us Alt', url: '/site/contact-us-alt' },
-                { title: '404', url: '/site/not-found' },
-                { title: 'Terms And Conditions', url: '/site/terms' },
-                { title: 'FAQ', url: '/site/faq' },
-                { title: 'Components', url: '/site/components' },
-                { title: 'Typography', url: '/site/typography' },
-            ],
-        },
-    },
+    // {
+    //     title: 'Blog',
+    //     url: '/blog/category-classic',
+    //     submenu: {
+    //         type: 'menu',
+    //         menu: [
+    //             { title: 'Blog Classic', url: '/blog/category-classic' },
+    //             { title: 'Blog Grid', url: '/blog/category-grid' },
+    //             { title: 'Blog List', url: '/blog/category-list' },
+    //             { title: 'Blog Left Sidebar', url: '/blog/category-left-sidebar' },
+    //             { title: 'Post Page', url: '/blog/post-classic' },
+    //             { title: 'Post Without Sidebar', url: '/blog/post-full' },
+    //         ],
+    //     },
+    // },
+    // {
+    //     title: 'Pages',
+    //     url: '/site/about-us',
+    //     submenu: {
+    //         type: 'menu',
+    //         menu: [
+    //             { title: 'About Us', url: '/site/about-us' },
+    //             { title: 'Contact Us', url: '/site/contact-us' },
+    //             { title: 'Contact Us Alt', url: '/site/contact-us-alt' },
+    //             { title: '404', url: '/site/not-found' },
+    //             { title: 'Terms And Conditions', url: '/site/terms' },
+    //             { title: 'FAQ', url: '/site/faq' },
+    //             { title: 'Components', url: '/site/components' },
+    //             { title: 'Typography', url: '/site/typography' },
+    //         ],
+    //     },
+    // },
     {
         title: 'HERRAMIENTAS',
         url: '/shop/catalog/herramientas',
@@ -192,7 +192,7 @@ const dataHeaderNavigation: INav = [
         url: '/shop/catalog/pinturas',
     },
     {
-        title: 'COMO COMPRAR',
+        title: 'CÓMO COMPRAR',
         url: '/site/how-to-purchase',
     },
 ];

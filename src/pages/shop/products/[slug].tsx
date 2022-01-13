@@ -12,16 +12,16 @@ export interface PageProps {
 }
 
 export async function getStaticPaths() {
-    // const { products } = await goldfarbApi.getProductsList();
+    const { products } = await goldfarbApi.getProductsList();
 
-    const paths = [{ params: { slug: '22341' } }]; // for testing
+    // const paths = [{ params: { slug: '22341' } }]; // for testing
 
     // Get the paths we want to pre-render based on posts
-    // const paths = process.env.IGNORE_PRODUCT_BUILDS
-    //     ? []
-    //     : products
-    //           .filter((product: { itemcode: any }) => !!product.itemcode)
-    //           .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
+    const paths = process.env.IGNORE_PRODUCT_BUILDS
+        ? []
+        : products
+              .filter((product: { itemcode: any }) => !!product.itemcode)
+              .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
 
     // { fallback: false } means other routes should 404.
     return { paths, fallback: false };
