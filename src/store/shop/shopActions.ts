@@ -1,7 +1,7 @@
 import shopApi from '../../api/shop';
 import { IFilterValues, IListOptions } from '../../interfaces/list';
 import { IProductsList } from '../../interfaces/product';
-import { IShopCategory } from '../../interfaces/category';
+import { ICategory } from '../../interfaces/category';
 import { SHOP_NAMESPACE } from './shopTypes';
 import {
     SHOP_FETCH_CATEGORY_SUCCESS,
@@ -19,6 +19,8 @@ import {
     ShopSetFilterValueAction,
     ShopSetOptionValueAction,
     ShopThunkAction,
+    ShopFetchCategoriesDataSuccessAction,
+    SHOP_FETCH_CATEGORIES_DATA_SUCCESS,
 } from './shopActionTypes';
 import { ISearchOptions } from '../../interfaces/search';
 
@@ -40,7 +42,7 @@ export function shopInit(
     };
 }
 
-export function shopFetchCategorySuccess(category: IShopCategory | null): ShopFetchCategorySuccessAction {
+export function shopFetchCategorySuccess(category: ICategory | null): ShopFetchCategorySuccessAction {
     return {
         type: SHOP_FETCH_CATEGORY_SUCCESS,
         category,
@@ -57,6 +59,16 @@ export function shopFetchProductsListSuccess(productsList: IProductsList): ShopF
     return {
         type: SHOP_FETCH_PRODUCTS_LIST_SUCCESS,
         productsList,
+    };
+}
+
+export function shopFetchCategoriesDataSuccess(categoriesData: {
+    categoriesTreeData: ICategory[];
+    categoriesListData: ICategory[];
+}): ShopFetchCategoriesDataSuccessAction {
+    return {
+        type: SHOP_FETCH_CATEGORIES_DATA_SUCCESS,
+        categoriesData,
     };
 }
 
@@ -90,7 +102,7 @@ export function shopFetchCategoryThunk(categorySlug: string | null): ShopThunkAc
             canceled = true;
         };
 
-        let request: Promise<IShopCategory | null>;
+        let request: Promise<ICategory | null>;
 
         if (categorySlug) {
             request = shopApi.getCategoryBySlug(categorySlug);
@@ -119,6 +131,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
         const shopState = getState()[SHOP_NAMESPACE];
 
         const { category, searchOptions } = shopState;
+        let { categoriesData } = shopState;
 
         let { filters } = shopState;
 
@@ -139,7 +152,12 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
             }
         }
 
-        const productsList = await shopApi.getProductsList(shopState.options, filters, searchOpts);
+        if (!categoriesData) {
+            categoriesData = await shopApi.getCategoriesData();
+            dispatch(shopFetchCategoriesDataSuccess(categoriesData));
+        }
+
+        const productsList = await shopApi.getProductsList(shopState.options, filters, searchOpts, categoriesData);
 
         if (canceled) {
             return;

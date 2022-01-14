@@ -50,23 +50,15 @@ function Suggestions(props: SuggestionsProps) {
                         {product.compareAtPrice && (
                             <Fragment>
                                 <span className="suggestions__item-price-new">
-                                    <CurrencyFormat
-                                        value={product.price}
-                                        currency={product.currency}
-                                    />
+                                    <CurrencyFormat value={product.price} currency={product.currency} />
                                 </span>{' '}
                                 <span className="suggestions__item-price-old">
-                                    <CurrencyFormat
-                                        value={product.compareAtPrice}
-                                        currency={product.currency}
-                                    />
+                                    <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
                                 </span>
                             </Fragment>
                         )}
 
-                        {!product.compareAtPrice && (
-                            <CurrencyFormat value={product.price} currency={product.currency} />
-                        )}
+                        {!product.compareAtPrice && <CurrencyFormat value={product.price} currency={product.currency} />}
                     </div>
                 )}
 

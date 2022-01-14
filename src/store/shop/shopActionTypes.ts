@@ -4,7 +4,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { AppAction } from '../types';
 import { IFilterValues, IListOptions } from '../../interfaces/list';
 import { IProductsList } from '../../interfaces/product';
-import { IShopCategory } from '../../interfaces/category';
+import { ICategory } from '../../interfaces/category';
 import { SHOP_NAMESPACE, ShopState } from './shopTypes';
 import { ISearchOptions } from '../../interfaces/search';
 
@@ -13,6 +13,7 @@ export const SHOP_INIT = 'SHOP_INIT';
 export const SHOP_FETCH_CATEGORY_SUCCESS = 'SHOP_FETCH_CATEGORY_SUCCESS';
 export const SHOP_FETCH_PRODUCTS_LIST_START = 'SHOP_FETCH_PRODUCTS_LIST_START';
 export const SHOP_FETCH_PRODUCTS_LIST_SUCCESS = 'SHOP_FETCH_PRODUCTS_LIST_SUCCESS';
+export const SHOP_FETCH_CATEGORIES_DATA_SUCCESS = 'SHOP_FETCH_CATEGORIES_DATA_SUCCESS';
 export const SHOP_SET_OPTION_VALUE = 'SHOP_SET_OPTION_VALUE';
 export const SHOP_SET_FILTER_VALUE = 'SHOP_SET_FILTER_VALUE';
 export const SHOP_RESET_FILTERS = 'SHOP_RESET_FILTERS';
@@ -34,7 +35,7 @@ export interface ShopInitAction {
 
 export interface ShopFetchCategorySuccessAction {
     type: typeof SHOP_FETCH_CATEGORY_SUCCESS;
-    category: IShopCategory | null;
+    category: ICategory | null;
 }
 
 export interface ShopFetchProductsListStartAction {
@@ -62,12 +63,18 @@ export interface ShopResetFiltersAction {
     type: typeof SHOP_RESET_FILTERS;
 }
 
+export interface ShopFetchCategoriesDataSuccessAction {
+    type: typeof SHOP_FETCH_CATEGORIES_DATA_SUCCESS;
+    categoriesData: { categoriesTreeData: ICategory[]; categoriesListData: ICategory[] };
+}
+
 export type ShopAction =
     | ShopHydrateAction
     | ShopInitAction
     | ShopFetchCategorySuccessAction
     | ShopFetchProductsListStartAction
     | ShopFetchProductsListSuccessAction
+    | ShopFetchCategoriesDataSuccessAction
     | ShopSetOptionValueAction
     | ShopSetFilterValueAction
     | ShopResetFiltersAction;

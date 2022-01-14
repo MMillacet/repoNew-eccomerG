@@ -12,11 +12,13 @@ import {
     SHOP_SET_OPTION_VALUE,
     ShopAction,
     ShopSetFilterValueAction,
+    SHOP_FETCH_CATEGORIES_DATA_SUCCESS,
 } from './shopActionTypes';
 
 const initialState: ShopState = {
     init: false,
     category: null,
+    categoriesData: { categoriesTreeData: [], categoriesListData: [] },
     categorySlug: null,
     categoryIsLoading: true,
     productsListIsLoading: true,
@@ -63,6 +65,11 @@ function shopReducer(state = initialState, action: ShopAction): ShopState {
                 init: true,
                 categoryIsLoading: false,
                 category: action.category,
+            };
+        case SHOP_FETCH_CATEGORIES_DATA_SUCCESS:
+            return {
+                ...state,
+                categoriesData: action.categoriesData,
             };
         case SHOP_FETCH_PRODUCTS_LIST_START:
             return { ...state, productsListIsLoading: true };

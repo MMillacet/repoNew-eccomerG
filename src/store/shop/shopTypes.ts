@@ -9,6 +9,7 @@ export const SHOP_NAMESPACE = 'shop';
 export interface ShopState {
     init: boolean;
     categorySlug: string | null;
+    categoriesData: { categoriesTreeData: ICategory[]; categoriesListData: ICategory[] };
     category: ICategory | null;
     categoryIsLoading: boolean;
     productsListIsLoading: boolean;

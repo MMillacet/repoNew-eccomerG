@@ -5,7 +5,7 @@ import CheckFilterBuilder from '../filters/check';
 import RangeFilterBuilder from '../filters/range';
 import goldfarbApi from '../goldfarb';
 import { ISearchOptions } from '../../interfaces/search';
-import { IShopCategory } from '../../interfaces/category';
+import { ICategory } from '../../interfaces/category';
 import { IProduct, IProductsList } from '../../interfaces/product';
 
 export interface GetProductsOptions {
@@ -29,7 +29,7 @@ export async function getProductsList(
     options: GetProductsListOptions = {},
     filterValues: GetProductsListFilters = {},
     searchOptions: ISearchOptions = {},
-    categoriesData: { categoriesTreeData: IShopCategory[]; categoriesListData: IShopCategory[] },
+    categoriesData: { categoriesTreeData: ICategory[]; categoriesListData: ICategory[] },
 ): Promise<IProductsList> {
     const filters = [
         new CategoryFilterBuilder('category', 'Categories', categoriesData),

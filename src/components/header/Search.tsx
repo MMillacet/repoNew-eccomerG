@@ -1,13 +1,5 @@
 // react
-import {
-    ChangeEvent,
-    KeyboardEvent,
-    RefObject,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import { ChangeEvent, KeyboardEvent, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -18,7 +10,6 @@ import Cross20Svg from '../../svg/cross-20.svg';
 import Search20Svg from '../../svg/search-20.svg';
 import Suggestions from './Suggestions';
 import { IProduct } from '../../interfaces/product';
-import goldfarbApi from '../../api/goldfarb';
 
 export interface SearchProps {
     context: 'header' | 'mobile-header' | 'indicator';
@@ -86,17 +77,19 @@ function Search(props: SearchProps) {
             timer = setTimeout(() => {
                 if (canceled) return;
 
-                goldfarbApi.getProductsSearch({ term: query }).then(({ products }) => {
-                    const top5codes = products.slice(0, 5).map((p: { code: string }) => p.code);
+                fetch(`/api/products/search?term=${query}`)
+                    .then((response) => response.json())
+                    .then(({ products }) => {
+                        const top5codes = products.slice(0, 5).map((p: { code: string }) => p.code);
 
-                    goldfarbApi
-                        .getProductsLookup2({ itemcodes: top5codes })
-                        .then(({ products }) => {
-                            setSuggestedProducts(products);
-                            setHasSuggestions(products.length > 0);
-                            setSuggestionsOpen(true);
-                        });
-                });
+                        fetch(`/api/products/lookup?itemcodes=${top5codes}`)
+                            .then((response) => response.json())
+                            .then(({ products }) => {
+                                setSuggestedProducts(products);
+                                setHasSuggestions(products.length > 0);
+                                setSuggestionsOpen(true);
+                            });
+                    });
             }, 200);
         }
 
@@ -133,11 +126,7 @@ function Search(props: SearchProps) {
         context !== 'mobile-header' ? (
             ''
         ) : (
-            <button
-                className="search__button search__button--type--close"
-                type="button"
-                onClick={close}
-            >
+            <button className="search__button search__button--type--close" type="button" onClick={close}>
                 <Cross20Svg />
             </button>
         );
@@ -166,11 +155,7 @@ function Search(props: SearchProps) {
                     <div className="search__border" />
                 </form>
 
-                <Suggestions
-                    className="search__suggestions"
-                    context={context}
-                    products={suggestedProducts}
-                />
+                <Suggestions className="search__suggestions" context={context} products={suggestedProducts} />
             </div>
         </div>
     );

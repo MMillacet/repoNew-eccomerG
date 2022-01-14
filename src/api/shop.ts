@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,arrow-body-style */
-// noinspection ES6UnusedImports
-import qs from 'query-string';
-import { IShopCategory } from '../interfaces/category';
+import { ICategory } from '../interfaces/category';
 import { IProduct, IProductsList } from '../interfaces/product';
 import { IFilterValues, IListOptions } from '../interfaces/list';
 import {
@@ -41,34 +39,28 @@ export type GetSuggestionsOptions = {
     category?: string;
 };
 
-let categoryDataCache: {
-    categoriesTreeData: IShopCategory[];
-    categoriesListData: IShopCategory[];
-} | null = null;
-
 const getCategoriesData = async () => {
-    if (!categoryDataCache) {
-        const families = await goldfarbApi.getFamilies();
-        const categories = familiesToCategories(families);
-        const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categories);
-        categoryDataCache = { categoriesTreeData, categoriesListData };
-    }
-
-    return categoryDataCache;
+    const families = await goldfarbApi.getFamilies();
+    const categories = familiesToCategories(families);
+    const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categories);
+    return { categoriesTreeData, categoriesListData };
 };
 
 const shopApi = {
+    getCategoriesData: async () => {
+        return getCategoriesData();
+    },
     /**
      * Returns array of categories.
      */
-    getCategories: async (options: GetCategoriesOptions = {}): Promise<IShopCategory[]> => {
+    getCategories: async (options: GetCategoriesOptions = {}): Promise<ICategory[]> => {
         const { categoriesTreeData } = await getCategoriesData();
         return categoriesTreeData.map((x) => prepareCategory(x, options.depth));
     },
     /**
      * Returns category by slug.
      */
-    getCategoryBySlug: async (slug: string): Promise<IShopCategory> => {
+    getCategoryBySlug: async (slug: string): Promise<ICategory> => {
         const { categoriesListData } = await getCategoriesData();
         const category = categoriesListData.find((x) => x.slug === slug);
         return category ? Promise.resolve(prepareCategory(category, 2)) : Promise.reject();
@@ -108,9 +100,9 @@ const shopApi = {
         options: IListOptions = {},
         filters: IFilterValues = {},
         searchOptions: ISearchOptions = {},
+        categories: { categoriesTreeData: ICategory[]; categoriesListData: ICategory[] },
     ): Promise<IProductsList> => {
-        const categoriesData = await getCategoriesData();
-        return getProductsList(options, filters, searchOptions, categoriesData);
+        return getProductsList(options, filters, searchOptions, categories);
     },
     /**
      * Returns array of featured products.

@@ -5,20 +5,11 @@ import goldfarbApi from '../../../api/goldfarb';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = getSession(req, res);
 
-    const { term, orderby, family, category, subcategory } = req.query;
+    const { itemcodes } = req.query || '';
 
     const cardcode = session ? session.user.cardcode : null;
 
-    const params = {
-        term: term as string,
-        orderby: orderby as string,
-        family: family as string,
-        category: category as string,
-        subcategory: subcategory as string,
-        cardcode,
-    };
-
-    const result = await goldfarbApi.getProductsSearch2(params);
+    const result = await goldfarbApi.getProductsLookup2({ itemcodes: (itemcodes as string).split(','), cardcode });
 
     res.status(200).json(result);
 };

@@ -44,9 +44,7 @@ export default class CategoryFilterBuilder extends AbstractFilterBuilder<ICatego
                 children: x.children === undefined ? [] : x.children.filter(categoryHasProductsFn),
             }));
         } else {
-            this.items = categoriesTreeData
-                .map((x: any) => prepareCategory(x))
-                .filter(categoryHasProductsFn);
+            this.items = categoriesTreeData.map((x: any) => prepareCategory(x)).filter(categoryHasProductsFn);
         }
     }
 
