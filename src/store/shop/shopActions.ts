@@ -152,7 +152,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
             }
         }
 
-        if (!categoriesData) {
+        if (typeof window === 'undefined' && !categoriesData) {
             categoriesData = await shopApi.getCategoriesData();
             dispatch(shopFetchCategoriesDataSuccess(categoriesData));
         }
