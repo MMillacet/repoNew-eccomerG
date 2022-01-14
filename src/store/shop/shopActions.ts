@@ -154,6 +154,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
 
         if (typeof window === 'undefined' && !categoriesData) {
             categoriesData = await shopApi.getCategoriesData();
+
             dispatch(shopFetchCategoriesDataSuccess(categoriesData));
         }
 

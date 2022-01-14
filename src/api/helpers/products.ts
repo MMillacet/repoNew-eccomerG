@@ -51,27 +51,25 @@ export async function getProductsList(
     if (isBrowser && cacheKey && searchCache[cacheKey]) {
         searchProducts = searchCache[cacheKey];
     } else {
-        const { products } = await goldfarbApi.getProductsSearch2({
-            term: term || '',
-            cardcode,
-            orderby: 'relevance',
-            family,
-            category,
-            subcategory,
-        });
-        // const config: AxiosRequestConfig = {
-        //     url: '/api/products/search',
-        //     method: 'get',
-        //     params: {
-        //         term,
-        //         orderby: 'relevance',
-        //         family,
-        //         category,
-        //         subcategory,
-        //     },
-        // };
+        let products: IProduct[];
 
-        // const { data } = await axios(config);
+        if (isBrowser) {
+            const url = new URL('/api/products/search', document.baseURI);
+            url.searchParams.append('term', term || '');
+            if (family) url.searchParams.append('family', family as string);
+            if (category) url.searchParams.append('category', category as string);
+            if (subcategory) url.searchParams.append('subcategory', subcategory as string);
+            ({ products } = await (await fetch(url.toString())).json());
+        } else {
+            ({ products } = await goldfarbApi.getProductsSearch2({
+                term: term || '',
+                cardcode,
+                orderby: 'relevance',
+                family,
+                category,
+                subcategory,
+            }));
+        }
         if (isBrowser && cacheKey) searchCache[cacheKey] = products;
         searchProducts = products;
     }
