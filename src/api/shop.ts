@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,arrow-body-style */
+import families from '../data/categories.json';
 import { ICategory } from '../interfaces/category';
 import { IProduct, IProductsList } from '../interfaces/product';
 import { IFilterValues, IListOptions } from '../interfaces/list';
@@ -40,7 +41,6 @@ export type GetSuggestionsOptions = {
 };
 
 const getCategoriesData = async () => {
-    const families = await goldfarbApi.getFamilies();
     const categories = familiesToCategories(families);
     const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categories);
     return { categoriesTreeData, categoriesListData };
