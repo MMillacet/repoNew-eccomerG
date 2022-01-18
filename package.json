@@ -4,8 +4,8 @@
     "private": true,
     "scripts": {
         "lint": "eslint --fix .",
-        "pre-build-fetch": "node ./scripts/fetch-products.js && node ./scripts/fetch-categories.js",
-        "pre-build": "npm run pre-build-fetch && git add src/data/* && git commit -m 'pre-build'",
+        "pre-fetch-items": "node ./scripts/fetch-products.js && node ./scripts/fetch-categories.js",
+        "update-items": "npm run pre-fetch-items && git add src/data/* && git commit -m 'pre-build'",
         "dev": "next dev",
         "build": "NODE_ENV=development next build",
         "start": "NODE_ENV=development next start"

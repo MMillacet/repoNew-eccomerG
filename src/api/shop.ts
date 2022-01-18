@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,arrow-body-style */
-import families from '../data/categories.json';
+import families from '../data/families.json';
 import { ICategory } from '../interfaces/category';
 import { IProduct, IProductsList } from '../interfaces/product';
 import { IFilterValues, IListOptions } from '../interfaces/list';
