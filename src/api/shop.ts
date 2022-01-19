@@ -41,7 +41,8 @@ export type GetSuggestionsOptions = {
 };
 
 const getCategoriesData = async () => {
-    const categories = familiesToCategories(families);
+    const f = families || (await goldfarbApi.getFamilies());
+    const categories = familiesToCategories(f);
     const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categories);
     return { categoriesTreeData, categoriesListData };
 };
@@ -100,9 +101,9 @@ const shopApi = {
         options: IListOptions = {},
         filters: IFilterValues = {},
         searchOptions: ISearchOptions = {},
-        categories: { categoriesTreeData: ICategory[]; categoriesListData: ICategory[] },
     ): Promise<IProductsList> => {
-        return getProductsList(options, filters, searchOptions, categories);
+        const categoriesData = await shopApi.getCategoriesData();
+        return getProductsList(options, filters, searchOptions, categoriesData);
     },
     /**
      * Returns array of featured products.

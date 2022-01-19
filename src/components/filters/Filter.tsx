@@ -25,37 +25,13 @@ function Filter(props: FilterProps) {
         case 'category':
             return <FilterCategory data={data} />;
         case 'range':
-            return (
-                <FilterRange
-                    data={data}
-                    value={getFilterValue(data, value)}
-                    onChangeValue={onChangeValue}
-                />
-            );
+            return <FilterRange data={data} value={getFilterValue(data, value)} onChangeValue={onChangeValue} />;
         case 'check':
-            return (
-                <FilterCheck
-                    data={data}
-                    value={getFilterValue(data, value)}
-                    onChangeValue={onChangeValue}
-                />
-            );
+            return <FilterCheck data={data} value={getFilterValue(data, value)} onChangeValue={onChangeValue} />;
         case 'radio':
-            return (
-                <FilterRadio
-                    data={data}
-                    value={getFilterValue(data, value)}
-                    onChangeValue={onChangeValue}
-                />
-            );
+            return <FilterRadio data={data} value={getFilterValue(data, value)} onChangeValue={onChangeValue} />;
         case 'color':
-            return (
-                <FilterColor
-                    data={data}
-                    value={getFilterValue(data, value)}
-                    onChangeValue={onChangeValue}
-                />
-            );
+            return <FilterColor data={data} value={getFilterValue(data, value)} onChangeValue={onChangeValue} />;
         default:
             return null;
     }

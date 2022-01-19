@@ -131,7 +131,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
         const shopState = getState()[SHOP_NAMESPACE];
 
         const { category, searchOptions } = shopState;
-        let { categoriesData } = shopState;
+        // let { categoriesData } = shopState;
 
         let { filters } = shopState;
 
@@ -152,13 +152,13 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
             }
         }
 
-        if (typeof window === 'undefined' && !categoriesData) {
-            categoriesData = await shopApi.getCategoriesData();
+        // if (typeof window === 'undefined' && !categoriesData) {
+        //     categoriesData = await shopApi.getCategoriesData();
 
-            dispatch(shopFetchCategoriesDataSuccess(categoriesData));
-        }
+        //     dispatch(shopFetchCategoriesDataSuccess(categoriesData));
+        // }
 
-        const productsList = await shopApi.getProductsList(shopState.options, filters, searchOpts, categoriesData);
+        const productsList = await shopApi.getProductsList(shopState.options, filters, searchOpts);
 
         if (canceled) {
             return;

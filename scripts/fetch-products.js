@@ -111,15 +111,12 @@ const run = async () => {
     const files = {};
 
     try {
-        // for (let i = 0; i < lastItemCode; i += 300) {
         let i = 0;
         let itemcodesToLookup = itemcodes.slice(i, i + 300);
         while (itemcodesToLookup.length > 0) {
-            // if (itemcodesToLookup.length > 0) {
             // eslint-disable-next-line no-await-in-loop
             const { products } = await lookup(itemcodesToLookup);
 
-            // eslint-disable-next-line no-loop-func
             products.forEach((p) => {
                 const filecode = fileCode(p.id);
                 if (!files[filecode]) {

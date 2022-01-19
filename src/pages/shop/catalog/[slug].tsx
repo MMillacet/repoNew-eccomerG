@@ -37,6 +37,8 @@ import { wrapper } from '../../../store/store';
 //     };
 // });
 
+// Problem to solve: If we server this statically we don't have price on first server and either price filter
+
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
     await getShopPageData(store, context);
 
