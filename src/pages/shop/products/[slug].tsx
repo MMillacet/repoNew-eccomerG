@@ -55,12 +55,13 @@ export async function getStaticPaths() {
     // Get the paths we want to pre-render based on posts
     const { products } = await goldfarbApi.getProductsList();
 
-    // await writeProductsLocally(products); 
+    // await writeProductsLocally(products);
 
     const paths = process.env.IGNORE_PRODUCT_BUILDS
         ? []
         : products
-              .filter((product: { itemcode: any }) => !!product.itemcode)
+              // eslint-disable-next-line no-restricted-globals
+              .filter((product: { itemcode: any }) => product.itemcode && !isNaN(product.itemcode))
               .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
 
     // { fallback: false } means other routes should 404.

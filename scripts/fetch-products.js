@@ -22,7 +22,7 @@ const makeProduct = (product) => {
         category: product.category,
         subcategory,
         unitMult: product.unitMult,
-        images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],
+        images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${product.id}.jpg`],
         brand: {
             name: product.brand,
             slug: nameToSlug(product.brand),

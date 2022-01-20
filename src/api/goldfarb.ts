@@ -30,8 +30,8 @@ const makeProduct = (product: any) => {
         subcategory,
         unitMult: Number(product.unitMult),
         unitsPerItem: Number(product.unitsPerItem),
-        // images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
-        images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],
+        images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
+        // images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],
         availability: product.hasStock ? 'in-stock' : 'out-of-stock',
         // compareAtPrice: product.discount > 0 ? product.price * (1 - (product.discount / 100 )) : undefined,
         brand: {
