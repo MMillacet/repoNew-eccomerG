@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { nameToSlug } from './helpers/utils';
-import { isProductionEnvironment } from '../services/environment';
+// import { isProductionEnvironment } from '../services/environment';
 
-const baseURL = isProductionEnvironment ? 'http://app.goldfarb.com.uy/main/api' : 'http://app.goldfarb.com.uy/PruebasMain/api';
+// const baseURL = isProductionEnvironment ? 'http://app.goldfarb.com.uy/main/api' : 'http://app.goldfarb.com.uy/PruebasMain/api';
+
+const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 
 export interface LookupOptions {
     itemcodes: string[];
