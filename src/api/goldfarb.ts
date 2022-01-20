@@ -20,7 +20,6 @@ export interface SearchOptions {
 }
 
 const makeProduct = (product: any) => {
-    // price: product.price || product.finalPrice,
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
     return {
