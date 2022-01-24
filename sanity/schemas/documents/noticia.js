@@ -1,11 +1,11 @@
 export default {
-    name: 'post',
-    title: 'Post',
+    name: 'noticia',
+    title: 'Noticia',
     type: 'document',
     fields: [
         {
             name: 'title',
-            title: 'Title',
+            title: 'Titulo',
             type: 'string',
         },
         {
@@ -19,32 +19,42 @@ export default {
         },
         {
             name: 'author',
-            title: 'Author',
+            title: 'Autor',
             type: 'reference',
             to: { type: 'teamMember' },
         },
         {
             name: 'mainImage',
-            title: 'Main image',
+            title: 'Imagen Principal',
             type: 'image',
             options: {
                 hotspot: true,
             },
         },
         {
+            name: 'includeImageInPost',
+            title: 'Incluir imagen en la noticia',
+            type: 'boolean',
+        },
+        {
+            name: 'video',
+            title: 'Video',
+            type: 'file',
+        },
+        {
             name: 'categories',
-            title: 'Categories',
+            title: 'Categorías',
             type: 'array',
-            of: [{ type: 'reference', to: { type: 'category' } }],
+            of: [{ type: 'category' }],
         },
         {
             name: 'publishedAt',
-            title: 'Published at',
+            title: 'Fecha Publicación',
             type: 'datetime',
         },
         {
             name: 'body',
-            title: 'Body',
+            title: 'Contenido',
             type: 'blockContent',
         },
     ],

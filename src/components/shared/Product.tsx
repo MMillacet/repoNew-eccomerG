@@ -43,7 +43,7 @@ function Product(props: ProductProps) {
         return cartAddItem(product, [], quantity);
     };
 
-    const handleChangeQuantity = (_quantity: string | number) => { 
+    const handleChangeQuantity = (_quantity: string | number) => {
         const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
         setQuantity(quantity);
     };
@@ -54,7 +54,10 @@ function Product(props: ProductProps) {
         prices = (
             <Fragment>
                 <span className="product__new-price">
-                    <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
+                    <CurrencyFormat
+                        value={realTimeProduct?.price}
+                        currency={realTimeProduct?.currency}
+                    />
                 </span>{' '}
                 <span className="product__old-price">
                     <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
@@ -62,7 +65,9 @@ function Product(props: ProductProps) {
             </Fragment>
         );
     } else {
-        prices = <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />;
+        prices = (
+            <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
+        );
     }
 
     return (
@@ -118,7 +123,9 @@ function Product(props: ProductProps) {
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
                     </div>
-                    <div className="product__description">{realTimeProduct?.description || product.description}</div>
+                    <div className="product__description">
+                        {realTimeProduct?.description || product.description}
+                    </div>
                     <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
@@ -193,9 +200,12 @@ function Product(props: ProductProps) {
                                                 data-toggle="tooltip"
                                                 title="Wishlist"
                                                 onClick={run}
-                                                className={classNames('btn btn-secondary btn-svg-icon btn-lg', {
-                                                    'btn-loading': loading,
-                                                })}
+                                                className={classNames(
+                                                    'btn btn-secondary btn-svg-icon btn-lg',
+                                                    {
+                                                        'btn-loading': loading,
+                                                    },
+                                                )}
                                             >
                                                 <Wishlist16Svg />
                                             </button>
@@ -211,9 +221,12 @@ function Product(props: ProductProps) {
                                                 data-toggle="tooltip"
                                                 title="Compare"
                                                 onClick={run}
-                                                className={classNames('btn btn-secondary btn-svg-icon btn-lg', {
-                                                    'btn-loading': loading,
-                                                })}
+                                                className={classNames(
+                                                    'btn btn-secondary btn-svg-icon btn-lg',
+                                                    {
+                                                        'btn-loading': loading,
+                                                    },
+                                                )}
                                             >
                                                 <Compare16Svg />
                                             </button>

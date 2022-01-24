@@ -1,4 +1,4 @@
-import { ImageAsset } from '@sanity/types/dist/dts';
+import { ImageAsset } from '@sanity/types';
 
 export interface SanitySection {
     subtitle: string;

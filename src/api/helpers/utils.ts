@@ -14,3 +14,12 @@ export function nameToSlug(name: string): string {
         .replace(/[^a-z0-9]/, '-')
         .replace(/-+/, '-');
 }
+
+export function formatDate(date: Date | undefined) {
+    if (!date) return '';
+    const dateObject = new Date(date);
+    const dateString = `${dateObject.getDate()}/${
+        dateObject.getMonth() + 1
+    }/${dateObject.getFullYear()}`;
+    return dateString;
+}

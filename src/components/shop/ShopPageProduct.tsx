@@ -77,7 +77,12 @@ function ShopPageProduct(props: ShopPageProductProps) {
                         </div>
 
                         {relatedProducts.length > 0 && (
-                            <BlockProductsCarousel title="Related Products" layout="grid-4-sm" products={relatedProducts} withSidebar />
+                            <BlockProductsCarousel
+                                title="Related Products"
+                                layout="grid-4-sm"
+                                products={relatedProducts}
+                                withSidebar
+                            />
                         )}
                     </div>
                     {sidebarPosition === 'end' && sidebar}
@@ -95,7 +100,11 @@ function ShopPageProduct(props: ShopPageProductProps) {
                 </div>
 
                 {relatedProducts.length > 0 && (
-                    <BlockProductsCarousel title="Productos relacionados" layout="grid-5" products={relatedProducts} />
+                    <BlockProductsCarousel
+                        title="Productos relacionados"
+                        layout="grid-5"
+                        products={relatedProducts}
+                    />
                 )}
             </Fragment>
         );

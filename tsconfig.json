@@ -15,6 +15,7 @@
         "isolatedModules": true,
         "jsx": "preserve"
     },
+    "files": ["@types/block-content-to-react.d.ts"],
     "exclude": ["node_modules"],
     "include": ["custom.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

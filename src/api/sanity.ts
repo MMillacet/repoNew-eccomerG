@@ -103,6 +103,56 @@ const sanityApi = {
             throw new Error(`${error}`);
         }
     },
+    getBlog: async (limit?: number, orderField?: string, orderDirection: string = 'desc') => {
+        const order = orderField ? ` | order(${orderField} ${orderDirection})` : '';
+        const slice = limit ? `[0...${limit}]` : '';
+        const query = `
+            *[_type == "noticia"]{
+                ...,
+                author -> {
+                    ...,
+                    "id": _id,
+                    role,
+                    bio,
+                    "image": image.asset->
+                },
+                "id": _id,
+                "slug": slug.current,
+                "mainImage": mainImage.asset->
+            } ${order} ${slice}
+        `;
+        try {
+            const result = await client.fetch(query);
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`${error}`);
+        }
+    },
+    getBlogPost: async (slug: String) => {
+        const query = `
+            *[_type == "noticia" && slug.current == "${slug}"]{
+                ...,
+                author -> {
+                    ...,
+                    "id": _id,
+                    role,
+                    bio,
+                    "image": image.asset->
+                },
+                "id": _id,
+                "slug": slug.current,
+                "mainImage": mainImage.asset->
+            }[0]
+        `;
+        try {
+            const result = await client.fetch(query);
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`${error}`);
+        }
+    },
 };
 
 export default sanityApi;

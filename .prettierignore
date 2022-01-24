@@ -4,7 +4,6 @@
 **/dist
 **/lib
 **/lib-es5
-**/sanity
 **/presets
 **/.next
 **/out

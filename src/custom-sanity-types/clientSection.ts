@@ -1,4 +1,4 @@
-import { ImageAsset } from '@sanity/types/dist/dts';
+import { ImageAsset } from '@sanity/types';
 import { SanityPaymentMethod } from './paymentMethod';
 
 export interface SanityClientSection {
