@@ -16,6 +16,10 @@ https://manage.auth0.com/dashboard/us/goldfarb/users
 
 https://goldfarb.sanity.studio/desk
 
+## Como crear noticia
+
+https://www.loom.com/share/574b07a2a55b4142883373b5619eed88
+
 ## Documentacion
 
 -   [Next.js documentacion](https://nextjs.org/docs) - Next.js features & API
