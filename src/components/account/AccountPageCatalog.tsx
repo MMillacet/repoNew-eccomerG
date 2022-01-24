@@ -1,54 +1,75 @@
 // react
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
+import Check9x7Svg from '../../svg/check-9x7.svg';
 
 import AppLink from '../shared/AppLink';
-import Pagination from '../shared/Pagination';
-import CurrencyFormat from '../shared/CurrencyFormat';
-
-const limit = 12;
+import { useCart } from '../../store/cart/cartHooks';
+import url from '../../services/url';
+import InputNumber from '../shared/InputNumber';
 
 function AccountPageCatalog() {
-    const [accountStatus, setAccountStatus] = useState<any>(null);
-    const [page, setPage] = useState(1);
-    const [items, setItems] = useState<[]>([]);
+    const cart = useCart();
+    const [isLoading, setIsLoading] = useState(false);
+    const [columns, setColumns] = useState(2);
+    const [price, setPrice] = useState(true);
+    const [iva, setIva] = useState(true);
+    const [multiplier, setMultiplier] = useState(1);
+    const { user } = useUser();
 
-    const handlePageChange = (page: number) => {
-        const start = (page - 1) * limit;
-        const end = start + limit;
-        const items = accountStatus.lines.slice(start, end);
-        setPage(page);
-        setItems(items);
+    const handleColumnsChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setColumns(Number(event.target.value));
     };
 
-    useEffect(() => {
-        const getAccountStatus = async () => {
-            const { data }: any = await axios.get('/api/account/status');
-            setAccountStatus(data);
-            setItems(data.lines.slice(0, limit));
-        };
+    const handlePriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setPrice(event.target.checked);
+    };
 
-        getAccountStatus();
-    }, []);
+    const handleIvaChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setIva(event.target.checked);
+    };
 
-    const statusList = items?.map((item: any, i: number) => (
+    const handleMultiplierChange = (_mult: string | number) => {
+        const mult = Number(_mult.toString().slice(0, 3));
+        setMultiplier(mult);
+    };
+
+    const handleCreateCatalog = async () => {
+        setIsLoading(true);
+        const res = await axios.post('/api/products/catalog', {
+            email: user?.email,
+            columns,
+            price,
+            iva,
+            multiplier,
+            itemcodes: cart.items.map((item) => item.product.code),
+        });
+        setIsLoading(false);
+        if (res.status === 200) {
+            toast.success(`Catalogo enviado a ${user?.email}`, { theme: 'colored' });
+        } else {
+            toast.error('Error al enviar el catalogo', { theme: 'colored' });
+        }
+    };
+
+    const itemsList = cart.items?.map((item: any, i: number) => (
         <tr key={i}>
-            <td>{item?.docNum?.trim() && <AppLink href={''}>{`#${item.docNum}`}</AppLink>}</td>
-            <td>{item.doc1}</td>
-            <td>{item.doc2}</td>
-            <td>{item.invoice}</td>
-            <td>{item.date}</td>
+            <td>{item?.product.code}</td>
             <td>
-                <CurrencyFormat value={item.balanceP} />
+                <div className="product-image">
+                    <AppLink href={url.product(item.product)} className="product-image__body">
+                        <img className="product-image__img" src={item.product.images[0]} alt="" />
+                    </AppLink>
+                </div>
             </td>
-            <td>
-                <CurrencyFormat value={item.balanceD} currency={'U$'} />
-            </td>
+            <td>{item.product.title}</td>
         </tr>
     ));
 
@@ -59,30 +80,71 @@ function AccountPageCatalog() {
             </Head>
 
             <div className="card-header">
-                <h5>Estado de cuenta</h5>
+                <h5>Crear catalogo</h5>
                 <br />
-                <div className="status-card__row">
-                    <div className="status-card__row-title">Cliente</div>
-                    <div className="status-card__row-content">{accountStatus?.name}</div>
-                </div>
-                <div className="status-card__row">
-                    <div className="status-card__row-title">Codigo</div>
-                    <div className="status-card__row-content">{accountStatus?.name}</div>
-                </div>
-                <div className="status-card__row">
-                    <div className="status-card__row-title">RUT</div>
-                    <div className="status-card__row-content">{accountStatus?.rut}</div>
-                </div>
-                <div className="status-card__row">
-                    <div className="status-card__row-title">Saldo $</div>
-                    <div className="status-card__row-content">
-                        <CurrencyFormat value={accountStatus?.balanceP} />
+                <div className="row">
+                    <div className="col-md-3">
+                        <div className="form-group">
+                            <label htmlFor="select-columns">Columnas</label>
+                            <select id="select-columns" className="form-control" value={columns} onChange={handleColumnsChange}>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={6}>6</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div className="status-card__row">
-                    <div className="status-card__row-title">Saldo D</div>
-                    <div className="status-card__row-content">
-                        <CurrencyFormat value={accountStatus?.balanceD} currency={'U$'} />
+                    <div className="col-md-3">
+                        <div className="form-group">
+                            <div className="form-check">
+                                <span className="form-check-input input-check">
+                                    <span className="input-check__body">
+                                        <input
+                                            id="price"
+                                            className="input-check__input"
+                                            type="checkbox"
+                                            checked={price}
+                                            onChange={handlePriceChange}
+                                        />
+                                        <span className="input-check__box" />
+                                        <Check9x7Svg className="input-check__icon" />
+                                    </span>
+                                </span>
+                                <label htmlFor="price">Precio</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="form-group">
+                            <div className="form-check">
+                                <span className="form-check-input input-check">
+                                    <span className="input-check__body">
+                                        <input
+                                            id="iva"
+                                            className="input-check__input"
+                                            type="checkbox"
+                                            checked={iva}
+                                            onChange={handleIvaChange}
+                                        />
+                                        <span className="input-check__box" />
+                                        <Check9x7Svg className="input-check__icon" />
+                                    </span>
+                                </span>
+                                <label htmlFor="iva">IVA</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="form-group">
+                            <label htmlFor="multiplier">Multiplicador</label>
+                            <InputNumber
+                                id="multiplier"
+                                min={0}
+                                max={3}
+                                step={0.1}
+                                value={multiplier}
+                                onChange={handleMultiplierChange}
+                            ></InputNumber>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,26 +156,18 @@ function AccountPageCatalog() {
                         <thead>
                             <tr>
                                 <th>Codigo</th>
-                                <th>Doc</th>
-                                <th>Doc</th>
-                                <th>Factura</th>
-                                <th>Fecha</th>
-                                <th>Saldo $</th>
-                                <th>Saldo U$</th>
+                                <th>Imagen</th>
+                                <th>Producto</th>
                             </tr>
                         </thead>
-                        <tbody>{statusList}</tbody>
+                        <tbody>{itemsList}</tbody>
                     </table>
                 </div>
             </div>
             <div className="card-divider" />
-            <div className="card-footer">
-                <Pagination
-                    current={page}
-                    total={Math.ceil(accountStatus?.lines.length / limit)}
-                    onPageChange={handlePageChange}
-                />
-            </div>
+            <button type="submit" className={`btn btn-primary ${isLoading ? 'btn-loading' : ''}`} onClick={handleCreateCatalog}>
+                Crear catalogo
+            </button>
         </div>
     );
 }

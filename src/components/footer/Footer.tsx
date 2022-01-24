@@ -17,8 +17,8 @@ const Footer: FunctionComponent = () => {
     ];
 
     const accountLinks = [
+        { title: 'Editar Perfil', url: '/account/profile' },
         { title: 'Historial de pedidos', url: '/account/orders' },
-        { title: 'Catálogo', url: '/catalog' },
         { title: 'Estado de cuenta', url: '/account/status' },
         { title: 'Crear catalogo', url: '/account/catalog' },
     ];

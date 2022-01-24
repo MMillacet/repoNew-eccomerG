@@ -94,12 +94,7 @@ function InputNumber(props: InputNumberProps) {
 
     return (
         <div className={classes}>
-            <input
-                className={formControlClasses}
-                type="number"
-                onChange={handleChange}
-                {...otherProps}
-            />
+            <input className={formControlClasses} type="number" onChange={handleChange} {...otherProps} />
             <div className="input-number__add" onMouseDown={handleAddMouseDown} />
             <div className="input-number__sub" onMouseDown={handleSubMouseDown} />
         </div>

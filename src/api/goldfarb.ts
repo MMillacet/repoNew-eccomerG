@@ -4,7 +4,15 @@ import { nameToSlug } from './helpers/utils';
 
 // const baseURL = isProductionEnvironment ? 'http://app.goldfarb.com.uy/main/api' : 'http://app.goldfarb.com.uy/PruebasMain/api';
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = 'http://app.goldfarb.com.uy/main/api'; // 'http://app.goldfarb.com.uy/PruebasMain/api';
+
+export interface CatalogOptions {
+    email: string;
+    itemcodes: string[];
+    price: boolean;
+    iva: boolean;
+    multiplier: number;
+}
 
 export interface LookupOptions {
     itemcodes: string[];
@@ -312,6 +320,18 @@ const goldfarbApi = {
 
         return data;
     },
+
+    createCatalog: async (options: CatalogOptions) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/goldfarb/CreateCatalog',
+            method: 'post',
+            data: options,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    }
 };
 
 export default goldfarbApi;

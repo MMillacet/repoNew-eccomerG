@@ -36,21 +36,11 @@ export default function AccountPageLogin() {
                                     <form>
                                         <div className="form-group">
                                             <label htmlFor="login-email">Email address</label>
-                                            <input
-                                                id="login-email"
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="Enter email"
-                                            />
+                                            <input id="login-email" type="email" className="form-control" placeholder="Enter email" />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="login-password">Password</label>
-                                            <input
-                                                id="login-password"
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Password"
-                                            />
+                                            <input id="login-password" type="password" className="form-control" placeholder="Password" />
                                             <small className="form-text text-muted">
                                                 <AppLink href="/">Forgotten Password</AppLink>
                                             </small>
@@ -59,27 +49,17 @@ export default function AccountPageLogin() {
                                             <div className="form-check">
                                                 <span className="form-check-input input-check">
                                                     <span className="input-check__body">
-                                                        <input
-                                                            id="login-remember"
-                                                            type="checkbox"
-                                                            className="input-check__input"
-                                                        />
+                                                        <input id="login-remember" type="checkbox" className="input-check__input" />
                                                         <span className="input-check__box" />
                                                         <Check9x7Svg className="input-check__icon" />
                                                     </span>
                                                 </span>
-                                                <label
-                                                    className="form-check-label"
-                                                    htmlFor="login-remember"
-                                                >
+                                                <label className="form-check-label" htmlFor="login-remember">
                                                     Remember Me
                                                 </label>
                                             </div>
                                         </div>
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary mt-2 mt-md-3 mt-lg-4"
-                                        >
+                                        <button type="submit" className="btn btn-primary mt-2 mt-md-3 mt-lg-4">
                                             Login
                                         </button>
                                     </form>
@@ -93,37 +73,17 @@ export default function AccountPageLogin() {
                                     <form>
                                         <div className="form-group">
                                             <label htmlFor="register-email">Email address</label>
-                                            <input
-                                                id="register-email"
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="Enter email"
-                                            />
+                                            <input id="register-email" type="email" className="form-control" placeholder="Enter email" />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="register-password">Password</label>
-                                            <input
-                                                id="register-password"
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Password"
-                                            />
+                                            <input id="register-password" type="password" className="form-control" placeholder="Password" />
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="register-confirm">
-                                                Repeat Password
-                                            </label>
-                                            <input
-                                                id="register-confirm"
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Password"
-                                            />
+                                            <label htmlFor="register-confirm">Repeat Password</label>
+                                            <input id="register-confirm" type="password" className="form-control" placeholder="Password" />
                                         </div>
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary mt-2 mt-md-3 mt-lg-4"
-                                        >
+                                        <button type="submit" className="btn btn-primary mt-2 mt-md-3 mt-lg-4">
                                             Register
                                         </button>
                                     </form>

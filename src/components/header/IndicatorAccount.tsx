@@ -40,7 +40,7 @@ function IndicatorAccount() {
                     <AppLink href={url.accountOrders()}>Historial pedidos</AppLink>
                 </li>
                 <li>
-                    <AppLink href={url.accountAddresses()}>Direcciones</AppLink>
+                    <AppLink href={url.accountCatalog()}>Crear catalogo</AppLink>
                 </li>
                 <li>
                     <AppLink href={url.accountPassword()}>Contraseña</AppLink>
