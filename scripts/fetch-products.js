@@ -62,40 +62,6 @@ const lookup = async (itemcodes) => {
 
 const fileCode = (itemcode) => `${itemcode - (itemcode % 1000)}`;
 
-// const run = async () => {
-//     const start = new Date();
-//     const { products } = await getProductsList();
-//     const itemcodes = products
-//         .filter((product) => !!product)
-//         .map((product) => Number(product.itemcode))
-//         .sort((a, b) => a - b);
-
-//     const lastItemCode = itemcodes[itemcodes.length - 1];
-
-//     for (let i = 0; i < lastItemCode; i += 1000) {
-//         try {
-//             const itemcodesToLookup = itemcodes.filter((itemcode) => itemcode >= i && itemcode < i + 1000);
-//             console.log(`Looking up ${itemcodesToLookup.length} products...`);
-
-//             if (itemcodesToLookup.length > 0) {
-//                 // eslint-disable-next-line no-await-in-loop
-//                 const { products } = await lookup(itemcodesToLookup);
-//                 const file = {};
-//                 products.forEach((p) => {
-//                     file[p.id] = p;
-//                 });
-//                 fs.writeFileSync(`${__dirname}/../src/data/products/${i}.json`, JSON.stringify(file), { flag: 'w+' });
-//             }
-//         } catch (err) {
-//             console.error(`Error at ${i}, ${err}`);
-//             throw err;
-//         }
-//     }
-//     const end = new Date();
-//     const seconds = (end - start) / 1000;
-//     console.log(`Done in ${seconds} seconds`);
-// };
-
 const run = async () => {
     const start = new Date();
     // delete all contents of data/products folder

@@ -12,7 +12,7 @@ const Footer: FunctionComponent = () => {
         // { title: 'Misión y visión', url: '/site/vision-mission' },
         { title: 'Preguntas frecuentes', url: '/site/faq' },
         { title: 'Contacto', url: '/site/contact-us' },
-        { title: 'Noticias', url: '/site/news' },
+        { title: 'Noticias', url: '/blog' },
         { title: 'Como comprar', url: '/site/how-to-purchase' },
     ];
 
