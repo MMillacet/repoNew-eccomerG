@@ -50,6 +50,8 @@ function ProductsView(props: ProductsViewProps) {
 
     const { user } = useUser();
 
+    const isUserActivated = user && user.cardcode;
+
     const handlePageChange = useSetOption('page', parseFloat);
     const handleSortChange = useSetOption('sort', (event) => event.target.value);
     const handleLimitChange = useSetOption('limit', (event) => parseFloat(event.target.value));
@@ -129,8 +131,8 @@ function ProductsView(props: ProductsViewProps) {
                                     <option value="default">Relevancia</option>
                                     <option value="name_asc">Nombre (A-Z)</option>
                                     <option value="name_desc">Nombre (Z-A)</option>
-                                    {user && <option value="price_asc">Precio (menor a mayor)</option>}
-                                    {user && <option value="price_desc">Precio (mayor a menor)</option>}
+                                    {isUserActivated && <option value="price_asc">Precio (menor a mayor)</option>}
+                                    {isUserActivated && <option value="price_desc">Precio (mayor a menor)</option>}
                                 </select>
                             </div>
                         </div>

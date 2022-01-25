@@ -24,6 +24,7 @@ function WidgetFilters(props: WidgetFiltersProps) {
     const filters = useShopFilters();
     const values = useShopFilterValues();
     const { user } = useUser();
+    const isUserActivated = user && user.cardcode;
 
     const shopSetFilterValue = useShopSetFilterValueThunk();
     const shopResetFilters = useShopResetFiltersThunk();
@@ -36,7 +37,7 @@ function WidgetFilters(props: WidgetFiltersProps) {
     );
 
     const filtersList = filters
-        .filter((filter) => !(!user && filter.slug === 'price'))
+        .filter((filter) => !(!isUserActivated && filter.slug === 'price'))
         .map((filter) => {
             const renderFilter: RenderFilterFn = ({ toggle, setItemRef, setContentRef }) => (
                 <div className="filter filter--opened" ref={setItemRef}>

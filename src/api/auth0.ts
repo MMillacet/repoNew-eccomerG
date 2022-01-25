@@ -1,11 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 export interface UserMetadata {
-    name: string;
-    phone: string;
+    name?: string;
+    phone?: string;
+    cardcode?: string;
 }
 
 const auth0Api = {
+    // eslint-disable-next-line camelcase
     patch: async (userId: string, user_metadata: UserMetadata, accessToken?: string) => {
         const config: AxiosRequestConfig = {
             method: 'PATCH',

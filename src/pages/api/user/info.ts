@@ -11,16 +11,20 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
         const user = await auth0Api.info(session.accessToken);
         const transformedUser = transformUser(user);
 
-        const clientHeader = await goldfarbApi.getOrderHeader(transformedUser.cardcode);
+        if (!transformedUser.cardcode) {
+            res.status(401).json({ error: 'User not authenticated' });
+        } else {
+            const clientHeader = await goldfarbApi.getOrderHeader(transformedUser.cardcode);
 
-        session.user = {
-            initialised: true,
-            ...session.user,
-            ...transformedUser,
-            clientHeader,
-        };
+            session.user = {
+                initialised: true,
+                ...session.user,
+                ...transformedUser,
+                clientHeader,
+            };
 
-        res.status(200).json(session.user);
+            res.status(200).json(session.user);
+        }
     } else {
         // Should be auth because of withApiAuthRequired
         res.status(401).json({ error: 'User not authenticated' });

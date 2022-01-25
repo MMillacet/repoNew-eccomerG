@@ -27,6 +27,8 @@ function Suggestions(props: SuggestionsProps) {
 
     const { user } = useUser();
 
+    const isUserActivated = user && user.cardcode;
+
     const list =
         products &&
         products.map((product) => (
@@ -45,7 +47,7 @@ function Suggestions(props: SuggestionsProps) {
                     <div className="suggestions__item-meta"> {product.category} </div>
                 </div>
 
-                {user && (
+                {isUserActivated && (
                     <div className="suggestions__item-price">
                         {product.compareAtPrice && (
                             <Fragment>
@@ -62,7 +64,7 @@ function Suggestions(props: SuggestionsProps) {
                     </div>
                 )}
 
-                {user && context === 'header' && (
+                {isUserActivated && context === 'header' && (
                     <div className="suggestions__item-actions">
                         <AsyncAction
                             action={() => cartAddItem(product)}
