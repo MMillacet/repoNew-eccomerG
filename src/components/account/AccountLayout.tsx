@@ -30,7 +30,7 @@ function AccountLayout(props: AccountLayoutProps) {
         // { title: 'Order Details', link: url.accountOrder({ id: 5 }) },
         // { title: 'Direcciones', link: url.accountAddresses() },
         { title: 'Estado de cuenta', link: url.accountStatus() },
-        { title: 'Crear catalogo', url: url.accountCatalog() },
+        { title: 'Crear catalogo', link: url.accountCatalog() },
         // { title: 'Edit Address', link: url.accountAddress({ id: 5 }) },
         // { title: 'Password', link: url.accountPassword() },
         // { title: 'Cerrar sesión', link: url.accountSignIn() },

@@ -1,6 +1,7 @@
 // third-party
 import Head from 'next/head';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 // data stubs
 import { IUser } from '../../interfaces/user';
@@ -12,12 +13,14 @@ export interface AccountPageProfileProps {
 export default function AccountPageProfile(props: AccountPageProfileProps) {
     const { user } = props;
 
+    const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState(user?.name);
     const [phone, setPhone] = useState(user?.phone);
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
 
+        setIsLoading(true);
         const res = await fetch('/api/user/update', {
             body: JSON.stringify({
                 name: event.target.name.value,
@@ -28,6 +31,13 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
         });
 
         await res.json();
+        setIsLoading(false);
+
+        if (res.status === 200) {
+            toast.success('Perfil actualizado correctamente', { theme: 'colored' });
+        } else {
+            toast.error('Error al actualizar perfil', { theme: 'colored' });
+        }
     };
 
     return (
@@ -66,7 +76,7 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                             <input id="cardcode" type="text" className="form-control" value={user?.cardcode} readOnly />
                         </div>
                         <div className="form-group mt-5 mb-0">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className={`btn btn-primary ${isLoading ? 'btn-loading' : ''}`}>
                                 Save
                             </button>
                         </div>
