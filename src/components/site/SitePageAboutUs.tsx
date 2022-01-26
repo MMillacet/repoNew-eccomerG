@@ -51,10 +51,7 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                 <title>Sobre Nosotros</title>
             </Head>
 
-            <div
-                className="about-us__image"
-                style={{ backgroundImage: `url("${props.initData?.banner?.image?.url}")` }}
-            />
+            <div className="about-us__image" style={{ backgroundImage: `url("${props.initData?.banner?.image?.url}")` }} />
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-xl-10">
@@ -62,14 +59,10 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                             <h1 className="about-us__title">{props.initData?.title}</h1>
                             <h5 className="about-us__team-title">{props.initData?.subtitle}</h5>
                             <div className="about-us__text typography">
-                                {props.initData?.texts && (
-                                    <SanityBlockContent blocks={props.initData?.texts} />
-                                )}
+                                {props.initData?.texts && <SanityBlockContent blocks={props.initData?.texts} />}
                             </div>
                             <div className="about-us__team">
-                                <h3 className="about-us__team-title">
-                                    REFERENTES DEL EQUIPO COMERCIAL
-                                </h3>
+                                <h3 className="about-us__team-title">REFERENTES DEL EQUIPO COMERCIAL</h3>
                                 {/* <div className="about-us__team-subtitle text-muted">
                                     <br />
                                     <AppLink href={url.contacts()}>Contact us</AppLink> and we will
@@ -78,19 +71,12 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                                 <div className="about-us__teammates teammates">
                                     <GoldfarbSlick {...slickSettings}>
                                         {props.initData?.team?.map((teamMember) => (
-                                            <div
-                                                key={teamMember.id}
-                                                className="teammates__item teammate"
-                                            >
+                                            <div key={teamMember.id} className="teammates__item teammate">
                                                 <div className="teammate__avatar">
                                                     <img src={`${teamMember.image?.url}`} alt="" />
                                                 </div>
-                                                <div className="teammate__name">
-                                                    {teamMember.name}
-                                                </div>
-                                                <div className="teammate__position text-muted">
-                                                    {teamMember.role}
-                                                </div>
+                                                <div className="teammate__name">{teamMember.name}</div>
+                                                <div className="teammate__position text-muted">{teamMember.role}</div>
                                             </div>
                                         ))}
                                     </GoldfarbSlick>

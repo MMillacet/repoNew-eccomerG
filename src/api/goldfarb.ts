@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { IGoldfarbInvoice } from '../interfaces/invoice';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
@@ -307,6 +308,50 @@ const goldfarbApi = {
      * Account
      * */
 
+    getInvoice: async (invoiceId: string, cardcode: string): Promise<IGoldfarbInvoice> => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/Invoice',
+            method: 'get',
+            params: {
+                docNum: invoiceId,
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getInvoiceReturn: async (invoiceId: string, cardcode: string): Promise<IGoldfarbInvoice> => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/InvoiceReturn',
+            method: 'get',
+            params: {
+                docNum: invoiceId,
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getReceipt: async (invoiceId: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/clientRecipe',
+            method: 'get',
+            params: {
+                docNum: invoiceId,
+                // cardcode, why no cardcode?
+            },
+        };
+        const { data } = await axios(config);
+        return data;
+    },
+
     getAccountStatus: async (cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
@@ -331,7 +376,7 @@ const goldfarbApi = {
         const { data } = await axios(config);
 
         return data;
-    }
+    },
 };
 
 export default goldfarbApi;

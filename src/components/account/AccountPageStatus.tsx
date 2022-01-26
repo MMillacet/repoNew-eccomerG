@@ -36,21 +36,30 @@ function AccountPageStatus() {
         getAccountStatus();
     }, []);
 
-    const statusList = items?.map((item: any, i: number) => (
-        <tr key={i}>
-            <td>{item?.docNum?.trim() && <AppLink href={''}>{`#${item.docNum}`}</AppLink>}</td>
-            <td>{item.doc1}</td>
-            <td>{item.doc2}</td>
-            <td>{item.invoice}</td>
-            <td>{item.date}</td>
-            <td>
-                <CurrencyFormat value={item.balanceP} />
-            </td>
-            <td>
-                <CurrencyFormat value={item.balanceD} currency={'U$'} />
-            </td>
-        </tr>
-    ));
+    const url: any = {
+        Fac: '/account/documents/invoice',
+        Ndc: '/account/documents/return',
+        Rec: '/account/documents/receipt',
+    };
+
+    const statusList = items?.map((item: any, i: number) => {
+        const docNum = item?.docNum?.trim();
+        return (
+            <tr key={i}>
+                <td>{docNum && <AppLink href={`${url[item.doc1]}/${docNum}`}>{`#${docNum}`}</AppLink>}</td>
+                <td>{item.doc1}</td>
+                <td>{item.doc2}</td>
+                <td>{item.invoice}</td>
+                <td>{item.date}</td>
+                <td>
+                    <CurrencyFormat value={item.balanceP} />
+                </td>
+                <td>
+                    <CurrencyFormat value={item.balanceD} currency={'U$'} />
+                </td>
+            </tr>
+        );
+    });
 
     return (
         <div className="card">
@@ -108,11 +117,7 @@ function AccountPageStatus() {
             </div>
             <div className="card-divider" />
             <div className="card-footer">
-                <Pagination
-                    current={page}
-                    total={Math.ceil(accountStatus?.lines.length / limit)}
-                    onPageChange={handlePageChange}
-                />
+                <Pagination current={page} total={Math.ceil(accountStatus?.lines.length / limit)} onPageChange={handlePageChange} />
             </div>
         </div>
     );
