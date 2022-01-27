@@ -91,6 +91,20 @@ const goldfarbApi = {
         return data;
     },
 
+    isClientValid: async (cardcode: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/validclient',
+            method: 'get',
+            params: {
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
     /**
      * Products
      * */

@@ -5,6 +5,7 @@ import Head from 'next/head';
 import oldUsers from '../../data/users.json';
 import auth0Api from '../../api/auth0';
 import { transformUser } from '../../services/user';
+import goldfarbApi from '../../api/goldfarb';
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const { req, res } = context;
@@ -38,11 +39,21 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
                 console.log('User not found in old users database');
             }
         } else {
-            // If user already has cardcode, redirect to home
-            res.writeHead(302, {
-                Location: '/',
-            });
-            res.end();
+            const isClientValid = await goldfarbApi.isClientValid(transformedUser.cardcode);
+            if (isClientValid) {
+                res.writeHead(302, {
+                    Location: '/',
+                });
+                res.end();
+            } else {
+                console.log('User is not valid');
+                const response = await auth0Api.patch(user.sub, { cardcode: undefined }, session.accessToken);
+                console.log(JSON.stringify(response));
+                res.writeHead(302, {
+                    Location: '/account/activate',
+                });
+                res.end();
+            }
         }
     } else {
         console.error('User not found in session');
