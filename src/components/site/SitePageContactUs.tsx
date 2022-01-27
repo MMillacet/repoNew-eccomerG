@@ -12,7 +12,7 @@ import theme from '../../data/theme';
 
 function SitePageContactUs() {
     const breadcrumb = [
-        { title: 'Home', url: '' },
+        { title: 'Inicio', url: '/' },
         { title: 'Contacto', url: '' },
     ];
 

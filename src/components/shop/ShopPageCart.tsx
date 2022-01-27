@@ -71,8 +71,8 @@ function ShopPageCart() {
     };
 
     const breadcrumb = [
-        { title: 'Inicio', url: '' },
-        { title: 'Carro', url: '' },
+        { title: 'Inicio', url: '/' },
+        { title: 'Carro de compras', url: '' },
     ];
 
     let content;
@@ -265,10 +265,10 @@ function ShopPageCart() {
     return (
         <Fragment>
             <Head>
-                <title>{`Shopping Cart — ${theme.name}`}</title>
+                <title>{`Carro de compras — ${theme.name}`}</title>
             </Head>
 
-            <PageHeader header="Shopping Cart" breadcrumb={breadcrumb} />
+            <PageHeader header="Carro de compras" breadcrumb={breadcrumb} />
 
             {content}
         </Fragment>
