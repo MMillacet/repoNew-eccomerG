@@ -48,7 +48,7 @@ export interface IGoldfarbReceipt {
         docNum: number;
         folioNum: string;
         docDate: string;
-        docCurr: string;
+        docCur: string;
         total: number;
     }[];
     noApply: number;
