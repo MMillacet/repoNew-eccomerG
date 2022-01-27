@@ -24,8 +24,8 @@ function ShopPageWishlist() {
     const wishlistRemoveItem = useWishlistRemoveItem();
     const cartAddItem = useCartAddItem();
     const breadcrumb = [
-        { title: 'Home', url: '' },
-        { title: 'Wishlist', url: '' },
+        { title: 'Inicio', url: '' },
+        { title: 'Favoritos', url: '' },
     ];
 
     let content;
@@ -81,22 +81,16 @@ function ShopPageWishlist() {
                         </div>
                     </td>
                     <td className="wishlist__column wishlist__column--stock">
-                        <div className="badge badge-success">In Stock</div>
+                        <div className="badge badge-success">En stock</div>
                     </td>
                     <td className="wishlist__column wishlist__column--price">
                         <CurrencyFormat value={item.price} />
                     </td>
                     <td className="wishlist__column wishlist__column--tocart">
-                        <AsyncAction
-                            action={() => cartAddItem(item)}
-                            render={renderAddToCarButton}
-                        />
+                        <AsyncAction action={() => cartAddItem(item)} render={renderAddToCarButton} />
                     </td>
                     <td className="wishlist__column wishlist__column--remove">
-                        <AsyncAction
-                            action={() => wishlistRemoveItem(item.id)}
-                            render={renderRemoveButton}
-                        />
+                        <AsyncAction action={() => wishlistRemoveItem(item.id)} render={renderRemoveButton} />
                     </td>
                 </tr>
             );
@@ -109,21 +103,11 @@ function ShopPageWishlist() {
                         <thead className="wishlist__head">
                             <tr className="wishlist__row">
                                 <th className="wishlist__column wishlist__column--image">Image</th>
-                                <th className="wishlist__column wishlist__column--product">
-                                    Product
-                                </th>
-                                <th className="wishlist__column wishlist__column--stock">
-                                    Stock Status
-                                </th>
+                                <th className="wishlist__column wishlist__column--product">Product</th>
+                                <th className="wishlist__column wishlist__column--stock">Stock Status</th>
                                 <th className="wishlist__column wishlist__column--price">Price</th>
-                                <th
-                                    className="wishlist__column wishlist__column--tocart"
-                                    aria-label="Agregar al carro"
-                                />
-                                <th
-                                    className="wishlist__column wishlist__column--remove"
-                                    aria-label="Remove"
-                                />
+                                <th className="wishlist__column wishlist__column--tocart" aria-label="Agregar al carro" />
+                                <th className="wishlist__column wishlist__column--remove" aria-label="Remove" />
                             </tr>
                         </thead>
                         <tbody className="wishlist__body">{itemsList}</tbody>
@@ -136,10 +120,10 @@ function ShopPageWishlist() {
             <div className="block block-empty">
                 <div className="container">
                     <div className="block-empty__body">
-                        <div className="block-empty__message">Your wish list is empty!</div>
+                        <div className="block-empty__message">Tus favoritos estan vacios!</div>
                         <div className="block-empty__actions">
                             <AppLink href="/" className="btn btn-primary btn-sm">
-                                Continue
+                                Continuar
                             </AppLink>
                         </div>
                     </div>

@@ -7,16 +7,16 @@ import classNames from 'classnames';
 // application
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
-import Compare16Svg from '../../svg/compare-16.svg';
+// import Compare16Svg from '../../svg/compare-16.svg';
 import CurrencyFormat from './CurrencyFormat';
 import Quickview16Svg from '../../svg/quickview-16.svg';
-import Rating from './Rating';
+// import Rating from './Rating';
 import url from '../../services/url';
-import Wishlist16Svg from '../../svg/wishlist-16.svg';
+// import Wishlist16Svg from '../../svg/wishlist-16.svg';
 import { IProduct } from '../../interfaces/product';
-import { useCompareAddItem } from '../../store/compare/compareHooks';
+// import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useQuickviewOpen } from '../../store/quickview/quickviewHooks';
-import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
+// import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
@@ -36,8 +36,8 @@ function ProductCard(props: ProductCardProps) {
         'product-card--layout--horizontal': layout === 'horizontal',
     });
     const cartAddItem = useCartAddItem();
-    const wishlistAddItem = useWishlistAddItem();
-    const compareAddItem = useCompareAddItem();
+    // const wishlistAddItem = useWishlistAddItem();
+    // const compareAddItem = useCompareAddItem();
     const quickviewOpen = useQuickviewOpen();
 
     const badges: any[] = [];
@@ -61,7 +61,6 @@ function ProductCard(props: ProductCardProps) {
                 <AppLink href={url.product(product)} className="product-image__body">
                     <img
                         className="product-image__img"
-                        // src={`https://goldfarbbetascc.sana-cloud.net/product/image/large/${product.id}_0.jpg`}
                         src={`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${product.id}.jpg`}
                         alt=""
                     />
@@ -120,10 +119,10 @@ function ProductCard(props: ProductCardProps) {
                 <div className="product-card__name">
                     <AppLink href={url.product(product)}>{product.title}</AppLink>
                 </div>
-                <div className="product-card__rating">
+                {/* <div className="product-card__rating">
                     <Rating value={product.rating} />
                     <div className=" product-card__rating-legend">{`${product.reviews} Reviews`}</div>
-                </div>
+                </div> */}
                 {features}
             </div>
             <div className="product-card__actions">
@@ -158,7 +157,7 @@ function ProductCard(props: ProductCardProps) {
                             </Fragment>
                         )}
                     />
-                    <AsyncAction
+                    {/* <AsyncAction
                         action={() => wishlistAddItem(product)}
                         render={({ run, loading }) => (
                             <button
@@ -171,8 +170,8 @@ function ProductCard(props: ProductCardProps) {
                                 <Wishlist16Svg />
                             </button>
                         )}
-                    />
-                    <AsyncAction
+                    /> */}
+                    {/* <AsyncAction
                         action={() => compareAddItem(product)}
                         render={({ run, loading }) => (
                             <button
@@ -185,7 +184,7 @@ function ProductCard(props: ProductCardProps) {
                                 <Compare16Svg />
                             </button>
                         )}
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

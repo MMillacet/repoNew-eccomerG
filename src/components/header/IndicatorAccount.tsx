@@ -42,9 +42,9 @@ function IndicatorAccount() {
                 <li>
                     <AppLink href={url.accountCatalog()}>Crear catalogo</AppLink>
                 </li>
-                <li>
+                {/* <li>
                     <AppLink href={url.accountPassword()}>Contraseña</AppLink>
-                </li>
+                </li> */}
             </ul>
             <div className="account-menu__divider" />
             <ul className="account-menu__links">

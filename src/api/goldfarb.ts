@@ -77,6 +77,20 @@ const goldfarbApi = {
         return data;
     },
 
+    getServiceStatus: async (docNum: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/servicestatus',
+            method: 'get',
+            params: {
+                docNum,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
     /**
      * Products
      * */

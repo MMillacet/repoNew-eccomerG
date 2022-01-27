@@ -191,7 +191,7 @@ function Product(props: ProductProps) {
                                         )}
                                     />
                                 </div>
-                                <div className="product__actions-item product__actions-item--wishlist">
+                                {/* <div className="product__actions-item product__actions-item--wishlist">
                                     <AsyncAction
                                         action={() => wishlistAddItem(product)}
                                         render={({ run, loading }) => (
@@ -232,7 +232,7 @@ function Product(props: ProductProps) {
                                             </button>
                                         )}
                                     />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </form>

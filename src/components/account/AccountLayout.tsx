@@ -24,7 +24,7 @@ function AccountLayout(props: AccountLayoutProps) {
     ];
 
     const items = [
-        { title: 'Inicio', link: url.accountDashboard() },
+        // { title: 'Inicio', link: url.accountDashboard() },
         { title: 'Editar Perfil', link: url.accountProfile() },
         { title: 'Historial de pedidos', link: url.accountOrders() },
         // { title: 'Order Details', link: url.accountOrder({ id: 5 }) },

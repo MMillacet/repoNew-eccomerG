@@ -2,13 +2,13 @@
 import AppLink from '../shared/AppLink';
 import CartIndicator from './IndicatorCart';
 // import Departments from './Departments';
-import Heart20Svg from '../../svg/heart-20.svg';
-import Indicator from './Indicator';
+// import Heart20Svg from '../../svg/heart-20.svg';
+// import Indicator from './Indicator';
 import IndicatorAccount from './IndicatorAccount';
 import IndicatorSearch from './IndicatorSearch';
 import LogoSmallSvg from '../../svg/logo-small.svg';
 import NavLinks from './NavLinks';
-import { useWishlist } from '../../store/wishlist/wishlistHooks';
+// import { useWishlist } from '../../store/wishlist/wishlistHooks';
 
 export type NavPanelLayout = 'default' | 'compact';
 
@@ -18,9 +18,9 @@ export interface NavPanelProps {
 
 function NavPanel(props: NavPanelProps) {
     const { layout = 'default' } = props;
-    const {
-        items: { length: wishlistCount },
-    } = useWishlist();
+    // const {
+    //     items: { length: wishlistCount },
+    // } = useWishlist();
 
     let logo = null;
     // let departments = null;
@@ -60,7 +60,7 @@ function NavPanel(props: NavPanelProps) {
                     <div className="nav-panel__indicators">
                         {searchIndicator}
 
-                        <Indicator url="/shop/wishlist" value={wishlistCount} icon={<Heart20Svg />} />
+                        {/* <Indicator url="/shop/wishlist" value={wishlistCount} icon={<Heart20Svg />} /> */}
 
                         <CartIndicator />
 

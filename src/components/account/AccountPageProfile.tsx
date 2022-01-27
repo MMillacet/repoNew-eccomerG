@@ -77,7 +77,7 @@ export default function AccountPageProfile(props: AccountPageProfileProps) {
                         </div>
                         <div className="form-group mt-5 mb-0">
                             <button type="submit" className={`btn btn-primary ${isLoading ? 'btn-loading' : ''}`}>
-                                Save
+                                Guardar
                             </button>
                         </div>
                     </div>
