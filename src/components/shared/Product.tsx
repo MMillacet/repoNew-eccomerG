@@ -11,7 +11,7 @@ import Compare16Svg from '../../svg/compare-16.svg';
 import CurrencyFormat from './CurrencyFormat';
 import InputNumber from './InputNumber';
 import ProductGallery from './ProductGallery';
-import Rating from './Rating';
+// import Rating from './Rating';
 import Wishlist16Svg from '../../svg/wishlist-16.svg';
 import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
@@ -54,10 +54,7 @@ function Product(props: ProductProps) {
         prices = (
             <Fragment>
                 <span className="product__new-price">
-                    <CurrencyFormat
-                        value={realTimeProduct?.price}
-                        currency={realTimeProduct?.currency}
-                    />
+                    <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
                 </span>{' '}
                 <span className="product__old-price">
                     <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
@@ -65,9 +62,7 @@ function Product(props: ProductProps) {
             </Fragment>
         );
     } else {
-        prices = (
-            <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
-        );
+        prices = <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />;
     }
 
     return (
@@ -113,7 +108,7 @@ function Product(props: ProductProps) {
                         />
                     </div>
                     <h1 className="product__name">{product.title}</h1>
-                    <div className="product__rating">
+                    {/* <div className="product__rating">
                         <div className="product__rating-stars">
                             <Rating value={product.rating} />
                         </div>
@@ -122,10 +117,8 @@ function Product(props: ProductProps) {
                             <span>/</span>
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
-                    </div>
-                    <div className="product__description">
-                        {realTimeProduct?.description || product.description}
-                    </div>
+                    </div> */}
+                    <div className="product__description">{realTimeProduct?.description || product.description}</div>
                     <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
