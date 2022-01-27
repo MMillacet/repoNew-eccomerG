@@ -17,8 +17,6 @@ export interface AccountOrderDetailProps {
 export default function AccountPageOrderDetails(props: AccountOrderDetailProps) {
     const { order } = props;
 
-    console.log(order);
-
     const orderItems = order.lines.map((line) => (
         <tr key={line.lineNum}>
             <td>{`${line.description} × ${line.quantity}`}</td>
@@ -28,16 +26,14 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
     ));
 
     const totals = () => {
-        const shipping = { price: 25 };
+        const shipping = { price: 0 };
         const { taxPesos, taxDolares } = order.header;
 
         const r1 = shipping && (
             <tr key={1}>
                 <th>Envio</th>
                 <td></td>
-                <td>
-                    <CurrencyFormat value={shipping.price} />
-                </td>
+                <td>{/* <CurrencyFormat value={shipping.price} /> */}</td>
             </tr>
         );
 

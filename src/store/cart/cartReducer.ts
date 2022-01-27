@@ -51,7 +51,7 @@ function calcTotals(items: CartItem[], currency: string): CartTotal[] {
         return [
             {
                 type: 'tax',
-                title: 'Tax',
+                title: 'Impuestos',
                 price: calcSubtotal(items, currency) * 0.2,
             },
         ];
@@ -60,12 +60,12 @@ function calcTotals(items: CartItem[], currency: string): CartTotal[] {
     return [
         {
             type: 'shipping',
-            title: 'Shipping',
-            price: 25,
+            title: 'Envio',
+            price: 0,
         },
         {
             type: 'tax',
-            title: 'Tax',
+            title: 'Impuestos',
             price: calcSubtotal(items, currency) * 0.2,
         },
     ];

@@ -67,7 +67,7 @@
     color: $dropcart-font-muted-color;
 }
 .dropcart__product-meta {
-    margin-top: 5px;
+    margin-top: 25px;
     font-size: 13px;
 }
 .dropcart__product-price {
@@ -75,7 +75,7 @@
     font-weight: $font-weight-bold;
 }
 .dropcart__product-remove {
-    margin-top: -6px;
+    margin-top: 15px;
     flex-shrink: 0;
 
     @include direction {
