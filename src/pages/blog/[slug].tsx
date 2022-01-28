@@ -9,28 +9,17 @@ export interface PageProps {
     recentPosts?: Array<SanityBlogPost> | null;
 }
 function Page(props: PageProps) {
-    return (
-        <BlogPagePost
-            layout="classic"
-            sidebarPosition="end"
-            post={props.post}
-            recentPosts={props.recentPosts}
-        />
-    );
+    return <BlogPagePost layout="classic" sidebarPosition="end" post={props.post} recentPosts={props.recentPosts} />;
 }
 
 export async function getStaticPaths() {
     const posts = await sanityApi.getBlog();
 
     // Get the paths we want to pre-render based on posts
-    const paths = process.env.IGNORE_PRODUCT_BUILDS
-        ? []
-        : posts
-              .filter((product: { slug: any }) => !!product.slug)
-              .map((product: { slug: any }) => ({ params: { slug: product.slug } }));
+    const paths = posts.filter((post: { slug: any }) => !!post.slug).map((post: { slug: any }) => ({ params: { slug: post.slug } }));
 
     // { fallback: false } means other routes should 404.
-    return { paths, fallback: false };
+    return { paths, fallback: true };
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context: GetStaticPropsContext) => {
