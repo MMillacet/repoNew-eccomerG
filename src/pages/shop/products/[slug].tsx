@@ -65,7 +65,7 @@ export async function getStaticPaths() {
               .map((product: { itemcode: any }) => ({ params: { slug: product.itemcode } }));
 
     // { fallback: false } means other routes should 404.
-    return { paths, fallback: false };
+    return { paths, fallback: true };
 }
 
 const fileCode = (itemcode: number) => `${itemcode - (itemcode % 1000)}`;

@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context: GetStat
         post = await sanityApi.getBlogPost(slug);
         recentPosts = await sanityApi.getBlog(5, 'publishedAt', 'desc');
     }
-    console.log('recentPosts', recentPosts);
+
     return {
         props: {
             post,
