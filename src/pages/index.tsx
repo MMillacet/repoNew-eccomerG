@@ -1,6 +1,6 @@
 // third-party
 import { useUser } from '@auth0/nextjs-auth0';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
 // application
@@ -30,7 +30,7 @@ function Page(props: PageProps) {
     return <HomePageTwo initData={initData} />;
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     const result = await sanityApi.getHomeContent();
 
     const [herramientas, loMasVendido, destacados] = await Promise.all(
