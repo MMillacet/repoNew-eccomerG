@@ -1,5 +1,5 @@
 // third-party
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 // application
 import sanityApi from '../../api/sanity';
@@ -14,7 +14,7 @@ function Page(props: PageProps) {
     return <SitePageAboutUs initData={initData} />;
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     const { title, subtitle, nuestroEquipo, banner, texts } = await sanityApi.getAboutUsContent();
 
     return {
