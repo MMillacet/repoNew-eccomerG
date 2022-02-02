@@ -1,5 +1,5 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -28,12 +28,30 @@ export interface ProductProps {
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
+
     const { realTimeProduct } = useRealTimeProduct(product?.id);
 
     const [quantity, setQuantity] = useState<number>(1);
+    const [documents, setDocuments] = useState<string[]>([]);
+    const [images, setImages] = useState<string[]>(product.images);
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
     const compareAddItem = useCompareAddItem();
+
+    const fetchDocuments = async () => {
+        const docs = await (await fetch(`/api/documents?id=${product.code}`)).json();
+        setDocuments(docs);
+    };
+
+    const fetchImages = async () => {
+        const imgs = await (await fetch(`/api/images?id=${product.code}`)).json();
+        setImages(imgs);
+    };
+
+    useEffect(() => {
+        fetchDocuments();
+        fetchImages();
+    }, []);
 
     const addToCart = () => {
         if (typeof quantity === 'string') {
@@ -50,25 +68,27 @@ function Product(props: ProductProps) {
 
     let prices;
 
-    if (product.compareAtPrice) {
-        prices = (
-            <Fragment>
-                <span className="product__new-price">
-                    <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
-                </span>{' '}
-                <span className="product__old-price">
-                    <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
-                </span>
-            </Fragment>
-        );
-    } else {
-        prices = <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />;
+    if (realTimeProduct && realTimeProduct.price > 0) {
+        if (product.compareAtPrice) {
+            prices = (
+                <Fragment>
+                    <span className="product__new-price">
+                        <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
+                    </span>{' '}
+                    <span className="product__old-price">
+                        <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
+                    </span>
+                </Fragment>
+            );
+        } else {
+            prices = <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />;
+        }
     }
 
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} images={product.images} />
+                <ProductGallery layout={layout} images={images} />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -119,13 +139,13 @@ function Product(props: ProductProps) {
                         </div>
                     </div> */}
                     <div className="product__description">{realTimeProduct?.description || product.description}</div>
-                    <ul className="product__features">
+                    {/* <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
                         <li>Battery Cell Type: Lithium</li>
                         <li>Voltage: 20 Volts</li>
                         <li>Battery Capacity: 2 Ah</li>
-                    </ul>
+                    </ul> */}
                     <ul className="product__meta">
                         <li className="product__meta-availability">
                             Disponibilidad:{' '}
@@ -136,9 +156,9 @@ function Product(props: ProductProps) {
                             )}
                         </li>
                         <li>
-                            Brand: <AppLink href="/">{product.brand?.name}</AppLink>
+                            Marca: <AppLink href="/">{product.brand?.name}</AppLink>
                         </li>
-                        <li>SKU: {product?.id}</li>
+                        <li>Codigo: {product?.id}</li>
                     </ul>
                 </div>
 
@@ -184,49 +204,23 @@ function Product(props: ProductProps) {
                                         )}
                                     />
                                 </div>
-                                {/* <div className="product__actions-item product__actions-item--wishlist">
-                                    <AsyncAction
-                                        action={() => wishlistAddItem(product)}
-                                        render={({ run, loading }) => (
-                                            <button
-                                                type="button"
-                                                data-toggle="tooltip"
-                                                title="Wishlist"
-                                                onClick={run}
-                                                className={classNames(
-                                                    'btn btn-secondary btn-svg-icon btn-lg',
-                                                    {
-                                                        'btn-loading': loading,
-                                                    },
-                                                )}
-                                            >
-                                                <Wishlist16Svg />
-                                            </button>
-                                        )}
-                                    />
-                                </div>
-                                <div className="product__actions-item product__actions-item--compare">
-                                    <AsyncAction
-                                        action={() => compareAddItem(product)}
-                                        render={({ run, loading }) => (
-                                            <button
-                                                type="button"
-                                                data-toggle="tooltip"
-                                                title="Compare"
-                                                onClick={run}
-                                                className={classNames(
-                                                    'btn btn-secondary btn-svg-icon btn-lg',
-                                                    {
-                                                        'btn-loading': loading,
-                                                    },
-                                                )}
-                                            >
-                                                <Compare16Svg />
-                                            </button>
-                                        )}
-                                    />
-                                </div> */}
                             </div>
+                            {documents.length > 0 && (
+                                <Fragment>
+                                    <br />
+                                    <br />
+                                    <label htmlFor="product-docs" className="product__option-label">
+                                        Documentos
+                                    </label>
+                                    <ul className="product__meta">
+                                        {documents.map((document, i) => (
+                                            <li key={i}>
+                                                <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Fragment>
+                            )}
                         </div>
                     </form>
                 </div>

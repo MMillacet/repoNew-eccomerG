@@ -81,10 +81,7 @@ const slickSettingsThumbnails = {
     },
 };
 
-type CreateGalleryFn = (
-    images: PhotoSwipe.Item[],
-    options: PhotoSwipe.Options,
-) => PhotoSwipe<PhotoSwipeUIDefault.Options>;
+type CreateGalleryFn = (images: PhotoSwipe.Item[], options: PhotoSwipe.Options) => PhotoSwipe<PhotoSwipeUIDefault.Options>;
 
 export type ProductGalleryLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -126,10 +123,8 @@ function ProductGallery(props: ProductGalleryProps) {
                 throw Error('Image ref is null');
             }
 
-            const width =
-                (tag.dataset.width ? parseFloat(tag.dataset.width) : null) || tag.naturalWidth;
-            const height =
-                (tag.dataset.height ? parseFloat(tag.dataset.height) : null) || tag.naturalHeight;
+            const width = (tag.dataset.width ? parseFloat(tag.dataset.width) : null) || tag.naturalWidth;
+            const height = (tag.dataset.height ? parseFloat(tag.dataset.height) : null) || tag.naturalHeight;
 
             return {
                 src: images[index],
@@ -308,18 +303,9 @@ function ProductGallery(props: ProductGalleryProps) {
         });
 
         return (
-            <button
-                type="button"
-                key={index}
-                onClick={() => handleThumbnailClick(index)}
-                className={classes}
-            >
+            <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
                 <div className="product-image__body">
-                    <img
-                        className="product-image__img product-gallery__carousel-image"
-                        src={image}
-                        alt=""
-                    />
+                    <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
                 </div>
             </button>
         );
@@ -330,11 +316,7 @@ function ProductGallery(props: ProductGalleryProps) {
             <div className="product-gallery">
                 <div className="product-gallery__featured">
                     {layout !== 'quickview' && (
-                        <button
-                            type="button"
-                            className="product-gallery__zoom"
-                            onClick={handleZoomButtonClick}
-                        >
+                        <button type="button" className="product-gallery__zoom" onClick={handleZoomButtonClick}>
                             <ZoomIn24Svg />
                         </button>
                     )}

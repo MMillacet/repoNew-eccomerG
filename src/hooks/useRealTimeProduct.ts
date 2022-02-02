@@ -1,9 +1,7 @@
 // react
-import { useUser } from '@auth0/nextjs-auth0';
 import { useEffect, useReducer } from 'react';
 
 // application
-import goldfarbApi from '../api/goldfarb';
 import { IProduct } from '../interfaces/product';
 
 export enum ApiRequestActionTypes {
@@ -44,19 +42,17 @@ const useRealTimeProduct = (productCode: string | number | undefined): RealTimeP
         realTimeProduct: undefined,
     });
 
-    const { user } = useUser();
+    // const { user } = useUser();
 
     useEffect(() => {
         const realTimeProductRequest = async () => {
             try {
                 if (productCode) {
                     dispatch({ type: ApiRequestActionTypes.START });
-                    const data = await goldfarbApi.getProductsLookup({
-                        itemcodes: [`${productCode}`],
-                        cardcode: `${user?.cardcode}`,
-                    });
 
+                    const data = await (await fetch(`/api/products/lookup?itemcodes=${[`${productCode}`]}`)).json();
                     const rtProduct = data?.products?.[0];
+
                     if (rtProduct) dispatch({ type: ApiRequestActionTypes.SUCCESS, payload: rtProduct });
                 }
             } catch (error: any) {
