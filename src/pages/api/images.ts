@@ -1,4 +1,3 @@
-import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const DOCS_EXT = ['jpg'];
@@ -48,9 +47,9 @@ async function getImages(id: string) {
     return imgs;
 }
 
-export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.query.id as string;
 
     const result = await getImages(id);
     res.status(200).json(result);
-});
+};
