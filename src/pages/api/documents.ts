@@ -15,11 +15,11 @@ async function isUrlFound(url: string): Promise<boolean> {
 async function getDocumentsForExt(id: string, ext: string): Promise<string[]> {
     const docs: string[] = [];
 
-    let i = 1;
+    let i = 0;
     let exit = false;
 
     while (!exit && i < 10) {
-        const url = i === 1 ? `${DOCS_BASE_URL}${id}.${ext}` : `${DOCS_BASE_URL}${id}-${i}.${ext}`;
+        const url = i === 0 ? `${DOCS_BASE_URL}${id}.${ext}` : `${DOCS_BASE_URL}${id}-${i}.${ext}`;
         // eslint-disable-next-line no-await-in-loop
         const found = await isUrlFound(url);
 
