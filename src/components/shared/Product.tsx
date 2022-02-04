@@ -17,7 +17,6 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
-import useRealTimeProduct from '../../hooks/useRealTimeProduct';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -29,29 +28,24 @@ export interface ProductProps {
 function Product(props: ProductProps) {
     const { product, layout } = props;
 
-    const { realTimeProduct } = useRealTimeProduct(product?.id);
+    // const { realTimeProduct } = useRealTimeProduct(product?.id);
 
     const [quantity, setQuantity] = useState<number>(1);
-    const [documents, setDocuments] = useState<string[]>([]);
-    const [images, setImages] = useState<string[]>(product.images);
+    const [rtProduct, setRtProduct] = useState<IProduct>(product);
+
+    useEffect(() => {
+        const realTimeProductRequest = async () => {
+            const data = await (await fetch(`/api/products/lookup?itemcodes=${[`${product.code}`]}`)).json();
+            const p = data.products[0];
+            setRtProduct(p);
+        };
+
+        realTimeProductRequest();
+    }, [product]);
+
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
     const compareAddItem = useCompareAddItem();
-
-    const fetchDocuments = async () => {
-        const docs = await (await fetch(`/api/documents?id=${product.code}`)).json();
-        setDocuments(docs);
-    };
-
-    const fetchImages = async () => {
-        const imgs = await (await fetch(`/api/images?id=${product.code}`)).json();
-        setImages(imgs);
-    };
-
-    useEffect(() => {
-        fetchDocuments();
-        fetchImages();
-    }, [product]);
 
     const addToCart = () => {
         if (typeof quantity === 'string') {
@@ -68,12 +62,12 @@ function Product(props: ProductProps) {
 
     let prices;
 
-    if (realTimeProduct && realTimeProduct.price > 0) {
+    if (rtProduct && rtProduct.price > 0) {
         if (product.compareAtPrice) {
             prices = (
                 <Fragment>
                     <span className="product__new-price">
-                        <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />
+                        <CurrencyFormat value={rtProduct?.price} currency={rtProduct?.currency} />
                     </span>{' '}
                     <span className="product__old-price">
                         <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
@@ -81,14 +75,14 @@ function Product(props: ProductProps) {
                 </Fragment>
             );
         } else {
-            prices = <CurrencyFormat value={realTimeProduct?.price} currency={realTimeProduct?.currency} />;
+            prices = <CurrencyFormat value={rtProduct?.price} currency={rtProduct?.currency} />;
         }
     }
 
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} images={images} />
+                <ProductGallery layout={layout} images={product.images} />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -138,7 +132,7 @@ function Product(props: ProductProps) {
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
                     </div> */}
-                    <div className="product__description">{realTimeProduct?.description || product.description}</div>
+                    <div className="product__description">{product.description || product.description}</div>
                     {/* <ul className="product__features">
                         <li>Speed: 750 RPM</li>
                         <li>Power Source: Cordless-Electric</li>
@@ -149,7 +143,7 @@ function Product(props: ProductProps) {
                     <ul className="product__meta">
                         <li className="product__meta-availability">
                             Disponibilidad:{' '}
-                            {realTimeProduct?.hasStock ? (
+                            {rtProduct?.hasStock ? (
                                 <span className="text-success">En stock</span>
                             ) : (
                                 <span className="text-muted">Sin stock</span>
@@ -167,7 +161,7 @@ function Product(props: ProductProps) {
                         Disponibilidad: <span className="text-success">En stock</span>
                     </div>
 
-                    {realTimeProduct && <div className="product__prices">{prices}</div>}
+                    {rtProduct && <div className="product__prices">{prices}</div>}
 
                     <form className="product__options">
                         <div className="form-group product__option">
@@ -205,7 +199,7 @@ function Product(props: ProductProps) {
                                     />
                                 </div>
                             </div>
-                            {documents.length > 0 && (
+                            {product.documents.length > 0 && (
                                 <Fragment>
                                     <br />
                                     <br />
@@ -213,7 +207,7 @@ function Product(props: ProductProps) {
                                         Documentos
                                     </label>
                                     <ul className="product__meta">
-                                        {documents.map((document, i) => (
+                                        {product.documents.map((document, i) => (
                                             <li key={i}>
                                                 <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
                                             </li>

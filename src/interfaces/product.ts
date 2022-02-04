@@ -20,6 +20,7 @@ export interface IProduct {
     slug: string;
     name: string;
     images: string[];
+    documents: string[];
     compareAtPrice: number | null;
     brand: IBrand | null;
     badges: string[];
