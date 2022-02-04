@@ -51,7 +51,7 @@ function Product(props: ProductProps) {
     useEffect(() => {
         fetchDocuments();
         fetchImages();
-    }, []);
+    }, [product]);
 
     const addToCart = () => {
         if (typeof quantity === 'string') {
