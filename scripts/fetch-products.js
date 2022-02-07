@@ -16,6 +16,7 @@ const makeProduct = (product) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
     return {
+        ...product,
         id: Number(code),
         slug: code,
         code,
@@ -24,7 +25,7 @@ const makeProduct = (product) => {
         category: product.category,
         subcategory,
         unitMult: product.unitMult,
-        images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
+        // images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
         brand: {
             name: product.brand,
             slug: nameToSlug(product.brand),

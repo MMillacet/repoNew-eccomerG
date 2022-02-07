@@ -47,6 +47,7 @@ export interface IProduct {
     tax: number;
     relatedItems: string[];
     shops: any[];
+    listOrder: string;
 }
 
 export type IProductsList = IPaginatedList<IProduct> & IFilterableList<IProduct, IFilter>;

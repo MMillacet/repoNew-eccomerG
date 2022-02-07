@@ -92,25 +92,35 @@ export async function getProductsList(
     const from = (page - 1) * limit + 1;
     const to = Math.max(Math.min(page * limit, total), from);
 
-    items = items.sort((a: { title: string; finalPrice: number }, b: { title: string; finalPrice: number }) => {
-        if (['name_asc', 'name_desc'].includes(sort)) {
-            if (a.title === b.title) {
-                return 0;
+    items = items.sort(
+        (a: { title: string; finalPrice: number; listOrder: string }, b: { title: string; finalPrice: number; listOrder: string }) => {
+            if (['name_asc', 'name_desc'].includes(sort)) {
+                if (a.title === b.title) {
+                    return 0;
+                }
+
+                return (a.title > b.title ? 1 : -1) * (sort === 'name_asc' ? 1 : -1);
             }
 
-            return (a.title > b.title ? 1 : -1) * (sort === 'name_asc' ? 1 : -1);
-        }
+            if (['price_asc', 'price_desc'].includes(sort)) {
+                if (a.finalPrice === b.finalPrice) {
+                    return 0;
+                }
 
-        if (['price_asc', 'price_desc'].includes(sort)) {
-            if (a.finalPrice === b.finalPrice) {
-                return 0;
+                return (a.finalPrice > b.finalPrice ? 1 : -1) * (sort === 'price_asc' ? 1 : -1);
             }
 
-            return (a.finalPrice > b.finalPrice ? 1 : -1) * (sort === 'price_asc' ? 1 : -1);
-        }
+            if (['list_asc', 'list_desc'].includes(sort)) {
+                if (a.listOrder === b.listOrder) {
+                    return 0;
+                }
 
-        return 0;
-    });
+                return (a.listOrder > b.listOrder ? 1 : -1) * (sort === 'list_asc' ? 1 : -1);
+            }
+
+            return 0;
+        },
+    );
 
     const start = (page - 1) * limit;
     const end = start + limit;
