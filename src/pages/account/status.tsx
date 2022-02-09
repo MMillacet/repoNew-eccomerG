@@ -1,11 +1,14 @@
 // application
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import AccountLayout from '../../components/account/AccountLayout';
 import AccountPageStatus from '../../components/account/AccountPageStatus';
 
 function Page() {
-    return <AccountPageStatus />;
+    return (
+        <AccountLayout>
+            <AccountPageStatus />
+        </AccountLayout>
+    );
 }
 
-Page.Layout = AccountLayout;
-
-export default Page;
+export default withPageAuthRequired(Page);

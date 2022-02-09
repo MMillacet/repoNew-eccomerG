@@ -1,4 +1,5 @@
 // third-party
+import { useUser } from '@auth0/nextjs-auth0';
 import Head from 'next/head';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -6,12 +7,8 @@ import { toast } from 'react-toastify';
 // data stubs
 import { IUser } from '../../interfaces/user';
 
-export interface AccountPageProfileProps {
-    user: IUser;
-}
-
-export default function AccountPageProfile(props: AccountPageProfileProps) {
-    const { user } = props;
+export default function AccountPageProfile() {
+    const { user } = useUser() as any as { user: IUser };
 
     const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState(user?.name);

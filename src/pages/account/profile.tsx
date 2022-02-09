@@ -1,35 +1,14 @@
-import { getSession } from '@auth0/nextjs-auth0';
-import { GetServerSidePropsContext } from 'next';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 // application
 import AccountLayout from '../../components/account/AccountLayout';
 import AccountPageProfile from '../../components/account/AccountPageProfile';
-import { IUser } from '../../interfaces/user';
 
-export interface ProfileProps {
-    user: IUser;
+function Page() {
+    return (
+        <AccountLayout>
+            <AccountPageProfile />
+        </AccountLayout>
+    );
 }
 
-function Page(props: ProfileProps) {
-    const { user } = props;
-
-    return <AccountPageProfile user={user} />;
-}
-
-Page.Layout = AccountLayout;
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const { req, res } = context;
-
-    const session = await getSession(req, res);
-
-    if (session) {
-        return {
-            props: {
-                user: session.user,
-            },
-        };
-    }
-    return { props: {} };
-};
-
-export default Page;
+export default withPageAuthRequired(Page);

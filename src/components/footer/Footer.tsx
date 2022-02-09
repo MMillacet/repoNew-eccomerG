@@ -1,3 +1,4 @@
+import { useUser } from '@auth0/nextjs-auth0';
 import { FunctionComponent } from 'react';
 
 // application
@@ -7,6 +8,7 @@ import FooterLinks from './FooterLinks';
 import ToTop from './ToTop';
 
 const Footer: FunctionComponent = () => {
+    const { user } = useUser();
     const informationLinks = [
         { title: 'Sobre nosotros', url: '/site/about-us' },
         // { title: 'Misión y visión', url: '/site/vision-mission' },
@@ -32,9 +34,9 @@ const Footer: FunctionComponent = () => {
                         <div className="col-6 col-md-3 col-lg-3">
                             <FooterLinks title="Información" items={informationLinks} />
                         </div>
-                        <div className="col-6 col-md-3 col-lg-3">
-                            <FooterLinks title="Mi cuenta" items={accountLinks} />
-                        </div>
+
+                        <div className="col-6 col-md-3 col-lg-3">{user && <FooterLinks title="Mi cuenta" items={accountLinks} />}</div>
+
                         <div className="col-12 col-md-6 col-lg-6">
                             <FooterContacts />
                         </div>
@@ -43,8 +45,8 @@ const Footer: FunctionComponent = () => {
 
                 <div className="site-footer__bottom">
                     <div className="site-footer__copyright">
-                        {/* © Copyright 2021 Goldfarb. Todos los derechos reservados. ({process?.env?.NODE_ENV}) */}
-                        © Copyright 2022 Goldfarb. Todos los derechos reservados. (Desarrollo)
+                        {/* © Copyright 2021 Goldfarb. Todos los derechos reservados. ({process?.env?.NODE_ENV}) */}© Copyright 2022
+                        Goldfarb. Todos los derechos reservados. (Desarrollo)
                     </div>
                 </div>
             </div>

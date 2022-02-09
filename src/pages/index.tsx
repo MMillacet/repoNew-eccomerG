@@ -1,7 +1,5 @@
 // third-party
-import { useUser } from '@auth0/nextjs-auth0';
 import { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
 
 // application
 import sanityApi from '../api/sanity';
@@ -13,18 +11,6 @@ export interface PageProps {
 }
 
 function Page(props: PageProps) {
-    const { user } = useUser();
-
-    const fetchUserInfo = async () => {
-        await fetch('/api/user/info');
-    };
-
-    useEffect(() => {
-        if (user && !user.initialised) {
-            fetchUserInfo();
-        }
-    }, [user]);
-
     const { initData } = props;
 
     return <HomePageTwo initData={initData} />;

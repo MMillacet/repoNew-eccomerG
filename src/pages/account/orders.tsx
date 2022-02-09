@@ -1,5 +1,5 @@
 // application
-import { getSession } from '@auth0/nextjs-auth0';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
 import goldfarbApi from '../../api/goldfarb';
 import AccountLayout from '../../components/account/AccountLayout';
@@ -32,14 +32,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
 }
 
-export interface AccountPageOrdersProps {
-    orders: any[];
+function Page({ orders }: any) {
+    return (
+        <AccountLayout>
+            <AccountPageOrders orders={orders} />
+        </AccountLayout>
+    );
 }
 
-function Page({ orders }: AccountPageOrdersProps) {
-    return <AccountPageOrders orders={orders} />;
-}
-
-Page.Layout = AccountLayout;
-
-export default Page;
+export default withPageAuthRequired(Page);
