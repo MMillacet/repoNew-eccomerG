@@ -274,7 +274,7 @@ const goldfarbApi = {
      * Orders
      * */
 
-    getOrderHeader: async (cardcode: string = '400092') => {
+    getOrderHeader: async (cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/client/header',
