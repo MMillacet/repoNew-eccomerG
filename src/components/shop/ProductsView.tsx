@@ -129,10 +129,9 @@ function ProductsView(props: ProductsViewProps) {
                                     onChange={handleSortChange}
                                 >
                                     <option value="default">Relevancia</option>
+                                    <option value="list_asc">Lista</option>
                                     <option value="name_asc">Nombre (A-Z)</option>
                                     <option value="name_desc">Nombre (Z-A)</option>
-                                    <option value="list_asc">Lista (menor a mayor)</option>
-                                    <option value="list_desc">Lista (mayor a menor)</option>
                                     {isUserActivated && <option value="price_asc">Precio (menor a mayor)</option>}
                                     {isUserActivated && <option value="price_desc">Precio (mayor a menor)</option>}
                                 </select>
