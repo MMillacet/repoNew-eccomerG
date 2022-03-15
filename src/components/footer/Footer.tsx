@@ -9,6 +9,8 @@ import ToTop from './ToTop';
 
 const Footer: FunctionComponent = () => {
     const { user } = useUser();
+    const isUserActivated = user && !!user.cardcode;
+
     const informationLinks = [
         { title: 'Sobre nosotros', url: '/site/about-us' },
         // { title: 'Misión y visión', url: '/site/vision-mission' },
@@ -35,7 +37,9 @@ const Footer: FunctionComponent = () => {
                             <FooterLinks title="Información" items={informationLinks} />
                         </div>
 
-                        <div className="col-6 col-md-3 col-lg-3">{user && <FooterLinks title="Mi cuenta" items={accountLinks} />}</div>
+                        <div className="col-6 col-md-3 col-lg-3">
+                            {isUserActivated && <FooterLinks title="Mi cuenta" items={accountLinks} />}
+                        </div>
 
                         <div className="col-12 col-md-6 col-lg-6">
                             <FooterContacts />

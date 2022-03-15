@@ -1,5 +1,6 @@
 // application
 import { useUser } from '@auth0/nextjs-auth0';
+import { Fragment } from 'react';
 import AppLink from '../shared/AppLink';
 import Indicator from './Indicator';
 import Person20Svg from '../../svg/person-20.svg';
@@ -7,6 +8,7 @@ import url from '../../services/url';
 
 function IndicatorAccount() {
     const { user } = useUser();
+    const isUserActivated = user && !!user.cardcode;
 
     const loggedOutDropdown = (
         <div className="account-menu">
@@ -31,21 +33,23 @@ function IndicatorAccount() {
                     <div className="account-menu__user-email">{user?.email}</div>
                 </div>
             </AppLink>
-            <div className="account-menu__divider" />
-            <ul className="account-menu__links">
-                <li>
-                    <AppLink href={url.accountProfile()}>Editar Perfil</AppLink>
-                </li>
-                <li>
-                    <AppLink href={url.accountOrders()}>Historial pedidos</AppLink>
-                </li>
-                <li>
-                    <AppLink href={url.accountCatalog()}>Crear catalogo</AppLink>
-                </li>
-                {/* <li>
-                    <AppLink href={url.accountPassword()}>Contraseña</AppLink>
-                </li> */}
-            </ul>
+
+            {isUserActivated && (
+                <Fragment>
+                    <div className="account-menu__divider" />
+                    <ul className="account-menu__links">
+                        <li>
+                            <AppLink href={url.accountProfile()}>Editar Perfil</AppLink>
+                        </li>
+                        <li>
+                            <AppLink href={url.accountOrders()}>Historial pedidos</AppLink>
+                        </li>
+                        <li>
+                            <AppLink href={url.accountCatalog()}>Crear catalogo</AppLink>
+                        </li>
+                    </ul>
+                </Fragment>
+            )}
             <div className="account-menu__divider" />
             <ul className="account-menu__links">
                 <li>

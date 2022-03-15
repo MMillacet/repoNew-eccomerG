@@ -9,9 +9,7 @@ const afterCallback = async (req: NextApiRequest, res: NextApiResponse, session:
     if (session) {
         const user = await auth0Api.info(session?.accessToken);
         const transformedUser = transformUser(user);
-
-        const clientHeader = await goldfarbApi.getOrderHeader(transformedUser.cardcode);
-
+        const clientHeader = transformedUser.cardcode ? await goldfarbApi.getOrderHeader(transformedUser?.cardcode) : {};
         // eslint-disable-next-line no-param-reassign
         session.user = {
             initialised: true,
