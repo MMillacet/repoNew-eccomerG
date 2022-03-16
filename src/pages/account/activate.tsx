@@ -74,7 +74,7 @@ function Page() {
                 <div className="row justify-content-center">
                     <h1>Activa tu usuario</h1>
                     <br />
-                    La activacion de tu cuenta esta siendo procesada. Por favor envia un correo a info@goldfarb.com.uy con tu numero de
+                    La activacion de tu cuenta esta siendo procesada. Por favor envia un correo a contacto@goldfarb.com.uy con tu numero de
                     cliente.
                 </div>
             </div>

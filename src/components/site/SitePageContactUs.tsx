@@ -1,5 +1,5 @@
 // react
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
@@ -15,6 +15,14 @@ function SitePageContactUs() {
         { title: 'Inicio', url: '/' },
         { title: 'Contacto', url: '' },
     ];
+
+    const [subject, setSubject] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleContactClick = (e: any) => {
+        e.preventDefault();
+        window.open(`mailto:contacto@goldfarb.com.uy?subject=${subject}&body=${message}`);
+    };
 
     return (
         <Fragment>
@@ -47,7 +55,7 @@ function SitePageContactUs() {
                                             <p>
                                                 Pantaleon Perez 4881 - C.P. 12100
                                                 <br />
-                                                Email: info@goldfarb.com.uy
+                                                Email: contacto@goldfarb.com.uy
                                                 <br />
                                                 Telefono: (598) 2524 4447
                                             </p>
@@ -63,35 +71,17 @@ function SitePageContactUs() {
                                     </div>
 
                                     <div className="col-12 col-lg-6">
-                                        <h4 className="contact-us__header card-title">
-                                            Déjanos un mensaje
-                                        </h4>
+                                        <h4 className="contact-us__header card-title">Déjanos un mensaje</h4>
 
                                         <form>
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="form-name">Tu nombre</label>
-                                                    <input
-                                                        type="text"
-                                                        id="form-name"
-                                                        className="form-control"
-                                                    />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="form-email">Email</label>
-                                                    <input
-                                                        type="email"
-                                                        id="form-email"
-                                                        className="form-control"
-                                                    />
-                                                </div>
-                                            </div>
                                             <div className="form-group">
                                                 <label htmlFor="form-subject">Asunto</label>
                                                 <input
                                                     type="text"
                                                     id="form-subject"
                                                     className="form-control"
+                                                    value={subject}
+                                                    onChange={(e) => setSubject(e.target.value)}
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -100,9 +90,11 @@ function SitePageContactUs() {
                                                     id="form-message"
                                                     className="form-control"
                                                     rows={4}
+                                                    value={message}
+                                                    onChange={(e) => setMessage(e.target.value)}
                                                 />
                                             </div>
-                                            <button type="submit" className="btn btn-primary">
+                                            <button type="submit" className="btn btn-primary" onClick={handleContactClick}>
                                                 Enviar mensaje
                                             </button>
                                         </form>
