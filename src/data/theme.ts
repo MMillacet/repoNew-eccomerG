@@ -8,7 +8,7 @@ export default {
     },
     contacts: {
         address: 'Pantaleon Perez 4881 - C.P. 12100',
-        email: 'contacto@goldfarb.com.uy',
+        email: 'info@goldfarb.com.uy',
         phone: '(598) 2524 4447',
     },
 };

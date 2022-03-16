@@ -41,15 +41,13 @@ function SitePageContactUs() {
                             <div className="contact-us__container">
                                 <div className="row">
                                     <div className="col-12 col-lg-6 pb-4 pb-lg-0">
-                                        <h4 className="contact-us__header card-title">
-                                            Nuestra dirección
-                                        </h4>
+                                        <h4 className="contact-us__header card-title">Nuestra dirección</h4>
 
                                         <div className="contact-us__address">
                                             <p>
                                                 Pantaleon Perez 4881 - C.P. 12100
                                                 <br />
-                                                Email: contacto@goldfarb.com.uy
+                                                Email: info@goldfarb.com.uy
                                                 <br />
                                                 Telefono: (598) 2524 4447
                                             </p>

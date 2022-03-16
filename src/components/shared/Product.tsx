@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
+import { useUser } from '@auth0/nextjs-auth0';
 
 // application
 import AppLink from './AppLink';
@@ -32,6 +33,9 @@ function Product(props: ProductProps) {
 
     const [quantity, setQuantity] = useState<number>(1);
     const [rtProduct, setRtProduct] = useState<IProduct>(product);
+
+    const { user } = useUser();
+    const isUserActivated = user && !!user.cardcode;
 
     useEffect(() => {
         const realTimeProductRequest = async () => {
@@ -163,60 +167,62 @@ function Product(props: ProductProps) {
 
                     {rtProduct && <div className="product__prices">{prices}</div>}
 
-                    <form className="product__options">
-                        <div className="form-group product__option">
-                            <label htmlFor="product-quantity" className="product__option-label">
-                                Cantidad
-                            </label>
-                            <div className="product__actions">
-                                <div className="product__actions-item">
-                                    <InputNumber
-                                        id="product-quantity"
-                                        aria-label="Quantity"
-                                        className="product__quantity"
-                                        size="lg"
-                                        min={product.unitMult}
-                                        step={product.unitMult}
-                                        value={quantity}
-                                        onChange={(quantity) => handleChangeQuantity(quantity)}
-                                    />
+                    {isUserActivated && (
+                        <form className="product__options">
+                            <div className="form-group product__option">
+                                <label htmlFor="product-quantity" className="product__option-label">
+                                    Cantidad
+                                </label>
+                                <div className="product__actions">
+                                    <div className="product__actions-item">
+                                        <InputNumber
+                                            id="product-quantity"
+                                            aria-label="Quantity"
+                                            className="product__quantity"
+                                            size="lg"
+                                            min={product.unitMult}
+                                            step={product.unitMult}
+                                            value={quantity}
+                                            onChange={(quantity) => handleChangeQuantity(quantity)}
+                                        />
+                                    </div>
+                                    <div className="product__actions-item product__actions-item--addtocart">
+                                        <AsyncAction
+                                            action={() => addToCart()}
+                                            render={({ run, loading }) => (
+                                                <button
+                                                    type="button"
+                                                    onClick={run}
+                                                    disabled={!quantity}
+                                                    className={classNames('btn btn-primary btn-lg', {
+                                                        'btn-loading': loading,
+                                                    })}
+                                                >
+                                                    Agregar al carro
+                                                </button>
+                                            )}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="product__actions-item product__actions-item--addtocart">
-                                    <AsyncAction
-                                        action={() => addToCart()}
-                                        render={({ run, loading }) => (
-                                            <button
-                                                type="button"
-                                                onClick={run}
-                                                disabled={!quantity}
-                                                className={classNames('btn btn-primary btn-lg', {
-                                                    'btn-loading': loading,
-                                                })}
-                                            >
-                                                Agregar al carro
-                                            </button>
-                                        )}
-                                    />
-                                </div>
+                                {product.documents.length > 0 && (
+                                    <Fragment>
+                                        <br />
+                                        <br />
+                                        <label htmlFor="product-docs" className="product__option-label">
+                                            Documentos
+                                        </label>
+                                        <ul className="product__meta">
+                                            {product.documents.map((document, i) => (
+                                                <li key={i}>
+                                                    <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </Fragment>
+                                )}
                             </div>
-                            {product.documents.length > 0 && (
-                                <Fragment>
-                                    <br />
-                                    <br />
-                                    <label htmlFor="product-docs" className="product__option-label">
-                                        Documentos
-                                    </label>
-                                    <ul className="product__meta">
-                                        {product.documents.map((document, i) => (
-                                            <li key={i}>
-                                                <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </Fragment>
-                            )}
-                        </div>
-                    </form>
+                        </form>
+                    )}
                 </div>
 
                 <div className="product__footer"></div>

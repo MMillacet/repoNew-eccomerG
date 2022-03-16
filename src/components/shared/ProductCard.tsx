@@ -2,6 +2,7 @@
 import { Fragment, memo } from 'react';
 
 // third-party
+import { useUser } from '@auth0/nextjs-auth0';
 import classNames from 'classnames';
 
 // application
@@ -28,6 +29,10 @@ export interface ProductCardProps {
 
 function ProductCard(props: ProductCardProps) {
     const { product, layout } = props;
+
+    const { user } = useUser();
+    const isUserActivated = user && !!user.cardcode;
+
     const containerClasses = classNames('product-card', {
         'product-card--layout--grid product-card--size--sm': layout === 'grid-sm',
         'product-card--layout--grid product-card--size--nl': layout === 'grid-nl',
@@ -131,33 +136,34 @@ function ProductCard(props: ProductCardProps) {
                     <span className="text-success">In Stock</span>
                 </div>
                 {price}
-                <div className="product-card__buttons">
-                    <AsyncAction
-                        action={() => cartAddItem(product)}
-                        render={({ run, loading }) => (
-                            <Fragment>
-                                <button
-                                    type="button"
-                                    onClick={run}
-                                    className={classNames('btn btn-primary product-card__addtocart', {
-                                        'btn-loading': loading,
-                                    })}
-                                >
-                                    Agregar al carro
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={run}
-                                    className={classNames('btn btn-secondary product-card__addtocart product-card__addtocart--list', {
-                                        'btn-loading': loading,
-                                    })}
-                                >
-                                    Agregar al carro
-                                </button>
-                            </Fragment>
-                        )}
-                    />
-                    {/* <AsyncAction
+                {isUserActivated && (
+                    <div className="product-card__buttons">
+                        <AsyncAction
+                            action={() => cartAddItem(product)}
+                            render={({ run, loading }) => (
+                                <Fragment>
+                                    <button
+                                        type="button"
+                                        onClick={run}
+                                        className={classNames('btn btn-primary product-card__addtocart', {
+                                            'btn-loading': loading,
+                                        })}
+                                    >
+                                        Agregar al carro
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={run}
+                                        className={classNames('btn btn-secondary product-card__addtocart product-card__addtocart--list', {
+                                            'btn-loading': loading,
+                                        })}
+                                    >
+                                        Agregar al carro
+                                    </button>
+                                </Fragment>
+                            )}
+                        />
+                        {/* <AsyncAction
                         action={() => wishlistAddItem(product)}
                         render={({ run, loading }) => (
                             <button
@@ -171,7 +177,7 @@ function ProductCard(props: ProductCardProps) {
                             </button>
                         )}
                     /> */}
-                    {/* <AsyncAction
+                        {/* <AsyncAction
                         action={() => compareAddItem(product)}
                         render={({ run, loading }) => (
                             <button
@@ -185,7 +191,8 @@ function ProductCard(props: ProductCardProps) {
                             </button>
                         )}
                     /> */}
-                </div>
+                    </div>
+                )}
             </div>
         </div>
     );

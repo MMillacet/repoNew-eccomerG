@@ -95,11 +95,11 @@ export async function getProductsList(
     items = items.sort(
         (a: { title: string; finalPrice: number; listOrder: string }, b: { title: string; finalPrice: number; listOrder: string }) => {
             if (['name_asc', 'name_desc'].includes(sort)) {
-                if (a.title === b.title) {
+                if (a.title.toUpperCase() === b.title.toUpperCase()) {
                     return 0;
                 }
 
-                return (a.title > b.title ? 1 : -1) * (sort === 'name_asc' ? 1 : -1);
+                return (a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1) * (sort === 'name_asc' ? 1 : -1);
             }
 
             if (['price_asc', 'price_desc'].includes(sort)) {

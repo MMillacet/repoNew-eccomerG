@@ -1,4 +1,5 @@
 // application
+import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import CartIndicator from './IndicatorCart';
 // import Departments from './Departments';
@@ -18,6 +19,9 @@ export interface NavPanelProps {
 
 function NavPanel(props: NavPanelProps) {
     const { layout = 'default' } = props;
+
+    const { user } = useUser();
+    const isUserActivated = user && !!user.cardcode;
     // const {
     //     items: { length: wishlistCount },
     // } = useWishlist();
@@ -62,7 +66,7 @@ function NavPanel(props: NavPanelProps) {
 
                         {/* <Indicator url="/shop/wishlist" value={wishlistCount} icon={<Heart20Svg />} /> */}
 
-                        <CartIndicator />
+                        {isUserActivated && <CartIndicator />}
 
                         <IndicatorAccount />
                     </div>
