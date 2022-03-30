@@ -38,7 +38,7 @@ export async function getProductsList(
         // new RadioFilterBuilder('discount', 'Discount'),
     ];
 
-    const { term, cardcode, family, category, subcategory } = searchOptions;
+    const { term, cardcode, family, category, subcategory, brand } = searchOptions;
 
     let searchProducts;
 
@@ -59,6 +59,7 @@ export async function getProductsList(
             if (family) url.searchParams.append('family', family as string);
             if (category) url.searchParams.append('category', category as string);
             if (subcategory) url.searchParams.append('subcategory', subcategory as string);
+            if (brand) url.searchParams.append('brand', brand as string);
             ({ products } = await (await fetch(url.toString())).json());
         } else {
             ({ products } = await goldfarbApi.getProductsSearch2({
@@ -68,6 +69,7 @@ export async function getProductsList(
                 family,
                 category,
                 subcategory,
+                brand,
             }));
         }
         if (isBrowser && cacheKey) searchCache[cacheKey] = products;

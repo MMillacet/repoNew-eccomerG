@@ -148,6 +148,8 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
                     searchOpts.category = category.name;
                 } else if (category.level === 'subcategory') {
                     searchOpts.subcategory = category.name;
+                } else if (category.level === 'brand') {
+                    searchOpts.brand = category.name;
                 }
             }
         }

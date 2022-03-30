@@ -2,6 +2,7 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import { useState } from 'react';
 import oldUsers from '../../data/users.json';
 import auth0Api from '../../api/auth0';
 import { transformUser } from '../../services/user';
@@ -62,6 +63,25 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 };
 
 function Page() {
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [status, setStatus] = useState('');
+
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+
+        setIsLoading(true);
+        try {
+            await fetch(`/api/user/activate?cardcode=${event.target.cardcode.value}`);
+            setStatus('Muchas gracias. Su solicitud ha sido enviada.');
+            setIsDisabled(true);
+        } catch (error) {
+            setStatus('Ha ocurrido un Error. Por favor contactarse con contacto@goldfarb.com.uy');
+        }
+
+        setIsLoading(false);
+    };
+
     return (
         <div className="block">
             <Head>
@@ -71,12 +91,19 @@ function Page() {
                 <br />
                 <br />
                 <br />
+                <h2>Active su usuario.</h2>
                 <div className="row justify-content-center">
-                    <h1>Activa tu usuario</h1>
-                    <br />
-                    La activacion de tu cuenta esta siendo procesada. Por favor envia un correo a contacto@goldfarb.com.uy con tu numero de
-                    cliente.
+                    <form className="card-body" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="docnum">Numero de cliente</label>
+                            <input id="cardcode" type="text" className="form-control" />
+                        </div>
+                        <button type="submit" disabled={isDisabled} className={`btn btn-primary ${isLoading ? 'btn-loading' : ''}`}>
+                            Activar
+                        </button>
+                    </form>
                 </div>
+                <div className="row justify-content-center">{status}</div>
             </div>
         </div>
     );

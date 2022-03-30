@@ -15,7 +15,7 @@ function Page() {
                 </div>
                 <br />
                 <div className="row justify-content-center">
-                    Le hemos enviado un correo de verificacion. Si no lo ha recibido por favor contactese con nosotros.
+                    Le hemos enviado un correo de verificacion. Una vez verificado puede iniciar sesión.
                 </div>
             </div>
         </div>

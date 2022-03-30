@@ -26,6 +26,7 @@ export interface SearchOptions {
     subcategory?: string;
     term?: string;
     orderBy?: string;
+    brand?: string;
 }
 
 const makeProduct = (product: any) => {
@@ -193,6 +194,7 @@ const goldfarbApi = {
         family?: string;
         category?: string;
         subcategory?: string;
+        brand?: string;
     }) => {
         // price-high-to-low or price-low-to-high
         // eslint-disable-next-line no-param-reassign
@@ -400,6 +402,18 @@ const goldfarbApi = {
             url: '/goldfarb/CreateCatalog',
             method: 'post',
             data: options,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    sendActivationEmail: async (cardcode: string, email: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/ClientRegisterNotice',
+            method: 'get',
+            params: { cardcode, email },
         };
         const { data } = await axios(config);
 

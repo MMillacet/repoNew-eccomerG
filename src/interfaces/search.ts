@@ -4,4 +4,5 @@ export interface ISearchOptions {
     family?: string;
     category?: string;
     subcategory?: string;
+    brand?: string;
 }

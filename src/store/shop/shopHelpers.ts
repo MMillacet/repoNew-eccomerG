@@ -43,6 +43,9 @@ export function parseQuerySearchOptions(query: string) {
     if (typeof queryObject.subcategory === 'string') {
         searchOptionValues.subcategory = queryObject.subcategory;
     }
+    if (typeof queryObject.brand === 'string') {
+        searchOptionValues.brand = queryObject.brand;
+    }
 
     return searchOptionValues;
 }
@@ -97,6 +100,10 @@ export function buildQuery(options: IListOptions, filters: IFilterValues, search
 
     if (searchOptions.subcategory) {
         params.subcategory = searchOptions.subcategory;
+    }
+
+    if (searchOptions.brand) {
+        params.brand = searchOptions.brand;
     }
 
     Object.keys(filters)
