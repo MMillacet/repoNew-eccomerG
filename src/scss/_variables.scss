@@ -211,9 +211,9 @@ $topbar-dropdown-hover-arrow-color: #999 !default;
       $header-search-input-default-border-color:     #e5e5e5                                                   !default;
       $header-search-input-default-shadow:           0 0 0 2px $header-search-input-default-border-color inset !default;
       $header-search-input-default-placeholder:      #999                                                      !default;
-      $header-search-input-default-font-color:       $light-opposite-color                                      !default;
-      $header-search-input-default-icon-color:       #bfbfbf                                                   !default;
-      $header-search-input-default-icon-hover-color: $accent-color                                             !default;
+      $header-search-input-default-font-color:       $light-color                                     !default;
+      $header-search-input-default-icon-color:       $light-color                                                   !default;
+      $header-search-input-default-icon-hover-color: $light-color                                           !default;
       $header-search-input-default-arrows-color:     #4d4d4d                                                   !default;
       // input hover
       $header-search-input-hover-bg:                 $header-search-input-default-bg                           !default;
@@ -241,10 +241,10 @@ $topbar-dropdown-hover-arrow-color: #999 !default;
 // -- .search--location--indicator
 // ----------------------------------------
 $indicator-search-bg: $light-color !default;
-$indicator-search-font-color: $light-opposite-color !default;
+$indicator-search-font-color: $light-color !default;
 $indicator-search-shadow: 0 1px 15px rgba(#000, 0.25) !default;
-$indicator-search-button-default-color: #bfbfbf !default;
-$indicator-search-button-hover-color: $light-opposite-color !default;
+$indicator-search-button-default-color: $light-color !default;
+$indicator-search-button-hover-color: $light-color !default;
 // suggestion
 $indicator-search-suggestions-divider-color: #ebebeb !default;
 $indicator-search-suggestions-font-color: $light-opposite-color !default;
@@ -415,7 +415,7 @@ $megamenu-secondary-link-color: #5c6b73 !default;
 // ----------------------------------------
 // -- footer
 // ----------------------------------------
-$footer-bg: transparent !default;
+$footer-bg: $accent-dark-color !default;
 $footer-border-top: 1px solid $light-divider-color !default;
 $footer-copyright-border: 1px solid $light-divider-color !default;
 

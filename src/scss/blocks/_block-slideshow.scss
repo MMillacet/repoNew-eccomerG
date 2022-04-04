@@ -213,6 +213,7 @@ $local-dot-size: $local-dots-height - $local-dots-padding * 2;
     .block-slideshow__slide-image--mobile {
         background-position: top center;
         display: block;
+        background-size: cover;
     }
     .block-slideshow__slide-content {
         top: 30px;

@@ -33,15 +33,15 @@ const Footer: FunctionComponent = () => {
             <div className="container">
                 <div className="site-footer__widgets">
                     <div className="row">
-                        <div className="col-6 col-md-3 col-lg-3">
+                        <div className="col-sm-12 col-3 col-md-3 col-lg-3">
                             <FooterLinks title="Información" items={informationLinks} />
                         </div>
 
-                        <div className="col-6 col-md-3 col-lg-3">
+                        <div className="col-sm-12 col-3 col-md-3 col-lg-3">
                             {isUserActivated && <FooterLinks title="Mi cuenta" items={accountLinks} />}
                         </div>
 
-                        <div className="col-12 col-md-6 col-lg-6">
+                        <div className="col-sm-12 col-6 col-md-6 col-lg-6">
                             <FooterContacts />
                         </div>
                     </div>

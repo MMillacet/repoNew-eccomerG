@@ -28,6 +28,7 @@ $local-suggestion-transition: 0.2s;
     .search__form {
         height: $header-search-height;
         display: flex;
+        background-color: #1f4f75;
     }
     .search__border {
         position: absolute;
@@ -127,7 +128,7 @@ $local-suggestion-transition: 0.2s;
     .search__button {
         border: none;
         padding: 0;
-        background: transparent;
+        background-color: #4487c2;
         flex-grow: 0;
         width: $header-search-height;
         cursor: pointer;

@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import Cart20Svg from '../../svg/cart-20.svg';
-import Heart20Svg from '../../svg/heart-20.svg';
+// import Heart20Svg from '../../svg/heart-20.svg';
 import Indicator from '../header/Indicator';
 import Menu18x14Svg from '../../svg/menu-18x14.svg';
 import Search from '../header/Search';
@@ -16,7 +16,7 @@ import Search20Svg from '../../svg/search-20.svg';
 import url from '../../services/url';
 import { useCart } from '../../store/cart/cartHooks';
 import { useMobileMenuOpen } from '../../store/mobile-menu/mobileMenuHooks';
-import { useWishlist } from '../../store/wishlist/wishlistHooks';
+// import { useWishlist } from '../../store/wishlist/wishlistHooks';
 import IndicatorAccount from '../header/IndicatorAccount';
 
 function MobileHeader() {
@@ -26,9 +26,9 @@ function MobileHeader() {
     const [searchOpen, setSearchOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const cart = useCart();
-    const {
-        items: { length: wishlistCount },
-    } = useWishlist();
+    // const {
+    //     items: { length: wishlistCount },
+    // } = useWishlist();
     const mobileMenuOpen = useMobileMenuOpen();
 
     useEffect(() => {
@@ -67,12 +67,12 @@ function MobileHeader() {
                                 onClick={handleOpenSearch}
                                 icon={<Search20Svg />}
                             />
-                            <Indicator
+                            {/* <Indicator
                                 className="indicator--mobile d-sm-flex d-none"
                                 url={url.wishlist()}
                                 value={wishlistCount}
                                 icon={<Heart20Svg />}
-                            />
+                            /> */}
                             {isUserActivated && (
                                 <Indicator className="indicator--mobile" url={url.cart()} value={cart.quantity} icon={<Cart20Svg />} />
                             )}
