@@ -79,7 +79,7 @@ const lookupProductsLocally = async (itemcodes: string[]) => {
         codes.map(async (code) => {
             const filecode = fileCode(code);
 
-            const filename = `${path.join(process.cwd(), `/src/data/products/${filecode}.json`)}`;
+            const filename = path.resolve('./public', `products/${filecode}.json`);
 
             const products = JSON.parse(await fs.readFile(filename, 'utf8'));
             const product = products[code];
