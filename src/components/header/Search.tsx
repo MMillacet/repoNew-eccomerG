@@ -80,7 +80,7 @@ function Search(props: SearchProps) {
                 fetch(`/api/products/search?term=${query}`)
                     .then((response) => response.json())
                     .then(({ products }) => {
-                        const top5codes = products.slice(0, 5).map((p: { code: string }) => p.code);
+                        const top5codes = products.slice(0, 50).map((p: { code: string }) => p.code);
 
                         fetch(`/api/products/lookup?itemcodes=${top5codes}`)
                             .then((response) => response.json())
