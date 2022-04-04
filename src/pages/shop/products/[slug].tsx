@@ -1,7 +1,8 @@
 // third-party
 import { GetStaticPropsContext } from 'next';
-import { promises as fs } from 'fs';
-import path from 'path';
+import getConfig from 'next/config';
+// import { promises as fs } from 'fs';
+// import path from 'path';
 import goldfarbApi from '../../../api/goldfarb';
 import shopApi from '../../../api/shop';
 // application
@@ -15,6 +16,11 @@ export interface PageProps {
     relatedProducts: IProduct[];
     categories: IShopCategory[];
 }
+
+export const getInitialProps = async () => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+    console.log({ serverRuntimeConfig, publicRuntimeConfig });
+};
 
 // const writeProductsLocally = async (products: any[]) => {
 //     const itemcodes = products
@@ -77,14 +83,16 @@ const lookupProductsLocally = async (itemcodes: string[]) => {
 
     await Promise.all(
         codes.map(async (code) => {
-            const filecode = fileCode(code);
+            try {
+                const filecode = fileCode(code);
 
-            const filename = path.resolve('./public', `products/${filecode}.json`);
+                const products = await (await fetch(`https://goldfarb-ecommerce.vercel.app/products/${filecode}.json`)).json();
+                const product = products[code];
 
-            const products = JSON.parse(await fs.readFile(filename, 'utf8'));
-            const product = products[code];
-
-            result.push(product);
+                result.push(product);
+            } catch (e) {
+                console.error('Failed to add product', code);
+            }
         }),
     );
 

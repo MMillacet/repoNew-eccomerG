@@ -1,7 +1,5 @@
 // import { getSession } from '@auth0/nextjs-auth0';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import path from 'path';
-import { promises as fs } from 'fs';
 // import goldfarbApi from '../../../api/goldfarb';
 
 const fileCode = (itemcode: number) => `${itemcode - (itemcode % 1000)}`;
@@ -15,12 +13,8 @@ const lookupProductsLocally = async (itemcodes: string[]) => {
         codes.map(async (code) => {
             const filecode = fileCode(code);
 
-            const filename = path.resolve('./public', `products/${filecode}.json`);
+            const products = await (await fetch(`https://goldfarb-ecommerce.vercel.app/products/${filecode}.json`)).json();
 
-            // const filename = `${path.join(process.cwd(), `/src/data/products/${filecode}.json`)}`;
-            // const
-
-            const products = JSON.parse(await fs.readFile(filename, 'utf8'));
             const product = products[code];
 
             result.push(product);
