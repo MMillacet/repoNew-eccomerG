@@ -1,6 +1,5 @@
 // third-party
 import { GetStaticPropsContext } from 'next';
-import getConfig from 'next/config';
 // import { promises as fs } from 'fs';
 // import path from 'path';
 import goldfarbApi from '../../../api/goldfarb';
@@ -16,11 +15,6 @@ export interface PageProps {
     relatedProducts: IProduct[];
     categories: IShopCategory[];
 }
-
-export const getInitialProps = async () => {
-    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
-    console.log({ serverRuntimeConfig, publicRuntimeConfig });
-};
 
 // const writeProductsLocally = async (products: any[]) => {
 //     const itemcodes = products
