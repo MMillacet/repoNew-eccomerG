@@ -99,8 +99,8 @@ const fileCode = (itemcode) => `${itemcode - (itemcode % 1000)}`;
 const run = async () => {
     const start = new Date();
     // delete all contents of data/products folder
-    const contents = fs.readdirSync(`${path.join(process.cwd(), `/src/data/products`)}`);
-    contents.map((e) => fs.unlinkSync(path.join(process.cwd(), `/src/data/products/${e}`)));
+    const contents = fs.readdirSync(`${path.join(process.cwd(), `/public/products`)}`);
+    contents.map((e) => fs.unlinkSync(path.join(process.cwd(), `/public/products/${e}`)));
 
     const { products } = await getProductsList();
     const itemcodes = products
@@ -134,7 +134,7 @@ const run = async () => {
     }
 
     Object.keys(files).forEach((filecode) => {
-        const filename = `${path.join(process.cwd(), `/src/data/products/${filecode}.json`)}`;
+        const filename = `${path.join(process.cwd(), `/public/products/${filecode}.json`)}`;
         fs.writeFileSync(filename, JSON.stringify(files[filecode]), { flag: 'w+' });
     });
 
