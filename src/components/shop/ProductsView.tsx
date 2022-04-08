@@ -156,6 +156,15 @@ function ProductsView(props: ProductsViewProps) {
                     </div>
                 </div>
 
+                {/* <div className="products-view__pagination">
+                    <Pagination
+                        current={options.page || productsList.page}
+                        siblings={2}
+                        total={productsList.pages}
+                        onPageChange={handlePageChange}
+                    />
+                </div> */}
+
                 <div
                     className="products-view__list products-list"
                     data-layout={layout !== 'list' ? grid : layout}

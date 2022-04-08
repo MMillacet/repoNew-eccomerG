@@ -10,7 +10,7 @@ const nameToSlug = (name) =>
         .replace(/[^a-z0-9]/, '-')
         .replace(/-+/, '-');
 
-const baseURL = 'http://app.goldfarb.com.uy/main/api';
+const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 
 const makeProduct = (product) => {
     const code = product.code || product.itemCode;
@@ -110,12 +110,15 @@ const run = async () => {
 
     const files = {};
 
+    console.log('Starting..');
     try {
         let i = 0;
         let itemcodesToLookup = itemcodes.slice(i, i + 300);
+        console.log(itemcodesToLookup);
         while (itemcodesToLookup.length > 0) {
             // eslint-disable-next-line no-await-in-loop
             const { products } = await lookup(itemcodesToLookup);
+            console.log({ products });
 
             products.forEach((p) => {
                 const filecode = fileCode(p.id);
@@ -127,6 +130,8 @@ const run = async () => {
             i += 300;
             itemcodesToLookup = itemcodes.slice(i, i + 300);
             console.log(`${i}/${itemcodes.length}`);
+            const time = new Date() - start;
+            console.log({ time: time / 1000 });
         }
     } catch (err) {
         console.error(`Error ${err}`);
