@@ -15,6 +15,7 @@ import { useMobileMenu, useMobileMenuClose } from '../../store/mobile-menu/mobil
 import dataMobileMenu from '../../data/mobileMenu';
 import dataShopCurrencies from '../../data/shopCurrencies';
 import { IMobileMenuLink } from '../../interfaces/menus/mobile-menu';
+import AppLink from '../shared/AppLink';
 
 function MobileMenu() {
     const mobileMenu = useMobileMenu();
@@ -52,7 +53,11 @@ function MobileMenu() {
             <div className="mobilemenu__backdrop" onClick={mobileMenuClose} />
             <div className="mobilemenu__body">
                 <div className="mobilemenu__header">
-                    <div className="mobilemenu__title">Menu</div>
+                    <div className="mobilemenu__title">
+                        <AppLink href={'/'} className="mobile-header__logo">
+                            <img src="/images/logos/goldfarb-logo.png" alt="" />
+                        </AppLink>
+                    </div>
                     <button type="button" className="mobilemenu__close" onClick={mobileMenuClose}>
                         <Cross20Svg />
                     </button>

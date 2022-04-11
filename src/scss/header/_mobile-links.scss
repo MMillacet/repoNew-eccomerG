@@ -55,7 +55,7 @@ $local-expand-transition-duration: 0.3s;
     transition: fill 0.2s;
 
     @include direction {
-        #{$border-inline-start}: 1px solid $mobilemenu-divider-color;
+        // #{$border-inline-start}: 1px solid $mobilemenu-divider-color;
     }
 
     &:focus {
@@ -121,14 +121,14 @@ $local-expand-transition-duration: 0.3s;
         background: $mobilemenu-bg;
 
         @include direction {
-            #{$padding-inline-start}: 20px;
+            // #{$padding-inline-start}: 20px;
         }
 
         & > li {
             background: $mobilemenu-deep-links-bg;
 
             @include direction {
-                #{$border-inline-start}: 1px solid $mobilemenu-divider-color;
+                // #{$border-inline-start}: 1px solid $mobilemenu-divider-color;
             }
         }
     }
