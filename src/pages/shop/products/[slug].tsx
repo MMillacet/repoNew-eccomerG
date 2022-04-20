@@ -71,7 +71,7 @@ export async function getStaticPaths() {
 const fileCode = (itemcode: number) => `${itemcode - (itemcode % 1000)}`;
 
 const lookupProductsLocally = async (itemcodes: string[]) => {
-    const codes = itemcodes.map((itemcode) => Number(itemcode));
+    const codes = itemcodes.filter(Number).map((itemcode) => Number(itemcode));
 
     const result: any[] = [];
 
@@ -104,7 +104,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         const [product] = products;
 
         if (product) {
-            const relatedProducts = await lookupProductsLocally(product?.relatedItems || []);
+            const relatedItems = product?.relatedItems?.filter((item: any) => !!item) || [];
+            const relatedProducts = await lookupProductsLocally(relatedItems);
 
             return {
                 props: {
