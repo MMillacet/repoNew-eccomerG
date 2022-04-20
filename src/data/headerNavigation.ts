@@ -13,13 +13,13 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Herramientas Manuales',
-                                url: '/shop/catalog?category=Herramientas Manuales',
+                                title: 'Manuales',
+                                url: '/shop/catalog?category=Manuales',
                                 children: [
-                                    { title: 'Destornilladores', url: '/shop/catalog?subcategory=Destornilladores' },
+                                    { title: 'Bocallaves y accesorios', url: '/shop/catalog?subcategory=Bocallaves y accesorios' },
                                     { title: 'Llaves', url: '/shop/catalog?subcategory=Llaves' },
-                                    { title: 'Bocallaves', url: '/shop/catalog?subcategory=Bocallaves' },
-                                    { title: 'Dados', url: '/shop/catalog?subcategory=Dados' },
+                                    { title: 'Destornilladores', url: '/shop/catalog?subcategory=Destornilladores' },
+                                    { title: 'Limas y escofinas', url: '/shop/catalog?subcategory=Limas y escofinas' },
                                 ],
                             },
                         ],
@@ -31,10 +31,10 @@ const header: INav = [
                                 title: 'Accesorios',
                                 url: '/shop/catalog?category=Accesorios',
                                 children: [
-                                    { title: 'Lijas', url: '/shop/catalog?subcategory=Lijas' },
-                                    { title: 'Discos', url: '/shop/catalog?subcategory=Discos' },
-                                    { title: 'Hojas', url: '/shop/catalog?subcategory=Hojas' },
                                     { title: 'Mechas', url: '/shop/catalog?subcategory=Mechas' },
+                                    { title: 'Puntas y cinceles', url: '/shop/catalog?subcategory=Puntas y cinceles' },
+                                    { title: 'Hojas de sierra circular', url: '/shop/catalog?subcategory=Hojas de sierra circular' },
+                                    { title: 'Sierra sable', url: '/shop/catalog?subcategory=Sierra sable' },
                                 ],
                             },
                         ],
@@ -43,12 +43,15 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Herramientas Eléctricas',
-                                url: '/shop/catalog?category=Herramientas Eléctricas',
+                                title: 'Electricas',
+                                url: '/shop/catalog?category=Electricas',
                                 children: [
+                                    { title: 'Hidrolavadoras y accesorios', url: '/shop/catalog?subcategory=Hidrolavadoras y accesorios' },
+                                    {
+                                        title: 'Equipos de soldar y accesorios',
+                                        url: '/shop/catalog?subcategory=Equipos de soldar y accesorios',
+                                    },
                                     { title: 'Sierras', url: '/shop/catalog?subcategory=Sierras' },
-                                    { title: 'Mechas', url: '/shop/catalog?subcategory=Mechas' },
-                                    { title: 'Discos', url: '/shop/catalog?subcategory=Discos' },
                                     { title: 'Amoladoras', url: '/shop/catalog?subcategory=Amoladoras' },
                                 ],
                             },
@@ -58,13 +61,13 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Ferretería',
-                                url: '/shop/catalog?category=Ferretería',
+                                title: 'A bateria',
+                                url: '/shop/catalog?category=A bateria',
                                 children: [
-                                    { title: 'Candados', url: '/shop/catalog?subcategory=Candados' },
-                                    { title: 'Tacos', url: '/shop/catalog?subcategory=Tacos' },
-                                    { title: 'Remaches', url: '/shop/catalog?subcategory=Remaches' },
-                                    { title: 'Cerraduras', url: '/shop/catalog?subcategory=Cerraduras' },
+                                    { title: 'Baterias y cargadores', url: '/shop/catalog?subcategory=Baterias y cargadores' },
+                                    { title: 'Taladros', url: '/shop/catalog?subcategory=Taladros' },
+                                    { title: 'Llaves de impacto', url: '/shop/catalog?subcategory=Llaves de impacto' },
+                                    { title: 'Amoladoras', url: '/shop/catalog?subcategory=Amoladoras' },
                                 ],
                             },
                         ],
@@ -85,9 +88,62 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Herraduras',
-                                url: '/shop/catalog?category=Herraduras',
-                                children: [{ title: 'Herram. P-herradores', url: '/shop/catalog?subcategory=Herram. P-herradores' }],
+                                title: 'Proteccion',
+                                url: '/shop/catalog?category=Proteccion',
+                                children: [
+                                    { title: 'Zapatos de seguridad', url: '/shop/catalog?subcategory=Zapatos de seguridad' },
+                                    { title: 'Guantes', url: '/shop/catalog?subcategory=Guantes' },
+                                    { title: 'Gafas', url: '/shop/catalog?subcategory=Gafas' },
+                                    { title: 'Eslingas', url: '/shop/catalog?subcategory=Eslingas' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Consumibles',
+                                url: '/shop/catalog?category=Consumibles',
+                                children: [
+                                    { title: 'Fijacion', url: '/shop/catalog?subcategory=Fijacion' },
+                                    { title: 'Remachees', url: '/shop/catalog?subcategory=Remachees' },
+                                    {
+                                        title: 'Aceites, grasas y lubricantes',
+                                        url: '/shop/catalog?subcategory=Aceites, grasas y lubricantes',
+                                    },
+                                    { title: 'Precintos', url: '/shop/catalog?subcategory=Precintos' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Abrasivos',
+                                url: '/shop/catalog?category=Abrasivos',
+                                children: [
+                                    { title: 'Discos c/velcro', url: '/shop/catalog?subcategory=Discos c/velcro' },
+                                    { title: 'Discos flap', url: '/shop/catalog?subcategory=Discos flap' },
+                                    { title: 'Lijas en banda', url: '/shop/catalog?subcategory=Lijas en banda' },
+                                    { title: 'Lijas al agua', url: '/shop/catalog?subcategory=Lijas al agua' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Varios',
+                                url: '/shop/catalog?category=Varios',
+                                children: [
+                                    { title: 'Lonas', url: '/shop/catalog?subcategory=Lonas' },
+                                    { title: 'Cuerdas', url: '/shop/catalog?subcategory=Cuerdas' },
+                                    { title: 'Sillas de playa', url: '/shop/catalog?subcategory=Sillas de playa' },
+                                    { title: 'Felpudos', url: '/shop/catalog?subcategory=Felpudos' },
+                                ],
                             },
                         ],
                     },
@@ -95,10 +151,9 @@ const header: INav = [
             },
         },
     },
-    { title: 'AGRO Y JARDIN', url: '/shop/catalog?family=Agro y Jardin', submenu: { type: 'megamenu', menu: { size: 'nl', columns: [] } } },
     {
-        title: 'PINTURA',
-        url: '/shop/catalog?family=Pintura',
+        title: 'AGRO Y JARDIN',
+        url: '/shop/catalog?family=Agro y Jardin',
         submenu: {
             type: 'megamenu',
             menu: {
@@ -108,13 +163,98 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Suvinil',
-                                url: '/shop/catalog?category=Suvinil',
+                                title: 'Accesorios',
+                                url: '/shop/catalog?category=Accesorios',
                                 children: [
-                                    { title: 'Madera y Metal', url: '/shop/catalog?subcategory=Madera y Metal' },
-                                    { title: 'SelfColor', url: '/shop/catalog?subcategory=SelfColor' },
-                                    { title: 'Compl+Otros', url: '/shop/catalog?subcategory=Compl+Otros' },
-                                    { title: 'Acrílico RM', url: '/shop/catalog?subcategory=Acrílico RM' },
+                                    { title: 'Cadenas', url: '/shop/catalog?subcategory=Cadenas' },
+                                    { title: 'Espadas', url: '/shop/catalog?subcategory=Espadas' },
+                                    { title: 'Carretes', url: '/shop/catalog?subcategory=Carretes' },
+                                    { title: 'Tanzas', url: '/shop/catalog?subcategory=Tanzas' },
+                                ],
+                            },
+                        ],
+                    },
+                    { size: 6, links: [{ title: 'Herraduras y clavos', url: '/shop/catalog?category=Herraduras y clavos', children: [] }] },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Riego',
+                                url: '/shop/catalog?category=Riego',
+                                children: [
+                                    { title: 'Mangueras', url: '/shop/catalog?subcategory=Mangueras' },
+                                    { title: 'Pistolas', url: '/shop/catalog?subcategory=Pistolas' },
+                                    { title: 'Acople rapido', url: '/shop/catalog?subcategory=Acople rapido' },
+                                    { title: 'Uniones', url: '/shop/catalog?subcategory=Uniones' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Herramientas',
+                                url: '/shop/catalog?category=Herramientas',
+                                children: [
+                                    { title: 'Tijeras de podar', url: '/shop/catalog?subcategory=Tijeras de podar' },
+                                    { title: 'Machetes', url: '/shop/catalog?subcategory=Machetes' },
+                                    { title: 'Escobillas', url: '/shop/catalog?subcategory=Escobillas' },
+                                    { title: 'Rastrillos', url: '/shop/catalog?subcategory=Rastrillos' },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    },
+    {
+        title: 'PINTURA',
+        url: '/shop/catalog?family=Pinturas',
+        submenu: {
+            type: 'megamenu',
+            menu: {
+                size: 'nl',
+                columns: [
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Paredes',
+                                url: '/shop/catalog?category=Paredes',
+                                children: [
+                                    { title: 'Base agua', url: '/shop/catalog?subcategory=Base agua' },
+                                    { title: 'Sistema selfcolors', url: '/shop/catalog?subcategory=Sistema selfcolors' },
+                                    { title: 'Especiales', url: '/shop/catalog?subcategory=Especiales' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Madera y metal',
+                                url: '/shop/catalog?category=Madera y metal',
+                                children: [
+                                    { title: 'Esmaltes', url: '/shop/catalog?subcategory=Esmaltes' },
+                                    { title: 'Sistema selfcolors', url: '/shop/catalog?subcategory=Sistema selfcolors' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Accesorios',
+                                url: '/shop/catalog?category=Accesorios',
+                                children: [
+                                    { title: 'Pinceles', url: '/shop/catalog?subcategory=Pinceles' },
+                                    { title: 'Rodillos', url: '/shop/catalog?subcategory=Rodillos' },
+                                    { title: 'Pinceletas', url: '/shop/catalog?subcategory=Pinceletas' },
+                                    { title: 'Bandejas', url: '/shop/catalog?subcategory=Bandejas' },
                                 ],
                             },
                         ],
@@ -126,35 +266,10 @@ const header: INav = [
                                 title: 'Madera',
                                 url: '/shop/catalog?category=Madera',
                                 children: [
-                                    { title: 'Esmaltes', url: '/shop/catalog?subcategory=Esmaltes' },
-                                    { title: 'Pinturas para madera', url: '/shop/catalog?subcategory=Pinturas para madera' },
-                                    { title: 'Tintas', url: '/shop/catalog?subcategory=Tintas' },
-                                    { title: 'Barnices', url: '/shop/catalog?subcategory=Barnices' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 6,
-                        links: [
-                            {
-                                title: 'Esmaltes Sinteticos',
-                                url: '/shop/catalog?category=Esmaltes Sinteticos',
-                                children: [{ title: 'Esmaltes', url: '/shop/catalog?subcategory=Esmaltes' }],
-                            },
-                        ],
-                    },
-                    {
-                        size: 6,
-                        links: [
-                            {
-                                title: 'Esmalte Aerosol',
-                                url: '/shop/catalog?category=Esmalte Aerosol',
-                                children: [
-                                    { title: 'Esmaltes', url: '/shop/catalog?subcategory=Esmaltes' },
-                                    { title: 'Poliuretano', url: '/shop/catalog?subcategory=Poliuretano' },
-                                    { title: 'Esmaltes Aerosol', url: '/shop/catalog?subcategory=Esmaltes Aerosol' },
-                                    { title: 'Zincifications', url: '/shop/catalog?subcategory=Zincifications' },
+                                    { title: 'Barniz', url: '/shop/catalog?subcategory=Barniz' },
+                                    { title: 'Protectores', url: '/shop/catalog?subcategory=Protectores' },
+                                    { title: 'Lacas y plastificantes', url: '/shop/catalog?subcategory=Lacas y plastificantes' },
+                                    { title: 'Protectores (base agua)', url: '/shop/catalog?subcategory=Protectores (base agua)' },
                                 ],
                             },
                         ],
@@ -175,13 +290,13 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Cocina y comedor',
-                                url: '/shop/catalog?category=Cocina y comedor',
+                                title: 'Ollas, sartenes, planchas',
+                                url: '/shop/catalog?category=Ollas, sartenes, planchas',
                                 children: [
-                                    { title: 'Cuchillos', url: '/shop/catalog?subcategory=Cuchillos' },
-                                    { title: 'Cucharas', url: '/shop/catalog?subcategory=Cucharas' },
-                                    { title: 'Cubiertos', url: '/shop/catalog?subcategory=Cubiertos' },
-                                    { title: 'Sartenes', url: '/shop/catalog?subcategory=Sartenes' },
+                                    { title: 'Acero inoxidable', url: '/shop/catalog?subcategory=Acero inoxidable' },
+                                    { title: 'Antiadherente paris', url: '/shop/catalog?subcategory=Antiadherente paris' },
+                                    { title: 'Hierro', url: '/shop/catalog?subcategory=Hierro' },
+                                    { title: 'Antiadherente', url: '/shop/catalog?subcategory=Antiadherente' },
                                 ],
                             },
                         ],
@@ -190,13 +305,16 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Iluminación',
-                                url: '/shop/catalog?category=Iluminación',
+                                title: 'Cubiertos, cuchillos y tijeras',
+                                url: '/shop/catalog?category=Cubiertos, cuchillos y tijeras',
                                 children: [
-                                    { title: 'Lamparas', url: '/shop/catalog?subcategory=Lamparas' },
-                                    { title: 'Linternas', url: '/shop/catalog?subcategory=Linternas' },
-                                    { title: 'Reflectores', url: '/shop/catalog?subcategory=Reflectores' },
-                                    { title: 'Tubos', url: '/shop/catalog?subcategory=Tubos' },
+                                    { title: 'Cuchillas', url: '/shop/catalog?subcategory=Cuchillas' },
+                                    { title: 'Cubierto acero inoxidable', url: '/shop/catalog?subcategory=Cubierto acero inoxidable' },
+                                    {
+                                        title: 'Cubierto mango polipropileno',
+                                        url: '/shop/catalog?subcategory=Cubierto mango polipropileno',
+                                    },
+                                    { title: 'Cubierto mango madera', url: '/shop/catalog?subcategory=Cubierto mango madera' },
                                 ],
                             },
                         ],
@@ -205,13 +323,13 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Jardín',
-                                url: '/shop/catalog?category=Jardín',
+                                title: 'Accesorios',
+                                url: '/shop/catalog?category=Accesorios',
                                 children: [
-                                    { title: 'Reposeras', url: '/shop/catalog?subcategory=Reposeras' },
-                                    { title: 'Piscinas', url: '/shop/catalog?subcategory=Piscinas' },
-                                    { title: 'Sillas', url: '/shop/catalog?subcategory=Sillas' },
-                                    { title: 'Dispensadores', url: '/shop/catalog?subcategory=Dispensadores' },
+                                    { title: 'Cocina', url: '/shop/catalog?subcategory=Cocina' },
+                                    { title: 'Utensilios', url: '/shop/catalog?subcategory=Utensilios' },
+                                    { title: 'Varios', url: '/shop/catalog?subcategory=Varios' },
+                                    { title: 'Vino & bar', url: '/shop/catalog?subcategory=Vino & bar' },
                                 ],
                             },
                         ],
@@ -220,12 +338,13 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Decoración',
-                                url: '/shop/catalog?category=Decoración',
+                                title: 'Vajilla',
+                                url: '/shop/catalog?category=Vajilla',
                                 children: [
-                                    { title: 'Relojes', url: '/shop/catalog?subcategory=Relojes' },
-                                    { title: 'Macetas', url: '/shop/catalog?subcategory=Macetas' },
-                                    { title: 'Repisas', url: '/shop/catalog?subcategory=Repisas' },
+                                    { title: 'Vidrio', url: '/shop/catalog?subcategory=Vidrio' },
+                                    { title: 'Ceramica', url: '/shop/catalog?subcategory=Ceramica' },
+                                    { title: 'Te y cafe de vidrio', url: '/shop/catalog?subcategory=Te y cafe de vidrio' },
+                                    { title: 'Porcelana', url: '/shop/catalog?subcategory=Porcelana' },
                                 ],
                             },
                         ],
@@ -246,13 +365,54 @@ const header: INav = [
                         size: 6,
                         links: [
                             {
-                                title: 'Electrodomésticos',
-                                url: '/shop/catalog?category=Electrodomésticos',
+                                title: 'Cocina',
+                                url: '/shop/catalog?category=Cocina',
                                 children: [
-                                    { title: 'Soportes', url: '/shop/catalog?subcategory=Soportes' },
-                                    { title: 'Extractores', url: '/shop/catalog?subcategory=Extractores' },
+                                    { title: 'Anafes', url: '/shop/catalog?subcategory=Anafes' },
+                                    { title: 'Freidoras', url: '/shop/catalog?subcategory=Freidoras' },
+                                    { title: 'Microondas', url: '/shop/catalog?subcategory=Microondas' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Soportes',
+                                url: '/shop/catalog?category=Soportes',
+                                children: [
+                                    { title: 'Tv', url: '/shop/catalog?subcategory=Tv' },
+                                    { title: 'Electrodomesticos', url: '/shop/catalog?subcategory=Electrodomesticos' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Desayuno',
+                                url: '/shop/catalog?category=Desayuno',
+                                children: [
+                                    { title: 'Jarras electricas', url: '/shop/catalog?subcategory=Jarras electricas' },
+                                    { title: 'Cafeteras', url: '/shop/catalog?subcategory=Cafeteras' },
+                                    { title: 'Tostadora', url: '/shop/catalog?subcategory=Tostadora' },
+                                    { title: 'Sandwicheras', url: '/shop/catalog?subcategory=Sandwicheras' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 6,
+                        links: [
+                            {
+                                title: 'Calefaccion',
+                                url: '/shop/catalog?category=Calefaccion',
+                                children: [
                                     { title: 'Estufas', url: '/shop/catalog?subcategory=Estufas' },
-                                    { title: 'Licuadoras', url: '/shop/catalog?subcategory=Licuadoras' },
+                                    { title: 'Caloventiladores', url: '/shop/catalog?subcategory=Caloventiladores' },
+                                    { title: 'Calienta camas', url: '/shop/catalog?subcategory=Calienta camas' },
                                 ],
                             },
                         ],
@@ -262,213 +422,5 @@ const header: INav = [
         },
     },
 ];
-
-// const dataHeaderNavigation: INav = [
-// {
-//     title: 'Home',
-//     url: '/',
-//     submenu: {
-//         type: 'menu',
-//         menu: [
-//             { title: 'Home 1', url: '/home-one' },
-//             { title: 'Home 2', url: '/' },
-//         ],
-//     },
-// },
-// {
-//     title: 'Megamenu',
-//     url: '',
-//     submenu: {
-//         type: 'megamenu',
-//         menu: {
-//             size: 'nl',
-//             columns: [
-//                 {
-//                     size: 6,
-//                     links: [
-//                         {
-//                             title: 'Power Tools',
-//                             url: '',
-//                             children: [
-//                                 { title: 'Engravers', url: '' },
-//                                 { title: 'Wrenches', url: '' },
-//                                 { title: 'Wall Chaser', url: '' },
-//                                 { title: 'Pneumatic Tools', url: '' },
-//                             ],
-//                         },
-//                     ],
-//                 },
-//                 {
-//                     size: 6,
-//                     links: [
-//                         {
-//                             title: 'Machine Tools',
-//                             url: '',
-//                             children: [
-//                                 { title: 'Thread Cutting', url: '' },
-//                                 { title: 'Chip Blowers', url: '' },
-//                                 { title: 'Sharpening Machines', url: '' },
-//                                 { title: 'Pipe Cutters', url: '' },
-//                                 { title: 'Slotting machines', url: '' },
-//                                 { title: 'Lathes', url: '' },
-//                             ],
-//                         },
-//                     ],
-//                 },
-//                 {
-//                     size: 6,
-//                     links: [
-//                         {
-//                             title: 'Hand Tools',
-//                             url: '',
-//                             children: [
-//                                 { title: 'Screwdrivers', url: '' },
-//                                 { title: 'Handsaws', url: '' },
-//                                 { title: 'Knives', url: '' },
-//                                 { title: 'Axes', url: '' },
-//                                 { title: 'Multitools', url: '' },
-//                                 { title: 'Paint Tools', url: '' },
-//                             ],
-//                         },
-//                     ],
-//                 },
-//                 {
-//                     size: 6,
-//                     links: [
-//                         {
-//                             title: 'Garden Equipment',
-//                             url: '',
-//                             children: [
-//                                 { title: 'Motor Pumps', url: '' },
-//                                 { title: 'Chainsaws', url: '' },
-//                                 { title: 'Electric Saws', url: '' },
-//                                 { title: 'Brush Cutters', url: '' },
-//                             ],
-//                         },
-//                     ],
-//                 },
-//             ],
-//         },
-//     },
-// },
-
-// {
-//     title: 'Shop',
-//     url: '/shop/category-grid-3-columns-sidebar',
-//     submenu: {
-//         type: 'menu',
-//         menu: [
-//             {
-//                 title: 'Shop Grid',
-//                 url: '/shop/category-grid-3-columns-sidebar',
-//                 children: [
-//                     {
-//                         title: '3 Columns Sidebar',
-//                         url: '/shop/category-grid-3-columns-sidebar',
-//                     },
-//                     { title: '4 Columns Full', url: '/shop/category-grid-4-columns-full' },
-//                     { title: '5 Columns Full', url: '/shop/category-grid-5-columns-full' },
-//                 ],
-//             },
-//             { title: 'Shop List', url: '/shop/category-list' },
-//             { title: 'Shop Right Sidebar', url: '/shop/category-right-sidebar' },
-//             {
-//                 title: 'Product',
-//                 url: '/shop/product-standard',
-//                 children: [
-//                     { title: 'Product', url: '/shop/product-standard' },
-//                     { title: 'Product Alt', url: '/shop/product-columnar' },
-//                     { title: 'Product Sidebar', url: '/shop/product-sidebar' },
-//                 ],
-//             },
-//             { title: 'Cart', url: '/shop/cart' },
-//             { title: 'Checkout', url: '/shop/checkout' },
-//             { title: 'Order Success', url: '/shop/checkout/success' },
-//             { title: 'Wishlist', url: '/shop/wishlist' },
-//             { title: 'Compare', url: '/shop/compare' },
-//             { title: 'Track Order', url: '/shop/track-order' },
-//         ],
-//     },
-// },
-// {
-//     title: 'Account',
-//     url: '/account/login',
-//     submenu: {
-//         type: 'menu',
-//         menu: [
-//             { title: 'Iniciar sesión', url: '/account/login' },
-//             { title: 'Dashboard', url: '/account/dashboard' },
-//             { title: 'Editar Perfil', url: '/account/profile' },
-//             { title: 'Historial pedidos', url: '/account/orders' },
-//             {
-//                 title: 'Order Details',
-//                 url: {
-//                     href: '/account/orders/[orderId]',
-//                     as: '/account/orders/5',
-//                     prefetch: false,
-//                 },
-//             },
-//             { title: 'Address Book', url: '/account/addresses' },
-//             {
-//                 title: 'Edit Address',
-//                 url: {
-//                     href: '/account/addresses/[addressId]',
-//                     as: '/account/addresses/5',
-//                     prefetch: false,
-//                 },
-//             },
-//             { title: 'Change Password', url: '/account/password' },
-//         ],
-//     },
-// },
-// {
-//     title: 'Blog',
-//     url: '/blog/category-classic',
-//     submenu: {
-//         type: 'menu',
-//         menu: [
-//             { title: 'Blog Classic', url: '/blog/category-classic' },
-//             { title: 'Blog Grid', url: '/blog/category-grid' },
-//             { title: 'Blog List', url: '/blog/category-list' },
-//             { title: 'Blog Left Sidebar', url: '/blog/category-left-sidebar' },
-//             { title: 'Post Page', url: '/blog/post-classic' },
-//             { title: 'Post Without Sidebar', url: '/blog/post-full' },
-//         ],
-//     },
-// },
-// {
-//     title: 'Pages',
-//     url: '/site/about-us',
-//     submenu: {
-//         type: 'menu',
-//         menu: [
-//             { title: 'About Us', url: '/site/about-us' },
-//             { title: 'Contact Us', url: '/site/contact-us' },
-//             { title: 'Contact Us Alt', url: '/site/contact-us-alt' },
-//             { title: '404', url: '/site/not-found' },
-//             { title: 'Terms And Conditions', url: '/site/terms' },
-//             { title: 'FAQ', url: '/site/faq' },
-//             { title: 'Components', url: '/site/components' },
-//             { title: 'Typography', url: '/site/typography' },
-//         ],
-//     },
-// },
-//     {
-//         title: 'HERRAMIENTAS',
-//         url: '/shop/catalog/herramientas',
-//     },
-//     {
-//         title: 'HOGAR',
-//         url: '/shop/catalog/hogar',
-//     },
-//     {
-//         title: 'PINTURAS',
-//         url: '/shop/catalog/pinturas',
-//     },
-//     {
-//         title: 'CÓMO COMPRAR',
-//         url: '/site/how-to-purchase',
-//     },
-// ];
 
 export default header;
