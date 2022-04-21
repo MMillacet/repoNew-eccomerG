@@ -419,6 +419,18 @@ const goldfarbApi = {
 
         return data;
     },
+
+    getShipping: async (params: { total: number; tipoPedido: string; cardcode: string }) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getshipping',
+            method: 'get',
+            params,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
 };
 
 export default goldfarbApi;

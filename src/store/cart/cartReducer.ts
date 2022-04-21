@@ -58,11 +58,11 @@ function calcTotals(items: CartItem[], currency: string): CartTotal[] {
     }
 
     return [
-        {
-            type: 'shipping',
-            title: 'Envio',
-            price: 0,
-        },
+        // {
+        //     type: 'shipping',
+        //     title: 'Envio',
+        //     price: 0,
+        // },
         {
             type: 'tax',
             title: 'Impuestos',

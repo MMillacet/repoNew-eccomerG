@@ -28,6 +28,7 @@ function ShopPageCheckout() {
     const cart = useCart();
     const emptyCart = useCartEmpty();
     // const [currentPayment, setCurrentPayment] = useState('bank');
+    const [shippingCost, setShippingCost] = useState(0);
 
     const { user } = useUser();
     const { clientHeader }: any = user || {};
@@ -36,6 +37,17 @@ function ShopPageCheckout() {
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
+
+    useEffect(() => {
+        const getShipping = async () => {
+            const type = orderType;
+            if (type) {
+                const data = await (await fetch(`/api/shipping?totalp=${cart.total.$}&totald=${cart.total.U$}&tipoPedido=${type}`)).json();
+                setShippingCost(data);
+            }
+        };
+        getShipping();
+    }, [cart.total, orderType]);
 
     // const handlePaymentChange = (event: ChangeEvent<HTMLInputElement>) => {
     //     if (event.target.checked) {
@@ -91,16 +103,16 @@ function ShopPageCheckout() {
     };
 
     const totals = () => {
-        const shipping = cart.totals.$.find((x: CartTotal) => x.type === 'shipping');
+        // const shipping = cart.totals.$.find((x: CartTotal) => x.type === 'shipping');
         const taxPesos = cart.totals.$.find((x: CartTotal) => x.type === 'tax');
         const taxDollars = cart.totals.U$.find((x: CartTotal) => x.type === 'tax');
 
-        const r1 = shipping && (
+        const r1 = (
             <tr key={1}>
                 <th>Envio</th>
                 <td></td>
                 <td>
-                    <CurrencyFormat value={shipping.price} />
+                    <CurrencyFormat value={shippingCost} />
                 </td>
             </tr>
         );
