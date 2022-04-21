@@ -105,8 +105,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
         if (product) {
             const relatedItems = product?.relatedItems?.filter((item: any) => !!item) || [];
-            const relatedProducts = await lookupProductsLocally(relatedItems);
-
+            const relatedProducts = await (await lookupProductsLocally(relatedItems)).filter((p: any) => !!p);
             return {
                 props: {
                     product,
