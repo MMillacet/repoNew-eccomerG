@@ -7,7 +7,7 @@ import goldfarbApi from '../../../api/goldfarb';
 const fileCode = (itemcode: number) => `${itemcode - (itemcode % 1000)}`;
 
 const lookupProductsLocally = async (itemcodes: string[]) => {
-    const codes = itemcodes.map((itemcode) => Number(itemcode));
+    const codes = itemcodes.filter(Number).map((itemcode) => Number(itemcode));
 
     const result: any[] = [];
 

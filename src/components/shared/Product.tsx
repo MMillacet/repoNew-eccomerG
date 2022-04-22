@@ -39,8 +39,7 @@ function Product(props: ProductProps) {
 
     useEffect(() => {
         const realTimeProductRequest = async () => {
-            const data = await (await fetch(`/api/products/lookup?itemcodes=${[`${product.code}`]}`)).json();
-            const p = data.products[0];
+            const p = await (await fetch(`/api/products/${product.code}`)).json();
             setRtProduct(p);
         };
 
