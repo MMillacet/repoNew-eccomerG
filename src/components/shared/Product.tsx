@@ -33,14 +33,36 @@ function Product(props: ProductProps) {
 
     const [quantity, setQuantity] = useState<number>(1);
     const [rtProduct, setRtProduct] = useState<IProduct>(product);
+    const [description, setDescription] = useState<JSX.Element[]>();
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
 
+    const rtProductChanged = (product: IProduct) => {
+        setRtProduct(product);
+
+        const d = product.description.split('<br/>').map((line, i) => {
+            if (line.startsWith('-') || line.startsWith('*')) {
+                return (
+                    <li className="product_description_item" key={i}>
+                        {line.substring(1)}
+                    </li>
+                );
+            }
+            return (
+                <div key={i} className="product__description">
+                    {line}
+                </div>
+            );
+        });
+
+        setDescription(d);
+    };
+
     useEffect(() => {
         const realTimeProductRequest = async () => {
-            const p = await (await fetch(`/api/products/${product.code}`)).json();
-            setRtProduct(p);
+            const p = await (await fetch(`/api/products/${product.code}?desc=true`)).json();
+            rtProductChanged(p);
         };
 
         realTimeProductRequest();
@@ -81,6 +103,22 @@ function Product(props: ProductProps) {
             prices = <CurrencyFormat value={rtProduct?.price} currency={rtProduct?.currency} />;
         }
     }
+
+    // let description;
+    // if (rtProduct && rtProduct.description) {
+    //     description = rtProduct.description.split('<br/>').map((line, i) => {
+    //         if (line.startsWith('-') || line.startsWith('*')) {
+    //             return <li key={i}>{line.substring(1)}</li>;
+    //         }
+
+    //         return (
+    //             <Fragment key={i}>
+    //                 {line}
+    //                 {/* <br /> */}
+    //             </Fragment>
+    //         );
+    //     });
+    // }
 
     return (
         <div className={`product product--layout--${layout}`}>
@@ -135,14 +173,8 @@ function Product(props: ProductProps) {
                             <AppLink href="/">Write A Review</AppLink>
                         </div>
                     </div> */}
-                    <div className="product__description">{product.description || product.description}</div>
-                    {/* <ul className="product__features">
-                        <li>Speed: 750 RPM</li>
-                        <li>Power Source: Cordless-Electric</li>
-                        <li>Battery Cell Type: Lithium</li>
-                        <li>Voltage: 20 Volts</li>
-                        <li>Battery Capacity: 2 Ah</li>
-                    </ul> */}
+
+                    <div className="product__description">{description}</div>
                     <ul className="product__meta">
                         <li className="product__meta-availability">
                             Disponibilidad:{' '}

@@ -53,6 +53,7 @@ const lookup = async (itemcodes) => {
         method: 'get',
         params: {
             itemcodes: itemcodes.join(','),
+            withDesc: 'true',
         },
     };
 
@@ -62,11 +63,10 @@ const lookup = async (itemcodes) => {
         data.products.map(async (product) => {
             const p = makeProduct(product);
 
-            const [description, documents, images] = await Promise.all([getDescription(p.id), getDocuments(p.id), getImages(p.id)]);
+            const [documents, images] = await Promise.all([getDocuments(p.id), getImages(p.id)]);
 
             p.images = images;
             p.documents = documents;
-            p.description = description;
             return p;
         }),
     );
@@ -74,25 +74,26 @@ const lookup = async (itemcodes) => {
     return data;
 };
 
-const getDescription = async (itemcode) => {
-    try {
-        const config = {
-            baseURL,
-            url: '/goldfarb/ProductLookup',
-            method: 'post',
-            data: {
-                itemcodes: [itemcode],
-            },
-        };
+// const getDescription = async (itemcode) => {
+//     try {
+//         const config = {
+//             baseURL,
+//             url: '/web/ProductLookup',
+//             method: 'get',
+//             data: {
+//                 itemcodes: [itemcode],
+//                 withDesc: 'true',
+//             },
+//         };
 
-        const { data } = await axios(config);
+//         const { data } = await axios(config);
 
-        return data.products[0].description;
-    } catch (error) {
-        console.log('desc', error);
-        throw error;
-    }
-};
+//         return data.products[0].description;
+//     } catch (error) {
+//         console.log('desc', error);
+//         throw error;
+//     }
+// };
 
 const fileCode = (itemcode) => `${itemcode - (itemcode % 1000)}`;
 

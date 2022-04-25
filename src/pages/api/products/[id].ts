@@ -17,7 +17,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
     try {
         const {
             products: [product],
-        } = await goldfarbApi.getProductsLookup({ itemcodes: [`${id}`], cardcode });
+        } = await goldfarbApi.getProductsLookup({ itemcodes: [`${id}`], cardcode, withDesc: 'true' });
 
         res.status(200).json(product);
     } catch (error) {

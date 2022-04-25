@@ -18,6 +18,7 @@ export interface CatalogOptions {
 export interface LookupOptions {
     itemcodes: string[];
     cardcode?: string;
+    withDesc?: string;
 }
 
 export interface SearchOptions {
@@ -112,7 +113,7 @@ const goldfarbApi = {
     getFamilies: async () => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/getFamilies',
+            url: '/web/getFamilies',
             method: 'GET',
         };
         const { data } = await axios(config);
@@ -120,28 +121,28 @@ const goldfarbApi = {
         return data;
     },
 
+    // getProductsLookup: async (options: LookupOptions): Promise<{ products: any[] }> => {
+    //     const config: AxiosRequestConfig = {
+    //         baseURL,
+    //         url: '/goldfarb/ProductLookup',
+    //         method: 'post',
+    //         data: options,
+    //     };
+
+    //     try {
+    //         const { data } = await axios(config);
+
+    //         data.products = data.products.map((product: any) => makeProduct(product));
+
+    //         return data;
+    //     } catch (error) {
+    //         return {
+    //             products: [],
+    //         };
+    //     }
+    // },
+
     getProductsLookup: async (options: LookupOptions): Promise<{ products: any[] }> => {
-        const config: AxiosRequestConfig = {
-            baseURL,
-            url: '/goldfarb/ProductLookup',
-            method: 'post',
-            data: options,
-        };
-
-        try {
-            const { data } = await axios(config);
-
-            data.products = data.products.map((product: any) => makeProduct(product));
-
-            return data;
-        } catch (error) {
-            return {
-                products: [],
-            };
-        }
-    },
-
-    getProductsLookup2: async (options: LookupOptions): Promise<{ products: any[] }> => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/ProductLookup',
@@ -149,6 +150,7 @@ const goldfarbApi = {
             params: {
                 cardcode: options.cardcode,
                 itemcodes: options.itemcodes.join(','),
+                withDesc: options.withDesc,
             },
         };
 
@@ -163,28 +165,6 @@ const goldfarbApi = {
                 products: [],
             };
         }
-    },
-
-    getProductsSearch: async (options: SearchOptions) => {
-        // price-high-to-low or price-low-to-high
-        // eslint-disable-next-line no-param-reassign
-        options.orderBy = options.orderBy || 'relevance';
-        const config: AxiosRequestConfig = options.family
-            ? {
-                  baseURL,
-                  url: `/goldfarb/Outlet?family=${options.family}`,
-                  method: 'get',
-              }
-            : {
-                  baseURL,
-                  url: '/goldfarb/ProductSearch',
-                  method: 'post',
-                  data: options,
-              };
-
-        const { data } = await axios(config);
-
-        return data;
     },
 
     getProductsSearch2: async (params: {
@@ -217,7 +197,7 @@ const goldfarbApi = {
     getProductsList: async () => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/ProductsList',
+            url: '/web/ProductsList',
             method: 'get',
         };
 
@@ -242,25 +222,25 @@ const goldfarbApi = {
         return data;
     },
 
-    invoiceReturn: async (docNum: string, cardcode: string) => {
-        const config: AxiosRequestConfig = {
-            baseURL,
-            url: '/goldfarb/InvoiceReturn',
-            method: 'get',
-            params: {
-                docNum,
-                cardcode,
-            },
-        };
-        const { data } = await axios(config);
+    // invoiceReturn: async (docNum: string, cardcode: string) => {
+    //     const config: AxiosRequestConfig = {
+    //         baseURL,
+    //         url: '/goldfarb/InvoiceReturn',
+    //         method: 'get',
+    //         params: {
+    //             docNum,
+    //             cardcode,
+    //         },
+    //     };
+    //     const { data } = await axios(config);
 
-        return data;
-    },
+    //     return data;
+    // },
 
     recipe: async (docNum: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/clientRecipe',
+            url: '/web/clientRecipe',
             method: 'get',
             params: {
                 docNum,
@@ -294,7 +274,7 @@ const goldfarbApi = {
     postOrder: async (order: any) => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/CreateOrder',
+            url: '/web/CreateOrder',
             method: 'post',
             data: order,
         };
@@ -325,8 +305,8 @@ const goldfarbApi = {
             method: 'get',
             params: {
                 cardcode,
-                start: '2021-01-01',
-                end: '2021-12-31',
+                start: '2020-01-01',
+                end: '2022-12-31',
             },
         };
         const { data } = await axios(config);
@@ -385,7 +365,7 @@ const goldfarbApi = {
     getAccountStatus: async (cardcode: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/ClientState',
+            url: '/web/ClientState',
             method: 'get',
             params: {
                 cardcode,
@@ -399,7 +379,7 @@ const goldfarbApi = {
     createCatalog: async (options: CatalogOptions) => {
         const config: AxiosRequestConfig = {
             baseURL,
-            url: '/goldfarb/CreateCatalog',
+            url: '/web/CreateCatalog',
             method: 'post',
             data: options,
         };

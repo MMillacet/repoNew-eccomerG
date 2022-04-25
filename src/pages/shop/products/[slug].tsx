@@ -98,14 +98,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         const { slug } = context.params;
         const categories = await shopApi.getCategories({ depth: 1 });
 
-        // const { products } = await goldfarbApi.getProductsLookup2({ itemcodes: [slug] });
         const products = await lookupProductsLocally([slug]);
 
         const [product] = products;
 
         if (product) {
             const relatedItems = product?.relatedItems?.filter((item: any) => !!item) || [];
-            const relatedProducts = await (await lookupProductsLocally(relatedItems)).filter((p: any) => !!p);
+            const relatedProducts = (await lookupProductsLocally(relatedItems)).filter((p: any) => !!p);
             return {
                 props: {
                     product,

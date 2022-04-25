@@ -43,7 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (topProducts.length < results && missingProductsItemcodes.length > 0) {
         const cardcode = session ? session.user.cardcode : null;
-        const { products: missingProducts } = await goldfarbApi.getProductsLookup2({ itemcodes: missingProductsItemcodes, cardcode });
+        const { products: missingProducts } = await goldfarbApi.getProductsLookup({ itemcodes: missingProductsItemcodes, cardcode });
         missingProducts.forEach((p) => products.push(p));
     }
 
