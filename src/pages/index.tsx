@@ -19,15 +19,17 @@ function Page(props: PageProps) {
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     const result = await sanityApi.getHomeContent();
 
-    const [herramientas, loMasVendido, destacados] = await Promise.all(
-        [result.herramientas, result.loMasVendido, result.destacados].map((list) => goldfarbApi.getProductsLookup({ itemcodes: list })),
-    );
+    // const [herramientas, loMasVendido, destacados] = await Promise.all(
+    //     [result.herramientas, result.loMasVendido, result.destacados].map((list) => goldfarbApi.getProductsLookup({ itemcodes: list })),
+    // );
+
+    const destacados = await goldfarbApi.getProductsLookup({ itemcodes: result.destacados });
 
     return {
         props: {
             initData: {
-                herramientas: herramientas?.products,
-                loMasVendido: loMasVendido?.products,
+                // herramientas: herramientas?.products,
+                // loMasVendido: loMasVendido?.products,
                 destacados: destacados?.products,
                 slides: result?.slides,
                 banners: result?.banners,

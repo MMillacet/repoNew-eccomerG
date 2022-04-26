@@ -161,6 +161,7 @@ const goldfarbApi = {
 
             return data;
         } catch (error) {
+            console.log(error);
             return {
                 products: [],
             };

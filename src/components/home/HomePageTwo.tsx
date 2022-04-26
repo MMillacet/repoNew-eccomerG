@@ -20,8 +20,8 @@ import { IBrand } from '../../interfaces/brand';
 import AppLink from '../shared/AppLink';
 
 export interface InitData {
-    herramientas?: IProduct[];
-    loMasVendido?: IProduct[];
+    // herramientas?: IProduct[];
+    // loMasVendido?: IProduct[];
     destacados?: IProduct[];
     featuredProducts?: IProduct[];
     bestsellers?: IProduct[];
