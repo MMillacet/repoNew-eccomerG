@@ -31,7 +31,7 @@ function Product(props: ProductProps) {
 
     // const { realTimeProduct } = useRealTimeProduct(product?.id);
 
-    const [quantity, setQuantity] = useState<number>(1);
+    const [quantity, setQuantity] = useState<number>(product.unitMult);
     const [rtProduct, setRtProduct] = useState<IProduct>(product);
     const [description, setDescription] = useState<JSX.Element[]>();
 

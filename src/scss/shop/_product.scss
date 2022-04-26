@@ -190,8 +190,15 @@
     margin: 4px;
 }
 .product__quantity {
-    width: 120px;
+    width: 80px;
 }
+
+.product-card .btn {
+    width: 110px;
+    margin-top: 3px !important;
+    height: 46px !important;
+}
+
 .product__footer {
     margin-top: 32px;
     display: flex;

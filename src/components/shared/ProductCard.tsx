@@ -1,5 +1,5 @@
 // react
-import { Fragment, memo } from 'react';
+import { Fragment, memo, useState } from 'react';
 
 // third-party
 import { useUser } from '@auth0/nextjs-auth0';
@@ -19,6 +19,7 @@ import { IProduct } from '../../interfaces/product';
 import { useQuickviewOpen } from '../../store/quickview/quickviewHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
+import InputNumber from './InputNumber';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -29,6 +30,8 @@ export interface ProductCardProps {
 
 function ProductCard(props: ProductCardProps) {
     const { product, layout } = props;
+
+    const [quantity, setQuantity] = useState<number>(product.unitMult);
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
@@ -45,20 +48,42 @@ function ProductCard(props: ProductCardProps) {
     // const compareAddItem = useCompareAddItem();
     const quickviewOpen = useQuickviewOpen();
 
+    const addToCart = () => {
+        if (typeof quantity === 'string') {
+            return Promise.resolve();
+        }
+
+        return cartAddItem(product, [], quantity);
+    };
+
+    product.badges = ['new'];
+
     const badges: any[] = [];
     let image;
     let price;
     let features;
 
-    // if (product.badges.includes('sale')) {
-    //     badges.push(<div key="sale" className="product-card__badge product-card__badge--sale">Sale</div>);
-    // }
-    // if (product.badges.includes('hot')) {
-    //     badges.push(<div key="hot" className="product-card__badge product-card__badge--hot">Hot</div>);
-    // }
-    // if (product.badges.includes('new')) {
-    //     badges.push(<div key="new" className="product-card__badge product-card__badge--new">New</div>);
-    // }
+    if (product.badges.includes('sale')) {
+        badges.push(
+            <div key="sale" className="product-card__badge product-card__badge--sale">
+                Sale
+            </div>,
+        );
+    }
+    if (product.badges.includes('hot')) {
+        badges.push(
+            <div key="hot" className="product-card__badge product-card__badge--hot">
+                Hot
+            </div>,
+        );
+    }
+    if (product.badges.includes('new')) {
+        badges.push(
+            <div key="new" className="product-card__badge product-card__badge--new">
+                {product.code}
+            </div>,
+        );
+    }
 
     if (product.id) {
         image = (
@@ -92,6 +117,11 @@ function ProductCard(props: ProductCardProps) {
             </div>
         );
     }
+
+    const handleChangeQuantity = (_quantity: string | number) => {
+        const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
+        setQuantity(quantity);
+    };
     // if (product.attributes && product.attributes.length) {
     //     features = (
     //         <ul className="product-card__features-list">
@@ -138,13 +168,26 @@ function ProductCard(props: ProductCardProps) {
                 {price}
                 {isUserActivated && (
                     <div className="product-card__buttons">
+                        <div className="product__actions-item">
+                            <InputNumber
+                                id="product-quantity"
+                                aria-label="Quantity"
+                                className="product__quantity"
+                                size="lg"
+                                min={product.unitMult}
+                                step={product.unitMult}
+                                value={quantity}
+                                onChange={(quantity) => handleChangeQuantity(quantity)}
+                            />
+                        </div>
                         <AsyncAction
-                            action={() => cartAddItem(product)}
+                            action={() => addToCart()}
                             render={({ run, loading }) => (
                                 <Fragment>
                                     <button
                                         type="button"
                                         onClick={run}
+                                        disabled={!quantity}
                                         className={classNames('btn btn-primary product-card__addtocart', {
                                             'btn-loading': loading,
                                         })}
@@ -153,6 +196,7 @@ function ProductCard(props: ProductCardProps) {
                                     </button>
                                     <button
                                         type="button"
+                                        disabled={!quantity}
                                         onClick={run}
                                         className={classNames('btn btn-secondary product-card__addtocart product-card__addtocart--list', {
                                             'btn-loading': loading,

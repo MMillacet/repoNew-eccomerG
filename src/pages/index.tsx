@@ -1,7 +1,8 @@
 // third-party
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 // application
+import { getSession } from '@auth0/nextjs-auth0';
 import sanityApi from '../api/sanity';
 import goldfarbApi from '../api/goldfarb';
 import HomePageTwo, { InitData } from '../components/home/HomePageTwo';
@@ -16,14 +17,18 @@ function Page(props: PageProps) {
     return <HomePageTwo initData={initData} />;
 }
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async (context: GetServerSidePropsContext) => {
     const result = await sanityApi.getHomeContent();
 
-    // const [herramientas, loMasVendido, destacados] = await Promise.all(
-    //     [result.herramientas, result.loMasVendido, result.destacados].map((list) => goldfarbApi.getProductsLookup({ itemcodes: list })),
-    // );
+    const { req, res } = context;
 
-    const destacados = await goldfarbApi.getProductsLookup({ itemcodes: result.destacados });
+    const session = await getSession(req, res);
+
+    const cardcode = session?.user?.cardcode || null;
+
+    const options = cardcode ? { itemcodes: result.destacados, cardcode } : { itemcodes: result.destacados };
+
+    const destacados = await goldfarbApi.getProductsLookup(options);
 
     return {
         props: {
