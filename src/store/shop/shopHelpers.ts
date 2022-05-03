@@ -9,6 +9,7 @@ import { IFilterValues, IListOptions } from '../../interfaces/list';
 import { ISearchOptions } from '../../interfaces/search';
 import { RootState } from '../root/rootTypes';
 import { shopInitThunk } from './shopActions';
+import { nameToSlug } from '../../api/helpers/utils';
 
 export function parseQueryOptions(query: string) {
     const queryObject = queryString.parse(query);
@@ -120,7 +121,7 @@ export default async function getShopPageData(
     context: GetServerSidePropsContext | GetStaticPropsContext,
     slug?: string,
 ): Promise<void> {
-    const categorySlug = slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
+    let categorySlug = slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
 
     const dispatch = store.dispatch as AppDispatch;
 
@@ -137,6 +138,16 @@ export default async function getShopPageData(
             const filters = parseQueryFilters(query);
             const searchOptions = parseQuerySearchOptions(query);
             searchOptions.cardcode = cardcode; // This doesn't come from the query string
+
+            if (!categorySlug) {
+                if (searchOptions.family) {
+                    categorySlug = nameToSlug(searchOptions.family);
+                } else if (searchOptions.category) {
+                    categorySlug = nameToSlug(searchOptions.category);
+                } else if (searchOptions.subcategory) {
+                    categorySlug = nameToSlug(searchOptions.subcategory);
+                }
+            }
 
             await dispatch(shopInitThunk(categorySlug, options, filters, searchOptions));
         }

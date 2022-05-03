@@ -5,6 +5,7 @@ export default function Topbar() {
         <div className="site-header__topbar topbar">
             <div className="topbar__container container">
                 <div className="topbar__row">
+                    <i className="footer-contacts__icon fas fa-search-location" />
                     <AppLink href={''} className="topbar-item divider">
                         INFO
                     </AppLink>

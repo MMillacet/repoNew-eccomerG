@@ -192,7 +192,7 @@ function ProductCard(props: ProductCardProps) {
                                             'btn-loading': loading,
                                         })}
                                     >
-                                        Agregar al carro
+                                        Agregar
                                     </button>
                                     <button
                                         type="button"
@@ -202,7 +202,7 @@ function ProductCard(props: ProductCardProps) {
                                             'btn-loading': loading,
                                         })}
                                     >
-                                        Agregar al carro
+                                        Agregar
                                     </button>
                                 </Fragment>
                             )}

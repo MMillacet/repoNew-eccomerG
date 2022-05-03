@@ -47,9 +47,7 @@ function ShopPageCompare() {
                     attributes.push(attribute);
                 }
 
-                attribute.values[product.id] = productAttribute.values
-                    .map((x) => x.name)
-                    .join(', ');
+                attribute.values[product.id] = productAttribute.values.map((x) => x.name).join(', ');
             }),
         );
 
@@ -81,9 +79,7 @@ function ShopPageCompare() {
                 <div className="compare-table__product-rating">
                     <Rating value={product.rating} />
                 </div>
-                <div className=" compare-table__product-rating-legend">
-                    {`${product.reviews} Reviews`}
-                </div>
+                <div className=" compare-table__product-rating-legend">{`${product.reviews} Reviews`}</div>
             </td>
         ));
 
@@ -91,11 +87,7 @@ function ShopPageCompare() {
             let badge;
 
             if (product.availability === 'in-stock') {
-                badge = (
-                    <span className="compare-table__product-badge badge badge-success">
-                        In Stock
-                    </span>
-                );
+                badge = <span className="compare-table__product-badge badge badge-success">In Stock</span>;
             }
 
             return <td key={product.id}>{badge}</td>;
@@ -115,7 +107,7 @@ function ShopPageCompare() {
 
                 return (
                     <button type="button" onClick={run} className={classes}>
-                        Agregar al carro
+                        Agregar
                     </button>
                 );
             };
@@ -128,9 +120,7 @@ function ShopPageCompare() {
         });
 
         const attributeRows = attributes.map((feature, index) => {
-            const rows = items.map((product) => (
-                <td key={product.id}>{feature.values[product.id]}</td>
-            ));
+            const rows = items.map((product) => <td key={product.id}>{feature.values[product.id]}</td>);
 
             return (
                 <tr key={index}>
@@ -155,10 +145,7 @@ function ShopPageCompare() {
 
             return (
                 <td key={product.id}>
-                    <AsyncAction
-                        action={() => compareRemoveItem(product.id)}
-                        render={renderButton}
-                    />
+                    <AsyncAction action={() => compareRemoveItem(product.id)} render={renderButton} />
                 </td>
             );
         });
@@ -205,9 +192,7 @@ function ShopPageCompare() {
             <div className="block block-empty">
                 <div className="container">
                     <div className="block-empty__body">
-                        <div className="block-empty__message">
-                            You have not chosen any products to compare!
-                        </div>
+                        <div className="block-empty__message">You have not chosen any products to compare!</div>
                         <div className="block-empty__actions">
                             <AppLink href="/" className="btn btn-primary btn-sm">
                                 Continue

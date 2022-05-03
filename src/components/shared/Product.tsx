@@ -229,7 +229,7 @@ function Product(props: ProductProps) {
                                                         'btn-loading': loading,
                                                     })}
                                                 >
-                                                    Agregar al carro
+                                                    Agregar
                                                 </button>
                                             )}
                                         />

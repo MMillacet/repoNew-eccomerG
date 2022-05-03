@@ -28,8 +28,8 @@ const url = {
     },
 
     shopCategory: (category: IShopCategory): ILinkProps => ({
-        href: '/shop/catalog/[slug]',
-        as: `/shop/catalog/${category.slug}`,
+        href: `/shop/catalog?${category.level}=${category.name}`,
+        as: `/shop/catalog?${category.level}=${category.name}`,
     }),
 
     product: (product: { id: number }): ILinkProps => ({

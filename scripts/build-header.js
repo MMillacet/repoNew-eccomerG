@@ -24,9 +24,9 @@ const run = async () => {
         submenu: {
             type: 'megamenu',
             menu: {
-                size: 'nl',
+                size: 'xl',
                 columns: family.categories.map((category) => ({
-                    size: 6,
+                    size: 3,
                     links: [
                         {
                             title: category.title,

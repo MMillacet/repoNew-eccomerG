@@ -106,7 +106,7 @@ function ProductsView(props: ProductsViewProps) {
                         <div className="view-options__filters-button">
                             <button type="button" className="filters-button" onClick={openSidebarFn}>
                                 <Filters16Svg className="filters-button__icon" />
-                                <span className="filters-button__title">Filters</span>
+                                <span className="filters-button__title">Filtros</span>
                                 {!!filtersCount && <span className="filters-button__counter">{filtersCount}</span>}
                             </button>
                         </div>

@@ -37,13 +37,7 @@ function CategorySidebar(props: CategorySidebarProps) {
                     closeFn();
                 }
                 // this is necessary to avoid the transition hiding the sidebar
-                if (
-                    !open &&
-                    media.matches &&
-                    changedByMedia &&
-                    backdropRef.current &&
-                    bodyRef.current
-                ) {
+                if (!open && media.matches && changedByMedia && backdropRef.current && bodyRef.current) {
                     const backdrop = backdropRef.current;
                     const body = bodyRef.current;
 
@@ -95,7 +89,7 @@ function CategorySidebar(props: CategorySidebarProps) {
             <div className="block-sidebar__backdrop" ref={backdropRef} onClick={closeFn} />
             <div className="block-sidebar__body" ref={bodyRef}>
                 <div className="block-sidebar__header">
-                    <div className="block-sidebar__title">Filters</div>
+                    <div className="block-sidebar__title">Filtros</div>
                     <button className="block-sidebar__close" type="button" onClick={closeFn}>
                         <Cross20Svg />
                     </button>
