@@ -103,12 +103,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         const [product] = products;
 
         if (product) {
-            const relatedItems = product?.relatedItems?.filter((item: any) => !!item) || [];
-            const relatedProducts = (await lookupProductsLocally(relatedItems)).filter((p: any) => !!p);
             return {
                 props: {
                     product,
-                    relatedProducts,
                     categories,
                 },
                 revalidate: 60, // In seconds
@@ -126,11 +123,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     };
 }
 
-function Page({ product, relatedProducts, categories }: PageProps) {
+function Page({ product, categories }: PageProps) {
     if (product === null) {
         return <SitePageNotFound />;
     }
-    return <ShopPageProduct categories={categories} product={product} relatedProducts={relatedProducts} />;
+    return <ShopPageProduct categories={categories} product={product} />;
 }
 
 export default Page;

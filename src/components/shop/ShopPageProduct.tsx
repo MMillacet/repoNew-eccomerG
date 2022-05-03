@@ -5,6 +5,7 @@ import { Fragment, useEffect, useState } from 'react';
 import Head from 'next/head';
 
 // application
+import useSWR from 'swr';
 import PageHeader from '../shared/PageHeader';
 import Product from '../shared/Product';
 import ProductTabs from './ProductTabs';
@@ -30,13 +31,18 @@ export interface ShopPageProductProps {
     sidebarPosition?: ShopPageProductSidebarPosition;
     // data
     product: IProduct;
-    relatedProducts: IProduct[];
     categories: IShopCategory[];
 }
 
 function ShopPageProduct(props: ShopPageProductProps) {
-    const { product, relatedProducts, layout = 'standard', sidebarPosition = 'start' } = props;
+    const { product, layout = 'standard', sidebarPosition = 'start' } = props;
     const [categories, setCategories] = useState<IShopCategory[]>([]);
+
+    const relatedItems = product?.relatedItems?.filter((item: any) => !!item) || [];
+
+    const { data } = useSWR(`/api/products/lookup?itemcodes=${relatedItems}`, (url) => fetch(url).then((res) => res.json()));
+
+    const relatedProducts = data?.products || [];
 
     // Load categories.
     useEffect(() => {
