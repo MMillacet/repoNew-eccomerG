@@ -21,7 +21,6 @@ import { useQuickviewOpen } from '../../store/quickview/quickviewHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
 import InputNumber from './InputNumber';
-import goldfarbApi from '../../api/goldfarb';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -39,9 +38,13 @@ function ProductCard(props: ProductCardProps) {
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
-    const { data } = useSWR(cardcode ? product.code : null, async () =>
-        goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode }),
+    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}`, (url: any) =>
+        fetch(url).then((res) => res.json()),
     );
+
+    // const { data } = useSWR(cardcode ? product.code : null, async () =>
+    //     goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode }),
+    // );
 
     const {
         products: [rtProduct],

@@ -19,7 +19,6 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
-import goldfarbApi from '../../api/goldfarb';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -38,8 +37,8 @@ function Product(props: ProductProps) {
 
     const cardcode = user && (user.cardcode as string);
 
-    const { data } = useSWR(`${product.code}-withdesc`, async () =>
-        goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode, withDesc: 'true' }),
+    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
+        fetch(url).then((res) => res.json()),
     );
 
     const {
