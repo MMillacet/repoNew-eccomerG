@@ -41,7 +41,7 @@ export type GetSuggestionsOptions = {
 };
 
 const getCategoriesData = async () => {
-    const f = await goldfarbApi.getFamilies();
+    const f = families || (await goldfarbApi.getFamilies());
     const categories = familiesToCategories(f);
     const [categoriesTreeData, categoriesListData] = walkTree(makeShopCategory, categories);
     return { categoriesTreeData, categoriesListData };
