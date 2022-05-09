@@ -9,4 +9,11 @@ const dataMobileMenu: IMobileMenu = [
     { type: 'link', title: 'ELECTRODOMÉSTICOS', url: '/shop/catalog?family=Electrodomesticos' },
 ];
 
-export default dataMobileMenu;
+export default [
+    ...dataMobileMenu,
+    {
+        type: 'link',
+        title: 'SERVICIO TÉCNICO',
+        url: '/site/contact-us',
+    },
+];

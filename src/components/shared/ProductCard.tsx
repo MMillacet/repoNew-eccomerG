@@ -110,14 +110,14 @@ function ProductCard(props: ProductCardProps) {
         );
     }
 
-    if (rtProduct && rtProduct.price > 0 && product.compareAtPrice) {
+    if (rtProduct && rtProduct.price > 0 && rtProduct.discount > 0) {
+        const oldPrice = rtProduct.price;
+        const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
         price = (
             <div className="product-card__prices">
-                <span className="product-card__new-price">
-                    <CurrencyFormat value={rtProduct.price} currency={rtProduct.currency} />
-                </span>{' '}
+                <CurrencyFormat value={newPrice} currency={rtProduct.currency} />{' '}
                 <span className="product-card__old-price">
-                    <CurrencyFormat value={product.compareAtPrice} currency={rtProduct.currency} />
+                    <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
                 </span>
             </div>
         );

@@ -66,14 +66,15 @@ function Product(props: ProductProps) {
     let prices;
 
     if (rtProduct && rtProduct.price > 0) {
-        if (product.compareAtPrice) {
+        if (rtProduct.discount > 0) {
+            const oldPrice = rtProduct.price;
+            const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
+
             prices = (
                 <Fragment>
-                    <span className="product__new-price">
-                        <CurrencyFormat value={rtProduct?.price} currency={rtProduct?.currency} />
-                    </span>{' '}
+                    <CurrencyFormat value={newPrice} currency={rtProduct?.currency} />{' '}
                     <span className="product__old-price">
-                        <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
+                        <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
                     </span>
                 </Fragment>
             );
