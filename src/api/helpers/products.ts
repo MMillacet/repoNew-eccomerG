@@ -2,7 +2,7 @@ import queryString from 'query-string';
 import CategoryFilterBuilder from '../filters/category';
 import CheckFilterBuilder from '../filters/check';
 // import RadioFilterBuilder from '../filters/radio';
-import RangeFilterBuilder from '../filters/range';
+// import RangeFilterBuilder from '../filters/range';
 import goldfarbApi from '../goldfarb';
 import { ISearchOptions } from '../../interfaces/search';
 import { ICategory } from '../../interfaces/category';
@@ -33,7 +33,7 @@ export async function getProductsList(
 ): Promise<IProductsList> {
     const filters = [
         new CategoryFilterBuilder('category', 'Categories', categoriesData),
-        new RangeFilterBuilder('price', 'Price'),
+        // new RangeFilterBuilder('price', 'Price'),
         new CheckFilterBuilder('brand', 'Brand'),
         // new RadioFilterBuilder('discount', 'Discount'),
     ];

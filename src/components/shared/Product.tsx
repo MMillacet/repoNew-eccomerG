@@ -1,11 +1,12 @@
 // react
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
 import { useUser } from '@auth0/nextjs-auth0';
 
 // application
+import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 import Compare16Svg from '../../svg/compare-16.svg';
@@ -18,6 +19,7 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
+import goldfarbApi from '../../api/goldfarb';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -29,44 +31,20 @@ export interface ProductProps {
 function Product(props: ProductProps) {
     const { product, layout } = props;
 
-    // const { realTimeProduct } = useRealTimeProduct(product?.id);
-
     const [quantity, setQuantity] = useState<number>(product.unitMult);
-    const [rtProduct, setRtProduct] = useState<IProduct>(product);
-    const [description, setDescription] = useState<JSX.Element[]>();
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
 
-    const rtProductChanged = (product: IProduct) => {
-        setRtProduct(product);
+    const cardcode = user && (user.cardcode as string);
 
-        const d = product.description.split('<br/>').map((line, i) => {
-            if (line.startsWith('-') || line.startsWith('*')) {
-                return (
-                    <li className="product_description_item" key={i}>
-                        {line.substring(1)}
-                    </li>
-                );
-            }
-            return (
-                <div key={i} className="product__description">
-                    {line}
-                </div>
-            );
-        });
+    const { data } = useSWR(`${product.code}-withdesc`, async () =>
+        goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode, withDesc: 'true' }),
+    );
 
-        setDescription(d);
-    };
-
-    useEffect(() => {
-        const realTimeProductRequest = async () => {
-            const p = await (await fetch(`/api/products/${product.code}?desc=true`)).json();
-            rtProductChanged(p);
-        };
-
-        realTimeProductRequest();
-    }, [product]);
+    const {
+        products: [rtProduct],
+    } = data ?? { products: [null] };
 
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
@@ -103,22 +81,6 @@ function Product(props: ProductProps) {
             prices = <CurrencyFormat value={rtProduct?.price} currency={rtProduct?.currency} />;
         }
     }
-
-    // let description;
-    // if (rtProduct && rtProduct.description) {
-    //     description = rtProduct.description.split('<br/>').map((line, i) => {
-    //         if (line.startsWith('-') || line.startsWith('*')) {
-    //             return <li key={i}>{line.substring(1)}</li>;
-    //         }
-
-    //         return (
-    //             <Fragment key={i}>
-    //                 {line}
-    //                 {/* <br /> */}
-    //             </Fragment>
-    //         );
-    //     });
-    // }
 
     return (
         <div className={`product product--layout--${layout}`}>
@@ -174,7 +136,24 @@ function Product(props: ProductProps) {
                         </div>
                     </div> */}
 
-                    <div className="product__description">{description}</div>
+                    <div className="product__description">
+                        {rtProduct &&
+                            rtProduct.description &&
+                            product.description.split('<br/>').map((line, i) => {
+                                if (line.startsWith('-') || line.startsWith('*')) {
+                                    return (
+                                        <li className="product_description_item" key={i}>
+                                            {line.substring(1)}
+                                        </li>
+                                    );
+                                }
+                                return (
+                                    <div key={i} className="product__description">
+                                        {line}
+                                    </div>
+                                );
+                            })}
+                    </div>
                     <ul className="product__meta">
                         <li className="product__meta-availability">
                             Disponibilidad:{' '}
@@ -217,7 +196,7 @@ function Product(props: ProductProps) {
                                             onChange={(quantity) => handleChangeQuantity(quantity)}
                                         />
                                     </div>
-                                    <div className="product__actions-item product__actions-item--addtocart">
+                                    <div style={{ marginLeft: '20px' }} className="product__actions-item product__actions-item--addtocart">
                                         <AsyncAction
                                             action={() => addToCart()}
                                             render={({ run, loading }) => (

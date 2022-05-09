@@ -6,6 +6,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import classNames from 'classnames';
 
 // application
+import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 // import Compare16Svg from '../../svg/compare-16.svg';
@@ -20,6 +21,7 @@ import { useQuickviewOpen } from '../../store/quickview/quickviewHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
 import InputNumber from './InputNumber';
+import goldfarbApi from '../../api/goldfarb';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -35,6 +37,15 @@ function ProductCard(props: ProductCardProps) {
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
+    const cardcode = user && (user.cardcode as string);
+
+    const { data } = useSWR(cardcode ? product.code : null, async () =>
+        goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode }),
+    );
+
+    const {
+        products: [rtProduct],
+    } = data ?? { products: [null] };
 
     const containerClasses = classNames('product-card', {
         'product-card--layout--grid product-card--size--sm': layout === 'grid-sm',
@@ -99,21 +110,21 @@ function ProductCard(props: ProductCardProps) {
         );
     }
 
-    if (product.price > 0 && product.compareAtPrice) {
+    if (rtProduct && rtProduct.price > 0 && product.compareAtPrice) {
         price = (
             <div className="product-card__prices">
                 <span className="product-card__new-price">
-                    <CurrencyFormat value={product.price} currency={product.currency} />
+                    <CurrencyFormat value={rtProduct.price} currency={rtProduct.currency} />
                 </span>{' '}
                 <span className="product-card__old-price">
-                    <CurrencyFormat value={product.compareAtPrice} currency={product.currency} />
+                    <CurrencyFormat value={product.compareAtPrice} currency={rtProduct.currency} />
                 </span>
             </div>
         );
-    } else if (product.price > 0) {
+    } else if (rtProduct && rtProduct.price > 0) {
         price = (
             <div className="product-card__prices">
-                <CurrencyFormat value={product.price} currency={product.currency} />
+                <CurrencyFormat value={rtProduct.price} currency={rtProduct.currency} />
             </div>
         );
     }

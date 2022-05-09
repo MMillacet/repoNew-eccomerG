@@ -142,7 +142,7 @@ const goldfarbApi = {
     //     }
     // },
 
-    getProductsLookup: async (options: LookupOptions): Promise<{ products: any[] }> => {
+    getProductsLookup: async (options: LookupOptions) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/ProductLookup',
@@ -171,7 +171,7 @@ const goldfarbApi = {
     getProductsSearch2: async (params: {
         term: string;
         cardcode?: string;
-        orderby: string;
+        orderby?: string;
         family?: string;
         category?: string;
         subcategory?: string;

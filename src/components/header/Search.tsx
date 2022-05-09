@@ -6,10 +6,13 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 // application
+import useSWR from 'swr';
+import { useUser } from '@auth0/nextjs-auth0';
 import Cross20Svg from '../../svg/cross-20.svg';
 import Search20Svg from '../../svg/search-20.svg';
 import Suggestions from './Suggestions';
 import { IProduct } from '../../interfaces/product';
+import goldfarbApi from '../../api/goldfarb';
 
 export interface SearchProps {
     context: 'header' | 'mobile-header' | 'indicator';
@@ -27,6 +30,10 @@ function Search(props: SearchProps) {
     const [query, setQuery] = useState('');
     const wrapperRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
+
+    const { user } = useUser();
+    const cardcode = user?.cardcode as string;
+
     const close = useCallback(() => {
         if (onClose) {
             onClose();
@@ -77,19 +84,33 @@ function Search(props: SearchProps) {
             timer = setTimeout(() => {
                 if (canceled) return;
 
-                fetch(`/api/products/search?term=${query}`)
-                    .then((response) => response.json())
-                    .then(({ products }) => {
-                        const top5codes = products.slice(0, 50).map((p: { code: string }) => p.code);
+                const {
+                    data: { products },
+                } = useSWR(query, async () => goldfarbApi.getProductsSearch2({ term: query }));
 
-                        fetch(`/api/products/lookup?itemcodes=${top5codes}`)
-                            .then((response) => response.json())
-                            .then(({ products }) => {
-                                setSuggestedProducts(products);
-                                setHasSuggestions(products.length > 0);
-                                setSuggestionsOpen(true);
-                            });
-                    });
+                const top5codes = products.slice(0, 50).map((p: { code: string }) => p.code);
+
+                const {
+                    data: { products: top5products },
+                } = useSWR(top5codes, async () => goldfarbApi.getProductsLookup({ itemcodes: top5codes, cardcode }));
+
+                setSuggestedProducts(top5products);
+                setHasSuggestions(top5products.length > 0);
+                setSuggestionsOpen(true);
+
+                // fetch(`/api/products/search?term=${query}`)
+                //     .then((response) => response.json())
+                //     .then(({ products }) => {
+                //         const top5codes = products.slice(0, 50).map((p: { code: string }) => p.code);
+
+                //         fetch(`/api/products/lookup?itemcodes=${top5codes}`)
+                //             .then((response) => response.json())
+                //             .then(({ products }) => {
+                //                 setSuggestedProducts(products);
+                //                 setHasSuggestions(products.length > 0);
+                //                 setSuggestionsOpen(true);
+                //             });
+                //     });
             }, 200);
         }
 

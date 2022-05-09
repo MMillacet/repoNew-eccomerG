@@ -35,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const itemcodes = (itemcodesString as string).split(',');
 
-    const products = await (await lookupProductsLocally(itemcodes)).filter((product) => product);
+    const products = (await lookupProductsLocally(itemcodes)).filter((product) => product);
 
     const missingProductsItemcodes = itemcodes.filter((itemcode: string) => !products.find((p) => p.itemcode === Number(itemcode)));
 
@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (topProducts.length < results && missingProductsItemcodes.length > 0) {
         const cardcode = session ? session.user.cardcode : null;
         const { products: missingProducts } = await goldfarbApi.getProductsLookup({ itemcodes: missingProductsItemcodes, cardcode });
-        missingProducts.forEach((p) => products.push(p));
+        missingProducts.forEach((p: any) => products.push(p));
     }
 
     res.status(200).json({ products: topProducts });

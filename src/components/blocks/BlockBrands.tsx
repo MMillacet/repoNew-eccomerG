@@ -48,7 +48,7 @@ export interface BlockBrandsProps {
 export default function BlockBrands(props: BlockBrandsProps) {
     const brandsList = props.brands?.map((brand, index) => (
         <div key={index} className="block-brands__item">
-            <AppLink href={`/shop/catalog?brand=${brand.name}`}>
+            <AppLink href={`/shop/catalog?brand=${brand.name}&sort=list_asc`}>
                 <img src={brand.logo?.url} alt="" />
             </AppLink>
         </div>
