@@ -42,6 +42,9 @@ function IndicatorAccount() {
                             <AppLink href={url.accountProfile()}>Editar Perfil</AppLink>
                         </li>
                         <li>
+                            <AppLink href={url.accountStatus()}>Estado de cuenta</AppLink>
+                        </li>
+                        <li>
                             <AppLink href={url.accountOrders()}>Historial pedidos</AppLink>
                         </li>
                         <li>

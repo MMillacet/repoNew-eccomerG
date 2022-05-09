@@ -7,13 +7,19 @@ const dataMobileMenu: IMobileMenu = [
     { type: 'link', title: 'PINTURA', url: '/shop/catalog?family=Pinturas' },
     { type: 'link', title: 'BAZAR', url: '/shop/catalog?family=Bazar' },
     { type: 'link', title: 'ELECTRODOMÉSTICOS', url: '/shop/catalog?family=Electrodomesticos' },
-];
-
-export default [
-    ...dataMobileMenu,
     {
         type: 'link',
         title: 'SERVICIO TÉCNICO',
         url: '/site/contact-us',
     },
 ];
+
+/*
+   {
+        type: 'link',
+        title: 'SERVICIO TÉCNICO',
+        url: '/site/contact-us',
+    },
+*/
+
+export default dataMobileMenu;

@@ -21,9 +21,9 @@ function FooterLinks(props: FunctionComponentProps) {
         ));
 
     return (
-        <div className="site-footer__widget footer-links">
-            <h5 className="footer-links__title">{title}</h5>
-            <ul className="footer-links__list">{linksList}</ul>
+        <div className="site-footer__widget footer-contacts">
+            <h5 className="footer-contacts__title">{title}</h5>
+            <ul className="footer-contacts__contacts">{linksList}</ul>
         </div>
     );
 }
