@@ -38,9 +38,17 @@ function ShopPageProduct(props: ShopPageProductProps) {
     const { product, layout = 'standard', sidebarPosition = 'start' } = props;
     const [categories, setCategories] = useState<IShopCategory[]>([]);
 
-    const relatedItems = product?.relatedItems?.filter((item: any) => !!item) || [];
+    let { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}`, (url: any) => fetch(url).then((res) => res.json()));
 
-    const { data } = useSWR(`/api/products/lookup?itemcodes=${relatedItems}`, (url) => fetch(url).then((res) => res.json()));
+    const {
+        products: [rtProduct],
+    } = data ?? { products: [null] };
+
+    const relatedItems = rtProduct?.relatedItems?.filter((item: any) => !!item) || [];
+
+    ({ data } = useSWR(relatedItems?.length > 0 ? `/api/products/lookup?itemcodes=${relatedItems}` : null, (url) =>
+        fetch(url).then((res) => res.json()),
+    ));
 
     const relatedProducts = data?.products || [];
 

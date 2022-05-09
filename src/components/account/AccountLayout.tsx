@@ -24,16 +24,10 @@ function AccountLayout(props: AccountLayoutProps) {
     ];
 
     const items = [
-        // { title: 'Inicio', link: url.accountDashboard() },
         { title: 'Editar Perfil', link: url.accountProfile() },
         { title: 'Historial de pedidos', link: url.accountOrders() },
-        // { title: 'Order Details', link: url.accountOrder({ id: 5 }) },
-        // { title: 'Direcciones', link: url.accountAddresses() },
         { title: 'Estado de cuenta', link: url.accountStatus() },
         { title: 'Crear catalogo', link: url.accountCatalog() },
-        // { title: 'Edit Address', link: url.accountAddress({ id: 5 }) },
-        // { title: 'Password', link: url.accountPassword() },
-        // { title: 'Cerrar sesión', link: url.accountSignIn() },
     ].map((item, index) => {
         const isActive = router.pathname === item.link?.href;
         const classes = classNames('account-nav__item', {

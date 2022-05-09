@@ -80,7 +80,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     return {
         props: {
             product: null,
-            relatedProducts: [],
             categories: [],
         },
         revalidate: 60, // In seconds
