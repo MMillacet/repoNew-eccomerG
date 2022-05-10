@@ -155,14 +155,16 @@ function Product(props: ProductProps) {
                             })}
                     </div>
                     <ul className="product__meta">
-                        <li className="product__meta-availability">
-                            Disponibilidad:{' '}
-                            {rtProduct?.hasStock ? (
-                                <span className="text-success">En stock</span>
-                            ) : (
-                                <span className="text-muted">Sin stock</span>
-                            )}
-                        </li>
+                        {isUserActivated && (
+                            <li className="product__meta-availability">
+                                Disponibilidad:{' '}
+                                {rtProduct?.hasStock ? (
+                                    <span className="text-success">En stock</span>
+                                ) : (
+                                    <span className="text-muted">Sin stock</span>
+                                )}
+                            </li>
+                        )}
                         <li>
                             Marca: <AppLink href="/">{product.brand?.name}</AppLink>
                         </li>

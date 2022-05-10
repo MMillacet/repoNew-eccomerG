@@ -175,10 +175,12 @@ function ProductCard(props: ProductCardProps) {
                 {features}
             </div>
             <div className="product-card__actions">
-                <div className="product-card__availability">
-                    Disponibilidad:
-                    <span className="text-success">In Stock</span>
-                </div>
+                {isUserActivated && (
+                    <div className="product-card__availability">
+                        Disponibilidad:
+                        <span className="text-success">In Stock</span>
+                    </div>
+                )}
                 {price}
                 {isUserActivated && (
                     <div className="product-card__buttons">
