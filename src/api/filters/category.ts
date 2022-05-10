@@ -3,11 +3,10 @@ import { ICategoryFilter, ICategoryFilterValue } from '../../interfaces/filter';
 import { IProduct } from '../../interfaces/product';
 import { ICategory } from '../../interfaces/category';
 import { prepareCategory } from '../helpers/category';
+import { nameToSlug } from '../helpers/utils';
 
 const productHasCategory = (product: IProduct, category: string): boolean =>
-    product.family?.toLowerCase() === category ||
-    product.category?.toLowerCase() === category ||
-    product.subcategory?.toLowerCase() === category;
+    nameToSlug(product.family) === category || nameToSlug(product.category) === category || nameToSlug(product.subcategory) === category;
 
 export default class CategoryFilterBuilder extends AbstractFilterBuilder<ICategoryFilter> {
     value: ICategoryFilterValue = null;
