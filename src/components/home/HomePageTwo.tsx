@@ -152,7 +152,8 @@ function HomePageTwo(props: HomePageOneProps) {
                                         backgroundRepeat: 'no-repeat',
                                         backgroundPosition: 'center',
                                         height: '300px',
-                                        backgroundImage: `url(${banners[1].image?.url})`,
+                                        backgroundSize: 'contain',
+                                        backgroundImage: `url(${banners[0].image?.url})`,
                                     }}
                                 >
                                     <div className="title-container title-bottom">
@@ -175,11 +176,12 @@ function HomePageTwo(props: HomePageOneProps) {
                                         backgroundRepeat: 'no-repeat',
                                         backgroundPosition: 'center',
                                         height: '300px',
-                                        backgroundImage: `url(${banners[0].image?.url})`,
+                                        backgroundSize: 'contain',
+                                        backgroundImage: `url(${banners[1].image?.url})`,
                                     }}
                                 >
                                     <div className="title-container title-top">
-                                        <h3 className="title">{banners[0].title}</h3>
+                                        <h3 className="title">{banners[1].title}</h3>
                                     </div>
 
                                     <AppLink href={`${banners[0].link?.url}`} className="btn btn-primary btn-lg">
@@ -198,11 +200,12 @@ function HomePageTwo(props: HomePageOneProps) {
                                         backgroundRepeat: 'no-repeat',
                                         backgroundPosition: 'center',
                                         height: '300px',
-                                        backgroundImage: `url(${banners[1].image?.url})`,
+                                        backgroundSize: 'contain',
+                                        backgroundImage: `url(${banners[2].image?.url})`,
                                     }}
                                 >
                                     <div className="title-container title-top">
-                                        <h3 className="title">{banners[0].title}</h3>
+                                        <h3 className="title">{banners[2].title}</h3>
                                     </div>
 
                                     <AppLink href={`${banners[0].link?.url}`} className="btn btn-primary btn-lg">
