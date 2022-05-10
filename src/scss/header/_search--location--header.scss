@@ -178,6 +178,7 @@ $local-suggestion-transition: 0.2s;
     } @else {
         display: block;
         height: $header-search-height;
+        margin-left: 30px;
 
         .search__border {
             z-index: -1;

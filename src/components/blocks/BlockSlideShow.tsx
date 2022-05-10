@@ -67,7 +67,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
         'col-lg-9': withDepartments,
     });
 
-    const slidesList = props.slides?.slice(0, 1).map((slide, index) => {
+    const slidesList = props.slides?.map((slide, index) => {
         // const image = (withDepartments ? slide.image_classic : slide.image_full)[direction];
         const image = slide.image?.url;
         return (
@@ -87,6 +87,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                 />
                 <div className="block-slideshow__slide-content">
                     {slide.title && <div className="block-slideshow__slide-title" dangerouslySetInnerHTML={{ __html: slide.title }} />}
+                    {slide.subtitle && <div className="block-slideshow__slide-text" dangerouslySetInnerHTML={{ __html: slide.subtitle }} />}
                     {slide.link?.text && (
                         <div className="block-slideshow__slide-button">
                             <AppLink
