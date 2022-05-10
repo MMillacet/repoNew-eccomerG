@@ -6,10 +6,12 @@ import { IBrand } from '../../interfaces/brand';
 const slickSettings = {
     dots: false,
     arrows: false,
-    infinite: false,
-    speed: 400,
+    infinite: true,
+    speed: 1000,
     slidesToShow: 6,
     slidesToScroll: 6,
+    autoplaySpeed: 4000,
+    autoplay: true,
     responsive: [
         {
             breakpoint: 1199,
@@ -35,8 +37,9 @@ const slickSettings = {
         {
             breakpoint: 575,
             settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                rows: 2,
             },
         },
     ],

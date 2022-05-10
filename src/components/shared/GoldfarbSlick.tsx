@@ -117,9 +117,7 @@ function GoldfarbSlickInner(props: GoldfarbSlickInnerProps) {
             }
 
             // Thank you Pythagoras.
-            const distance = Math.sqrt(
-                Math.abs(downX - moveEvent.screenX) ** 2 + Math.abs(downY - moveEvent.screenY) ** 2,
-            );
+            const distance = Math.sqrt(Math.abs(downX - moveEvent.screenX) ** 2 + Math.abs(downY - moveEvent.screenY) ** 2);
 
             if (moveEvent.cancelable && distance > 3) {
                 moveEvent.preventDefault();

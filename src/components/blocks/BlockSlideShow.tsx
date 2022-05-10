@@ -67,7 +67,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
         'col-lg-9': withDepartments,
     });
 
-    const slidesList = props.slides?.map((slide, index) => {
+    const slidesList = props.slides?.slice(0, 1).map((slide, index) => {
         // const image = (withDepartments ? slide.image_classic : slide.image_full)[direction];
         const image = slide.image?.url;
         return (
@@ -85,30 +85,12 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                         backgroundImage: `url(${image})`,
                     }}
                 />
-                <div
-                    className="block-slideshow__slide-content"
-                    // todo: move to class
-                    style={{ background: '#FFFFFF90', padding: '20px' }}
-                >
-                    {slide.title && (
-                        <div
-                            className="block-slideshow__slide-title"
-                            dangerouslySetInnerHTML={{ __html: slide.title }}
-                        />
-                    )}
-                    {slide.subtitle && (
-                        <div
-                            className="block-slideshow__slide-text"
-                            dangerouslySetInnerHTML={{ __html: slide.subtitle }}
-                        />
-                    )}
+                <div className="block-slideshow__slide-content">
+                    {slide.title && <div className="block-slideshow__slide-title" dangerouslySetInnerHTML={{ __html: slide.title }} />}
                     {slide.link?.text && (
                         <div className="block-slideshow__slide-button">
                             <AppLink
-                                href={
-                                    slide.link?.url ||
-                                    (slide.link?.phone && `tel:${slide.link?.phone}`)
-                                }
+                                href={slide.link?.url || (slide.link?.phone && `tel:${slide.link?.phone}`)}
                                 className="btn btn-primary btn-lg"
                             >
                                 {slide.link?.text}
@@ -124,11 +106,9 @@ function BlockSlideShow(props: BlockSlideShowProps) {
         <div className={blockClasses}>
             <div className="container">
                 <div className="row">
-                    {withDepartments && (
-                        <div className="col-3 d-lg-block d-none" ref={setDepartmentsAreaRef} />
-                    )}
+                    {withDepartments && <div className="col-3 d-lg-block d-none" ref={setDepartmentsAreaRef} />}
 
-                    <div className={layoutClasses}>
+                    <div className={layoutClasses} style={{ paddingLeft: 0, paddingRight: 0 }}>
                         <div className="block-slideshow__body">
                             <GoldfarbSlick {...slickSettings}>{slidesList}</GoldfarbSlick>
                         </div>
