@@ -78,7 +78,7 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
             </div>
             <div className="card-divider" />
             <div className="card-footer">
-                <Pagination current={page} total={Math.ceil(ordersList?.length / limit)} onPageChange={handlePageChange} />
+                <Pagination current={page} total={Math.ceil(orders?.length / limit)} onPageChange={handlePageChange} />
             </div>
         </div>
     );

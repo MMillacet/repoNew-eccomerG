@@ -306,7 +306,7 @@ const goldfarbApi = {
             method: 'get',
             params: {
                 cardcode,
-                start: '2020-01-01',
+                start: '2000-01-01',
                 end: '2022-12-31',
             },
         };
