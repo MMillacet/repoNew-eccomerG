@@ -89,10 +89,23 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                     {slide.title && <div className="block-slideshow__slide-title" dangerouslySetInnerHTML={{ __html: slide.title }} />}
                     {slide.subtitle && <div className="block-slideshow__slide-text" dangerouslySetInnerHTML={{ __html: slide.subtitle }} />}
                     {slide.link?.text && (
-                        <div className="block-slideshow__slide-button">
+                        <div
+                            className="block-slideshow__slide-button"
+                            style={
+                                {
+                                    // backgroundRepeat: 'no-repeat',
+                                    // backgroundImage: `url('/images/Botones/ConoceMas.png')`,
+                                    // width: '180px',
+                                    // height: '40px',
+                                    // display: 'flex',
+                                    // justifyContent: 'center',
+                                }
+                            }
+                        >
                             <AppLink
+                                style={{ color: 'white', display: 'flex', alignItems: 'center' }}
                                 href={slide.link?.url || (slide.link?.phone && `tel:${slide.link?.phone}`)}
-                                className="btn btn-primary btn-lg"
+                                className=""
                             >
                                 {slide.link?.text}
                             </AppLink>

@@ -21,20 +21,32 @@
     flex-shrink: 0;
 }
 
+.home-title-container {
+    height: 40px;
+    width: 100%;
+    background-color: rgb(102, 179, 233);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .home-title {
-    color: #003c7e;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 10px;
+    width: 310px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-image: url(/images/Botones/NuestrasMarcas.png);
+    display: flex;
+    justify-content: center;
 }
 
 .banners {
-    background-color: #bbdcf5;
     height: 400px;
     margin-bottom: 30px;
     margin-top: 20px;
     padding: 50px;
 }
+
+
 
 .banners {
     .title-container {

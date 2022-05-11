@@ -26,15 +26,21 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context:
 
     const cardcode = session?.user?.cardcode || null;
 
-    const options = cardcode ? { itemcodes: result.destacados, cardcode } : { itemcodes: result.destacados };
+    const [loMasVendido, destacados] = await Promise.all(
+        [result.loMasVendido, result.destacados].map((list) =>
+            goldfarbApi.getProductsLookup(cardcode ? { itemcodes: list, cardcode } : { itemcodes: list }),
+        ),
+    );
 
-    const destacados = await goldfarbApi.getProductsLookup(options);
+    // const options = cardcode ? { itemcodes: result.destacados, cardcode } : { itemcodes: result.destacados };
+
+    // const destacados = await goldfarbApi.getProductsLookup(options);
 
     return {
         props: {
             initData: {
                 // herramientas: herramientas?.products,
-                // loMasVendido: loMasVendido?.products,
+                loMasVendido: loMasVendido?.products,
                 destacados: destacados?.products,
                 slides: result?.slides,
                 banners: result?.banners,

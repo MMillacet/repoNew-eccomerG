@@ -28,6 +28,7 @@ function AccountLayout(props: AccountLayoutProps) {
         { title: 'Historial de pedidos', link: url.accountOrders() },
         { title: 'Estado de cuenta', link: url.accountStatus() },
         { title: 'Crear catalogo', link: url.accountCatalog() },
+        { title: 'Mis productos', link: url.accountProducts() },
     ].map((item, index) => {
         const isActive = router.pathname === item.link?.href;
         const classes = classNames('account-nav__item', {

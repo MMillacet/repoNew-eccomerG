@@ -60,6 +60,7 @@ export async function getProductsList(
             if (category) url.searchParams.append('category', category as string);
             if (subcategory) url.searchParams.append('subcategory', subcategory as string);
             if (brand) url.searchParams.append('brand', brand as string);
+            console.log('url', url.href);
             ({ products } = await (await fetch(url.toString())).json());
         } else {
             ({ products } = await goldfarbApi.getProductsSearch2({

@@ -26,7 +26,7 @@ $local-dot-size: $local-dots-height - $local-dots-padding * 2;
         width: auto;
         bottom: 16px;
         position: absolute;
-        background: $block-slideshow-dots-bg;
+        // background: $block-slideshow-dots-bg;
         padding: $local-dots-padding;
         border-radius: $local-dots-height * 0.5;
         font-size: 0;
@@ -113,6 +113,14 @@ $local-dot-size: $local-dots-height - $local-dots-padding * 2;
     transition: all 0.8s 0.5s;
 }
 .block-slideshow__slide-button {
+    background-repeat: no-repeat;
+    background-image: url(/images/Botones/ConoceMas.png);
+    font-style: italic;
+    font-size: large;
+    width: 180px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
     margin-top: 40px;
     opacity: 0;
     transition: all 1s 0.4s;

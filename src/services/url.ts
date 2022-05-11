@@ -103,6 +103,11 @@ const url = {
         as: '/account/password',
     }),
 
+    accountProducts: (): ILinkProps => ({
+        href: `/shop/catalog?sort=list_asc`,
+        as: `/shop/catalog?sort=list_asc`,
+    }),
+
     contacts: (): ILinkProps => ({
         href: '/site/contact-us',
     }),

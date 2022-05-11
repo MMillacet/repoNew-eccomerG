@@ -37,13 +37,12 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
     const ordersList = items?.map((item: any, i: number) => {
         const date = new Date(item.docDate);
         const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-        const orderStatus = item.Pedido === 'Borrador' ? 'Pendiente' : 'Procesando';
 
         return (
             <tr key={i}>
                 <td>{item?.key && <AppLink href={`/account/orders/${item.key}`}>{`#${item.key}`}</AppLink>}</td>
                 <td>{dateString}</td>
-                <td>{orderStatus}</td>
+                <td>{item.status}</td>
                 <td>
                     <CurrencyFormat value={item.totalPedido} />
                 </td>

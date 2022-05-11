@@ -5,7 +5,7 @@ export default function Topbar() {
         <div className="site-header__topbar topbar">
             <div className="topbar__container container">
                 <div className="topbar__row">
-                    <i className="footer-contacts__icon fas fa-search-location" />
+                    <img src="/images/Iconos/GeoLoc.png" style={{ width: '32px', height: '28px' }} />
                     <AppLink href={''} className="topbar-item divider">
                         INFO
                     </AppLink>

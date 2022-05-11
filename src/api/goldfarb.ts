@@ -21,15 +21,6 @@ export interface LookupOptions {
     withDesc?: string;
 }
 
-export interface SearchOptions {
-    family?: string;
-    category?: string;
-    subcategory?: string;
-    term?: string;
-    orderBy?: string;
-    brand?: string;
-}
-
 const makeProduct = (product: any) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
@@ -222,21 +213,6 @@ const goldfarbApi = {
 
         return data;
     },
-
-    // invoiceReturn: async (docNum: string, cardcode: string) => {
-    //     const config: AxiosRequestConfig = {
-    //         baseURL,
-    //         url: '/goldfarb/InvoiceReturn',
-    //         method: 'get',
-    //         params: {
-    //             docNum,
-    //             cardcode,
-    //         },
-    //     };
-    //     const { data } = await axios(config);
-
-    //     return data;
-    // },
 
     recipe: async (docNum: string) => {
         const config: AxiosRequestConfig = {

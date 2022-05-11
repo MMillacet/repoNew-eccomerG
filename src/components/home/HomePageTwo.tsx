@@ -7,7 +7,7 @@ import Head from 'next/head';
 // application
 import shopApi from '../../api/shop';
 import { IProduct } from '../../interfaces/product';
-import { useDeferredData, useMedia, useProductTabs } from '../../services/hooks';
+import { useMedia, useProductTabs } from '../../services/hooks';
 
 // blocks
 import BlockBrands from '../blocks/BlockBrands';
@@ -21,7 +21,7 @@ import AppLink from '../shared/AppLink';
 
 export interface InitData {
     // herramientas?: IProduct[];
-    // loMasVendido?: IProduct[];
+    loMasVendido?: IProduct[];
     destacados?: IProduct[];
     featuredProducts?: IProduct[];
     bestsellers?: IProduct[];
@@ -60,11 +60,6 @@ function HomePageTwo(props: HomePageOneProps) {
         initData?.featuredProducts,
     );
 
-    /**
-     * Bestsellers.
-     */
-    const bestsellers = useDeferredData(() => shopApi.getPopularProducts({ limit: 7 }), [], initData?.bestsellers);
-
     return (
         <Fragment>
             <Head>
@@ -84,8 +79,12 @@ function HomePageTwo(props: HomePageOneProps) {
                 ),
                 [],
             )} */}
+            <div className="home-title-container">
+                <div className="home-title">
+                    <h4 style={{ color: 'white', fontStyle: 'italic', height: '60px', lineHeight: '53px' }}>NUESTRAS MARCAS</h4>
+                </div>
+            </div>
 
-            <h3 className="home-title">NUESTRAS MARCAS</h3>
             {useMemo(
                 () => (
                     <BlockBrands brands={props.initData?.ourBrands} />
@@ -93,7 +92,32 @@ function HomePageTwo(props: HomePageOneProps) {
                 [],
             )}
 
-            <h3 className="home-title">DESTACADOS</h3>
+            <div className="home-title-container">
+                <div className="home-title">
+                    <h4 style={{ color: 'white', fontStyle: 'italic', height: '60px', lineHeight: '53px' }}>PRODUCTOS EN OFERTA</h4>
+                </div>
+            </div>
+
+            {useMemo(
+                () => (
+                    <BlockProductsCarousel
+                        title=""
+                        layout="grid-5"
+                        rows={1}
+                        products={props.initData?.loMasVendido}
+                        loading={featuredProducts.isLoading}
+                        onGroupClick={featuredProducts.handleTabChange}
+                    />
+                ),
+                [featuredProducts],
+            )}
+
+            <div className="home-title-container">
+                <div className="home-title">
+                    <h4 style={{ color: 'white', fontStyle: 'italic', height: '60px', lineHeight: '53px' }}>DESTACADOS</h4>
+                </div>
+            </div>
+
             {useMemo(
                 () => (
                     <BlockProductsCarousel
@@ -102,11 +126,10 @@ function HomePageTwo(props: HomePageOneProps) {
                         rows={1}
                         products={props.initData?.destacados}
                         loading={featuredProducts.isLoading}
-                        // groups={featuredProducts.tabs}
                         onGroupClick={featuredProducts.handleTabChange}
                     />
                 ),
-                [bestsellers.data],
+                [featuredProducts],
             )}
 
             {/* {useMemo(
@@ -123,20 +146,7 @@ function HomePageTwo(props: HomePageOneProps) {
                 ),
                 [featuredProducts],
             )}
-            {useMemo(
-                () => (
-                    <BlockProductsCarousel
-                        title="LO MÁS VENDIDO"
-                        layout="grid-5"
-                        rows={1}
-                        products={props.initData?.loMasVendido}
-                        loading={featuredProducts.isLoading}
-                        // groups={featuredProducts.tabs}
-                        onGroupClick={featuredProducts.handleTabChange}
-                    />
-                ),
-                [featuredProducts],
-            )} */}
+       */}
             {isDesktop && (
                 <div className="banners">
                     <div className="container">

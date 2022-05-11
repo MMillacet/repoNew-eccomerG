@@ -59,11 +59,7 @@ function HomePageOne(props: HomePageOneProps) {
     /**
      * Bestsellers.
      */
-    const bestsellers = useDeferredData(
-        () => shopApi.getPopularProducts({ limit: 7 }),
-        [],
-        initData?.bestsellers,
-    );
+    const bestsellers = useDeferredData(() => shopApi.getPopularProducts({ limit: 7 }), [], initData?.bestsellers);
 
     /**
      * Latest products.
@@ -162,11 +158,7 @@ function HomePageOne(props: HomePageOneProps) {
 
             {useMemo(
                 () => (
-                    <BlockCategories
-                        title="Popular Categories"
-                        layout="classic"
-                        categories={dataShopBlockCategories}
-                    />
+                    <BlockCategories title="Popular Categories" layout="classic" categories={dataShopBlockCategories} />
                 ),
                 [],
             )}
