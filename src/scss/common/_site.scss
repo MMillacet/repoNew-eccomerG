@@ -46,6 +46,12 @@
     padding: 50px;
 }
 
+@media screen and (max-width: breakpoint(sm-end)) {
+    .banners {
+        height: 650px;
+    }
+}
+
 
 
 .banners {

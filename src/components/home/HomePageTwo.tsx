@@ -5,9 +5,10 @@ import { Fragment, useMemo } from 'react';
 import Head from 'next/head';
 
 // application
+import router from 'next/router';
 import shopApi from '../../api/shop';
 import { IProduct } from '../../interfaces/product';
-import { useMedia, useProductTabs } from '../../services/hooks';
+import { useProductTabs } from '../../services/hooks';
 
 // blocks
 import BlockBrands from '../blocks/BlockBrands';
@@ -17,7 +18,6 @@ import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
 import { IBrand } from '../../interfaces/brand';
-import AppLink from '../shared/AppLink';
 
 export interface InitData {
     // herramientas?: IProduct[];
@@ -38,8 +38,6 @@ export interface HomePageOneProps {
 
 function HomePageTwo(props: HomePageOneProps) {
     const { initData } = props;
-
-    const isDesktop = useMedia('(min-width: 992px)');
 
     const banners = initData?.banners ?? [];
 
@@ -147,86 +145,65 @@ function HomePageTwo(props: HomePageOneProps) {
                 [featuredProducts],
             )}
        */}
-            {isDesktop && (
-                <div className="banners">
-                    <div className="container">
-                        <div className="row" style={{ height: '300px' }}>
+            {/* {isDesktop && ( */}
+            <div className="banners">
+                <div className="container">
+                    <div className="row" style={{ height: '300px' }}>
+                        <div
+                            className="col-12 col-sm-12 col-md-6 col-lg-6"
+                            style={{
+                                height: '300px',
+                            }}
+                        >
                             <div
-                                className="col-6 col-md-6 col-sm-12"
+                                onClick={() => (banners[0].link ? router.push(`${banners[0].link?.url}` || '') : null)}
                                 style={{
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
                                     height: '300px',
+                                    backgroundSize: 'contain',
+                                    backgroundImage: `url(${banners[0].image?.url})`,
                                 }}
-                            >
-                                <div
-                                    style={{
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'center',
-                                        height: '300px',
-                                        backgroundSize: 'contain',
-                                        backgroundImage: `url(${banners[0].image?.url})`,
-                                    }}
-                                >
-                                    <div className="title-container title-bottom">
-                                        <h3 className="title">{banners[0].title}</h3>
-                                    </div>
-
-                                    <AppLink href={`${banners[0].link?.url}`} className="btn btn-primary btn-lg">
-                                        {banners[0].link?.text}
-                                    </AppLink>
-                                </div>
-                            </div>
+                            ></div>
+                        </div>
+                        <div
+                            className="col-6 col-sm-6 col-md-3 col-lg-3"
+                            style={{
+                                height: '300px',
+                            }}
+                        >
                             <div
-                                className="col-3 col-md-3 col-sm-12"
+                                onClick={() => (banners[1].link ? router.push(`${banners[1].link?.url}` || '') : null)}
                                 style={{
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
                                     height: '300px',
+                                    backgroundSize: 'contain',
+                                    backgroundImage: `url(${banners[1].image?.url})`,
                                 }}
-                            >
-                                <div
-                                    style={{
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'center',
-                                        height: '300px',
-                                        backgroundSize: 'contain',
-                                        backgroundImage: `url(${banners[1].image?.url})`,
-                                    }}
-                                >
-                                    <div className="title-container title-top">
-                                        <h3 className="title">{banners[1].title}</h3>
-                                    </div>
-
-                                    <AppLink href={`${banners[0].link?.url}`} className="btn btn-primary btn-lg">
-                                        {banners[0].link?.text}
-                                    </AppLink>
-                                </div>
-                            </div>
+                            ></div>
+                        </div>
+                        <div
+                            className="col-6 col-sm-6 col-md-3 col-lg-3"
+                            style={{
+                                height: '300px',
+                            }}
+                        >
                             <div
-                                className="col-3 col-md-3 col-sm-12"
+                                onClick={() => (banners[2].link ? router.push(`${banners[2].link?.url}` || '') : null)}
                                 style={{
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
                                     height: '300px',
+                                    backgroundSize: 'contain',
+                                    backgroundImage: `url(${banners[2].image?.url})`,
                                 }}
-                            >
-                                <div
-                                    style={{
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'center',
-                                        height: '300px',
-                                        backgroundSize: 'contain',
-                                        backgroundImage: `url(${banners[2].image?.url})`,
-                                    }}
-                                >
-                                    <div className="title-container title-top">
-                                        <h3 className="title">{banners[2].title}</h3>
-                                    </div>
-
-                                    <AppLink href={`${banners[0].link?.url}`} className="btn btn-primary btn-lg">
-                                        {banners[0].link?.text}
-                                    </AppLink>
-                                </div>
-                            </div>
+                            ></div>
                         </div>
                     </div>
                 </div>
-            )}
+            </div>
+            {/* )} */}
 
             {/* {!isDesktop && <div>Not Desktop</div>}
 

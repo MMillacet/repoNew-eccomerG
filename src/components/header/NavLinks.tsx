@@ -73,7 +73,7 @@ function NavLinks() {
 
         return (
             <li key={index} className={classes} onMouseEnter={handleMouseEnter}>
-                <AppLink href={item.url} {...item.props}>
+                <AppLink target={'_parent'} href={item.url} {...item.props}>
                     <span>
                         {item.title}
                         {arrow}

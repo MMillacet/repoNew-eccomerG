@@ -82,7 +82,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
         () => (
             <CategorySidebar open={sidebarOpen} closeFn={closeSidebarFn} offcanvas={offcanvas}>
                 <CategorySidebarItem>
-                    <WidgetFilters title="Filters" offcanvas={offcanvas} />
+                    <WidgetFilters title="Filtros" offcanvas={offcanvas} />
                 </CategorySidebarItem>
             </CategorySidebar>
         ),

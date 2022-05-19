@@ -15,7 +15,7 @@ function Page(props: PageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-    const { title, subtitle, nuestroEquipo, banner, texts } = await sanityApi.getAboutUsContent();
+    const { title, subtitle = '', nuestroEquipo, banner, texts } = await sanityApi.getAboutUsContent();
 
     return {
         props: {

@@ -67,12 +67,16 @@ $item-padding: 14px;
             transition-duration: 0.1s;
         }
     }
+    
     &:hover .nav-links__menu,
     &:hover .nav-links__megamenu {
         opacity: 1;
         visibility: visible;
         transform: rotateX(0deg);
     }
+
+    // todo: stop hover after click
+
 }
 .nav-links__item--menu {
     position: relative;

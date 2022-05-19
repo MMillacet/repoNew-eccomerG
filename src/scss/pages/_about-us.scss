@@ -11,22 +11,35 @@
     background-size: cover;
     background-position: bottom center;
     height: 300px;
+    padding-top: 210px;
 }
 .about-us__body {
     background: #fff4;
     min-height: 380px;
     border-radius: 4px 4px 0 0;
-    padding: 55px 80px 45px;
+    padding: 5px 80px 45px;
 }
 .about-us__title {
-    text-align: center;
-    margin-bottom: 50px;
+    text-align: left;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    color: white;
+    vertical-align: bottom;
+    font-size: 26px;
 }
+
+.about-us__subtitle {
+    text-align: left;
+    margin-left: 30px;
+    color: white;
+    font-weight: 400;
+}
+
 .about-us__text {
     text-align: center;
 }
 .about-us__team {
-    margin-top: 75px;
+    margin-top: 45px;
     text-align: center;
 }
 .about-us__team-subtitle {
@@ -34,6 +47,39 @@
 }
 .about-us__teammates {
     margin-top: 42px;
+}
+
+.about-us__banner {
+    margin-top: 20px;
+}
+
+
+.about-us__banner-img {
+    height: 275px;
+    background-size: cover;
+    background-color: #00243f;
+}
+
+.about-us__banner-img-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    padding: 15px;
+}
+
+.about-us__banner-img-overlay-title {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.about-us__banner-img-overlay-text {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    position: absolute;
+    bottom: 5px;
+    width: 85%;
+    line-height: 22px;
 }
 
 .teammates {
@@ -99,7 +145,7 @@
     align-items: center;
     display: flex;
     img {
-        object-fit: cover;
+        object-fit: contain;
         width: 210px;
         height: 210px;
         max-width: 100%;
@@ -118,44 +164,53 @@
 @media (max-width: breakpoint(md-end)) and (min-width: breakpoint(md-start)) {
     .about-us__image {
         height: 460px;
+        padding-top: 370px;
     }
     .about-us__title {
-        margin-bottom: 36px;
+        // margin-bottom: 36px;
     }
     .about-us__body {
         padding: 50px;
     }
     .about-us__team {
-        margin-top: 75px;
+        margin-top: 45px;
     }
 }
 @media (max-width: breakpoint(sm-end)) and (min-width: breakpoint(sm-start)) {
     .about-us__image {
         height: 360px;
+        padding-top: 270px
     }
     .about-us__title {
-        margin-bottom: 24px;
+        font-size: 26px;
+        // margin-bottom: 24px;
+    }
+    .about-us__subtitle {
+        // font-size: 26px;
+        // margin-bottom: 24px;
     }
     .about-us__body {
         min-height: 290px;
         padding: 40px;
     }
     .about-us__team {
-        margin-top: 50px;
+        margin-top: 30px;
     }
 }
 @media (max-width: breakpoint(sm-end)) {
     .about-us__image {
         height: 330px;
+        padding-top: 240px;
     }
     .about-us__body {
         min-height: 290px;
         padding: 30px 24px;
     }
     .about-us__title {
-        margin-bottom: 20px;
+        font-size: 22px;
+        // margin-bottom: 20px;
     }
     .about-us__team {
-        margin-top: 50px;
+        margin-top: 30px;
     }
 }

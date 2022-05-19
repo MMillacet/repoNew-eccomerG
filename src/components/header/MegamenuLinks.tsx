@@ -18,7 +18,11 @@ function MegamenuLinks(props: MegamenuLinksProps) {
         let subLinks = null;
 
         if (link.title) {
-            title = <AppLink href={link.url}>{link.title}</AppLink>;
+            title = (
+                <AppLink target={'_parent'} href={link.url}>
+                    {link.title}
+                </AppLink>
+            );
         }
 
         if (link.children && link.children.length) {
