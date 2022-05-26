@@ -85,7 +85,7 @@ function Product(props: ProductProps) {
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} images={rtProduct.images} />
+                <ProductGallery layout={layout} images={rtProduct?.images ?? []} />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -124,7 +124,7 @@ function Product(props: ProductProps) {
                             )}
                         />
                     </div>
-                    <h1 className="product__name">{rtProduct.title}</h1>
+                    <h1 className="product__name">{rtProduct?.title}</h1>
                     {/* <div className="product__rating">
                         <div className="product__rating-stars">
                             <Rating value={product.rating} />
@@ -139,7 +139,7 @@ function Product(props: ProductProps) {
                     <div className="product__description">
                         {rtProduct &&
                             rtProduct.description &&
-                            rtProduct.description.split('<br/>').map((line: string, i: number) => {
+                            product.description.split('<br/>').map((line: string, i: number) => {
                                 if (line.startsWith('-') || line.startsWith('*')) {
                                     return (
                                         <li className="product_description_item" key={i}>
@@ -166,7 +166,7 @@ function Product(props: ProductProps) {
                             </li>
                         )}
                         <li>
-                            Marca: <AppLink href="/">{rtProduct.brand?.name}</AppLink>
+                            Marca: <AppLink href="/">{rtProduct?.brand?.name}</AppLink>
                         </li>
                         <li>Codigo: {product?.id}</li>
                     </ul>
@@ -192,8 +192,8 @@ function Product(props: ProductProps) {
                                             aria-label="Quantity"
                                             className="product__quantity"
                                             size="lg"
-                                            min={rtProduct.unitMult}
-                                            step={rtProduct.unitMult}
+                                            min={rtProduct?.unitMult}
+                                            step={rtProduct?.unitMult}
                                             value={quantity}
                                             onChange={(quantity) => handleChangeQuantity(quantity)}
                                         />
@@ -216,7 +216,7 @@ function Product(props: ProductProps) {
                                         />
                                     </div>
                                 </div>
-                                {rtProduct.documents.length > 0 && (
+                                {rtProduct?.documents.length > 0 && (
                                     <Fragment>
                                         <br />
                                         <br />
@@ -224,7 +224,7 @@ function Product(props: ProductProps) {
                                             Documentos
                                         </label>
                                         <ul className="product__meta">
-                                            {rtProduct.documents.map((document: string, i: number) => (
+                                            {rtProduct?.documents.map((document: string, i: number) => (
                                                 <li key={i}>
                                                     <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
                                                 </li>
