@@ -43,10 +43,7 @@ function SitePageFaq(props: SitePageFaqProps = {}) {
             <div className="block faq">
                 <div className="container">
                     <div className="row">
-                        <div
-                            className="faq__section col-sm-12 col-lg-6"
-                            style={{ marginTop: '10px' }}
-                        >
+                        <div className="faq__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
                             <div className="faq__section-title">
                                 <h3>{initData?.notClient?.subtitle}</h3>
                             </div>
@@ -54,18 +51,13 @@ function SitePageFaq(props: SitePageFaqProps = {}) {
                                 <div className="row">
                                     <div className="faq__section-column col-12 ">
                                         <div className="typography">
-                                            <SanityBlockContent
-                                                blocks={initData?.notClient?.text}
-                                            />
+                                            <SanityBlockContent blocks={initData?.notClient?.text} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className="faq__section col-sm-12 col-lg-6"
-                            style={{ marginTop: '10px' }}
-                        >
+                        <div className="faq__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
                             <div className="faq__section-title">
                                 <h3>{initData?.client?.subtitle}</h3>
                             </div>
