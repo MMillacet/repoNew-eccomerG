@@ -216,7 +216,7 @@ function Product(props: ProductProps) {
                                         />
                                     </div>
                                 </div>
-                                {rtProduct?.documents.length > 0 && (
+                                {rtProduct?.documents && rtProduct.documents.length > 0 && (
                                     <Fragment>
                                         <br />
                                         <br />
@@ -224,7 +224,7 @@ function Product(props: ProductProps) {
                                             Documentos
                                         </label>
                                         <ul className="product__meta">
-                                            {rtProduct?.documents.map((document: string, i: number) => (
+                                            {rtProduct.documents.map((document: string, i: number) => (
                                                 <li key={i}>
                                                     <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
                                                 </li>
