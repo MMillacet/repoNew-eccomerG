@@ -70,6 +70,7 @@ function BlockSlideShow(props: BlockSlideShowProps) {
     const slidesList = props.slides?.map((slide, index) => {
         // const image = (withDepartments ? slide.image_classic : slide.image_full)[direction];
         const image = slide.image?.url;
+        const link = slide.subtitle;
         return (
             <div key={index} className="block-slideshow__slide">
                 <div
@@ -87,26 +88,10 @@ function BlockSlideShow(props: BlockSlideShowProps) {
                 />
                 <div className="block-slideshow__slide-content">
                     {slide.title && <div className="block-slideshow__slide-title" dangerouslySetInnerHTML={{ __html: slide.title }} />}
-                    {slide.subtitle && <div className="block-slideshow__slide-text" dangerouslySetInnerHTML={{ __html: slide.subtitle }} />}
-                    {slide.link?.text && (
-                        <div
-                            className="block-slideshow__slide-button"
-                            style={
-                                {
-                                    // backgroundRepeat: 'no-repeat',
-                                    // backgroundImage: `url('/images/Botones/ConoceMas.png')`,
-                                    // width: '180px',
-                                    // height: '40px',
-                                    // display: 'flex',
-                                    // justifyContent: 'center',
-                                }
-                            }
-                        >
-                            <AppLink
-                                style={{ color: 'white', display: 'flex', alignItems: 'center' }}
-                                href={slide.link?.url || (slide.link?.phone && `tel:${slide.link?.phone}`)}
-                                className=""
-                            >
+
+                    {link && (
+                        <div className="block-slideshow__slide-button">
+                            <AppLink style={{ color: 'white', display: 'flex', alignItems: 'center' }} href={link} className="">
                                 {slide.link?.text}
                             </AppLink>
                         </div>

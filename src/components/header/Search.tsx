@@ -148,7 +148,7 @@ function Search(props: SearchProps) {
                         value={query}
                         className="search__input"
                         name="term"
-                        // placeholder="Producto o numero de articulo..."
+                        // placeholder="Producto o número de articulo..."
                         aria-label="Buscador"
                         type="text"
                         autoComplete="off"

@@ -48,7 +48,7 @@ function FilterCategory(props: FilterCheckProps) {
         categoriesList.unshift(
             <li key="[shop]" className="filter-categories__item filter-categories__item--parent">
                 <ArrowRoundedLeft6x9Svg className="filter-categories__arrow" />
-                <AppLink href={url.catalog()}>All Products</AppLink>
+                <AppLink href={url.catalog()}>Todos los productos</AppLink>
             </li>,
         );
     }

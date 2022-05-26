@@ -95,7 +95,7 @@ function Page() {
                 <div className="row justify-content-center">
                     <form className="card-body" onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="docnum">Numero de cliente</label>
+                            <label htmlFor="docnum">Número de cliente</label>
                             <input id="cardcode" type="text" className="form-control" />
                         </div>
                         <button type="submit" disabled={isDisabled} className={`btn btn-primary ${isLoading ? 'btn-loading' : ''}`}>

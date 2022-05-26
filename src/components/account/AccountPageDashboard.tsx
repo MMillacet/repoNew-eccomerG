@@ -59,7 +59,7 @@ export default function AccountPageDashboard() {
                     </div>
                     <br />
                     <div className="address-card__row">
-                        <div className="address-card__row-title">Numero de telefono</div>
+                        <div className="address-card__row-title">Número de telefono</div>
                         <div className="address-card__row-content">{user?.phone}</div>
                     </div>
                     <br />

@@ -5,14 +5,11 @@ import { Fragment, useMemo } from 'react';
 import Head from 'next/head';
 
 // application
-import router from 'next/router';
-import shopApi from '../../api/shop';
+import { useUser } from '@auth0/nextjs-auth0';
 import { IProduct } from '../../interfaces/product';
-import { useProductTabs } from '../../services/hooks';
 
 // blocks
 import BlockBrands from '../blocks/BlockBrands';
-// import BlockFeatures from '../blocks/BlockFeatures';
 import { BlockProductColumnsItem } from '../blocks/BlockProductColumns';
 import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
@@ -36,27 +33,22 @@ export interface HomePageOneProps {
     initData?: InitData;
 }
 
+const openUrl = (url: string): void => {
+    if (url) {
+        const w = window.open(url, '_blank');
+        if (w) {
+            w.focus(); // okay now
+        }
+    }
+};
+
 function HomePageTwo(props: HomePageOneProps) {
     const { initData } = props;
 
-    const banners = initData?.banners ?? [];
+    const { user } = useUser();
+    const isUserActivated = user && !!user.cardcode;
 
-    /**
-     * Featured products.
-     */
-    const featuredProducts = useProductTabs(
-        useMemo(
-            () => [
-                { id: 1, name: 'All', categorySlug: undefined },
-                { id: 2, name: 'Power Tools', categorySlug: 'power-tools' },
-                { id: 3, name: 'Hand Tools', categorySlug: 'hand-tools' },
-                { id: 4, name: 'Plumbing', categorySlug: 'plumbing' },
-            ],
-            [],
-        ),
-        (tab) => shopApi.getPopularProducts({ limit: 12, category: tab.categorySlug }),
-        initData?.featuredProducts,
-    );
+    const banners = initData?.banners ?? [];
 
     return (
         <Fragment>
@@ -71,12 +63,6 @@ function HomePageTwo(props: HomePageOneProps) {
                 [],
             )}
 
-            {/* {useMemo(
-                () => (
-                    <BlockFeatures layout="boxed" />
-                ),
-                [],
-            )} */}
             <div className="home-title-container">
                 <div className="home-title">
                     <h4 style={{ color: 'white', fontStyle: 'italic', height: '60px', lineHeight: '53px' }}>NUESTRAS MARCAS</h4>
@@ -90,25 +76,20 @@ function HomePageTwo(props: HomePageOneProps) {
                 [],
             )}
 
-            <div className="home-title-container">
-                <div className="home-title">
-                    <h4 style={{ color: 'white', fontStyle: 'italic', height: '60px', lineHeight: '53px' }}>PRODUCTOS EN OFERTA</h4>
+            {isUserActivated && (
+                <div className="home-title-container">
+                    <div className="home-title">
+                        <h4 style={{ color: 'white', fontStyle: 'italic', height: '60px', lineHeight: '53px' }}>PRODUCTOS EN OFERTA</h4>
+                    </div>
                 </div>
-            </div>
-
-            {useMemo(
-                () => (
-                    <BlockProductsCarousel
-                        title=""
-                        layout="grid-5"
-                        rows={1}
-                        products={props.initData?.loMasVendido}
-                        loading={featuredProducts.isLoading}
-                        onGroupClick={featuredProducts.handleTabChange}
-                    />
-                ),
-                [featuredProducts],
             )}
+
+            {useMemo(() => {
+                if (isUserActivated) {
+                    return <BlockProductsCarousel title="" layout="grid-5" rows={1} products={props.initData?.loMasVendido} />;
+                }
+                return null;
+            }, [])}
 
             <div className="home-title-container">
                 <div className="home-title">
@@ -118,34 +99,12 @@ function HomePageTwo(props: HomePageOneProps) {
 
             {useMemo(
                 () => (
-                    <BlockProductsCarousel
-                        title=""
-                        layout="grid-5"
-                        rows={1}
-                        products={props.initData?.destacados}
-                        loading={featuredProducts.isLoading}
-                        onGroupClick={featuredProducts.handleTabChange}
-                    />
+                    <BlockProductsCarousel title="" layout="grid-5" rows={1} products={props.initData?.destacados} />
                 ),
-                [featuredProducts],
+                [],
             )}
 
-            {/* {useMemo(
-                () => (
-                    <BlockProductsCarousel
-                        title="HERRAMIENTAS"
-                        layout="grid-5"
-                        rows={1}
-                        products={props.initData?.herramientas}
-                        loading={featuredProducts.isLoading}
-                        // groups={featuredProducts.tabs}
-                        // onGroupClick={featuredProducts.handleTabChange}
-                    />
-                ),
-                [featuredProducts],
-            )}
-       */}
-            {/* {isDesktop && ( */}
+            {console.log({ banners })}
             <div className="banners">
                 <div className="container">
                     <div className="row" style={{ height: '300px' }}>
@@ -156,7 +115,7 @@ function HomePageTwo(props: HomePageOneProps) {
                             }}
                         >
                             <div
-                                onClick={() => (banners[0].link ? router.push(`${banners[0].link?.url}` || '') : null)}
+                                onClick={() => openUrl(banners[0].link?.url)}
                                 style={{
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
@@ -173,7 +132,7 @@ function HomePageTwo(props: HomePageOneProps) {
                             }}
                         >
                             <div
-                                onClick={() => (banners[1].link ? router.push(`${banners[1].link?.url}` || '') : null)}
+                                onClick={() => openUrl(banners[1].link?.url)}
                                 style={{
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
@@ -190,7 +149,7 @@ function HomePageTwo(props: HomePageOneProps) {
                             }}
                         >
                             <div
-                                onClick={() => (banners[2].link ? router.push(`${banners[2].link?.url}` || '') : null)}
+                                onClick={() => openUrl(banners[2].link?.url)}
                                 style={{
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
