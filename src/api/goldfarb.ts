@@ -5,7 +5,7 @@ import { nameToSlug } from './helpers/utils';
 
 // const baseURL = isProductionEnvironment ? 'http://app.goldfarb.com.uy/main/api' : 'http://app.goldfarb.com.uy/PruebasMain/api';
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api'; // 'http://app.goldfarb.com.uy/main/api';;
+const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
 export interface CatalogOptions {
     email: string;
