@@ -89,7 +89,7 @@ function HomePageTwo(props: HomePageOneProps) {
                     return <BlockProductsCarousel title="" layout="grid-5" rows={1} products={props.initData?.loMasVendido} />;
                 }
                 return null;
-            }, [])}
+            }, [isUserActivated])}
 
             <div className="home-title-container">
                 <div className="home-title">
@@ -104,7 +104,6 @@ function HomePageTwo(props: HomePageOneProps) {
                 [],
             )}
 
-            {console.log({ banners })}
             <div className="banners">
                 <div className="container">
                     <div className="row" style={{ height: '300px' }}>
