@@ -54,7 +54,7 @@ function Product(props: ProductProps) {
             return Promise.resolve();
         }
 
-        return cartAddItem(product, [], quantity);
+        return cartAddItem(rtProduct, [], quantity);
     };
 
     const handleChangeQuantity = (_quantity: string | number) => {

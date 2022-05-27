@@ -67,7 +67,7 @@ function ProductCard(props: ProductCardProps) {
             return Promise.resolve();
         }
 
-        return cartAddItem(product, [], quantity);
+        return cartAddItem(rtProduct, [], quantity);
     };
 
     product.badges = ['new'];

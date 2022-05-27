@@ -18,7 +18,7 @@ import {
 } from './cartActionTypes';
 
 export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] = [], quantity = product.unitMult): CartAddItemAction {
-    toast.success(`Product "${product.title}" added to cart!`, { theme: 'colored' });
+    toast.success(`Producto "${product.title}" agregado al carro!`, { theme: 'colored' });
 
     return {
         type: CART_ADD_ITEM,

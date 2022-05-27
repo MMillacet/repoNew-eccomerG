@@ -63,12 +63,9 @@ function IndicatorCart() {
             <AsyncAction
                 action={() => cartRemoveItem(item.id)}
                 render={({ run, loading }) => {
-                    const classes = classNames(
-                        'dropcart__product-remove btn btn-light btn-sm btn-svg-icon',
-                        {
-                            'btn-loading': loading,
-                        },
-                    );
+                    const classes = classNames('dropcart__product-remove btn btn-light btn-sm btn-svg-icon', {
+                        'btn-loading': loading,
+                    });
 
                     return (
                         <button type="button" onClick={run} className={classes}>
@@ -129,14 +126,7 @@ function IndicatorCart() {
         );
     }
 
-    return (
-        <Indicator
-            url="/shop/cart"
-            dropdown={dropdown}
-            value={cart.quantity}
-            icon={<Cart20Svg />}
-        />
-    );
+    return <Indicator url="/shop/cart" dropdown={dropdown} value={cart.quantity} icon={<Cart20Svg />} />;
 }
 
 export default IndicatorCart;
