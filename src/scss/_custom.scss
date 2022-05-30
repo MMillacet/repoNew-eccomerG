@@ -1,3 +1,8 @@
 // -------------------------
 // --- You can add your custom CSS here and it will overwrite template styles.
 // -------------------------
+
+.pswp img {
+    max-width: none;
+    object-fit: scale-down;
+}
