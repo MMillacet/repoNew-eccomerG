@@ -1,0 +1,42 @@
+.howtobuy__section {
+    & + & {
+        margin-top: 70px;
+    }
+}
+.howtobuy__section-title {
+    margin-bottom: 20px;
+
+    h3 {
+        font-size: 22px;
+        font-weight: $font-weight-medium;
+    }
+}
+.howtobuy__section-body {
+    border: $card-border;
+    border-radius: $card-border-radius;
+    padding: 30px 44px;
+}
+.howtobuy__section-howtobuy {
+    padding-bottom: 48px;
+}
+.howtobuy__section-howtobuy:last-child {
+    padding-bottom: 0px;
+}
+
+@media (max-width: breakpoint(md-end)) {
+    .howtobuy__section + .howtobuy__section {
+        margin-top: 40px;
+    }
+    .howtobuy__section-body {
+        padding: 28px 24px;
+    }
+    .howtobuy__section-column + .howtobuy__section-column {
+        margin-top: 1.5em;
+    }
+    .howtobuy__section-howtobuy {
+        padding-bottom: 28px;
+    }
+    .howtobuy__section-howtobuy:last-child {
+        padding-bottom: 0px;
+    }
+}

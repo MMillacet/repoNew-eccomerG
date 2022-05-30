@@ -6,11 +6,9 @@ import Head from 'next/head';
 import SanityBlockContent from '@sanity/block-content-to-react';
 
 // application
-import PageHeader from '../shared/PageHeader';
 import { SanitySection } from '../../custom-sanity-types/section';
 import { SanityClientSection } from '../../custom-sanity-types/clientSection';
 // import BlockPaymentMethods from '../blocks/BlockPaymentMethods';
-import url from '../../services/url';
 
 export interface InitData {
     title: string;
@@ -21,16 +19,12 @@ export interface InitData {
     // whereToBuy: SanitySection;
     doubts: SanitySection;
 }
-export interface SitePageFaqProps {
+export interface SitePagehowtobuyProps {
     initData?: InitData;
 }
 
-function SitePageFaq(props: SitePageFaqProps = {}) {
+function SitePagehowtobuy(props: SitePagehowtobuyProps = {}) {
     const { initData } = props;
-    const breadcrumb = [
-        { title: 'Inicio', url: url.home() },
-        { title: initData?.title || 'Cómo Comprar', url: url.howToPurchase() },
-    ];
 
     return (
         <Fragment>
@@ -38,105 +32,56 @@ function SitePageFaq(props: SitePageFaqProps = {}) {
                 <title>CÓMO COMPRAR</title>
             </Head>
 
-            <PageHeader header={initData?.title} breadcrumb={breadcrumb} />
+            <div className="howtobuy__image" style={{ backgroundImage: `url("/images/como-comprar.png")` }}>
+                <h1 className="howtobuy__title">CÓMO COMPRAR</h1>
+                {/* <h5 className="about-us__subtitle">{props.initData?.title.toLocaleUpperCase()}</h5> */}
+            </div>
 
-            <div className="block faq">
+            <div className="block howtobuy">
                 <div className="container">
                     <div className="row">
-                        <div className="faq__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
-                            <div className="faq__section-title">
-                                <h3>{initData?.notClient?.subtitle}</h3>
-                            </div>
-                            <div className="faq__section-body">
+                        <div className="howtobuy__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
+                            <div className="howtobuy__section-body">
                                 <div className="row">
-                                    <div className="faq__section-column col-12 ">
-                                        <div className="typography">
-                                            <SanityBlockContent blocks={initData?.notClient?.text} />
+                                    <div className="howtobuy__section-column col-12 ">
+                                        <div className="howtobuy__section-title">
+                                            <h3>{initData?.notClient?.subtitle}</h3>
                                         </div>
+                                        <SanityBlockContent blocks={initData?.notClient?.text} />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="faq__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
-                            <div className="faq__section-title">
-                                <h3>{initData?.client?.subtitle}</h3>
-                            </div>
-                            <div className="faq__section-body">
+                        <div className="howtobuy__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
+                            <div className="howtobuy__section-body">
                                 <div className="row">
-                                    <div className="faq__section-column col-12 ">
-                                        <div className="typography">
-                                            <SanityBlockContent blocks={initData?.client?.text} />
+                                    <div className="howtobuy__section-column col-12 ">
+                                        <div className="howtobuy__section-title">
+                                            <h3>{initData?.client?.subtitle}</h3>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* <div className="faq__section col-6">
-                            <div className="faq__section-title">
-                                <h3>{initData?.client?.subtitle}</h3>
-                            </div>
-                            <div className="faq__section-body">
-                                <div className="row">
-                                    <div className="faq__section-column col-12">
                                         <SanityBlockContent blocks={initData?.client?.text} />
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <div className="faq__section-column col-12">
-                                        <div
-                                            className="block-banner__image block-banner__image--desktop"
-                                            style={{
-                                                backgroundImage: `url(${initData?.client?.image})`,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="faq__section-column col-12">
-                                        <h6>{initData?.client?.payment?.subtitle}</h6>
-
-                                        <SanityBlockContent
-                                            blocks={initData?.client?.payment?.text}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <BlockPaymentMethods
-                                        paymentMethods={initData?.client?.paymentMethods}
-                                    />
-                                </div>
-                                <div className="row">
-                                    <div className="faq__section-column col-12">
-                                        <h6>{initData?.client?.whereToBuy?.subtitle}</h6>
-
-                                        <SanityBlockContent
-                                            blocks={initData?.client?.whereToBuy?.text}
-                                        />
-                                    </div>
-                                </div>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
-                    {/* <div className="row">
-                        <BlockPaymentMethods paymentMethods={initData?.client?.paymentMethods} />
-                    </div> */}
 
-                    {/* <div className="faq__section">
-                        <div className="faq__section-title">
+                    <div className="howtobuy__section">
+                        <div className="howtobuy__section-title">
                             <h3>{initData?.doubts?.subtitle}</h3>
                         </div>
-                        <div className="faq__section-body">
+                        <div className="howtobuy__section-body">
                             <div className="row">
-                                <div className="faq__section-column col-12">
+                                <div className="howtobuy__section-column col-12">
                                     <SanityBlockContent blocks={initData?.doubts?.text} />
                                 </div>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </Fragment>
     );
 }
 
-export default SitePageFaq;
+export default SitePagehowtobuy;

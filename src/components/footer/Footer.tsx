@@ -13,7 +13,7 @@ const Footer: FunctionComponent = () => {
         { title: 'Preguntas frecuentes', url: '/site/faq' },
         { title: 'Contacto', url: '/site/contact-us' },
         { title: 'Consultar servicio', url: '/site/service-status' },
-        { title: 'Noticias', url: '/blog' },
+        // { title: 'Noticias', url: '/blog' },
         { title: 'Como comprar', url: '/site/how-to-purchase' },
     ];
 

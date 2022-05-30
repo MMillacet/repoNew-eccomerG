@@ -6,3 +6,20 @@
     max-width: none;
     object-fit: scale-down;
 }
+
+.howtobuy__image {
+    background-size: cover;
+    background-position: bottom center;
+    height: 475px;
+    padding-top: 400px;
+}
+
+.howtobuy__title  {
+    text-align: left;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    color: white;
+    vertical-align: bottom;
+    font-size: 36px;
+    letter-spacing: 0.5px;
+}

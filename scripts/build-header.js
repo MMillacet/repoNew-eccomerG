@@ -30,10 +30,10 @@ const run = async () => {
                     links: [
                         {
                             title: category.title,
-                            url: `/shop/catalog?category=${category.name}`,
+                            url: `/shop/catalog?family=${family.name}&category=${category.name}`,
                             children: category.subcategories.map((subcategory) => ({
-                                title: subcategory,
-                                url: `/shop/catalog?subcategory=${subcategory}`,
+                                title: subcategory.title,
+                                url: `/shop/catalog?family=${family.name}&category=${category.name}&subcategory=${subcategory.name}`,
                             })),
                         },
                     ],

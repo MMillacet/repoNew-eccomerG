@@ -1,5 +1,5 @@
 // third-party
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 // application
 import sanityApi from '../../api/sanity';
@@ -13,7 +13,8 @@ function Page(props: PageProps) {
     const { initData } = props;
     return <SitePageFaq initData={initData} />;
 }
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     const { titulo, preguntas } = await sanityApi.getFAQContent();
 
     // TODO: we should also include product request to shop api using product ids from sanity response
