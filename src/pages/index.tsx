@@ -32,16 +32,16 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context:
         ),
     );
 
-    // const options = cardcode ? { itemcodes: result.destacados, cardcode } : { itemcodes: result.destacados };
-
-    // const destacados = await goldfarbApi.getProductsLookup(options);
+    const productosDestacados = destacados.products.sort(
+        (a: any, b: any) => result.destacados.indexOf(a.code) - result.destacados.indexOf(b.code),
+    );
 
     return {
         props: {
             initData: {
                 // herramientas: herramientas?.products,
                 loMasVendido: loMasVendido?.products,
-                destacados: destacados?.products,
+                destacados: productosDestacados,
                 slides: result?.slides,
                 banners: result?.banners,
                 ourBrands: result?.nuestrasMarcas,

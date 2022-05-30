@@ -14,8 +14,6 @@ function Page(props: PageProps) {
     return <SitePageHowToPurchase initData={initData} />;
 }
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-    const data = await sanityApi.getHowToPurchaseContent();
-    console.log({ data });
     const { title, notClient, client, doubts } = await sanityApi.getHowToPurchaseContent();
 
     return {

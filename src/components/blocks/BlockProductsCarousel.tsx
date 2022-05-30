@@ -173,16 +173,7 @@ const slickSettings: { [layout: string]: GoldfarbSlickProps } = {
 };
 
 function BlockProductsCarousel<T extends BlockHeaderGroup>(props: BlockProductsCarouselProps<T>) {
-    const {
-        title,
-        layout = 'grid-4',
-        rows = 1,
-        products = [],
-        groups = [],
-        withSidebar = false,
-        loading = false,
-        onGroupClick,
-    } = props;
+    const { title, layout = 'grid-4', rows = 1, products = [], groups = [], withSidebar = false, loading = false, onGroupClick } = props;
 
     const slickRef = useRef<Slick>(null);
 
