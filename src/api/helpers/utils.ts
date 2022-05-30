@@ -18,8 +18,6 @@ export function nameToSlug(name: string): string {
 export function formatDate(date: Date | undefined) {
     if (!date) return '';
     const dateObject = new Date(date);
-    const dateString = `${dateObject.getDate()}/${
-        dateObject.getMonth() + 1
-    }/${dateObject.getFullYear()}`;
+    const dateString = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
     return dateString;
 }

@@ -37,10 +37,7 @@ const Footer: FunctionComponent = () => {
                 </div>
 
                 <div className="site-footer__bottom">
-                    <div className="site-footer__copyright">
-                        {/* © Copyright 2021 Goldfarb. Todos los derechos reservados. ({process?.env?.NODE_ENV}) */}© Copyright 2022
-                        Goldfarb. Todos los derechos reservados. (Desarrollo)
-                    </div>
+                    <div className="site-footer__copyright">© Copyright 2022 Goldfarb. Todos los derechos reservados. (Prod)</div>
                 </div>
             </div>
             <ToTop />
