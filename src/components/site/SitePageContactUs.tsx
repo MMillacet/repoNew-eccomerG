@@ -63,9 +63,7 @@ function SitePageContactUs() {
                                             <p>
                                                 <strong>Horarios</strong>
                                                 <br />
-                                                Lunes a viernes 9:00 - 13:00
-                                                <br />
-                                                Lunes a viernes 14:00 - 18:00
+                                                Lunes a viernes 8:15 - 17:30
                                             </p>
                                         </div>
                                     </div>
