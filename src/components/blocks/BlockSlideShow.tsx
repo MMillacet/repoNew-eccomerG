@@ -28,9 +28,11 @@ const slickSettings = {
     dots: true,
     arrows: false,
     infinite: true,
-    speed: 400,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplaySpeed: 6000,
+    autoplay: true,
 };
 
 function BlockSlideShow(props: BlockSlideShowProps) {

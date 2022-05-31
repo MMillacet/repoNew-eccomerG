@@ -1,7 +1,7 @@
 // const fs = require('fs');
 const axios = require('axios');
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = 'http://app.goldfarb.com.uy/Main/api';
 
 const getCategories = async () => {
     const config = {
