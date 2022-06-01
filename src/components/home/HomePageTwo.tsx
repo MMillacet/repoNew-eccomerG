@@ -121,6 +121,7 @@ function HomePageTwo(props: HomePageOneProps) {
                                     height: '300px',
                                     backgroundSize: 'contain',
                                     backgroundImage: `url(${banners[0].image?.url})`,
+                                    cursor: 'pointer',
                                 }}
                             ></div>
                         </div>
@@ -138,6 +139,7 @@ function HomePageTwo(props: HomePageOneProps) {
                                     height: '300px',
                                     backgroundSize: 'contain',
                                     backgroundImage: `url(${banners[1].image?.url})`,
+                                    cursor: 'pointer',
                                 }}
                             ></div>
                         </div>
@@ -155,6 +157,7 @@ function HomePageTwo(props: HomePageOneProps) {
                                     height: '300px',
                                     backgroundSize: 'contain',
                                     backgroundImage: `url(${banners[2].image?.url})`,
+                                    cursor: 'pointer',
                                 }}
                             ></div>
                         </div>
