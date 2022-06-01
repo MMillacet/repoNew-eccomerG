@@ -1,4 +1,3 @@
-// const fs = require('fs');
 const axios = require('axios');
 
 const baseURL = 'http://app.goldfarb.com.uy/Main/api';
