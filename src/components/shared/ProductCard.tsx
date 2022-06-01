@@ -11,13 +11,11 @@ import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 // import Compare16Svg from '../../svg/compare-16.svg';
 import CurrencyFormat from './CurrencyFormat';
-import Quickview16Svg from '../../svg/quickview-16.svg';
 // import Rating from './Rating';
 import url from '../../services/url';
 // import Wishlist16Svg from '../../svg/wishlist-16.svg';
 import { IProduct } from '../../interfaces/product';
 // import { useCompareAddItem } from '../../store/compare/compareHooks';
-import { useQuickviewOpen } from '../../store/quickview/quickviewHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
 import InputNumber from './InputNumber';
@@ -51,6 +49,7 @@ function ProductCard(props: ProductCardProps) {
     } = data ?? { products: [null] };
 
     const containerClasses = classNames('product-card', {
+        noauth: !isUserActivated,
         'product-card--layout--grid product-card--size--sm': layout === 'grid-sm',
         'product-card--layout--grid product-card--size--nl': layout === 'grid-nl',
         'product-card--layout--grid product-card--size--lg': layout === 'grid-lg',
@@ -60,7 +59,6 @@ function ProductCard(props: ProductCardProps) {
     const cartAddItem = useCartAddItem();
     // const wishlistAddItem = useWishlistAddItem();
     // const compareAddItem = useCompareAddItem();
-    const quickviewOpen = useQuickviewOpen();
 
     const addToCart = () => {
         if (typeof quantity === 'string') {
@@ -148,20 +146,6 @@ function ProductCard(props: ProductCardProps) {
 
     return (
         <div className={containerClasses}>
-            <AsyncAction
-                action={() => quickviewOpen(`${product.id}`)}
-                render={({ run, loading }) => (
-                    <button
-                        type="button"
-                        onClick={run}
-                        className={classNames('product-card__quickview', {
-                            'product-card__quickview--preload': loading,
-                        })}
-                    >
-                        <Quickview16Svg />
-                    </button>
-                )}
-            />
             {badges.length > 0 && <div className="product-card__badges-list">{badges}</div>}
             {image}
             <div className="product-card__info">

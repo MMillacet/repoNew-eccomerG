@@ -32,9 +32,11 @@
     }
 
     &:hover::before {
-        transition-duration: 0s;
-        box-shadow: $product-card-hover-shadow;
-        z-index: 2;
+        &:not(.noauth) {
+            transition-duration: 0s;
+            box-shadow: $product-card-hover-shadow;
+            z-index: 2;
+        }
     }
 
     &:hover .product-card__quickview {
@@ -52,6 +54,8 @@
         }
     }
 }
+
+
 .product-card__image {
     padding: 18px;
     flex-shrink: 0;
