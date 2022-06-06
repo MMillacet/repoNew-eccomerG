@@ -39,11 +39,7 @@ function GoldfarbApp({ Component, pageProps }: GoldfarbAppProps) {
 
         setTimeout(() => {
             const onTransitionEnd = (event: Event) => {
-                if (
-                    event instanceof TransitionEvent &&
-                    event.propertyName === 'opacity' &&
-                    preloader.parentNode
-                ) {
+                if (event instanceof TransitionEvent && event.propertyName === 'opacity' && preloader.parentNode) {
                     preloader.parentNode.removeChild(preloader);
                 }
             };
