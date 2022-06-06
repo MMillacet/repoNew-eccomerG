@@ -45,7 +45,7 @@ function SitePagehowtobuy(props: SitePagehowtobuyProps = {}) {
                                 <div className="row">
                                     <div className="howtobuy__section-column col-12 ">
                                         <div className="howtobuy__section-title">
-                                            <h3>{initData?.notClient?.subtitle}</h3>
+                                            <h3>{initData?.notClient?.subtitle.toUpperCase()}</h3>
                                         </div>
                                         <SanityBlockContent blocks={initData?.notClient?.text} />
                                     </div>
@@ -53,11 +53,17 @@ function SitePagehowtobuy(props: SitePagehowtobuyProps = {}) {
                             </div>
                         </div>
                         <div className="howtobuy__section col-sm-12 col-lg-6" style={{ marginTop: '10px' }}>
-                            <div className="howtobuy__section-body">
+                            <div
+                                className="howtobuy__section-body"
+                                style={{
+                                    backgroundColor: '#003c7e',
+                                    color: 'white',
+                                }}
+                            >
                                 <div className="row">
                                     <div className="howtobuy__section-column col-12 ">
                                         <div className="howtobuy__section-title">
-                                            <h3>{initData?.client?.subtitle}</h3>
+                                            <h3>{initData?.client?.subtitle.toUpperCase()}</h3>
                                         </div>
                                         <SanityBlockContent blocks={initData?.client?.text} />
                                     </div>
@@ -67,10 +73,10 @@ function SitePagehowtobuy(props: SitePagehowtobuyProps = {}) {
                     </div>
 
                     <div className="howtobuy__section">
-                        <div className="howtobuy__section-title">
-                            <h3>{initData?.doubts?.subtitle}</h3>
-                        </div>
                         <div className="howtobuy__section-body">
+                            <div className="howtobuy__section-title">
+                                <h3>{initData?.doubts?.subtitle}</h3>
+                            </div>
                             <div className="row">
                                 <div className="howtobuy__section-column col-12">
                                     <SanityBlockContent blocks={initData?.doubts?.text} />

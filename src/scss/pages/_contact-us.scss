@@ -6,6 +6,28 @@
 
 .contact-us {
 }
+
+.contact-us__image {
+    background-size: cover;
+    background-position: bottom center;
+    height: 275px;
+    padding-top: 200px;
+}
+.contact-us__body {
+    background: #fff4;
+    min-height: 380px;
+    border-radius: 4px 4px 0 0;
+    padding: 5px 80px 45px;
+}
+.contact-us__title {
+    text-align: left;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    color: white;
+    vertical-align: bottom;
+    font-size: 36px;
+}
+
 .contact-us__map {
     position: relative;
     height: 440px;
@@ -23,6 +45,55 @@
     }
 }
 
+.contact-us__banner-img {
+    height: 275px;
+    background-size: cover;
+    background-color: #00243f;
+}
+
+.contact-us__banner-img-overlay {
+    // background: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    padding: 15px;
+}
+
+.contact-us__banner-img-overlay-title {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.contact-us__banner-img-overlay-text {
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    position: absolute;
+    width: 85%;
+    line-height: 22px;
+}
+
+.card {
+    border: none;
+}
+
+.enviar-btn {
+    background-image: url(/images/Botones/ConoceMas.png);
+    width: 180px;
+    height: 40px;
+    float:right;
+}
+
+.whatsappicon {
+    position: absolute;
+    right: 37px;
+    top: -25px;
+}
+
+.card-body {
+    background-color: #003c7e;
+    color: white;
+}
+
 @media (max-width: breakpoint(lg-end)) {
     .contact-us__map {
         height: 400px;
@@ -32,14 +103,42 @@
     .contact-us__map {
         height: 380px;
     }
+    .contact-us__image {
+        height: 270px;
+        padding-top: 200px;
+    }
 }
 @media (max-width: breakpoint(sm-end)) {
     .contact-us__map {
         height: 360px;
     }
+
+    .contact-us__image {
+        height: 280px;
+        padding-top: 200px;
+        font-size: 16px;
+    }
+    .contact-us__title {
+        font-size: 26px;
+        // margin-bottom: 24px;
+    }
+
+
 }
 @media (max-width: breakpoint(xs-end)) {
+    .contact-us__image {
+        height: 160px;
+        padding-top: 110px;
+        font-size: 15px;
+    }
+    .contact-us__title {
+        font-size: 18px;
+        margin-left: 15px;
+    }
+
     .contact-us__map {
         height: 320px;
     }
 }
+
+
