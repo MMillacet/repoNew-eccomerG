@@ -10,8 +10,8 @@
 .about-us__image {
     background-size: cover;
     background-position: bottom center;
-    height: 475px;
-    padding-top: 370px;
+    height: 375px;
+    padding-top: 300px;
 }
 .about-us__body {
     background: #fff4;
@@ -36,7 +36,7 @@
 }
 
 .about-us__text {
-    text-align: center;
+    text-align: left;
 }
 .about-us__team {
     margin-top: 45px;
@@ -59,6 +59,48 @@
     margin-top: 20px;
 }
 
+.about-us__teammembers-title {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.about-us__team_name-title {
+    text-align: left;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+.about-us__team_name {
+    cursor: pointer;
+
+    svg {
+        position: absolute;
+        margin-top: -23px;
+        margin-right: 15px;
+
+        @include direction {
+            #{$inset-inline-end}: $local-button-padding - 3px;
+        }
+    }
+}
+
+.about-us__team_name.selected {
+    background-color: #e6e6e6;
+}
+
+.teamview__member {
+    text-align: left;
+    font-size: 16px;
+}
+
+.teamviewcontainer {
+    border: 1px solid #e6e6e6;
+    padding: 20px;
+}
+
+.teamnamescontainer {
+    margin-bottom: 30px;
+}
 
 .about-us__banner-img {
     height: 275px;
@@ -169,8 +211,8 @@
 
 @media (max-width: breakpoint(md-end)) and (min-width: breakpoint(md-start)) {
     .about-us__image {
-        height: 460px;
-        padding-top: 370px;
+        height: 270px;
+        padding-top: 200px;
     }
     .about-us__title {
         // margin-bottom: 36px;
@@ -184,8 +226,9 @@
 }
 @media (max-width: breakpoint(sm-end)) and (min-width: breakpoint(sm-start)) {
     .about-us__image {
-        height: 360px;
-        padding-top: 270px
+        height: 280px;
+        padding-top: 200px;
+        font-size: 16px;
     }
     .about-us__title {
         font-size: 26px;
@@ -205,15 +248,22 @@
 }
 @media (max-width: breakpoint(sm-end)) {
     .about-us__image {
-        height: 330px;
-        padding-top: 240px;
+        height: 160px;
+        padding-top: 110px;
+        font-size: 15px;
     }
     .about-us__body {
         min-height: 290px;
         padding: 30px 24px;
     }
     .about-us__title {
-        font-size: 22px;
+        font-size: 18px;
+        margin-left: 15px;
+        // margin-bottom: 20px;
+    }
+    .about-us__subtitle {
+        font-size: 13px;
+        margin-left: 15px;
         // margin-bottom: 20px;
     }
     .about-us__team {
