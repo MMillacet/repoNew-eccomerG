@@ -28,6 +28,12 @@
     font-size: 26px;
 }
 
+.about-us__banner-img {
+    height: 275px;
+    background-size: cover;
+    background-color: #00243f;
+}
+
 .about-us__subtitle {
     text-align: left;
     margin-left: 30px;
@@ -67,15 +73,17 @@
 .about-us__team_name-title {
     text-align: left;
     margin-left: 30px;
-    font-size: 20px;
+    font-size: 18px;
+    line-height: 30px;
 }
 
 .about-us__team_name {
     cursor: pointer;
+    height: 30px;
 
     svg {
         position: absolute;
-        margin-top: -23px;
+        margin-top: -25px;
         margin-right: 15px;
 
         @include direction {

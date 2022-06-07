@@ -159,7 +159,7 @@ $body-bg: $light-color !default;
 $body-font-color: $light-opposite-color !default;
 $body-font-muted-color: $light-opposite-muted-color !default;
 $body-font-alt-color: $light-opposite-alt-color !default;
-$body-font-family: 'DINNextLTPro-Regular' !default;
+$body-font-family: 'Roboto', 'sans-serif' !default;
 $body-font-size: 18px !default;
 $body-font-weight: $font-weight-normal !default;
 $body-line-height: 1.5 !default;
@@ -455,7 +455,7 @@ $h5-font-weight: $headers-font-weight !default;
 $h5-font-style: $headers-font-style !default;
 // h6
 $h6-font-family: $headers-font-family !default;
-$h6-font-size: 17px !default;
+$h6-font-size: 16px !default;
 $h6-font-weight: $headers-font-weight !default;
 $h6-font-style: $headers-font-style !default;
 

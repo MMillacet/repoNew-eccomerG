@@ -14,16 +14,13 @@ class MyDocument extends Document {
             <Html lang="en" dir="ltr">
                 <Head>
                     <link rel="shortcut icon" href="/favicon.ico" />
-
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" />
                     {/* fonts */}
                     {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" />
                      */}
-                    <link
-                        href="//db.onlinewebfonts.com/c/93a467f70a3e7b27a9b52a686f351dbe?family=DINNextLTPro-Regular"
-                        rel="stylesheet"
-                        type="text/css"
-                    />
-                    <link
+                    {/* <link href="/fonts/DINNextLTPro-Regular.ttf" rel="stylesheet" type="text/css" /> */}
+                    {/* <link href="../fonts/DINNextLTPro-Regular.ttf" rel="stylesheet" type="text/css" /> */}
+                    {/* <link
                         href="//db.onlinewebfonts.com/c/210d3faed34546b2e1d26bf0e0b847e7?family=DINNextLTPro-Medium"
                         rel="stylesheet"
                         type="text/css"
@@ -32,7 +29,7 @@ class MyDocument extends Document {
                         href="//db.onlinewebfonts.com/c/1f83f5c8497875fdc52c54ee78331a55?family=DIN+Next+LT+Pro+Heavy"
                         rel="stylesheet"
                         type="text/css"
-                    />
+                    /> */}
                     <Script
                         strategy="afterInteractive"
                         dangerouslySetInnerHTML={{
