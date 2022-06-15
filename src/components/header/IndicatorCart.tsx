@@ -14,7 +14,7 @@ import Indicator from './Indicator';
 import url from '../../services/url';
 import { useCart, useCartRemoveItem } from '../../store/cart/cartHooks';
 
-const currencies = ['$', 'U$'];
+const currencies = ['$', 'U$D'];
 
 function IndicatorCart() {
     const cart = useCart();

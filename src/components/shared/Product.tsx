@@ -71,10 +71,11 @@ function Product(props: ProductProps) {
 
             prices = (
                 <Fragment>
-                    <CurrencyFormat value={newPrice} currency={rtProduct?.currency} />{' '}
-                    <span className="product__old-price">
+                    <CurrencyFormat value={newPrice} currency={rtProduct?.currency} />
+                    <span className="product__old-price" style={{ marginLeft: '15px' }}>
                         <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
                     </span>
+                    <span className="product__discount">{`(Descuento del ${rtProduct.discount}%)`}</span>
                 </Fragment>
             );
         } else {

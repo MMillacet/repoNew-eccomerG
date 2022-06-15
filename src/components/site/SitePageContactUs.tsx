@@ -8,8 +8,22 @@ import Head from 'next/head';
 
 // data stubs
 import theme from '../../data/theme';
+import { Phone, Whatsapp } from '../shared/Whatsapp';
 
 function SitePageContactUs() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [status, setStatus] = useState('');
+
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+
+        setIsLoading(true);
+        const s = await (await fetch(`/api/documents/servicestatus?docNum=${event.target.docnum.value}`)).text();
+
+        setIsLoading(false);
+        setStatus(s);
+    };
+
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
 
@@ -21,11 +35,11 @@ function SitePageContactUs() {
     return (
         <Fragment>
             <Head>
-                <title>{`Atención al cliente — ${theme.name}`}</title>
+                <title>{`Servicio Técnico — ${theme.name}`}</title>
             </Head>
 
             <div className="contact-us__image" style={{ backgroundImage: `url('/images/atencioncliente/Atencion al cliente-06.png')` }}>
-                <h1 className="contact-us__title">ATENCIÓN AL CLIENTE</h1>
+                <h1 className="contact-us__title">SERVICIO TÉCNICO</h1>
             </div>
 
             <div className="block">
@@ -36,7 +50,9 @@ function SitePageContactUs() {
                             style={{ marginBottom: '30px' }}
                         >
                             <h3 className="atenciontitle">ATENCIÓN PERSONALIZADA</h3>
-                            <h5 className="atencionsubtitle">Contactanos a través de Whatsapp al 097133189</h5>
+                            <h5 className="atencionsubtitle">
+                                Contactanos a través de Whatsapp al <Whatsapp />
+                            </h5>
                         </div>
                         <div className="contact-us__banner col-12 col-md-7 justify-content-right">
                             <div
@@ -116,18 +132,21 @@ function SitePageContactUs() {
                             </div>
                         </div>
                         <div style={{ padding: '20px' }}>
-                            <h4 className="contact-us__header card-title">UBICACIÓN</h4>
+                            {/* <h4 className="contact-us__header card-title">UBICACIÓN</h4> */}
+                            <br />
                             <div className="contact-us__address">
+                                <h5>Encontranos en el Polo Logístico Nacional</h5>
+                                <br />
                                 <p>
-                                    Encontranos en el Polo Logístico Nacional
+                                    <i className="footer-contacts__icon fas fa-globe-americas" />
+                                    {theme.contacts.address}
                                     <br />
-                                    Pantaleon Perez 4881 - C.P. 12100
+                                    <Phone />
                                     <br />
-                                    Tel: (598) 2524 4447
+                                    <Whatsapp />
                                     <br />
-                                    Wpp: (598) 97 133 189
-                                    <br />
-                                    contacto@goldfarb.com.uy
+                                    <i className="footer-contacts__icon far fa-envelope" />
+                                    {theme.contacts.email}
                                 </p>
                             </div>
                         </div>
@@ -144,22 +163,21 @@ function SitePageContactUs() {
                         </div>
                     </div>
                     <div className="row" style={{ marginTop: '35px' }}>
-                        <div className="contact-us__banner col-12 col-md-6 col-lg-6 justify-content-left">
-                            <div
-                                className="contact-us__banner-img"
-                                style={{
-                                    backgroundImage: `url('/images/atencioncliente/Atencion al cliente-40.png')`,
-                                    padding: '15px',
-                                }}
-                            >
-                                {' '}
-                                <div className="contact-us__banner-img-overlay">
-                                    <h3 className="contact-us__banner-img-overlay-title">TE INTERESA FORMAR PARTE DE NUESTRO EQUIPO?</h3>
-                                    <h5 className="contact-us__banner-img-overlay-text">
-                                        Envianos tu CV actualizado a recursos@goldfarb.com.uy
-                                    </h5>
+                        <div
+                            className="contact-us__banner col-12 col-md-6 col-lg-6 justify-content-left card-body"
+                            style={{ height: '275px' }}
+                        >
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="docnum">Número de servicio</label>
+                                    <input id="docnum" type="text" className="form-control" />
                                 </div>
-                            </div>
+                                <button type="submit" className={`btn btn-primary enviar-btn ${isLoading ? 'btn-loading' : ''}`}>
+                                    {!isLoading ? 'CONSULTAR' : ''}
+                                </button>
+                            </form>
+
+                            <div className="row justify-content-left">{!isLoading ? status : ''}</div>
                         </div>
                         <div className="contact-us__banner col-12 col-md-6 col-lg-6 justify-content-right">
                             <div
@@ -168,15 +186,17 @@ function SitePageContactUs() {
                             >
                                 {' '}
                                 <div className="contact-us__banner-img-overlay">
-                                    <h3 className="contact-us__banner-img-overlay-title">SERVICIO POST VENTA</h3>
+                                    <h3 className="contact-us__banner-img-overlay-title">SECCIÓN REPUESTOS</h3>
                                     <h5 className="contact-us__banner-img-overlay-text">
-                                        Pantaleon Perez 4881 - C.P. 12100
+                                        <i className="footer-contacts__icon fas fa-globe-americas" />
+                                        {theme.contacts.address}
                                         <br />
-                                        Tel: (598) 2524 4447
+                                        <Phone />
                                         <br />
-                                        Wpp: (598) 97 133 189
+                                        <Whatsapp />
                                         <br />
-                                        repuestos@goldfarb.com.uy
+                                        <i className="footer-contacts__icon far fa-envelope" />
+                                        {theme.contacts.email}
                                     </h5>
                                 </div>
                             </div>

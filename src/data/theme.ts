@@ -9,6 +9,7 @@ export default {
     contacts: {
         address: 'Pantaleon Perez 4881 - C.P. 12100',
         email: 'contacto@goldfarb.com.uy',
-        phone: '(598) 2524 4447',
+        phone: '2524 4447',
+        whatsapp: '097 133 189',
     },
 };

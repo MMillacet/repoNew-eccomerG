@@ -8,13 +8,12 @@ import ToTop from './ToTop';
 
 const Footer: FunctionComponent = () => {
     const informationLinks = [
-        { title: 'Sobre nosotros', url: '/site/about-us' },
-        // { title: 'Misión y visión', url: '/site/vision-mission' },
-        { title: 'Preguntas frecuentes', url: '/site/faq' },
-        { title: 'Contacto', url: '/site/contact-us' },
-        { title: 'Consultar servicio', url: '/site/service-status' },
-        // { title: 'Noticias', url: '/blog' },
         { title: 'Como comprar', url: '/site/how-to-purchase' },
+        { title: 'Preguntas frecuentes', url: '/site/faq' },
+        { title: 'Sobre nosotros', url: '/site/about-us' },
+        { title: 'Servicio Técnico', url: '/site/contact-us' },
+        // { title: 'Misión y visión', url: '/site/vision-mission' },
+        // { title: 'Noticias', url: '/blog' },
     ];
 
     return (

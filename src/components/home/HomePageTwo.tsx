@@ -1,11 +1,12 @@
 // react
-import { Fragment, useMemo } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
 
 // application
 import { useUser } from '@auth0/nextjs-auth0';
+import { Modal } from 'reactstrap';
 import { IProduct } from '../../interfaces/product';
 
 // blocks
@@ -15,6 +16,36 @@ import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
 import { IBrand } from '../../interfaces/brand';
+
+const YoutubeVideoModal = (props: { onClose: () => void; videoUrl: string | null }) => {
+    const { onClose, videoUrl } = props;
+
+    if (!videoUrl) {
+        return null;
+    }
+
+    let videoView;
+
+    if (videoUrl !== null) {
+        videoView = (
+            <iframe
+                src={videoUrl}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                width="620"
+                height="515"
+                allowFullScreen
+                title="video"
+            />
+        );
+    }
+
+    return (
+        <Modal isOpen={videoUrl !== null} toggle={onClose} centered size="">
+            {videoView}
+        </Modal>
+    );
+};
 
 export interface InitData {
     // herramientas?: IProduct[];
@@ -33,20 +64,13 @@ export interface HomePageOneProps {
     initData?: InitData;
 }
 
-const openUrl = (url: string): void => {
-    if (url) {
-        const w = window.open(url, '_blank');
-        if (w) {
-            w.focus(); // okay now
-        }
-    }
-};
-
 function HomePageTwo(props: HomePageOneProps) {
     const { initData } = props;
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
+
+    const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
 
     const banners = initData?.banners ?? [];
 
@@ -114,7 +138,7 @@ function HomePageTwo(props: HomePageOneProps) {
                             }}
                         >
                             <div
-                                onClick={() => openUrl(banners[0].link?.url)}
+                                onClick={() => setPlayingVideoUrl(banners[0].link?.url)}
                                 style={{
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
@@ -132,7 +156,7 @@ function HomePageTwo(props: HomePageOneProps) {
                             }}
                         >
                             <div
-                                onClick={() => openUrl(banners[1].link?.url)}
+                                onClick={() => setPlayingVideoUrl(banners[1].link?.url)}
                                 style={{
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
@@ -150,7 +174,7 @@ function HomePageTwo(props: HomePageOneProps) {
                             }}
                         >
                             <div
-                                onClick={() => openUrl(banners[2].link?.url)}
+                                onClick={() => setPlayingVideoUrl(banners[2].link?.url)}
                                 style={{
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
@@ -161,14 +185,10 @@ function HomePageTwo(props: HomePageOneProps) {
                                 }}
                             ></div>
                         </div>
+                        <YoutubeVideoModal onClose={() => setPlayingVideoUrl(null)} videoUrl={playingVideoUrl}></YoutubeVideoModal>
                     </div>
                 </div>
             </div>
-            {/* )} */}
-
-            {/* {!isDesktop && <div>Not Desktop</div>}
-
-            {!isDesktop && <BlockSlideShow slides={initData?.banners} />} */}
         </Fragment>
     );
 }

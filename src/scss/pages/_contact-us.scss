@@ -4,6 +4,24 @@
 @import '../variables';
 @import '../functions';
 
+.atencionsubtitle {
+    a {
+        color: #3d464d !important;
+    }
+}
+
+.contact-us__address {
+    a {
+        color: #3d464d !important;
+    }
+}
+
+.contact-us__banner-img-overlay-text {
+    a {
+        color: white !important;
+    }
+}
+
 .contact-us {
 }
 
@@ -78,9 +96,23 @@
 
 .enviar-btn {
     background-image: url(/images/Botones/ConoceMas.png);
-    width: 180px;
+    width: 185px;
     height: 40px;
     float:right;
+    background-color: transparent;
+    border-color: #003c7e;
+    color: #fff;
+    fill: #fff;
+
+    &:active,
+    &:focus,
+    &:hover {
+        background-image: url(/images/Botones/ConoceMas.png) !important;
+        border-color: #003c7e !important;
+        color: #fff !important;
+        fill: #fff !important;
+        background-color: transparent !important;
+    }
 }
 
 .whatsappicon {

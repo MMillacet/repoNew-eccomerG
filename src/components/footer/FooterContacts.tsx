@@ -1,6 +1,8 @@
 // data stubs
 import theme from '../../data/theme';
 
+import { Whatsapp } from '../shared/Whatsapp';
+
 function FooterContacts() {
     return (
         <div className="site-footer__widget footer-contacts">
@@ -16,8 +18,7 @@ function FooterContacts() {
                     {theme.contacts.email}
                 </li>
                 <li>
-                    <i className="footer-contacts__icon fas fa-mobile-alt" />
-                    {theme.contacts.phone}
+                    <Whatsapp />
                 </li>
                 <li>
                     <i className="footer-contacts__icon far fa-clock" />

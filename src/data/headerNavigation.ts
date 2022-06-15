@@ -1152,7 +1152,7 @@ const header: INav = [
 export default [
     ...header,
     {
-        title: 'SERVICIOS TÉCNICOS',
+        title: 'SERVICIO TÉCNICO',
         url: '/site/contact-us',
     },
 ];

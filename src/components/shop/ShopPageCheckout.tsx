@@ -42,7 +42,7 @@ function ShopPageCheckout() {
         const getShipping = async () => {
             const type = orderType;
             if (type) {
-                const data = await (await fetch(`/api/shipping?totalp=${cart.total.$}&totald=${cart.total.U$}&tipoPedido=${type}`)).json();
+                const data = await (await fetch(`/api/shipping?totalp=${cart.total.$}&totald=${cart.total.U$D}&tipoPedido=${type}`)).json();
                 setShippingCost(data);
             }
         };
@@ -105,7 +105,7 @@ function ShopPageCheckout() {
     const totals = () => {
         // const shipping = cart.totals.$.find((x: CartTotal) => x.type === 'shipping');
         const taxPesos = cart.totals.$.find((x: CartTotal) => x.type === 'tax');
-        const taxDollars = cart.totals.U$.find((x: CartTotal) => x.type === 'tax');
+        const taxDollars = cart.totals.U$D.find((x: CartTotal) => x.type === 'tax');
 
         const r1 = (
             <tr key={1}>
@@ -120,7 +120,7 @@ function ShopPageCheckout() {
         const r2 = (taxPesos || taxDollars) && (
             <tr key={2}>
                 <th>Impuestos</th>
-                <td>{taxDollars && taxDollars.price > 0 && <CurrencyFormat value={taxDollars.price} currency={'U$'} />}</td>
+                <td>{taxDollars && taxDollars.price > 0 && <CurrencyFormat value={taxDollars.price} currency={'U$D'} />}</td>
                 <td>{taxPesos && taxPesos.price > 0 && <CurrencyFormat value={taxPesos.price} />}</td>
             </tr>
         );
@@ -131,7 +131,7 @@ function ShopPageCheckout() {
     const cartItems = cart.items.map((item) => (
         <tr key={item.id}>
             <td>{`${item.product.title} × ${item.quantity}`}</td>
-            <td>{item.product.currency === 'U$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
+            <td>{item.product.currency === 'U$D' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
             <td>{item.product.currency === '$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
         </tr>
     ));
@@ -141,7 +141,7 @@ function ShopPageCheckout() {
             <thead className="checkout__totals-header">
                 <tr>
                     <th>Producto</th>
-                    <th>Total U$</th>
+                    <th>Total U$D</th>
                     <th>Total $</th>
                 </tr>
             </thead>
@@ -151,7 +151,7 @@ function ShopPageCheckout() {
                     <tr>
                         <th>Subtotal</th>
                         <td>
-                            <CurrencyFormat value={cart.subtotal.U$} currency={'U$'} />
+                            <CurrencyFormat value={cart.subtotal.U$D} currency={'U$D'} />
                         </td>
                         <td>
                             <CurrencyFormat value={cart.subtotal.$} currency={'$'} />
@@ -164,7 +164,7 @@ function ShopPageCheckout() {
                 <tr>
                     <th>Total</th>
                     <td>
-                        <CurrencyFormat value={cart.total.U$} currency={'U$'} />
+                        <CurrencyFormat value={cart.total.U$D} currency={'U$D'} />
                     </td>
                     <td>
                         <CurrencyFormat value={cart.total.$} currency={'$'} />

@@ -10,6 +10,7 @@ import SanityBlockContent from '@sanity/block-content-to-react';
 // data stubs
 import { useState } from 'react';
 import classNames from 'classnames';
+import { Modal } from 'reactstrap';
 import { ITeamMember } from '../../interfaces/teamMember';
 import { BlockSlideItem } from '../blocks/BlockSlideShow';
 
@@ -194,6 +195,7 @@ const TeamsView = (props: { selectedTeam: string; onClick: any }) => (
     <div>
         {teamData
             .map((t) => t.name)
+            .sort()
             .map((team: string, index: number) => {
                 const isSelected = team.toUpperCase() === props.selectedTeam.toUpperCase();
                 const cnames = classNames({
@@ -217,7 +219,7 @@ const MembersView = (props: { selectedTeam: string }) => {
         const { members } = data;
         return (
             <div className="teamview">
-                {members.map((member, index) => (
+                {members.sort().map((member, index) => (
                     <div className="teamview__member row" key={index}>
                         <div className="col-5">
                             {member.lastName.toUpperCase()}, {member.firstName.toUpperCase()}
@@ -233,6 +235,7 @@ const MembersView = (props: { selectedTeam: string }) => {
 
 function SitePageAboutUs(props: SitePageAboutUsProps) {
     const [selectedTeam, setSelectedTeam] = useState(teamData[0].name);
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleTeamNameClick = (e: any) => {
         const teamClicked = e.target.innerText;
@@ -356,8 +359,10 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                         <div
                             className="about-us__banner-img"
                             style={{
-                                backgroundImage: `url('/images/aboutus/Goldfarb - Web Boceto_SOBRE NOSOTROS1-08.png')`,
+                                backgroundImage: `url('/images/aboutus/Goldfarb - Web Boceto_SOBRE NOSOTROS1-06.png')`,
+                                cursor: 'pointer',
                             }}
+                            onClick={() => setIsOpen(true)}
                         >
                             {' '}
                             <div className="about-us__banner-img-overlay">
@@ -367,6 +372,15 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                                     mismos para su reciclaje.{' '}
                                 </h5>
                             </div>
+                            <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
+                                <div
+                                    className="about-us__banner-img"
+                                    style={{
+                                        backgroundImage: `url('/images/aboutus/Goldfarb - Web Boceto_SOBRE NOSOTROS1-08.png')`,
+                                    }}
+                                    onClick={() => setIsOpen(true)}
+                                ></div>
+                            </Modal>
                         </div>
                     </div>
                     <div className="about-us__banner col-12 col-md-6 col-lg-6 justify-content-right">

@@ -55,7 +55,7 @@ function AccountPageStatus() {
                     <CurrencyFormat value={item.balanceP} />
                 </td>
                 <td>
-                    <CurrencyFormat value={item.balanceD} currency={'U$'} />
+                    <CurrencyFormat value={item.balanceD} currency={'U$D'} />
                 </td>
             </tr>
         );
@@ -91,7 +91,7 @@ function AccountPageStatus() {
                 <div className="status-card__row">
                     <div className="status-card__row-title">Saldo D</div>
                     <div className="status-card__row-content">
-                        <CurrencyFormat value={accountStatus?.balanceD} currency={'U$'} />
+                        <CurrencyFormat value={accountStatus?.balanceD} currency={'U$D'} />
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@ function AccountPageStatus() {
                                 <th>Factura</th>
                                 <th>Fecha</th>
                                 <th>Saldo $</th>
-                                <th>Saldo U$</th>
+                                <th>Saldo U$D</th>
                             </tr>
                         </thead>
                         <tbody>{statusList}</tbody>

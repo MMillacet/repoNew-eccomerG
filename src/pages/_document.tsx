@@ -15,6 +15,7 @@ class MyDocument extends Document {
                 <Head>
                     <link rel="shortcut icon" href="/favicon.ico" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" />
+                    {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" /> */}
                     {/* fonts */}
                     {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" />
                      */}
