@@ -1,4 +1,5 @@
 import AppLink from '../shared/AppLink';
+import { Phone, Whatsapp } from '../shared/Whatsapp';
 
 export default function Topbar() {
     return (
@@ -18,7 +19,12 @@ export default function Topbar() {
                     <AppLink href={'/site/faq'} className="topbar-item divider">
                         PREGUNTAS FRECUENTES
                     </AppLink>
-                    <div className="topbar-item-last">CONTÁCTENOS - 097 133 189</div>
+                    <div className="topbar-item divider">
+                        <Whatsapp />
+                    </div>
+                    <div className="topbar-item-last">
+                        <Phone />
+                    </div>
                 </div>
             </div>
         </div>
