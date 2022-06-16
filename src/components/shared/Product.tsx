@@ -217,6 +217,11 @@ function Product(props: ProductProps) {
                                         />
                                     </div>
                                 </div>
+                                <br />
+                                <label htmlFor="product-tax" className="product__option-label">
+                                    Impuestos: {rtProduct?.tax}%
+                                </label>
+
                                 {rtProduct?.documents && rtProduct.documents.length > 0 && (
                                     <Fragment>
                                         <br />

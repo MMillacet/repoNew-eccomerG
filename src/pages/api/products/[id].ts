@@ -70,8 +70,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         product.images = images;
 
-        console.log({ product });
-
         res.status(200).json(product);
     } catch (error) {
         res.status(500).json({ error });
