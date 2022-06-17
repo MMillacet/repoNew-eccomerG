@@ -4,13 +4,12 @@ import AppLink from './AppLink';
 
 export const Whatsapp = () => {
     const number = theme.contacts.whatsapp;
-    const link = `https://wa.me/${number.trim()}&lang=es`;
+    const link = `https://wa.me/${number.replace(/\s/g, '')}`;
     return (
         <>
             <i
                 className="footer-contacts__icon fa-brands fa-whatsapp"
                 style={{
-                    // fontSize: '18px',
                     verticalAlign: 'baseline',
                 }}
             ></i>
@@ -20,13 +19,12 @@ export const Whatsapp = () => {
 };
 export const Phone = () => {
     const number = theme.contacts.phone;
-    const link = `tel:${number.trim()}`;
+    const link = `tel:${number.replace(/\s/g, '')}`;
     return (
         <>
             <i
                 className="footer-contacts__icon fa fa-phone"
                 style={{
-                    // fontSize: '18px',
                     verticalAlign: 'baseline',
                 }}
             ></i>
