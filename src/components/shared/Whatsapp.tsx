@@ -4,7 +4,7 @@ import AppLink from './AppLink';
 
 export const Whatsapp = () => {
     const number = theme.contacts.whatsapp;
-    const link = `https://wa.me/${number.replace(/\s/g, '')}`;
+    const link = `https://wa.me/+598${number.replace(/\s/g, '')}`;
     return (
         <>
             <i
