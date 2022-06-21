@@ -13,34 +13,128 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
+                                title: 'Eléctricas',
+                                url: '/shop/catalog?family=Herramientas&category=Eléctricas',
+                                children: [
+                                    {
+                                        title: 'Amoladoras',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Amoladoras',
+                                    },
+                                    {
+                                        title: 'Taladros',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Taladros',
+                                    },
+                                    {
+                                        title: 'Atornilladores',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Atornilladores',
+                                    },
+                                    {
+                                        title: 'Hormigoneras',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Hormigoneras',
+                                    },
+                                    {
+                                        title: 'Lijadoras',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Lijadoras',
+                                    },
+                                    { title: 'Sierras', url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Sierras' },
+                                    {
+                                        title: 'Compresores',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Compresores',
+                                    },
+                                    {
+                                        title: 'Equipos de soldar',
+                                        url: '/shop/catalog?family=Herramientas&category=Eléctricas&subcategory=Equipos de soldar',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'A batería',
+                                url: '/shop/catalog?family=Herramientas&category=A batería',
+                                children: [
+                                    {
+                                        title: 'Amoladoras',
+                                        url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Amoladoras',
+                                    },
+                                    { title: 'Taladros', url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Taladros' },
+                                    {
+                                        title: 'Atornilladores',
+                                        url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Atornilladores',
+                                    },
+                                    {
+                                        title: 'Compresores',
+                                        url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Compresores',
+                                    },
+                                    {
+                                        title: 'Lijadoras',
+                                        url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Lijadoras',
+                                    },
+                                    {
+                                        title: 'Mezcladores',
+                                        url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Mezcladores',
+                                    },
+                                    {
+                                        title: 'Rotomartillos',
+                                        url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Rotomartillos',
+                                    },
+                                    { title: 'Sierras', url: '/shop/catalog?family=Herramientas&category=A batería&subcategory=Sierras' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'A combustión',
+                                url: '/shop/catalog?family=Herramientas&category=A combustión',
+                                children: [
+                                    {
+                                        title: 'Generadores',
+                                        url: '/shop/catalog?family=Herramientas&category=A combustión&subcategory=Generadores',
+                                    },
+                                    {
+                                        title: 'Hidrolavadoras y accesorios',
+                                        url: '/shop/catalog?family=Herramientas&category=A combustión&subcategory=Hidrolavadoras y accesorios',
+                                    },
+                                    {
+                                        title: 'Motobombas',
+                                        url: '/shop/catalog?family=Herramientas&category=A combustión&subcategory=Motobombas',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
                                 title: 'Manuales',
                                 url: '/shop/catalog?family=Herramientas&category=Manuales',
                                 children: [
+                                    { title: 'Aparejos', url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Aparejos' },
+                                    {
+                                        title: 'Arcos de sierra',
+                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Arcos de sierra',
+                                    },
                                     {
                                         title: 'Bocallaves y accesorios',
                                         url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Bocallaves y accesorios',
                                     },
-                                    { title: 'Llaves', url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Llaves' },
+                                    { title: 'Cepillos', url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Cepillos' },
+                                    { title: 'Cinceles', url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Cinceles' },
+                                    { title: 'Cizallas', url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Cizallas' },
                                     {
-                                        title: 'Destornilladores',
-                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Destornilladores',
+                                        title: 'Corta cerámica y porcelanato',
+                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Corta cerámica y porcelanato',
                                     },
                                     {
-                                        title: 'Limas y escofinas',
-                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Limas y escofinas',
-                                    },
-                                    { title: 'Alicates', url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Alicates' },
-                                    {
-                                        title: 'Destonilladores',
-                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Destonilladores',
-                                    },
-                                    {
-                                        title: 'Martillos',
-                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Martillos',
-                                    },
-                                    {
-                                        title: 'Espatulas',
-                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Espatulas',
+                                        title: 'Corta tubos',
+                                        url: '/shop/catalog?family=Herramientas&category=Manuales&subcategory=Corta tubos',
                                     },
                                 ],
                             },
@@ -53,177 +147,31 @@ const header: INav = [
                                 title: 'Accesorios',
                                 url: '/shop/catalog?family=Herramientas&category=Accesorios',
                                 children: [
-                                    { title: 'Mechas', url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Mechas' },
-                                    {
-                                        title: 'Puntas y cinceles',
-                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Puntas y cinceles',
-                                    },
-                                    {
-                                        title: 'Hojas de sierra circular',
-                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Hojas de sierra circular',
-                                    },
-                                    {
-                                        title: 'Sierra sable',
-                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Sierra sable',
-                                    },
                                     {
                                         title: 'Adaptadores',
                                         url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Adaptadores',
                                     },
                                     {
-                                        title: 'Hojas p/multifincion',
-                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Hojas p/multifincion',
+                                        title: 'Aspiradoras',
+                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Aspiradoras',
+                                    },
+                                    {
+                                        title: 'Banco sierra ingletadora',
+                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Banco sierra ingletadora',
+                                    },
+                                    { title: 'Bridas', url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Bridas' },
+                                    {
+                                        title: 'Cepillos',
+                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Cepillos',
+                                    },
+                                    {
+                                        title: 'Cinceles',
+                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Cinceles',
                                     },
                                     { title: 'Coronas', url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Coronas' },
                                     {
-                                        title: 'Hojas de sierra',
-                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Hojas de sierra',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Electricas',
-                                url: '/shop/catalog?family=Herramientas&category=Electricas',
-                                children: [
-                                    {
-                                        title: 'Hidrolavadoras y accesorios',
-                                        url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Hidrolavadoras y accesorios',
-                                    },
-                                    {
-                                        title: 'Equipos de soldar y accesorios',
-                                        url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Equipos de soldar y accesorios',
-                                    },
-                                    { title: 'Sierras', url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Sierras' },
-                                    {
-                                        title: 'Amoladoras',
-                                        url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Amoladoras',
-                                    },
-                                    {
-                                        title: 'Taladros',
-                                        url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Taladros',
-                                    },
-                                    {
-                                        title: 'Compresores',
-                                        url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Compresores',
-                                    },
-                                    { title: 'Bombas', url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Bombas' },
-                                    {
-                                        title: 'Lijadoras',
-                                        url: '/shop/catalog?family=Herramientas&category=Electricas&subcategory=Lijadoras',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'A bateria',
-                                url: '/shop/catalog?family=Herramientas&category=A bateria',
-                                children: [
-                                    {
-                                        title: 'Baterias y cargadores',
-                                        url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Baterias y cargadores',
-                                    },
-                                    { title: 'Taladros', url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Taladros' },
-                                    {
-                                        title: 'Llaves de impacto',
-                                        url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Llaves de impacto',
-                                    },
-                                    {
-                                        title: 'Amoladoras',
-                                        url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Amoladoras',
-                                    },
-                                    { title: 'Sierras', url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Sierras' },
-                                    { title: 'Sierra', url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Sierra' },
-                                    { title: 'Varios', url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Varios' },
-                                    {
-                                        title: 'Rotomartillos',
-                                        url: '/shop/catalog?family=Herramientas&category=A bateria&subcategory=Rotomartillos',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Medicion',
-                                url: '/shop/catalog?family=Herramientas&category=Medicion',
-                                children: [
-                                    { title: 'Niveles', url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Niveles' },
-                                    {
-                                        title: 'Cintas metricas',
-                                        url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Cintas metricas',
-                                    },
-                                    {
-                                        title: 'Escuadras',
-                                        url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Escuadras',
-                                    },
-                                    { title: 'Otros', url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Otros' },
-                                    { title: 'Laser', url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Laser' },
-                                    { title: 'Reglas', url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Reglas' },
-                                    { title: 'Galgas', url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Galgas' },
-                                    { title: 'Metros', url: '/shop/catalog?family=Herramientas&category=Medicion&subcategory=Metros' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'A combustion',
-                                url: '/shop/catalog?family=Herramientas&category=A combustion',
-                                children: [
-                                    {
-                                        title: 'Generadores',
-                                        url: '/shop/catalog?family=Herramientas&category=A combustion&subcategory=Generadores',
-                                    },
-                                    {
-                                        title: 'Motobombas',
-                                        url: '/shop/catalog?family=Herramientas&category=A combustion&subcategory=Motobombas',
-                                    },
-                                    {
-                                        title: 'Hidrolavadoras y accesorios',
-                                        url: '/shop/catalog?family=Herramientas&category=A combustion&subcategory=Hidrolavadoras y accesorios',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Varios',
-                                url: '/shop/catalog?family=Herramientas&category=Varios',
-                                children: [
-                                    {
-                                        title: 'Convertidor de voltaje',
-                                        url: '/shop/catalog?family=Herramientas&category=Varios&subcategory=Convertidor de voltaje',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Mechas',
-                                url: '/shop/catalog?family=Herramientas&category=Mechas',
-                                children: [
-                                    {
-                                        title: 'Hojas p/multifincion',
-                                        url: '/shop/catalog?family=Herramientas&category=Mechas&subcategory=Hojas p/multifincion',
+                                        title: 'Crucetas',
+                                        url: '/shop/catalog?family=Herramientas&category=Accesorios&subcategory=Crucetas',
                                     },
                                 ],
                             },
@@ -235,7 +183,7 @@ const header: INav = [
     },
     {
         title: 'FERRETERÍA',
-        url: '/shop/catalog?family=Ferreteria',
+        url: '/shop/catalog?family=Ferretería',
         submenu: {
             type: 'megamenu',
             menu: {
@@ -245,25 +193,34 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Proteccion',
-                                url: '/shop/catalog?family=Ferreteria&category=Proteccion',
+                                title: 'Almacenamiento',
+                                url: '/shop/catalog?family=Ferretería&category=Almacenamiento',
                                 children: [
+                                    { title: 'Bolsas', url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Bolsas' },
+                                    { title: 'Bolsos', url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Bolsos' },
                                     {
-                                        title: 'Zapatos de seguridad',
-                                        url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Zapatos de seguridad',
+                                        title: 'Cajas p/herramientas',
+                                        url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Cajas p/herramientas',
                                     },
-                                    { title: 'Guantes', url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Guantes' },
-                                    { title: 'Gafas', url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Gafas' },
-                                    { title: 'Eslingas', url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Eslingas' },
-                                    { title: 'Caretas', url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Caretas' },
                                     {
-                                        title: 'Equipos de lluvia',
-                                        url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Equipos de lluvia',
+                                        title: 'Cajones',
+                                        url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Cajones',
                                     },
-                                    { title: 'Botas', url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Botas' },
                                     {
-                                        title: 'Respiratoria',
-                                        url: '/shop/catalog?family=Ferreteria&category=Proteccion&subcategory=Respiratoria',
+                                        title: 'Cinturones',
+                                        url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Cinturones',
+                                    },
+                                    {
+                                        title: 'Mochilas',
+                                        url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Mochilas',
+                                    },
+                                    {
+                                        title: 'Organizadores',
+                                        url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Organizadores',
+                                    },
+                                    {
+                                        title: 'Valijas',
+                                        url: '/shop/catalog?family=Ferretería&category=Almacenamiento&subcategory=Valijas',
                                     },
                                 ],
                             },
@@ -273,37 +230,40 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Consumibles',
-                                url: '/shop/catalog?family=Ferreteria&category=Consumibles',
+                                title: 'Fijación',
+                                url: '/shop/catalog?family=Ferretería&category=Fijación',
                                 children: [
-                                    { title: 'Fijacion', url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Fijacion' },
+                                    { title: 'Bulones', url: '/shop/catalog?family=Ferretería&category=Fijación&subcategory=Bulones' },
+                                    { title: 'Clavos L', url: '/shop/catalog?family=Ferretería&category=Fijación&subcategory=Clavos L' },
+                                    { title: 'Pitones', url: '/shop/catalog?family=Ferretería&category=Fijación&subcategory=Pitones' },
+                                    { title: 'Tacos', url: '/shop/catalog?family=Ferretería&category=Fijación&subcategory=Tacos' },
+                                    { title: 'Tornillos', url: '/shop/catalog?family=Ferretería&category=Fijación&subcategory=Tornillos' },
+                                    { title: 'Varios', url: '/shop/catalog?family=Ferretería&category=Fijación&subcategory=Varios' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Grifería',
+                                url: '/shop/catalog?family=Ferretería&category=Grifería',
+                                children: [
                                     {
-                                        title: 'Remachees',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Remachees',
+                                        title: 'Accesorios',
+                                        url: '/shop/catalog?family=Ferretería&category=Grifería&subcategory=Accesorios',
+                                    },
+                                    { title: 'Colillas', url: '/shop/catalog?family=Ferretería&category=Grifería&subcategory=Colillas' },
+                                    { title: 'Grifos', url: '/shop/catalog?family=Ferretería&category=Grifería&subcategory=Grifos' },
+                                    { title: 'Juegos', url: '/shop/catalog?family=Ferretería&category=Grifería&subcategory=Juegos' },
+                                    {
+                                        title: 'Mezcladoras',
+                                        url: '/shop/catalog?family=Ferretería&category=Grifería&subcategory=Mezcladoras',
                                     },
                                     {
-                                        title: 'Aceites, grasas y lubricantes',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Aceites, grasas y lubricantes',
-                                    },
-                                    {
-                                        title: 'Precintos',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Precintos',
-                                    },
-                                    {
-                                        title: 'Aprietacables',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Aprietacables',
-                                    },
-                                    {
-                                        title: 'Grilletes',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Grilletes',
-                                    },
-                                    {
-                                        title: 'Cables de acero',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Cables de acero',
-                                    },
-                                    {
-                                        title: 'Mosquetones',
-                                        url: '/shop/catalog?family=Ferreteria&category=Consumibles&subcategory=Mosquetones',
+                                        title: 'Monocomandos',
+                                        url: '/shop/catalog?family=Ferretería&category=Grifería&subcategory=Monocomandos',
                                     },
                                 ],
                             },
@@ -313,37 +273,88 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Abrasivos',
-                                url: '/shop/catalog?family=Ferreteria&category=Abrasivos',
+                                title: 'Lijas',
+                                url: '/shop/catalog?family=Ferretería&category=Lijas',
+                                children: [
+                                    { title: 'Banda', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Banda' },
+                                    { title: 'Discos', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Discos' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Limpieza',
+                                url: '/shop/catalog?family=Ferretería&category=Limpieza',
+                                children: [
+                                    { title: 'Baldes', url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Baldes' },
+                                    {
+                                        title: 'Bolsas de residuo',
+                                        url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Bolsas de residuo',
+                                    },
+                                    { title: 'Cabos', url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Cabos' },
+                                    { title: 'Cepillos', url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Cepillos' },
+                                    { title: 'Escobas', url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Escobas' },
+                                    {
+                                        title: 'Escobillones',
+                                        url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Escobillones',
+                                    },
+                                    { title: 'Esponjas', url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Esponjas' },
+                                    { title: 'Felpudos', url: '/shop/catalog?family=Ferretería&category=Limpieza&subcategory=Felpudos' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Medición',
+                                url: '/shop/catalog?family=Ferretería&category=Medición',
+                                children: [
+                                    { title: 'Calibres', url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Calibres' },
+                                    {
+                                        title: 'Cintas métricas',
+                                        url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Cintas métricas',
+                                    },
+                                    { title: 'Escuadras', url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Escuadras' },
+                                    { title: 'Galgas', url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Galgas' },
+                                    { title: 'Laser', url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Laser' },
+                                    { title: 'Metros', url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Metros' },
+                                    {
+                                        title: 'Micrómetros',
+                                        url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Micrómetros',
+                                    },
+                                    { title: 'Niveles', url: '/shop/catalog?family=Ferretería&category=Medición&subcategory=Niveles' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Protección',
+                                url: '/shop/catalog?family=Ferretería&category=Protección',
                                 children: [
                                     {
-                                        title: 'Discos c/velcro',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Discos c/velcro',
+                                        title: 'Accesorios',
+                                        url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Accesorios',
                                     },
                                     {
-                                        title: 'Discos flap',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Discos flap',
+                                        title: 'Antiparras',
+                                        url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Antiparras',
                                     },
+                                    { title: 'Arnés', url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Arnés' },
+                                    { title: 'Auditivo', url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Auditivo' },
+                                    { title: 'Botas', url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Botas' },
+                                    { title: 'Caretas', url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Caretas' },
+                                    { title: 'Cascos', url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Cascos' },
                                     {
-                                        title: 'Lijas en banda',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Lijas en banda',
-                                    },
-                                    {
-                                        title: 'Lijas al agua',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Lijas al agua',
-                                    },
-                                    {
-                                        title: 'Lijas en rollo',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Lijas en rollo',
-                                    },
-                                    { title: 'Lijas', url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Lijas' },
-                                    {
-                                        title: 'Lijas p/madera',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Lijas p/madera',
-                                    },
-                                    {
-                                        title: 'Tela esmeril',
-                                        url: '/shop/catalog?family=Ferreteria&category=Abrasivos&subcategory=Tela esmeril',
+                                        title: 'Cinturones',
+                                        url: '/shop/catalog?family=Ferretería&category=Protección&subcategory=Cinturones',
                                     },
                                 ],
                             },
@@ -354,73 +365,24 @@ const header: INav = [
                         links: [
                             {
                                 title: 'Varios',
-                                url: '/shop/catalog?family=Ferreteria&category=Varios',
+                                url: '/shop/catalog?family=Ferretería&category=Varios',
                                 children: [
-                                    { title: 'Lonas', url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Lonas' },
-                                    { title: 'Cuerdas', url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Cuerdas' },
+                                    { title: 'Alambres', url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Alambres' },
+                                    { title: 'Baldes', url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Baldes' },
                                     {
-                                        title: 'Sillas de playa',
-                                        url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Sillas de playa',
+                                        title: 'Chicote de arranque',
+                                        url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Chicote de arranque',
                                     },
-                                    { title: 'Felpudos', url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Felpudos' },
                                     {
-                                        title: 'Mallas electrosoldadas',
-                                        url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Mallas electrosoldadas',
+                                        title: 'Cofre de seguridad',
+                                        url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Cofre de seguridad',
                                     },
-                                    { title: 'Tendederos', url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Tendederos' },
-                                    { title: 'Escobas', url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Escobas' },
-                                    { title: 'Baldes', url: '/shop/catalog?family=Ferreteria&category=Varios&subcategory=Baldes' },
-                                ],
-                            },
-                        ],
-                    },
-                    { size: 3, links: [{ title: 'Candados', url: '/shop/catalog?family=Ferreteria&category=Candados', children: [] }] },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Discos de corte y desbaste',
-                                url: '/shop/catalog?family=Ferreteria&category=Discos de corte y desbaste',
-                                children: [],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Escaleras',
-                                url: '/shop/catalog?family=Ferreteria&category=Escaleras',
-                                children: [
-                                    { title: 'Aluminio', url: '/shop/catalog?family=Ferreteria&category=Escaleras&subcategory=Aluminio' },
-                                    { title: 'Madera', url: '/shop/catalog?family=Ferreteria&category=Escaleras&subcategory=Madera' },
                                     {
-                                        title: 'Accesorios',
-                                        url: '/shop/catalog?family=Ferreteria&category=Escaleras&subcategory=Accesorios',
+                                        title: 'Discos p/afilar',
+                                        url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Discos p/afilar',
                                     },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Herramientas',
-                                url: '/shop/catalog?family=Ferreteria&category=Herramientas',
-                                children: [
-                                    { title: 'Palas', url: '/shop/catalog?family=Ferreteria&category=Herramientas&subcategory=Palas' },
-                                    {
-                                        title: 'Cucharas de albañil',
-                                        url: '/shop/catalog?family=Ferreteria&category=Herramientas&subcategory=Cucharas de albañil',
-                                    },
-                                    { title: 'Mangos', url: '/shop/catalog?family=Ferreteria&category=Herramientas&subcategory=Mangos' },
-                                    {
-                                        title: 'Arcos de sierra',
-                                        url: '/shop/catalog?family=Ferreteria&category=Herramientas&subcategory=Arcos de sierra',
-                                    },
-                                    { title: 'Escobas', url: '/shop/catalog?family=Ferreteria&category=Herramientas&subcategory=Escobas' },
-                                    { title: 'Hachas', url: '/shop/catalog?family=Ferreteria&category=Herramientas&subcategory=Hachas' },
+                                    { title: 'Ganchos', url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Ganchos' },
+                                    { title: 'Infladores', url: '/shop/catalog?family=Ferretería&category=Varios&subcategory=Infladores' },
                                 ],
                             },
                         ],
@@ -431,7 +393,7 @@ const header: INav = [
     },
     {
         title: 'AGRO Y JARDIN',
-        url: '/shop/catalog?family=Agro y Jardin',
+        url: '/shop/catalog?family=Agro y Jardín',
         submenu: {
             type: 'megamenu',
             menu: {
@@ -441,26 +403,21 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Accesorios',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Accesorios',
+                                title: 'Bordeadoras y desmalezadoras',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras',
                                 children: [
-                                    { title: 'Cadenas', url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Cadenas' },
-                                    { title: 'Espadas', url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Espadas' },
                                     {
-                                        title: 'Carretes',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Carretes',
-                                    },
-                                    { title: 'Tanzas', url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Tanzas' },
-                                    {
-                                        title: 'Podadoras',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Podadoras',
+                                        title: 'A batería',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras&subcategory=A batería',
                                     },
                                     {
-                                        title: 'Corta cercos',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Corta cercos',
+                                        title: 'A nafta',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras&subcategory=A nafta',
                                     },
-                                    { title: 'Brocas', url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Brocas' },
-                                    { title: 'Arnes', url: '/shop/catalog?family=Agro y Jardin&category=Accesorios&subcategory=Arnes' },
+                                    {
+                                        title: 'Eléctrico',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras&subcategory=Eléctrico',
+                                    },
                                 ],
                             },
                         ],
@@ -469,9 +426,22 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Herraduras y clavos',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Herraduras y clavos',
-                                children: [],
+                                title: 'Motosierras',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Motosierras',
+                                children: [
+                                    {
+                                        title: 'A batería',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Motosierras&subcategory=A batería',
+                                    },
+                                    {
+                                        title: 'A nafta',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Motosierras&subcategory=A nafta',
+                                    },
+                                    {
+                                        title: 'Eléctricas',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Motosierras&subcategory=Eléctricas',
+                                    },
+                                ],
                             },
                         ],
                     },
@@ -479,25 +449,43 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Riego',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Riego',
+                                title: 'Cortadoras de césped',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped',
                                 children: [
-                                    { title: 'Mangueras', url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Mangueras' },
-                                    { title: 'Pistolas', url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Pistolas' },
                                     {
-                                        title: 'Acople rapido',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Acople rapido',
+                                        title: 'A batería',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped&subcategory=A batería',
                                     },
-                                    { title: 'Uniones', url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Uniones' },
                                     {
-                                        title: 'Adaptadores',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Adaptadores',
+                                        title: 'A nafta',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped&subcategory=A nafta',
                                     },
-                                    { title: 'Regador', url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Regador' },
-                                    { title: 'Regaderas', url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Regaderas' },
                                     {
-                                        title: 'Aspersores',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Riego&subcategory=Aspersores',
+                                        title: 'Eléctrico',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped&subcategory=Eléctrico',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Cortacercos y sopladores',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores',
+                                children: [
+                                    {
+                                        title: 'A batería',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores&subcategory=A batería',
+                                    },
+                                    {
+                                        title: 'A nafta',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores&subcategory=A nafta',
+                                    },
+                                    {
+                                        title: 'Eléctrico',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores&subcategory=Eléctrico',
                                     },
                                 ],
                             },
@@ -508,53 +496,30 @@ const header: INav = [
                         links: [
                             {
                                 title: 'Herramientas',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Herramientas',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Herramientas',
                                 children: [
+                                    { title: 'Azadas', url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Azadas' },
                                     {
-                                        title: 'Tijeras de podar',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Tijeras de podar',
-                                    },
-                                    {
-                                        title: 'Machetes',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Machetes',
+                                        title: 'Escardillos',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Escardillos',
                                     },
                                     {
                                         title: 'Escobillas',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Escobillas',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Escobillas',
+                                    },
+                                    { title: 'Hoces', url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Hoces' },
+                                    {
+                                        title: 'Horquillas',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Horquillas',
+                                    },
+                                    { title: 'Kits', url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Kits' },
+                                    {
+                                        title: 'Machetes',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Machetes',
                                     },
                                     {
                                         title: 'Rastrillos',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Rastrillos',
-                                    },
-                                    { title: 'Hoces', url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Hoces' },
-                                    { title: 'Azadas', url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Azadas' },
-                                    {
-                                        title: 'Horquillas',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Horquillas',
-                                    },
-                                    { title: 'Kits', url: '/shop/catalog?family=Agro y Jardin&category=Herramientas&subcategory=Kits' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Motosierras',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Motosierras',
-                                children: [
-                                    {
-                                        title: 'A nafta',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Motosierras&subcategory=A nafta',
-                                    },
-                                    {
-                                        title: 'A bateria',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Motosierras&subcategory=A bateria',
-                                    },
-                                    {
-                                        title: 'Electricas',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Motosierras&subcategory=Electricas',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Herramientas&subcategory=Rastrillos',
                                     },
                                 ],
                             },
@@ -564,16 +529,116 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Desmalezadoras',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Desmalezadoras',
+                                title: 'Riego',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Riego',
                                 children: [
                                     {
-                                        title: 'A nafta',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Desmalezadoras&subcategory=A nafta',
+                                        title: 'Acople rápido',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Acople rápido',
                                     },
                                     {
-                                        title: 'A bateria',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Desmalezadoras&subcategory=A bateria',
+                                        title: 'Adaptadores',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Adaptadores',
+                                    },
+                                    {
+                                        title: 'Aspersores',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Aspersores',
+                                    },
+                                    { title: 'Boquillas', url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Boquillas' },
+                                    {
+                                        title: 'Enrollador de mangueras',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Enrollador de mangueras',
+                                    },
+                                    {
+                                        title: 'Exhibidores',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Exhibidores',
+                                    },
+                                    { title: 'Grifos', url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Grifos' },
+                                    { title: 'Kits', url: '/shop/catalog?family=Agro y Jardín&category=Riego&subcategory=Kits' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Accesorios',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Accesorios',
+                                children: [
+                                    {
+                                        title: 'Adaptadores',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Adaptadores',
+                                    },
+                                    { title: 'Cadenas', url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Cadenas' },
+                                    {
+                                        title: 'Carretes',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Carretes',
+                                    },
+                                    { title: 'Discos', url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Discos' },
+                                    { title: 'Espadas', url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Espadas' },
+                                    {
+                                        title: 'Herraduras y clavos de herrar',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Herraduras y clavos de herrar',
+                                    },
+                                    { title: 'Mechas', url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Mechas' },
+                                    { title: 'Tanzas', url: '/shop/catalog?family=Agro y Jardín&category=Accesorios&subcategory=Tanzas' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Varios',
+                                url: '/shop/catalog?family=Agro y Jardín&category=Varios',
+                                children: [
+                                    {
+                                        title: 'Fumigadores',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Fumigadores',
+                                    },
+                                    {
+                                        title: 'Grasas y aceites',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Grasas y aceites',
+                                    },
+                                    { title: 'Hoyadoras', url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Hoyadoras' },
+                                    { title: 'Macetas', url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Macetas' },
+                                    {
+                                        title: 'Multifunción',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Multifunción',
+                                    },
+                                    { title: 'Podadoras', url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Podadoras' },
+                                    {
+                                        title: 'Pulverizadores',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Pulverizadores',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    },
+    {
+        title: 'PINTURAS',
+        url: '/shop/catalog?family=Pinturas',
+        submenu: {
+            type: 'megamenu',
+            menu: {
+                size: 'xl',
+                columns: [
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Paredes, pisos y techos',
+                                url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos',
+                                children: [
+                                    {
+                                        title: 'Impermeabilizantes',
+                                        url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos&subcategory=Impermeabilizantes',
                                     },
                                 ],
                             },
@@ -583,9 +648,11 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Grasas y aceites',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Grasas y aceites',
-                                children: [],
+                                title: 'Madera y metal',
+                                url: '/shop/catalog?family=Pinturas&category=Madera y metal',
+                                children: [
+                                    { title: 'Barniz', url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Barniz' },
+                                ],
                             },
                         ],
                     },
@@ -593,14 +660,107 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Sopladores',
-                                url: '/shop/catalog?family=Agro y Jardin&category=Sopladores',
+                                title: 'Aerosoles',
+                                url: '/shop/catalog?family=Pinturas&category=Aerosoles',
                                 children: [
-                                    { title: 'A nafta', url: '/shop/catalog?family=Agro y Jardin&category=Sopladores&subcategory=A nafta' },
                                     {
-                                        title: 'A bateria',
-                                        url: '/shop/catalog?family=Agro y Jardin&category=Sopladores&subcategory=A bateria',
+                                        title: 'Aceites, grasas y lubricantes',
+                                        url: '/shop/catalog?family=Pinturas&category=Aerosoles&subcategory=Aceites, grasas y lubricantes',
                                     },
+                                    {
+                                        title: 'Alta temperatura',
+                                        url: '/shop/catalog?family=Pinturas&category=Aerosoles&subcategory=Alta temperatura',
+                                    },
+                                    { title: 'Esmaltes', url: '/shop/catalog?family=Pinturas&category=Aerosoles&subcategory=Esmaltes' },
+                                    { title: 'Especiales', url: '/shop/catalog?family=Pinturas&category=Aerosoles&subcategory=Especiales' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Complementos',
+                                url: '/shop/catalog?family=Pinturas&category=Complementos',
+                                children: [
+                                    { title: 'Epoxi', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Epoxi' },
+                                    {
+                                        title: 'Galvanizado',
+                                        url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Galvanizado',
+                                    },
+                                    { title: 'Madera', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Madera' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Accesorios',
+                                url: '/shop/catalog?family=Pinturas&category=Accesorios',
+                                children: [
+                                    {
+                                        title: 'Bandejas y jarras',
+                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Bandejas y jarras',
+                                    },
+                                    {
+                                        title: 'Extensores',
+                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Extensores',
+                                    },
+                                    { title: 'Kits', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Kits' },
+                                    { title: 'Pinceles', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Pinceles' },
+                                    {
+                                        title: 'Pinceletas',
+                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Pinceletas',
+                                    },
+                                    { title: 'Rodillos', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Rodillos' },
+                                    { title: 'Varios', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Varios' },
+                                    {
+                                        title: 'Venda p/pared',
+                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Venda p/pared',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Equipos de pintar',
+                                url: '/shop/catalog?family=Pinturas&category=Equipos de pintar',
+                                children: [
+                                    {
+                                        title: 'Accesorios',
+                                        url: '/shop/catalog?family=Pinturas&category=Equipos de pintar&subcategory=Accesorios',
+                                    },
+                                    {
+                                        title: 'Airless',
+                                        url: '/shop/catalog?family=Pinturas&category=Equipos de pintar&subcategory=Airless',
+                                    },
+                                    {
+                                        title: 'Pistolas',
+                                        url: '/shop/catalog?family=Pinturas&category=Equipos de pintar&subcategory=Pistolas',
+                                    },
+                                    {
+                                        title: 'Sopletes',
+                                        url: '/shop/catalog?family=Pinturas&category=Equipos de pintar&subcategory=Sopletes',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Varios',
+                                url: '/shop/catalog?family=Pinturas&category=Varios',
+                                children: [
+                                    { title: 'Colorantes', url: '/shop/catalog?family=Pinturas&category=Varios&subcategory=Colorantes' },
+                                    { title: 'Entonadores', url: '/shop/catalog?family=Pinturas&category=Varios&subcategory=Entonadores' },
                                 ],
                             },
                         ],
@@ -621,41 +781,26 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Ollas, sartenes, planchas',
-                                url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas',
+                                title: 'Accesorios',
+                                url: '/shop/catalog?family=Bazar&category=Accesorios',
                                 children: [
+                                    { title: 'Bandejas', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Bandejas' },
                                     {
-                                        title: 'Acero inoxidable',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Acero inoxidable',
+                                        title: 'Barra magnética',
+                                        url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Barra magnética',
                                     },
                                     {
-                                        title: 'Antiadherente paris',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Antiadherente paris',
+                                        title: 'Chairas y afiladores',
+                                        url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Chairas y afiladores',
                                     },
+                                    { title: 'Cocina', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Cocina' },
                                     {
-                                        title: 'Hierro',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Hierro',
+                                        title: 'Escurridores',
+                                        url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Escurridores',
                                     },
-                                    {
-                                        title: 'Antiadherente',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Antiadherente',
-                                    },
-                                    {
-                                        title: 'Aluminio fundido con antiadherente',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Aluminio fundido con antiadherente',
-                                    },
-                                    {
-                                        title: 'Esmaltada',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Esmaltada',
-                                    },
-                                    {
-                                        title: 'Aluminio pulido',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Aluminio pulido',
-                                    },
-                                    {
-                                        title: 'Acero pulido',
-                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Acero pulido',
-                                    },
+                                    { title: 'Espátulas', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Espátulas' },
+                                    { title: 'Mesa', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Mesa' },
+                                    { title: 'Parrilla', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Parrilla' },
                                 ],
                             },
                         ],
@@ -668,36 +813,36 @@ const header: INav = [
                                 url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras',
                                 children: [
                                     {
-                                        title: 'Cuchillas',
-                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cuchillas',
-                                    },
-                                    {
                                         title: 'Cubierto acero inoxidable',
                                         url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cubierto acero inoxidable',
                                     },
                                     {
-                                        title: 'Cubierto mango polipropileno',
-                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cubierto mango polipropileno',
+                                        title: 'Cubierto de niño',
+                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cubierto de niño',
                                     },
                                     {
                                         title: 'Cubierto mango madera',
                                         url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cubierto mango madera',
                                     },
                                     {
-                                        title: 'Tijeras',
-                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Tijeras',
+                                        title: 'Cubierto mango polipropileno',
+                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cubierto mango polipropileno',
                                     },
                                     {
-                                        title: 'Trinchar - parrilla',
-                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Trinchar - parrilla',
+                                        title: 'Cuchillas',
+                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cuchillas',
+                                    },
+                                    {
+                                        title: 'Cuchillos de monte',
+                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cuchillos de monte',
                                     },
                                     {
                                         title: 'Tacos',
                                         url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Tacos',
                                     },
                                     {
-                                        title: 'Cuchillos de monte',
-                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Cuchillos de monte',
+                                        title: 'Tijeras',
+                                        url: '/shop/catalog?family=Bazar&category=Cubiertos, cuchillos y tijeras&subcategory=Tijeras',
                                     },
                                 ],
                             },
@@ -707,20 +852,13 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Accesorios',
-                                url: '/shop/catalog?family=Bazar&category=Accesorios',
+                                title: 'Ollas, sartenes, planchas',
+                                url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas',
                                 children: [
-                                    { title: 'Cocina', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Cocina' },
-                                    { title: 'Utensilios', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Utensilios' },
-                                    { title: 'Varios', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Varios' },
-                                    { title: 'Vino & bar', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Vino & bar' },
-                                    { title: 'Espatulas', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Espatulas' },
-                                    { title: 'Pinzas', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Pinzas' },
                                     {
-                                        title: 'Chairas y afiladores',
-                                        url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Chairas y afiladores',
+                                        title: 'Acero inoxidable',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Acero inoxidable',
                                     },
-                                    { title: 'Ralladores', url: '/shop/catalog?family=Bazar&category=Accesorios&subcategory=Ralladores' },
                                 ],
                             },
                         ],
@@ -732,21 +870,21 @@ const header: INav = [
                                 title: 'Vajilla',
                                 url: '/shop/catalog?family=Bazar&category=Vajilla',
                                 children: [
-                                    { title: 'Vidrio', url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Vidrio' },
-                                    { title: 'Ceramica', url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Ceramica' },
-                                    {
-                                        title: 'Te y cafe de vidrio',
-                                        url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Te y cafe de vidrio',
-                                    },
-                                    { title: 'Porcelana', url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Porcelana' },
-                                    {
-                                        title: 'Bols apilable de vidrio',
-                                        url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Bols apilable de vidrio',
-                                    },
                                     {
                                         title: 'Acero inoxidable',
                                         url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Acero inoxidable',
                                     },
+                                    {
+                                        title: 'Bols apilable de vidrio',
+                                        url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Bols apilable de vidrio',
+                                    },
+                                    { title: 'Cerámica', url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Cerámica' },
+                                    { title: 'Porcelana', url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Porcelana' },
+                                    {
+                                        title: 'Te y café de vidrio',
+                                        url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Te y café de vidrio',
+                                    },
+                                    { title: 'Vidrio', url: '/shop/catalog?family=Bazar&category=Vajilla&subcategory=Vidrio' },
                                 ],
                             },
                         ],
@@ -758,18 +896,41 @@ const header: INav = [
                                 title: 'Horno',
                                 url: '/shop/catalog?family=Bazar&category=Horno',
                                 children: [
-                                    { title: 'Antiadherente', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Antiadherente' },
-                                    {
-                                        title: 'Aluminio pulido',
-                                        url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Aluminio pulido',
-                                    },
-                                    { title: 'Vidrio', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Vidrio' },
-                                    { title: 'Ceramica', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Ceramica' },
                                     {
                                         title: 'Acero inoxidable',
                                         url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Acero inoxidable',
                                     },
-                                    { title: 'Hierro', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Hierro' },
+                                    {
+                                        title: 'Aluminio pulido',
+                                        url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Aluminio pulido',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Cristalería, copas, vasos, jarras',
+                                url: '/shop/catalog?family=Bazar&category=Cristalería, copas, vasos, jarras',
+                                children: [
+                                    {
+                                        title: 'Cerveza',
+                                        url: '/shop/catalog?family=Bazar&category=Cristalería, copas, vasos, jarras&subcategory=Cerveza',
+                                    },
+                                    {
+                                        title: 'Copas',
+                                        url: '/shop/catalog?family=Bazar&category=Cristalería, copas, vasos, jarras&subcategory=Copas',
+                                    },
+                                    {
+                                        title: 'Jarras',
+                                        url: '/shop/catalog?family=Bazar&category=Cristalería, copas, vasos, jarras&subcategory=Jarras',
+                                    },
+                                    {
+                                        title: 'Vasos',
+                                        url: '/shop/catalog?family=Bazar&category=Cristalería, copas, vasos, jarras&subcategory=Vasos',
+                                    },
                                 ],
                             },
                         ],
@@ -781,14 +942,14 @@ const header: INav = [
                                 title: 'Termos',
                                 url: '/shop/catalog?family=Bazar&category=Termos',
                                 children: [
-                                    { title: 'Termo, mug', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Termo, mug' },
+                                    { title: 'Conservadoras', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Conservadoras' },
                                     { title: 'Jarra', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Jarra' },
+                                    { title: 'Tapones', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Tapones' },
                                     {
                                         title: 'Termo para comida',
                                         url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Termo para comida',
                                     },
-                                    { title: 'Tapones', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Tapones' },
-                                    { title: 'Conservadoras', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Conservadoras' },
+                                    { title: 'Termo, mug', url: '/shop/catalog?family=Bazar&category=Termos&subcategory=Termo, mug' },
                                 ],
                             },
                         ],
@@ -797,37 +958,24 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Cristaleria, copas, vasos, jarras',
-                                url: '/shop/catalog?family=Bazar&category=Cristaleria, copas, vasos, jarras',
+                                title: 'Varios',
+                                url: '/shop/catalog?family=Bazar&category=Varios',
                                 children: [
-                                    {
-                                        title: 'Vasos vidrio',
-                                        url: '/shop/catalog?family=Bazar&category=Cristaleria, copas, vasos, jarras&subcategory=Vasos vidrio',
-                                    },
-                                    {
-                                        title: 'Copas vidrio',
-                                        url: '/shop/catalog?family=Bazar&category=Cristaleria, copas, vasos, jarras&subcategory=Copas vidrio',
-                                    },
-                                    {
-                                        title: 'Jarras vidrio',
-                                        url: '/shop/catalog?family=Bazar&category=Cristaleria, copas, vasos, jarras&subcategory=Jarras vidrio',
-                                    },
-                                    {
-                                        title: 'Cerveza',
-                                        url: '/shop/catalog?family=Bazar&category=Cristaleria, copas, vasos, jarras&subcategory=Cerveza',
-                                    },
+                                    { title: 'Balanzas', url: '/shop/catalog?family=Bazar&category=Varios&subcategory=Balanzas' },
+                                    { title: 'Barbacoas', url: '/shop/catalog?family=Bazar&category=Varios&subcategory=Barbacoas' },
+                                    { title: 'Tablas', url: '/shop/catalog?family=Bazar&category=Varios&subcategory=Tablas' },
+                                    { title: 'Relojes', url: '/shop/catalog?family=Bazar&category=Varios&subcategory=Relojes' },
                                 ],
                             },
                         ],
                     },
-                    { size: 3, links: [{ title: 'Tablas', url: '/shop/catalog?family=Bazar&category=Tablas', children: [] }] },
                 ],
             },
         },
     },
     {
         title: 'ELECTRODOMÉSTICOS',
-        url: '/shop/catalog?family=Electrodomesticos',
+        url: '/shop/catalog?family=Electrodomésticos',
         submenu: {
             type: 'megamenu',
             menu: {
@@ -838,32 +986,36 @@ const header: INav = [
                         links: [
                             {
                                 title: 'Cocina',
-                                url: '/shop/catalog?family=Electrodomesticos&category=Cocina',
+                                url: '/shop/catalog?family=Electrodomésticos&category=Cocina',
                                 children: [
-                                    { title: 'Anafes', url: '/shop/catalog?family=Electrodomesticos&category=Cocina&subcategory=Anafes' },
                                     {
-                                        title: 'Freidoras',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Cocina&subcategory=Freidoras',
+                                        title: 'Anafes a gas',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Anafes a gas',
+                                    },
+                                    {
+                                        title: 'Anafes eléctrico',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Anafes eléctrico',
+                                    },
+                                    {
+                                        title: 'Cortadora de fiambre',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Cortadora de fiambre',
+                                    },
+                                    {
+                                        title: 'Freidoras con aceite',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Freidoras con aceite',
+                                    },
+                                    {
+                                        title: 'Freidoras sin aceite',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Freidoras sin aceite',
                                     },
                                     {
                                         title: 'Microondas',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Cocina&subcategory=Microondas',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Microondas',
                                     },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Soportes',
-                                url: '/shop/catalog?family=Electrodomesticos&category=Soportes',
-                                children: [
-                                    { title: 'Tv', url: '/shop/catalog?family=Electrodomesticos&category=Soportes&subcategory=Tv' },
+                                    { title: 'Mixers', url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Mixers' },
                                     {
-                                        title: 'Electrodomesticos',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Soportes&subcategory=Electrodomesticos',
+                                        title: 'Picadoras de carne',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Cocina&subcategory=Picadoras de carne',
                                     },
                                 ],
                             },
@@ -874,23 +1026,31 @@ const header: INav = [
                         links: [
                             {
                                 title: 'Desayuno',
-                                url: '/shop/catalog?family=Electrodomesticos&category=Desayuno',
+                                url: '/shop/catalog?family=Electrodomésticos&category=Desayuno',
                                 children: [
                                     {
-                                        title: 'Jarras electricas',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Desayuno&subcategory=Jarras electricas',
-                                    },
-                                    {
                                         title: 'Cafeteras',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Desayuno&subcategory=Cafeteras',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Desayuno&subcategory=Cafeteras',
                                     },
                                     {
-                                        title: 'Tostadora',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Desayuno&subcategory=Tostadora',
+                                        title: 'Exprimidor',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Desayuno&subcategory=Exprimidor',
                                     },
                                     {
-                                        title: 'Sandwicheras',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Desayuno&subcategory=Sandwicheras',
+                                        title: 'Jarras eléctricas',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Desayuno&subcategory=Jarras eléctricas',
+                                    },
+                                    {
+                                        title: 'Sandwichera',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Desayuno&subcategory=Sandwichera',
+                                    },
+                                    {
+                                        title: 'Sandwicheras Waflera Grill',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Desayuno&subcategory=Sandwicheras Waflera Grill',
+                                    },
+                                    {
+                                        title: 'Tostadoras',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Desayuno&subcategory=Tostadoras',
                                     },
                                 ],
                             },
@@ -900,111 +1060,47 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Calefaccion',
-                                url: '/shop/catalog?family=Electrodomesticos&category=Calefaccion',
+                                title: 'Batidoras y Licuadoras',
+                                url: '/shop/catalog?family=Electrodomésticos&category=Batidoras y Licuadoras',
                                 children: [
                                     {
-                                        title: 'Estufas',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Calefaccion&subcategory=Estufas',
+                                        title: 'Batidora hogar',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Batidoras y Licuadoras&subcategory=Batidora hogar',
+                                    },
+                                    {
+                                        title: 'Batidora profesional',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Batidoras y Licuadoras&subcategory=Batidora profesional',
+                                    },
+                                    {
+                                        title: 'Licuadora',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Batidoras y Licuadoras&subcategory=Licuadora',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        size: 3,
+                        links: [
+                            {
+                                title: 'Calefacción',
+                                url: '/shop/catalog?family=Electrodomésticos&category=Calefacción',
+                                children: [
+                                    {
+                                        title: 'Calienta camas',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Calefacción&subcategory=Calienta camas',
                                     },
                                     {
                                         title: 'Caloventiladores',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Calefaccion&subcategory=Caloventiladores',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Calefacción&subcategory=Caloventiladores',
                                     },
                                     {
-                                        title: 'Calienta camas',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Calefaccion&subcategory=Calienta camas',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [{ title: 'Extractores', url: '/shop/catalog?family=Electrodomesticos&category=Extractores', children: [] }],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Ayudantes de cocina',
-                                url: '/shop/catalog?family=Electrodomesticos&category=Ayudantes de cocina',
-                                children: [
-                                    {
-                                        title: 'Mixers',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Ayudantes de cocina&subcategory=Mixers',
+                                        title: 'Estufas convectora',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Calefacción&subcategory=Estufas convectora',
                                     },
                                     {
-                                        title: 'Picadoras de carne',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Ayudantes de cocina&subcategory=Picadoras de carne',
-                                    },
-                                    {
-                                        title: 'Cortadora de fiambre',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Ayudantes de cocina&subcategory=Cortadora de fiambre',
-                                    },
-                                    {
-                                        title: 'Exprimidores',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Ayudantes de cocina&subcategory=Exprimidores',
-                                    },
-                                    {
-                                        title: 'Multiprocesadores',
-                                        url: '/shop/catalog?family=Electrodomesticos&category=Ayudantes de cocina&subcategory=Multiprocesadores',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [{ title: 'Batidoras', url: '/shop/catalog?family=Electrodomesticos&category=Batidoras', children: [] }],
-                    },
-                    {
-                        size: 3,
-                        links: [{ title: 'Licuadoras', url: '/shop/catalog?family=Electrodomesticos&category=Licuadoras', children: [] }],
-                    },
-                ],
-            },
-        },
-    },
-    {
-        title: 'PINTURAS',
-        url: '/shop/catalog?family=Pinturas',
-        submenu: {
-            type: 'megamenu',
-            menu: {
-                size: 'xl',
-                columns: [
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Paredes',
-                                url: '/shop/catalog?family=Pinturas&category=Paredes',
-                                children: [
-                                    { title: 'Base agua', url: '/shop/catalog?family=Pinturas&category=Paredes&subcategory=Base agua' },
-                                    {
-                                        title: 'Sistema selfcolors',
-                                        url: '/shop/catalog?family=Pinturas&category=Paredes&subcategory=Sistema selfcolors',
-                                    },
-                                    { title: 'Especiales', url: '/shop/catalog?family=Pinturas&category=Paredes&subcategory=Especiales' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Madera y metal',
-                                url: '/shop/catalog?family=Pinturas&category=Madera y metal',
-                                children: [
-                                    {
-                                        title: 'Esmaltes',
-                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Esmaltes',
-                                    },
-                                    {
-                                        title: 'Sistema selfcolors',
-                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Sistema selfcolors',
+                                        title: 'Estufas cuarzo',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Calefacción&subcategory=Estufas cuarzo',
                                     },
                                 ],
                             },
@@ -1014,80 +1110,28 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Accesorios',
-                                url: '/shop/catalog?family=Pinturas&category=Accesorios',
+                                title: 'Soportes',
+                                url: '/shop/catalog?family=Electrodomésticos&category=Soportes',
                                 children: [
-                                    { title: 'Pinceles', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Pinceles' },
-                                    { title: 'Rodillos', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Rodillos' },
                                     {
-                                        title: 'Pinceletas',
-                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Pinceletas',
-                                    },
-                                    { title: 'Bandejas', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Bandejas' },
-                                    {
-                                        title: 'Venda p/pared',
-                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Venda p/pared',
+                                        title: 'Articulado para Tv',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Soportes&subcategory=Articulado para Tv',
                                     },
                                     {
-                                        title: 'Extensores',
-                                        url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Extensores',
-                                    },
-                                    { title: 'Kits', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Kits' },
-                                    { title: 'Jarras', url: '/shop/catalog?family=Pinturas&category=Accesorios&subcategory=Jarras' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Madera',
-                                url: '/shop/catalog?family=Pinturas&category=Madera',
-                                children: [
-                                    { title: 'Barniz', url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Barniz' },
-                                    { title: 'Protectores', url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Protectores' },
-                                    {
-                                        title: 'Lacas y plastificantes',
-                                        url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Lacas y plastificantes',
+                                        title: 'Consolas - decodificador',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Soportes&subcategory=Consolas - decodificador',
                                     },
                                     {
-                                        title: 'Protectores (base agua)',
-                                        url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Protectores (base agua)',
+                                        title: 'Electrodomésticos',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Soportes&subcategory=Electrodomésticos',
                                     },
                                     {
-                                        title: 'Protectores (para deck)',
-                                        url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Protectores (para deck)',
+                                        title: 'Fijo para Tv',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Soportes&subcategory=Fijo para Tv',
                                     },
                                     {
-                                        title: 'Lacas y lastificante (base agua)',
-                                        url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Lacas y lastificante (base agua)',
-                                    },
-                                    { title: 'Esmaltes', url: '/shop/catalog?family=Pinturas&category=Madera&subcategory=Esmaltes' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Aerosol',
-                                url: '/shop/catalog?family=Pinturas&category=Aerosol',
-                                children: [
-                                    { title: 'Esmaltes', url: '/shop/catalog?family=Pinturas&category=Aerosol&subcategory=Esmaltes' },
-                                    { title: 'Especiales', url: '/shop/catalog?family=Pinturas&category=Aerosol&subcategory=Especiales' },
-                                    {
-                                        title: 'Alta temperatura',
-                                        url: '/shop/catalog?family=Pinturas&category=Aerosol&subcategory=Alta temperatura',
-                                    },
-                                    {
-                                        title: 'Aceites, grasas y lubricantes',
-                                        url: '/shop/catalog?family=Pinturas&category=Aerosol&subcategory=Aceites, grasas y lubricantes',
-                                    },
-                                    {
-                                        title: 'Espuma poliuretano',
-                                        url: '/shop/catalog?family=Pinturas&category=Aerosol&subcategory=Espuma poliuretano',
+                                        title: 'Microondas',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Soportes&subcategory=Microondas',
                                     },
                                 ],
                             },
@@ -1097,48 +1141,25 @@ const header: INav = [
                         size: 3,
                         links: [
                             {
-                                title: 'Complementos',
-                                url: '/shop/catalog?family=Pinturas&category=Complementos',
+                                title: 'Extractores y Ventilación',
+                                url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación',
                                 children: [
-                                    { title: 'Metal', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Metal' },
-                                    { title: 'Madera', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Madera' },
-                                    { title: 'Paredes', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Paredes' },
                                     {
-                                        title: 'Restaurador y mateantes',
-                                        url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Restaurador y mateantes',
+                                        title: 'Extractor baño',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor baño',
                                     },
                                     {
-                                        title: 'Galvanizado',
-                                        url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Galvanizado',
+                                        title: 'Extractor cocina',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor cocina',
                                     },
-                                    { title: 'Epoxi', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Epoxi' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Metal',
-                                url: '/shop/catalog?family=Pinturas&category=Metal',
-                                children: [
-                                    { title: 'Esmaltes', url: '/shop/catalog?family=Pinturas&category=Metal&subcategory=Esmaltes' },
-                                    { title: 'Esmalte', url: '/shop/catalog?family=Pinturas&category=Metal&subcategory=Esmalte' },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        size: 3,
-                        links: [
-                            {
-                                title: 'Entonadores',
-                                url: '/shop/catalog?family=Pinturas&category=Entonadores',
-                                children: [
-                                    { title: 'Madera', url: '/shop/catalog?family=Pinturas&category=Entonadores&subcategory=Madera' },
-                                    { title: 'Base agua', url: '/shop/catalog?family=Pinturas&category=Entonadores&subcategory=Base agua' },
-                                    { title: 'Universal', url: '/shop/catalog?family=Pinturas&category=Entonadores&subcategory=Universal' },
+                                    {
+                                        title: 'Extractor industrial',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor industrial',
+                                    },
+                                    {
+                                        title: 'Ventiladores hogar',
+                                        url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Ventiladores hogar',
+                                    },
                                 ],
                             },
                         ],
