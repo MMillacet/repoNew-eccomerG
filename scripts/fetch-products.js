@@ -15,22 +15,22 @@ const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 const makeProduct = (product) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
+    const subsubcategory = product.subsubcategory || product.subSubCategory || null;
     return {
         ...product,
         id: Number(code),
         slug: code,
         code,
-        title: product.title,
-        family: product.family,
-        category: product.category,
         subcategory,
-        unitMult: product.unitMult,
-        // images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
+        subsubcategory,
+        unitMult: Number(product.unitMult),
+        unitsPerItem: Number(product.unitsPerItem),
+        images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
+        availability: product.hasStock ? 'in-stock' : 'out-of-stock',
         brand: {
             name: product.brand,
             slug: nameToSlug(product.brand),
         },
-        relatedItems: product.relatedItems,
     };
 };
 
@@ -62,7 +62,6 @@ const lookup = async (itemcodes) => {
     data.products = await Promise.all(
         data.products.map(async (product) => {
             const p = makeProduct(product);
-
             const [documents, images] = await Promise.all([getDocuments(p.id), getImages(p.id)]);
 
             p.images = images;
@@ -115,11 +114,9 @@ const run = async () => {
     try {
         let i = 0;
         let itemcodesToLookup = itemcodes.slice(i, i + 300);
-        console.log(itemcodesToLookup);
         while (itemcodesToLookup.length > 0) {
             // eslint-disable-next-line no-await-in-loop
             const { products } = await lookup(itemcodesToLookup);
-            console.log({ products });
 
             products.forEach((p) => {
                 const filecode = fileCode(p.id);

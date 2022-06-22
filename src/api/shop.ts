@@ -64,7 +64,7 @@ const shopApi = {
     getCategoryBySlug: async (slug: string): Promise<ICategory> => {
         const { categoriesListData } = await getCategoriesData();
         const category = categoriesListData.find((x) => x.slug === slug);
-        return category ? Promise.resolve(prepareCategory(category, 2)) : Promise.reject();
+        return category ? Promise.resolve(prepareCategory(category, 3)) : Promise.reject();
     },
     /**
      * Returns product.

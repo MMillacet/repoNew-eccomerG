@@ -43,6 +43,7 @@ export interface IProduct {
     family: string;
     category: string;
     subcategory: string;
+    subsubcategory: string;
     hasBought: boolean;
     tax: number;
     relatedItems: string[];

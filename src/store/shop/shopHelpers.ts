@@ -44,6 +44,9 @@ export function parseQuerySearchOptions(query: string) {
     if (typeof queryObject.subcategory === 'string') {
         searchOptionValues.subcategory = queryObject.subcategory;
     }
+    if (typeof queryObject.subsubcategory === 'string') {
+        searchOptionValues.subsubcategory = queryObject.subsubcategory;
+    }
     if (typeof queryObject.brand === 'string') {
         searchOptionValues.brand = queryObject.brand;
     }
@@ -103,6 +106,10 @@ export function buildQuery(options: IListOptions, filters: IFilterValues, search
         params.subcategory = searchOptions.subcategory;
     }
 
+    if (searchOptions.subsubcategory) {
+        params.subsubcategory = searchOptions.subsubcategory;
+    }
+
     if (searchOptions.brand) {
         params.brand = searchOptions.brand;
     }
@@ -122,7 +129,6 @@ export default async function getShopPageData(
     slug?: string,
 ): Promise<void> {
     let categorySlug = slug || (typeof context.params?.slug === 'string' ? context.params.slug : null);
-
     const dispatch = store.dispatch as AppDispatch;
 
     if ('req' in context) {
@@ -140,12 +146,14 @@ export default async function getShopPageData(
             searchOptions.cardcode = cardcode; // This doesn't come from the query string
 
             if (!categorySlug) {
-                if (searchOptions.family) {
-                    categorySlug = nameToSlug(searchOptions.family);
-                } else if (searchOptions.category) {
-                    categorySlug = nameToSlug(searchOptions.category);
+                if (searchOptions.subsubcategory) {
+                    categorySlug = nameToSlug(searchOptions.subsubcategory);
                 } else if (searchOptions.subcategory) {
                     categorySlug = nameToSlug(searchOptions.subcategory);
+                } else if (searchOptions.category) {
+                    categorySlug = nameToSlug(searchOptions.category);
+                } else if (searchOptions.family) {
+                    categorySlug = nameToSlug(searchOptions.family);
                 }
             }
 

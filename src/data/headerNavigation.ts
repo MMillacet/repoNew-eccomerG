@@ -415,8 +415,8 @@ const header: INav = [
                                         url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras&subcategory=A nafta',
                                     },
                                     {
-                                        title: 'Eléctrico',
-                                        url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras&subcategory=Eléctrico',
+                                        title: 'Eléctricas',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Bordeadoras y desmalezadoras&subcategory=Eléctricas',
                                     },
                                 ],
                             },
@@ -461,8 +461,8 @@ const header: INav = [
                                         url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped&subcategory=A nafta',
                                     },
                                     {
-                                        title: 'Eléctrico',
-                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped&subcategory=Eléctrico',
+                                        title: 'Eléctricas',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortadoras de césped&subcategory=Eléctricas',
                                     },
                                 ],
                             },
@@ -484,8 +484,8 @@ const header: INav = [
                                         url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores&subcategory=A nafta',
                                     },
                                     {
-                                        title: 'Eléctrico',
-                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores&subcategory=Eléctrico',
+                                        title: 'Eléctricos',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Cortacercos y sopladores&subcategory=Eléctricos',
                                     },
                                 ],
                             },
@@ -1148,6 +1148,7 @@ const header: INav = [
                                         title: 'Extractor baño',
                                         url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor baño',
                                     },
+
                                     {
                                         title: 'Extractor cocina',
                                         url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor cocina',

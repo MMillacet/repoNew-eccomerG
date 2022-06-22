@@ -113,6 +113,7 @@ export function shopFetchCategoryThunk(categorySlug: string | null): ShopThunkAc
         if (canceled) {
             return;
         }
+
         dispatch(shopFetchCategorySuccess(category));
     };
 }
@@ -141,6 +142,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
             filters = { ...filters, category: shopState.categorySlug };
 
             // category can come from search params or from slug
+            // TODO check this
             if (category && category.level) {
                 if (category.level === 'family') {
                     searchOpts.family = category.name;
@@ -148,6 +150,8 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
                     searchOpts.category = category.name;
                 } else if (category.level === 'subcategory') {
                     searchOpts.subcategory = category.name;
+                } else if (category.level === 'subsubcategory') {
+                    searchOpts.subsubcategory = category.name;
                 } else if (category.level === 'brand') {
                     searchOpts.brand = category.name;
                 }

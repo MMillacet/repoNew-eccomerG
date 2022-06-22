@@ -24,12 +24,14 @@ export interface LookupOptions {
 const makeProduct = (product: any) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
+    const subsubcategory = product.subsubcategory || product.subSubCategory || null;
     return {
         ...product,
         id: Number(code),
         slug: code,
         code,
         subcategory,
+        subsubcategory,
         unitMult: Number(product.unitMult),
         unitsPerItem: Number(product.unitsPerItem),
         images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
@@ -159,13 +161,14 @@ const goldfarbApi = {
         }
     },
 
-    getProductsSearch2: async (params: {
+    getProductsSearch: async (params: {
         term: string;
         cardcode?: string;
         orderby?: string;
         family?: string;
         category?: string;
         subcategory?: string;
+        subsubcategory?: string;
         brand?: string;
     }) => {
         // price-high-to-low or price-low-to-high

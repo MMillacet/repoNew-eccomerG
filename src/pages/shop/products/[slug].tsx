@@ -47,7 +47,9 @@ const lookupProductsLocally = async (itemcodes: string[]) => {
                 const products = await (await fetch(`https://goldfarb-ecommerce.vercel.app/products/${filecode}.json`)).json();
                 const product = products[code];
 
-                result.push(product);
+                if (product) {
+                    result.push(product);
+                }
             } catch (e) {
                 console.error('Failed to add product', code);
             }
@@ -62,7 +64,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         const { slug } = context.params;
         const categories = await shopApi.getCategories({ depth: 1 });
 
-        const products = await lookupProductsLocally([slug]);
+        let products = await lookupProductsLocally([slug]);
+
+        if (products.length === 0) {
+            products = (await goldfarbApi.getProductsLookup({ itemcodes: [slug], withDesc: 'true' })).products;
+        }
 
         const [product] = products;
 
