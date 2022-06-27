@@ -41,7 +41,6 @@ import { wrapper } from '../../../store/store';
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
     await getShopPageData(store, context);
-
     return { props: {} };
 });
 

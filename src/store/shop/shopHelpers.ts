@@ -144,9 +144,16 @@ export default async function getShopPageData(
             const filters = parseQueryFilters(query);
             const searchOptions = parseQuerySearchOptions(query);
             searchOptions.cardcode = cardcode; // This doesn't come from the query string
-
             if (!categorySlug) {
-                if (searchOptions.subsubcategory) {
+                if (searchOptions.subsubcategory && searchOptions.subcategory) {
+                    categorySlug = `${nameToSlug(searchOptions.subcategory)}-${nameToSlug(searchOptions.subsubcategory)}`;
+                } else if (searchOptions.subcategory && searchOptions.category) {
+                    categorySlug = `${nameToSlug(searchOptions.category)}-${nameToSlug(searchOptions.subcategory)}`;
+                } else if (searchOptions.category && searchOptions.family) {
+                    categorySlug = `${nameToSlug(searchOptions.family)}-${nameToSlug(searchOptions.category)}`;
+                } else if (searchOptions.family) {
+                    categorySlug = nameToSlug(searchOptions.family);
+                } else if (searchOptions.subsubcategory) {
                     categorySlug = nameToSlug(searchOptions.subsubcategory);
                 } else if (searchOptions.subcategory) {
                     categorySlug = nameToSlug(searchOptions.subcategory);
@@ -156,7 +163,6 @@ export default async function getShopPageData(
                     categorySlug = nameToSlug(searchOptions.family);
                 }
             }
-
             await dispatch(shopInitThunk(categorySlug, options, filters, searchOptions));
         }
     } else {

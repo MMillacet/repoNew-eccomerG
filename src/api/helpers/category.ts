@@ -62,19 +62,20 @@ export const familiesToCategories = (families: any[]) => {
         level: 'family',
         children: family.categories.map((category: { name: string; subcategories: any[] }) => ({
             name: category.name,
-            slug: nameToSlug(category.name),
+            slug: `${nameToSlug(family.name)}-${nameToSlug(category.name)}`,
             level: 'category',
             children: category.subcategories.map((subcategory: { name: string; subsubcategories: any[] }) => ({
                 name: subcategory.name,
-                slug: nameToSlug(subcategory.name),
+                slug: `${nameToSlug(category.name)}-${nameToSlug(subcategory.name)}`,
                 level: 'subcategory',
                 children: subcategory.subsubcategories.map((subsubcategory: string) => ({
                     name: subsubcategory,
-                    slug: nameToSlug(subsubcategory),
+                    slug: `${nameToSlug(subcategory.name)}-${nameToSlug(subsubcategory)}`,
                     level: 'subsubcategory',
                 })),
             })),
         })),
     }));
+
     return categories;
 };

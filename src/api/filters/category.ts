@@ -6,10 +6,10 @@ import { prepareCategory } from '../helpers/category';
 import { nameToSlug } from '../helpers/utils';
 
 const productHasCategory = (product: IProduct, category: string): boolean =>
-    nameToSlug(product.family) === category ||
-    nameToSlug(product.category) === category ||
-    nameToSlug(product.subcategory) === category ||
-    nameToSlug(product.subsubcategory) === category;
+    `${nameToSlug(product.family)}-${nameToSlug(product.category)}` === category ||
+    `${nameToSlug(product.category)}-${nameToSlug(product.subcategory)}` === category ||
+    `${nameToSlug(product.subcategory)}-${nameToSlug(product.subsubcategory)}` === category ||
+    nameToSlug(product.family) === category;
 
 export default class CategoryFilterBuilder extends AbstractFilterBuilder<ICategoryFilter> {
     value: ICategoryFilterValue = null;
@@ -53,10 +53,10 @@ export default class CategoryFilterBuilder extends AbstractFilterBuilder<ICatego
 
     categoryHasProducts = (category: ICategory, products: IProduct[]) => {
         const hasCategory = (product: IProduct, category: ICategory): boolean =>
-            nameToSlug(product.family) === category.slug ||
-            nameToSlug(product.category) === category.slug ||
-            nameToSlug(product.subcategory) === category.slug ||
-            nameToSlug(product.subsubcategory) === category.slug;
+            `${nameToSlug(product.family)}-${nameToSlug(product.category)}` === category.slug ||
+            `${nameToSlug(product.category)}-${nameToSlug(product.subcategory)}` === category.slug ||
+            `${nameToSlug(product.subcategory)}-${nameToSlug(product.subsubcategory)}` === category.slug ||
+            nameToSlug(product.family) === category.slug;
 
         // return false;
         return products.reduce((acc, product) => acc || hasCategory(product, category), false);
