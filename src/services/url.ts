@@ -27,10 +27,20 @@ const url = {
         throw Error('Undefined category type');
     },
 
-    shopCategory: (category: IShopCategory): ILinkProps => ({
-        href: `/shop/catalog?${category.level}=${category.name}`,
-        as: `/shop/catalog?${category.level}=${category.name}`,
-    }),
+    shopCategory: (category: IShopCategory): ILinkProps => {
+        let url = `/shop/catalog?${category.level}=${category.name}`;
+        let parentCategory = category.parent;
+
+        while (parentCategory) {
+            url += `&${parentCategory.level}=${parentCategory.name}`;
+            parentCategory = parentCategory.parent;
+        }
+
+        return {
+            href: url,
+            as: url,
+        };
+    },
 
     product: (product: { id: number }): ILinkProps => ({
         href: '/shop/products/[slug]',

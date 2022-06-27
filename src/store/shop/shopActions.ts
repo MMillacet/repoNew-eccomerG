@@ -131,7 +131,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
 
         const shopState = getState()[SHOP_NAMESPACE];
 
-        const { category, searchOptions } = shopState;
+        const { searchOptions } = shopState;
         // let { categoriesData } = shopState;
 
         let { filters } = shopState;
@@ -143,19 +143,19 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
 
             // category can come from search params or from slug
             // TODO check this
-            if (category && category.level) {
-                if (category.level === 'family') {
-                    searchOpts.family = category.name;
-                } else if (category.level === 'category') {
-                    searchOpts.category = category.name;
-                } else if (category.level === 'subcategory') {
-                    searchOpts.subcategory = category.name;
-                } else if (category.level === 'subsubcategory') {
-                    searchOpts.subsubcategory = category.name;
-                } else if (category.level === 'brand') {
-                    searchOpts.brand = category.name;
-                }
-            }
+            // if (category && category.level) {
+            //     if (category.level === 'family') {
+            //         searchOpts.family = category.name;
+            //     } else if (category.level === 'category') {
+            //         searchOpts.category = category.name;
+            //     } else if (category.level === 'subcategory') {
+            //         searchOpts.subcategory = category.name;
+            //     } else if (category.level === 'subsubcategory') {
+            //         searchOpts.subsubcategory = category.name;
+            //     } else if (category.level === 'brand') {
+            //         searchOpts.brand = category.name;
+            //     }
+            // }
         }
 
         // if (typeof window === 'undefined' && !categoriesData) {
