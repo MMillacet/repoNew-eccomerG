@@ -42,7 +42,7 @@ function SitePageContactUs() {
                 <h1 className="contact-us__title">SERVICIO TÉCNICO</h1>
             </div>
 
-            <div className="block">
+            <div className="block contact-us">
                 <div className="container">
                     <div className="row" style={{ marginTop: '40px', marginBottom: '40px' }}>
                         <div
