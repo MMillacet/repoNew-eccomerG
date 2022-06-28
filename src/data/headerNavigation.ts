@@ -1148,7 +1148,6 @@ const header: INav = [
                                         title: 'Extractor baño',
                                         url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor baño',
                                     },
-
                                     {
                                         title: 'Extractor cocina',
                                         url: '/shop/catalog?family=Electrodomésticos&category=Extractores y Ventilación&subcategory=Extractor cocina',

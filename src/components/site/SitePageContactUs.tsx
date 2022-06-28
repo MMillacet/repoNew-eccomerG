@@ -32,6 +32,9 @@ function SitePageContactUs() {
         window.open(`mailto:contacto@goldfarb.com.uy?subject=${subject}&body=${message}`);
     };
 
+    const number = theme.contacts.whatsapp;
+    const link = `https://wa.me/+598${number.replace(/\s/g, '')}`;
+
     return (
         <Fragment>
             <Head>
@@ -46,15 +49,9 @@ function SitePageContactUs() {
                 <div className="container">
                     <div className="row" style={{ marginTop: '40px', marginBottom: '40px' }}>
                         <div
-                            className="contact-us__banner col-12 col-md-5 col-lg-5 justify-content-left atencion"
-                            style={{ marginBottom: '30px' }}
+                            className="contact-us__banner col-12 col-md-7 justify-content-right whatsapp"
+                            onClick={() => window.open(link)}
                         >
-                            <h3 className="atenciontitle">ATENCIÓN PERSONALIZADA</h3>
-                            <h5 className="atencionsubtitle">
-                                Contactanos a través de Whatsapp al <Whatsapp />
-                            </h5>
-                        </div>
-                        <div className="contact-us__banner col-12 col-md-7 justify-content-right">
                             <div
                                 className="contact-us__banner-img"
                                 style={{
@@ -65,8 +62,10 @@ function SitePageContactUs() {
                             >
                                 <img className="whatsappicon" src={'/images/atencioncliente/Atencion al cliente-25.png'}></img>{' '}
                                 <div className="contact-us__banner-img-overlay">
-                                    <h3 className="contact-us__banner-img-overlay-title">NECESITAS AYUDA?</h3>
-                                    <h5 className="contact-us__banner-img-overlay-text">Por favor no dudes en contactarnos</h5>
+                                    <h3 className="contact-us__banner-img-overlay-title">ATENCIÓN PERSONALIZADA</h3>
+                                    <h5 className="contact-us__banner-img-overlay-text">
+                                        Por favor no dudes en contactarnos al <Whatsapp />
+                                    </h5>
                                 </div>
                             </div>
                         </div>
