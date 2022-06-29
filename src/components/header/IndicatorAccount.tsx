@@ -67,7 +67,10 @@ function IndicatorAccount() {
 
     const dropdown = user ? loggedInDropdown : loggedOutDropdown;
 
-    return <Indicator dropdown={dropdown} icon={<Person20Svg />} />;
+    // eslint-disable-next-line no-nested-ternary
+    const username = isUserActivated && user?.name ? user.name : isUserActivated && user.nickname ? user.nickname : undefined;
+
+    return <Indicator dropdown={dropdown} icon={<Person20Svg />} value={username} />;
 }
 
 export default IndicatorAccount;

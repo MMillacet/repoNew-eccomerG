@@ -63,7 +63,12 @@ const shopApi = {
      */
     getCategoryBySlug: async (slug: string): Promise<ICategory> => {
         const { categoriesListData } = await getCategoriesData();
-        const category = categoriesListData.find((x) => x.slug === slug);
+        let category = categoriesListData.find((x) => x.slug === slug);
+
+        if (!category) {
+            category = categoriesListData.find((x) => x.slug.includes(slug));
+        }
+
         return category ? Promise.resolve(prepareCategory(category, 3)) : Promise.reject();
     },
     /**

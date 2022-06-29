@@ -9,7 +9,7 @@ import AppLink from '../shared/AppLink';
 import { ILinkProps } from '../../interfaces/menus/link-props';
 
 export interface IndicatorProps {
-    value?: number;
+    value?: number | string;
     dropdown?: ReactNode;
     icon?: ReactNode;
     url?: string | ILinkProps;
@@ -59,11 +59,7 @@ class Indicator extends Component<IndicatorProps, IndicatorState> {
     handleOutsideClick = (event: MouseEvent) => {
         const { open } = this.state;
 
-        if (
-            this.wrapperRef.current &&
-            !this.wrapperRef.current.contains(event.target as HTMLElement) &&
-            open
-        ) {
+        if (this.wrapperRef.current && !this.wrapperRef.current.contains(event.target as HTMLElement) && open) {
             this.close();
         }
     };
@@ -122,11 +118,7 @@ class Indicator extends Component<IndicatorProps, IndicatorState> {
             );
         } else {
             buttonElement = (
-                <button
-                    type="button"
-                    className="indicator__button"
-                    onClick={this.handleButtonClick}
-                >
+                <button type="button" className="indicator__button" onClick={this.handleButtonClick}>
                     {title}
                 </button>
             );

@@ -65,6 +65,7 @@ function shopReducer(state = initialState, action: ShopAction): ShopState {
                 init: true,
                 categoryIsLoading: false,
                 category: action.category,
+                categorySlug: action.category?.slug || '',
             };
         case SHOP_FETCH_CATEGORIES_DATA_SUCCESS:
             return {

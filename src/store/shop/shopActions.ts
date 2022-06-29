@@ -103,12 +103,12 @@ export function shopFetchCategoryThunk(categorySlug: string | null): ShopThunkAc
         };
 
         let request: Promise<ICategory | null>;
-
         if (categorySlug) {
             request = shopApi.getCategoryBySlug(categorySlug);
         } else {
             request = Promise.resolve(null);
         }
+
         const category = await request;
         if (canceled) {
             return;
@@ -117,6 +117,19 @@ export function shopFetchCategoryThunk(categorySlug: string | null): ShopThunkAc
         dispatch(shopFetchCategorySuccess(category));
     };
 }
+
+const enhanceSearchOptions = (searchOptions: ISearchOptions, category: ICategory): ISearchOptions => {
+    if (category.level === 'subsubcategory' && !searchOptions.subcategory) {
+        return { ...searchOptions, subcategory: category.parent?.name };
+    }
+    if (category.level === 'subcategory' && !searchOptions.category) {
+        return { ...searchOptions, category: category.parent?.name };
+    }
+    if (category.level === 'category' && !searchOptions.family) {
+        return { ...searchOptions, category: category.parent?.name };
+    }
+    return searchOptions;
+};
 
 export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
     return async (dispatch, getState) => {
@@ -136,7 +149,7 @@ export function shopFetchProductsListThunk(): ShopThunkAction<Promise<void>> {
 
         let { filters } = shopState;
 
-        const searchOpts = { ...searchOptions };
+        const searchOpts = shopState.category ? enhanceSearchOptions(searchOptions, shopState.category) : searchOptions;
 
         if (shopState.categorySlug !== null) {
             filters = { ...filters, category: shopState.categorySlug };
