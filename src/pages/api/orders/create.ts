@@ -14,7 +14,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
 
     const result = await goldfarbApi.postOrder(order);
 
-    if (result.state === 'E') {
+    if (result.state !== 'E') {
         res.status(200).json({ orderId: result.message });
     } else {
         console.error({ error: result });
