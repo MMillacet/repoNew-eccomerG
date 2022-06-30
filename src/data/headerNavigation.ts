@@ -278,6 +278,13 @@ const header: INav = [
                                 children: [
                                     { title: 'Banda', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Banda' },
                                     { title: 'Discos', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Discos' },
+                                    { title: 'En banda', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=En banda' },
+                                    { title: 'Hojas', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Hojas' },
+                                    {
+                                        title: 'Lijadora orbital',
+                                        url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Lijadora orbital',
+                                    },
+                                    { title: 'Rollos', url: '/shop/catalog?family=Ferretería&category=Lijas&subcategory=Rollos' },
                                 ],
                             },
                         ],
@@ -613,6 +620,10 @@ const header: INav = [
                                         title: 'Pulverizadores',
                                         url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Pulverizadores',
                                     },
+                                    {
+                                        title: 'Taladro motorizado',
+                                        url: '/shop/catalog?family=Agro y Jardín&category=Varios&subcategory=Taladro motorizado',
+                                    },
                                 ],
                             },
                         ],
@@ -640,6 +651,22 @@ const header: INav = [
                                         title: 'Impermeabilizantes',
                                         url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos&subcategory=Impermeabilizantes',
                                     },
+                                    {
+                                        title: 'Paredes',
+                                        url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos&subcategory=Paredes',
+                                    },
+                                    {
+                                        title: 'Pisos',
+                                        url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos&subcategory=Pisos',
+                                    },
+                                    {
+                                        title: 'Pisos y paredes',
+                                        url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos&subcategory=Pisos y paredes',
+                                    },
+                                    {
+                                        title: 'Techos',
+                                        url: '/shop/catalog?family=Pinturas&category=Paredes, pisos y techos&subcategory=Techos',
+                                    },
                                 ],
                             },
                         ],
@@ -652,6 +679,34 @@ const header: INav = [
                                 url: '/shop/catalog?family=Pinturas&category=Madera y metal',
                                 children: [
                                     { title: 'Barniz', url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Barniz' },
+                                    {
+                                        title: 'Esmaltes para madera',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Esmaltes para madera',
+                                    },
+                                    {
+                                        title: 'Esmaltes para madera y metal',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Esmaltes para madera y metal',
+                                    },
+                                    {
+                                        title: 'Esmaltes para metal',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Esmaltes para metal',
+                                    },
+                                    {
+                                        title: 'Lacas y plastificantes',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Lacas y plastificantes',
+                                    },
+                                    {
+                                        title: 'Protectores para deck',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Protectores para deck',
+                                    },
+                                    {
+                                        title: 'Protectores para madera',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Protectores para madera',
+                                    },
+                                    {
+                                        title: 'Sistema selfcolors',
+                                        url: '/shop/catalog?family=Pinturas&category=Madera y metal&subcategory=Sistema selfcolors',
+                                    },
                                 ],
                             },
                         ],
@@ -690,6 +745,12 @@ const header: INav = [
                                         url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Galvanizado',
                                     },
                                     { title: 'Madera', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Madera' },
+                                    { title: 'Metal', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Metal' },
+                                    { title: 'Paredes', url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Paredes' },
+                                    {
+                                        title: 'Restaurador y mateantes',
+                                        url: '/shop/catalog?family=Pinturas&category=Complementos&subcategory=Restaurador y mateantes',
+                                    },
                                 ],
                             },
                         ],
@@ -761,6 +822,7 @@ const header: INav = [
                                 children: [
                                     { title: 'Colorantes', url: '/shop/catalog?family=Pinturas&category=Varios&subcategory=Colorantes' },
                                     { title: 'Entonadores', url: '/shop/catalog?family=Pinturas&category=Varios&subcategory=Entonadores' },
+                                    { title: 'Epoxi', url: '/shop/catalog?family=Pinturas&category=Varios&subcategory=Epoxi' },
                                 ],
                             },
                         ],
@@ -859,6 +921,34 @@ const header: INav = [
                                         title: 'Acero inoxidable',
                                         url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Acero inoxidable',
                                     },
+                                    {
+                                        title: 'Acero pulido',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Acero pulido',
+                                    },
+                                    {
+                                        title: 'Aluminio fundido con antiadherente',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Aluminio fundido con antiadherente',
+                                    },
+                                    {
+                                        title: 'Aluminio pulido',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Aluminio pulido',
+                                    },
+                                    {
+                                        title: 'Antiadherente',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Antiadherente',
+                                    },
+                                    {
+                                        title: 'Antiadherente parís',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Antiadherente parís',
+                                    },
+                                    {
+                                        title: 'Esmaltada',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Esmaltada',
+                                    },
+                                    {
+                                        title: 'Hierro',
+                                        url: '/shop/catalog?family=Bazar&category=Ollas, sartenes, planchas&subcategory=Hierro',
+                                    },
                                 ],
                             },
                         ],
@@ -904,6 +994,10 @@ const header: INav = [
                                         title: 'Aluminio pulido',
                                         url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Aluminio pulido',
                                     },
+                                    { title: 'Antiadherente', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Antiadherente' },
+                                    { title: 'Cerámica', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Cerámica' },
+                                    { title: 'Hierro', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Hierro' },
+                                    { title: 'Vidrio', url: '/shop/catalog?family=Bazar&category=Horno&subcategory=Vidrio' },
                                 ],
                             },
                         ],
