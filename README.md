@@ -4,9 +4,8 @@ Goldfarb E-Commerce
 
 ## Desarrollo local con Nodejs
 0) `npm i -g yarn`
-1) `yarn install`
-2) `yarn build`
-3) `yarn start`
+1) `yarn`
+2) `yarn dev` o `yarn build` + `yarn start`
 
 ## Desarrollo local con Docker
 
