@@ -3,9 +3,9 @@ Goldfarb E-Commerce
 ![image](https://user-images.githubusercontent.com/50899946/143028761-60a4b625-c738-41b1-a238-7f13cedbd46e.png)
 
 ## Desarrollo local con Nodejs
-0) `npm i -g yarn`
-1) `yarn`
-2) `yarn dev` o `yarn build` + `yarn start`
+-   `npm i -g yarn`
+-   `yarn`
+-   `yarn dev` o `yarn build` + `yarn start`
 
 ## Desarrollo local con Docker
 
