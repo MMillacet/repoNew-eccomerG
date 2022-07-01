@@ -2,7 +2,12 @@ Goldfarb E-Commerce
 
 ![image](https://user-images.githubusercontent.com/50899946/143028761-60a4b625-c738-41b1-a238-7f13cedbd46e.png)
 
-## Desarrollo local
+## Desarrollo local (teniendo nodejs instalado)
+1) `yarn install`
+2) `yarn build`
+3) `yarn start`
+
+## Desarrollo local con Docker
 
 -   Instalar [Docker](https://docs.docker.com/get-docker/)
 -   En el directorio del proyecto ejecutar `docker-compose up --build`
