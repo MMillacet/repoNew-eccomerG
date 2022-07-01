@@ -2,7 +2,7 @@ Goldfarb E-Commerce
 
 ![image](https://user-images.githubusercontent.com/50899946/143028761-60a4b625-c738-41b1-a238-7f13cedbd46e.png)
 
-## Desarrollo local (teniendo nodejs instalado)
+## Desarrollo local con Nodejs
 1) `yarn install`
 2) `yarn build`
 3) `yarn start`
