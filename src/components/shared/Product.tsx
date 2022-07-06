@@ -140,7 +140,7 @@ function Product(props: ProductProps) {
                     <div className="product__description">
                         {rtProduct &&
                             rtProduct.description &&
-                            product.description.split('<br/>').map((line: string, i: number) => {
+                            rtProduct.description.split('<br/>').map((line: string, i: number) => {
                                 if (line.startsWith('-') || line.startsWith('*')) {
                                     return (
                                         <li className="product_description_item" key={i}>
