@@ -7,10 +7,9 @@ export interface CurrencyFormatProps {
 }
 
 function CurrencyFormat(props: CurrencyFormatProps) {
-    const currency = props.currency === 'U$' ? 'U$D' : '$';
     const value = props.value || 0;
 
-    return <Fragment>{`${currency} ${value.toLocaleString('es-UY')}`}</Fragment>;
+    return <Fragment>{`${props.currency} ${value.toLocaleString('es-UY')}`}</Fragment>;
 }
 
 export default CurrencyFormat;

@@ -25,6 +25,8 @@ const makeProduct = (product: any) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
     const subsubcategory = product.subsubcategory || product.subSubCategory || null;
+    const currency = product.currency === 'U$' ? 'U$D' : product.currency;
+
     return {
         ...product,
         id: Number(code),
@@ -34,6 +36,7 @@ const makeProduct = (product: any) => {
         subsubcategory,
         unitMult: Number(product.unitMult),
         unitsPerItem: Number(product.unitsPerItem),
+        currency,
         images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
         // images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],
         availability: product.hasStock ? 'in-stock' : 'out-of-stock',
