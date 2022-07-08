@@ -11,7 +11,7 @@ Goldfarb E-Commerce
 
 -   Instalar [Docker](https://docs.docker.com/get-docker/)
 -   En el directorio del proyecto ejecutar `docker-compose up --build`
--   Abrir el navegador en [http://localhost:3000](http://localhost:3000)
+-   Abrir el navegador en  [http://localhost:3000](http://localhost:3000)
 
 ## Manejo de usuarios
 
