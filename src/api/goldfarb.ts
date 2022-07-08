@@ -4,6 +4,7 @@ import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
 // const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+//const baseURL = 'http://localhost:50483/api';
 
 const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
@@ -35,7 +36,7 @@ const makeProduct = (product: any) => {
         subcategory,
         subsubcategory,
         unitMult: Number(product.unitMult),
-        unitsPerItem: Number(product.unitsPerItem),
+        unitsPerItem: product.unitsPerItem,
         currency,
         images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
         // images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],

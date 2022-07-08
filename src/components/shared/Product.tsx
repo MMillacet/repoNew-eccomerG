@@ -169,6 +169,9 @@ function Product(props: ProductProps) {
                         <li>
                             Marca: <AppLink href="/">{rtProduct?.brand?.name}</AppLink>
                         </li>
+                        <li>
+                            Unidad venta: <AppLink href="/">{rtProduct?.unitsPerItem}</AppLink>
+                        </li>
                         <li>Codigo: {product?.id}</li>
                     </ul>
                 </div>

@@ -9,7 +9,7 @@ export interface CurrencyFormatProps {
 function CurrencyFormat(props: CurrencyFormatProps) {
     const value = props.value || 0;
 
-    return <Fragment>{`${props.currency} ${value.toLocaleString('es-UY')}`}</Fragment>;
+    return <Fragment>{`${props.currency} ${value.toLocaleString('es-UY', {maximumFractionDigits:2, minimumFractionDigits:2})}`}</Fragment>;
 }
 
 export default CurrencyFormat;
