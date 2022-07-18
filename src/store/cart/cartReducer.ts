@@ -34,6 +34,13 @@ function calcSubtotal(items: CartItem[], currency: string = '$'): number {
     return items.reduce((subtotal, item) => (item.product.currency === currency ? subtotal + item.total : subtotal), 0);
 }
 
+function calcTax(items: CartItem[], currency: string = '$'): number {
+    return items.reduce(
+        (subtotal, item) => (item.product.currency === currency ? subtotal + (item.total * item.product.tax) / 100 : subtotal),
+        0,
+    );
+}
+
 function calcQuantity(items: CartItem[]): number {
     return items.reduce((quantity, item) => quantity + item.quantity, 0);
 }
@@ -42,33 +49,41 @@ function calcTotal(subtotal: number, totals: CartTotal[]): number {
     return totals.reduce((acc, extraLine) => acc + extraLine.price, subtotal);
 }
 
-function calcTotals(items: CartItem[], currency: string): CartTotal[] {
+function calcTotals(items: CartItem[], currency: string = '$'): CartTotal[] {
     if (items.length === 0) {
         return [];
     }
 
-    if (currency !== '$') {
-        return [
-            {
-                type: 'tax',
-                title: 'Impuestos',
-                price: calcSubtotal(items, currency) * 0.2,
-            },
-        ];
-    }
-
     return [
-        // {
-        //     type: 'shipping',
-        //     title: 'Envio',
-        //     price: 0,
-        // },
         {
             type: 'tax',
             title: 'Impuestos',
-            price: calcSubtotal(items, currency) * 0.2,
+            price: calcTax(items, currency),
         },
     ];
+
+    // if (currency !== '$') {
+    //     return [
+    //         {
+    //             type: 'tax',
+    //             title: 'Impuestos',
+    //             price: calcTax(items) * 0.2,
+    //         },
+    //     ];
+    // }
+
+    // return [
+    //     // {
+    //     //     type: 'shipping',
+    //     //     title: 'Envio',
+    //     //     price: 0,
+    //     // },
+    //     {
+    //         type: 'tax',
+    //         title: 'Impuestos',
+    //         price: calcSubtotal(items, currency) * 0.2,
+    //     },
+    // ];
 }
 
 function calcAllTotals(items: CartItem[]) {
