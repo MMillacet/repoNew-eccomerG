@@ -44,7 +44,7 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
                 <td>{dateString}</td>
                 <td>{item.status}</td>
                 <td>
-                    <CurrencyFormat value={item.totalPedido} />
+                    <CurrencyFormat currency={item.currency} value={item.totalPedido} />
                 </td>
             </tr>
         );
