@@ -20,7 +20,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
     const orderItems = order.lines.map((line) => (
         <tr key={line.lineNum}>
             <td>{`${line.description} × ${line.quantity}`}</td>
-            <td>{line.currency === 'U$D' && <CurrencyFormat value={line.total} currency={line.currency} />}</td>
+            <td>{line.currency === 'U$' && <CurrencyFormat value={line.total} currency={line.currency} />}</td>
             <td>{line.currency === '$' && <CurrencyFormat value={line.total} currency={line.currency} />}</td>
         </tr>
     ));
@@ -56,7 +56,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                 <title>{`Detalle pedido`}</title>
             </Head>
 
-            <div className="card">
+            <div className="card order-details">
                 <div className="order-header">
                     <div className="order-header__actions">
                         <AppLink href={url.accountOrders()} className="btn btn-xs btn-secondary">

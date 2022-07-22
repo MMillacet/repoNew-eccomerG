@@ -5,6 +5,12 @@
 @import '../functions';
 @import '../mixins/direction';
 
+.order-details {
+    td {
+        font-size: 14px;
+    }
+}
+
 .order-header {
     padding: 1.625rem 2rem 1.375rem;
 
