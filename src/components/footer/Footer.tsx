@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import WhatsappFixed from '../shared/WhatsappFixed';
 
 // application
 import FooterContacts from './FooterContacts';
@@ -39,6 +40,7 @@ const Footer: FunctionComponent = () => {
                     <div className="site-footer__copyright">© Copyright 2022 Goldfarb. Todos los derechos reservados. (Prod)</div>
                 </div>
             </div>
+            <WhatsappFixed />
             <ToTop />
         </div>
     );
