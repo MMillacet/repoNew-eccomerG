@@ -151,6 +151,7 @@ Table of Contents:
 @import 'common/fake-svg-icon';
 @import 'common/page-header';
 @import 'common/site';
+@import 'remixicon/fonts/remixicon.css';
 
 /* ----------------------------------------
 // Components
@@ -228,6 +229,7 @@ Table of Contents:
 @import 'footer/footer-newsletter';
 @import 'footer/site-footer';
 @import 'footer/totop';
+@import 'footer/social-media';
 
 /* ----------------------------------------
 // Pages
@@ -314,3 +316,10 @@ Table of Contents:
 @import 'widgets/widget-tags';
 
 @import 'custom';
+
+/* ----------------------------------------
+// Promos
+// ---------------------------------------- */
+@import 'promos/product-promo-card';
+@import 'promos/promo-products';
+

@@ -4,7 +4,7 @@ import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
 // const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
-//const baseURL = 'http://localhost:50483/api';
+// const baseURL = 'http://localhost:50483/api';
 
 const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
@@ -390,6 +390,35 @@ const goldfarbApi = {
             url: '/web/getshipping',
             method: 'get',
             params,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getPromoProducts: async (docEntry: number, cardcode: number) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getpromolines',
+            method: 'get',
+            params: {
+                docEntry,
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getPromos: async (cardcode: number) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getpromos',
+            method: 'get',
+            params: {
+                cardcode,
+            },
         };
         const { data } = await axios(config);
 

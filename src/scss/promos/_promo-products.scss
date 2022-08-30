@@ -1,0 +1,84 @@
+.promo-product-row{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.promo-product-row .products-list__item {
+    padding: 0.7rem 0.7rem;
+}
+
+.promo-product-price{
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+}
+
+.promo-product__buttons {
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    justify-content: end;
+}
+
+.promo-products__price-row {
+    padding: 2px 22px 24px;
+    flex-grow: 1;
+    display: flex;
+}
+
+.promo-products__price-old {
+margin-top: 5px;
+}
+.d-flex{
+    display: flex;
+    column-gap: 3px;
+    align-items:center
+}
+
+.product-card__grey-text{
+    color: $price-old-color;
+    font-weight: $font-weight-normal;
+    font-size: 13px;
+}
+
+.product-card__discount{
+    color: $price-new-color;
+    font-weight: $font-weight-semi-bold;
+}
+
+.product-promo-banner{
+    justify-content: center;
+    display:flex;
+}
+
+.product-promo-discount{
+    justify-content: center;
+    display:flex;
+    padding: 25px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.product-promo-discount-col{
+    background: #003c7e;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.product-promo-btn-sg{
+    margin-top:20px;
+    display:flex;
+    justify-content: center
+}
+
+.condition-error{
+    color:red;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+
+
+
+
