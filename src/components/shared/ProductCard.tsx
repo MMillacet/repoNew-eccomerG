@@ -40,10 +40,6 @@ function ProductCard(props: ProductCardProps) {
         fetch(url).then((res) => res.json()),
     );
 
-    // const { data } = useSWR(cardcode ? product.code : null, async () =>
-    //     goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode }),
-    // );
-
     const {
         products: [rtProduct],
     } = data ?? { products: [null] };
@@ -134,15 +130,6 @@ function ProductCard(props: ProductCardProps) {
         const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
         setQuantity(quantity);
     };
-    // if (product.attributes && product.attributes.length) {
-    //     features = (
-    //         <ul className="product-card__features-list">
-    //             {product.attributes.filter((x) => x.featured).map((attribute, index) => (
-    //                 <li key={index}>{`${attribute.name}: ${attribute.values.map((x) => x.name).join(', ')}`}</li>
-    //             ))}
-    //         </ul>
-    //     );
-    // }
 
     return (
         <div className={containerClasses}>
@@ -207,34 +194,6 @@ function ProductCard(props: ProductCardProps) {
                                 </Fragment>
                             )}
                         />
-                        {/* <AsyncAction
-                        action={() => wishlistAddItem(product)}
-                        render={({ run, loading }) => (
-                            <button
-                                type="button"
-                                onClick={run}
-                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist', {
-                                    'btn-loading': loading,
-                                })}
-                            >
-                                <Wishlist16Svg />
-                            </button>
-                        )}
-                    /> */}
-                        {/* <AsyncAction
-                        action={() => compareAddItem(product)}
-                        render={({ run, loading }) => (
-                            <button
-                                type="button"
-                                onClick={run}
-                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare', {
-                                    'btn-loading': loading,
-                                })}
-                            >
-                                <Compare16Svg />
-                            </button>
-                        )}
-                    /> */}
                     </div>
                 )}
             </div>

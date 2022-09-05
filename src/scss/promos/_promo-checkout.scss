@@ -1,0 +1,38 @@
+.promo-checkout-quantity{
+    align-items: center;
+    justify-content: start;
+    grid-gap:5px
+}
+
+.promo-checkout-quantity-text{
+font-weight: 600;
+}
+
+
+.promo-checkout-btns{
+    justify-content:center;
+    gap:20px;
+    display: flex;
+}
+
+.promo-checkout-total-price{
+    justify-content:center;
+}
+
+.promo-checkout-total-quantity{
+    align-items: center;
+    justify-content: center;
+    grid-gap:5px
+}
+
+.promo-checkout-price-row{
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+}
+
+.promo-checkout-name{
+    justify-content:center;
+}
+
+

@@ -23,21 +23,16 @@ export interface ProductCardProps {
     product: any;
     layout?: ProductCardLayout;
     handleAddItem: Function;
+    productQuantity: number;
 }
 
 function ProductPromoCard(props: ProductCardProps) {
-    const { product, layout, handleAddItem } = props;
+    const { product, layout, handleAddItem, productQuantity } = props;
 
-    // console.log({ product });
-
-    const [quantity, setQuantity] = useState<number>(product.unitMult);
+    const [quantity, setQuantity] = useState<number>(productQuantity);
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
-
-    // const { data } = useSWR(cardcode ? product.code : null, async () =>
-    //     goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode }),
-    // );
 
     const containerClasses = classNames('product-card', {
         noauth: !isUserActivated,

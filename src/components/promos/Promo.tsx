@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IProduct } from '../../interfaces/product';
 import PromoCheckout from './PromoCheckout';
 import PromoListProducts from './PromoListProducts';
@@ -19,9 +19,23 @@ export interface ItemsSelected {
 }
 
 export default function PromoProducts({ products, promo }: IPromoProducts) {
-    console.log({ products, promo });
     const [view, setView] = useState<string>('view1');
     const [productsSelected, setProductsSelected] = useState<any[]>([]);
+
+    useEffect(() => {
+        const newProductsSelecetd: any[] = [];
+        const generatedProducts = async () => {
+            await products.forEach((product: IProduct) => {
+                const newItem = {
+                    product,
+                    quantity: 0,
+                };
+                newProductsSelecetd.push(newItem);
+            });
+            setProductsSelected(newProductsSelecetd);
+        };
+        generatedProducts();
+    }, [products]);
 
     if (products.length < 1) {
         return (
@@ -36,7 +50,7 @@ export default function PromoProducts({ products, promo }: IPromoProducts) {
     return (
         <div className="cart block">
             <div className="container">
-                <div className="products-view__list products-list">
+                <div className="products-view__content">
                     <div className="products-view__empty-title product-promo-banner">
                         <img src={promo.u_Banner}></img>
                     </div>
@@ -44,16 +58,21 @@ export default function PromoProducts({ products, promo }: IPromoProducts) {
                         <div className="product-promo-discount-col col-12 col-lg-10">{promo.u_Descrip}</div>
                     </div>
                     {view === 'view1' && (
-                        <PromoListProducts
-                            products={products}
-                            productsSelected={productsSelected}
-                            setView={setView}
-                            promo={promo}
-                            setProductsSelected={setProductsSelected}
-                        />
+                        <div className="products-view__list products-list">
+                            <PromoListProducts
+                                productsSelected={productsSelected}
+                                setView={setView}
+                                promo={promo}
+                                setProductsSelected={setProductsSelected}
+                            />
+                        </div>
                     )}
-                    {view === 'view2' && <PromoCheckout />}
-                    {view === 'view3' && <PromoCheckout />}
+                    {view === 'view2' && (
+                        <div className="products-view__list products-list" data-layout={'list'} data-with-features={'false'}>
+                            <PromoCheckout setView={setView} productsSelected={productsSelected} />
+                        </div>
+                    )}
+                    {view === 'view3' && <PromoCheckout setView={setView} productsSelected={productsSelected} />}
                 </div>
             </div>
         </div>
