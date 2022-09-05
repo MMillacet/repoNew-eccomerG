@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { IProduct } from '../../interfaces/product';
 import PromoCheckout from './PromoCheckout';
+import PromoCreate from './PromoConfirm';
 import PromoListProducts from './PromoListProducts';
 
 export type ProductsViewLayout = 'grid' | 'grid-with-features' | 'list';
@@ -72,7 +73,7 @@ export default function PromoProducts({ products, promo }: IPromoProducts) {
                             <PromoCheckout setView={setView} productsSelected={productsSelected} />
                         </div>
                     )}
-                    {view === 'view3' && <PromoCheckout setView={setView} productsSelected={productsSelected} />}
+                    {view === 'view3' && <PromoCreate />}
                 </div>
             </div>
         </div>

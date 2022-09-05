@@ -33,7 +33,7 @@ export default function PromoCheckout({ productsSelected, setView }: IPromoCheck
     };
 
     const handleFinalize = () => {
-        setView('view1');
+        setView('view3');
     };
 
     return (

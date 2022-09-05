@@ -6,7 +6,7 @@ import { nameToSlug } from './helpers/utils';
 // const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 // const baseURL = 'http://localhost:50483/api';
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
 export interface CatalogOptions {
     email: string;
@@ -418,6 +418,19 @@ const goldfarbApi = {
             method: 'get',
             params: {
                 cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+    postPromo: async (orderPromoWeb: any) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/createorderpromo',
+            method: 'post',
+            params: {
+                orderPromoWeb,
             },
         };
         const { data } = await axios(config);
