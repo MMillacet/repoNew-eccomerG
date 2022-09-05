@@ -37,7 +37,6 @@
         flex-shrink: 0;
         width: 190px;
         padding: 16px 20px;
-
         @include direction {
             #{$border-inline-start}: 1px solid $product-card-divider-color;
         }

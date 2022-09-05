@@ -78,6 +78,39 @@ margin-top: 5px;
     margin-top: 1rem;
 }
 
+.justify-content-c{
+    justify-content: center;
+}
+
+.product-promo-price{
+    padding-left: 36px;
+}
+
+.promo-card-row{
+    margin-bottom: 10px;
+}
+
+.product-promo-card-descount{
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.product-card_prices-promo{
+    margin-top: 0px;
+    line-height: 1;
+    font-weight: 700;
+    color: #003c7e;
+}
+
+ .product-card_prices-col{
+    align-items: flex-end
+}
+
+
+
+
+
 
 
 

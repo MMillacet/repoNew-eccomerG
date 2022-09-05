@@ -129,25 +129,23 @@ function ProductPromoCard(props: ProductCardProps) {
                 </div>
                 {features}
             </div>
-            <div className="promo-products__price-row product-card__actions row">
-                <div className="col-7 promo-product-price">{price}</div>
+            <div className=" product-card__actions row promo-card-row">
+                <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>
 
-                {
-                    <div className="promo-product__buttons col-5">
-                        <div className="product__actions-item">
-                            <InputNumber
-                                id="product-quantity"
-                                aria-label="Quantity"
-                                className="product__quantity"
-                                size="lg"
-                                min={product.unitMult}
-                                step={product.unitMult}
-                                value={quantity}
-                                onChange={(quantity) => handleChangeQuantity(quantity)}
-                            />
-                        </div>
+                <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-5 ">
+                    <div className="product__actions-item">
+                        <InputNumber
+                            id="product-quantity"
+                            aria-label="Quantity"
+                            className="product__quantity"
+                            size="lg"
+                            min={product.unitMult}
+                            step={product.unitMult}
+                            value={quantity}
+                            onChange={(quantity) => handleChangeQuantity(quantity)}
+                        />
                     </div>
-                }
+                </div>
             </div>
         </div>
     );
