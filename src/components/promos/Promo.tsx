@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react';
-import { IProduct } from '../../interfaces/product';
+import { IProductPromoSelected, IPromoLine } from '../../interfaces/product';
+import { IPromo } from '../../interfaces/promo';
 import PromoCheckout from './PromoCheckout';
 import PromoConfirm from './PromoConfirm';
 import PromoListProducts from './PromoListProducts';
@@ -10,23 +11,18 @@ export type ProductsViewLayout = 'grid' | 'grid-with-features' | 'list';
 export type ProductsViewGrid = 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full';
 
 export interface IPromoProducts {
-    products: IProduct[];
-    promo: any;
-}
-
-export interface ItemsSelected {
-    product: any;
-    quantity: number;
+    products: IPromoLine[];
+    promo: IPromo;
 }
 
 export default function PromoProducts({ products, promo }: IPromoProducts) {
     const [view, setView] = useState<string>('view1');
-    const [productsSelected, setProductsSelected] = useState<any[]>([]);
+    const [productsSelected, setProductsSelected] = useState<IProductPromoSelected[]>([]);
 
     useEffect(() => {
-        const newProductsSelecetd: any[] = [];
+        const newProductsSelecetd: IProductPromoSelected[] = [];
         const generatedProducts = async () => {
-            await products.forEach((product: IProduct) => {
+            await products.forEach((product: IPromoLine) => {
                 const newItem = {
                     product,
                     quantity: 0,

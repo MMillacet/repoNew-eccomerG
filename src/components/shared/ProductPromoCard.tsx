@@ -15,7 +15,6 @@ import url from '../../services/url';
 // import { useCompareAddItem } from '../../store/compare/compareHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import InputNumber from './InputNumber';
-import Rating from './Rating';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -48,7 +47,6 @@ function ProductPromoCard(props: ProductCardProps) {
     const badges: any[] = [];
     let image;
     let price;
-    let features;
 
     if (product.badges.includes('sale')) {
         badges.push(
@@ -123,11 +121,6 @@ function ProductPromoCard(props: ProductCardProps) {
                 <div className="product-card__name">
                     <AppLink href={url.product(product)}>{product.itemName}</AppLink>
                 </div>
-                <div className="product-card__rating">
-                    <Rating value={product.rating} />
-                    <div className=" product-card__rating-legend">{`${product.reviews} Reviews`}</div>
-                </div>
-                {features}
             </div>
             <div className=" product-card__actions row promo-card-row">
                 <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { IBrand } from './brand';
 import { IFilter } from './filter';
 import { IFilterableList, IPaginatedList } from './list';
@@ -49,6 +50,20 @@ export interface IProduct {
     relatedItems: string[];
     shops: any[];
     listOrder: string;
+}
+
+export interface IPromoLine {
+    itemCode: string;
+    itemName: string;
+    currency: string;
+    price: number;
+    discPrcnt: number;
+    u_Porcentaje: number;
+}
+
+export interface IProductPromoSelected {
+    quantity: number;
+    product: IPromoLine;
 }
 
 export type IProductsList = IPaginatedList<IProduct> & IFilterableList<IProduct, IFilter>;

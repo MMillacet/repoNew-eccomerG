@@ -8,17 +8,18 @@ import Head from 'next/head';
 // import Check9x7Svg from '../../svg/check-9x7.svg';
 import { useUser } from '@auth0/nextjs-auth0';
 // import Collapse, { CollapseRenderFn } from '../shared/Collapse';
-import axios from 'axios';
 import CurrencyFormat from '../shared/CurrencyFormat';
 
 // data stubs
 // import dataShopPayments from '../../data/shopPayments';
 import theme from '../../data/theme';
 import PromoHeader from './PromoHeader';
+import { IProductPromoSelected } from '../../interfaces/product';
+import goldfarbApi from '../../api/goldfarb';
 
 interface IPromoConfirm {
     setView: Function;
-    productsSelected: any;
+    productsSelected: IProductPromoSelected[];
 }
 
 export default function PromoConfirm({ setView, productsSelected }: IPromoConfirm) {
@@ -40,31 +41,30 @@ export default function PromoConfirm({ setView, productsSelected }: IPromoConfir
         header: {
             cardcode: user?.cardcode,
             cardname: user?.name,
-            remito: clientHeader.remito,
+            shipToCode,
+            // transpCode,
             tipoMov: clientHeader.tipoMov,
             tipoPed: orderType,
+            // comments
             discount: clientHeader.discount,
-            shipToCode,
+            remito: clientHeader.remito,
+            // addressExtention:
+            // compraID
         },
-        lines: productsSelected.items.map((item: any) => ({
-            itemcode: item.product.code,
-            description: item.product.title,
+        lines: productsSelected.map((item: IProductPromoSelected) => ({
+            itemCode: item.product.itemCode,
             quantity: item.quantity,
-            currency: item.product.currency,
-            price: item.product.price,
-            discount: item.product.discount,
-            total: item.total,
         })),
     });
 
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
-        // const order = createOrder();
-        // try {
-        //     const res = await axios.post('/api/orders/create', { order });
-        //     setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
-        // } catch (error) {
-        //     setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
-        // }
+        const order = createOrder();
+        try {
+            const res = await goldfarbApi.postPromo(order);
+            setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
+        } catch (error) {
+            setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+        }
     };
 
     useEffect(() => {
@@ -115,11 +115,13 @@ export default function PromoConfirm({ setView, productsSelected }: IPromoConfir
                             <td>{`${item.product.itemName} × ${item.quantity}`}</td>
                             <td>
                                 {item.product.currency === 'U$D' && (
-                                    <CurrencyFormat value={totalNewPrice} currency={item.product.currency} />
+                                    <CurrencyFormat value={item.product.price * item.quantity} currency={item.product.currency} />
                                 )}
                             </td>
                             <td>
-                                {item.product.currency === '$' && <CurrencyFormat value={totalNewPrice} currency={item.product.currency} />}
+                                {item.product.currency === '$' && (
+                                    <CurrencyFormat value={item.product.price * item.quantity} currency={item.product.currency} />
+                                )}
                             </td>
                         </tr>
                     );
@@ -166,7 +168,7 @@ export default function PromoConfirm({ setView, productsSelected }: IPromoConfir
             </tfoot>
         </table>
     );
-    const breadcrumb = [{ title: 'Lista' }, { title: 'Checkout' }, { title: 'Confirmar pedido' }];
+    const breadcrumb = [{ title: 'Lista' }, { title: 'Verifica tu seleccion' }, { title: 'Confirmar pedido' }];
 
     return (
         <Fragment>

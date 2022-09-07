@@ -45,7 +45,7 @@ function PromoHeader(props: PageHeaderProps) {
             } else {
                 link = (
                     <li key={index} className="breadcrumb-item">
-                        <div onClick={() => handleChangeView(index)} {...item.props}>
+                        <div className="breadcrum-promo-item" onClick={() => handleChangeView(index)} {...item.props}>
                             {item.title}
                         </div>
                         <ArrowRoundedRight6x9Svg className="breadcrumb-arrow" />
