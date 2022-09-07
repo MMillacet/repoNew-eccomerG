@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import WhatsappFixed from '../shared/WhatsappFixed';
 
 // application
 import FooterContacts from './FooterContacts';
 import FooterLinks from './FooterLinks';
-import SocialMedia from './SocialMedia';
+// import SocialMedia from './SocialMedia';
 // import FooterNewsletter from './FooterNewsletter';
 import ToTop from './ToTop';
 
@@ -34,9 +33,9 @@ const Footer: FunctionComponent = () => {
                         <div className="col-6 col-md-3 col-lg-3">
                             <FooterContacts />
                         </div>
-                        <div className="col-12 col-md-4 col-lg-3 social-media-col">
+                        {/* <div className="col-12 col-md-4 col-lg-3 social-media-col">
                             <SocialMedia />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -44,7 +43,6 @@ const Footer: FunctionComponent = () => {
                     <div className="site-footer__copyright">© Copyright 2022 Goldfarb. Todos los derechos reservados. (Prod)</div>
                 </div>
             </div>
-            <WhatsappFixed />
             <ToTop />
         </div>
     );
