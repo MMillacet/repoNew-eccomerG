@@ -17,13 +17,12 @@ import PromoHeader from './PromoHeader';
 import { IProductPromoSelected } from '../../interfaces/product';
 import goldfarbApi from '../../api/goldfarb';
 
-interface IPromoConfirm {
-    setView: Function;
-    productsSelected: IProductPromoSelected[];
+export interface IPromoProducts {
+    promoContainer: any;
 }
 
-export default function PromoConfirm({ setView, productsSelected }: IPromoConfirm) {
-    console.log({ productsSelected });
+export default function PromoConfirm({ promoContainer }: IPromoProducts) {
+    const { setView, productsSelected } = promoContainer;
 
     const { user } = useUser();
     const { clientHeader }: any = user || {};

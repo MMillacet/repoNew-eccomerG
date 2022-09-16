@@ -1,36 +1,18 @@
 // eslint-disable-next-line no-use-before-define
 import Head from 'next/head';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import theme from '../../data/theme';
 import { IProductPromoSelected } from '../../interfaces/product';
 import AppLink from '../shared/AppLink';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import PromoHeader from './PromoHeader';
 
-export interface IPromoCheckout {
-    productsSelected: IProductPromoSelected[];
-    setView: Function;
+export interface IPromoProducts {
+    promoContainer: any;
 }
-export default function PromoCheckout({ productsSelected, setView }: IPromoCheckout) {
-    const [totalNewPrice, setTotalNewPrice] = useState<number>(0);
-    const [totalOldPrice, setTotalOldPrice] = useState<number>(0);
-    const [totalQuantity, setTotalQuantity] = useState<number>(0);
 
-    useEffect(() => {
-        setTotalNewPrice(0);
-        setTotalOldPrice(0);
-        setTotalQuantity(0);
-        productsSelected.forEach((item: IProductPromoSelected) => {
-            if (item.quantity > 0) {
-                setTotalNewPrice(
-                    (prevState) =>
-                        prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
-                );
-                setTotalOldPrice((prevState) => prevState + item.product.price * item.quantity);
-                setTotalQuantity((prevState) => prevState + item.quantity);
-            }
-        });
-    }, [productsSelected]);
+export default function PromoCheckout({ promoContainer }: IPromoProducts) {
+    const { totalNewPrice, totalOldPrice, totalQuantity, productsSelected, setView } = promoContainer;
 
     const handleGoBack = () => {
         setView('view1');
@@ -73,7 +55,10 @@ export default function PromoCheckout({ productsSelected, setView }: IPromoCheck
                         {item.product.u_Porcentaje ? `${item.product.u_Porcentaje}%` : ''}
                     </td>
                     <td className="cart-table__column cart-table__column--total" data-title="Total">
-                        <CurrencyFormat value={item.product.price * item.quantity} currency={item.product.currency} />
+                        <CurrencyFormat
+                            value={(item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity}
+                            currency={item.product.currency}
+                        />
                     </td>
                 </tr>
             );
@@ -127,7 +112,7 @@ export default function PromoCheckout({ productsSelected, setView }: IPromoCheck
                                 <div className="product-card__prices row">
                                     <div className="col-12 d-flex">
                                         <CurrencyFormat value={totalNewPrice} currency={productsSelected[0].product.currency} />
-                                        <div className="product-card__grey-text">with </div>
+                                        <div className="product-card__grey-text">con </div>
                                         <div className="product-card__discount">{productsSelected[0].product.u_Porcentaje}% </div>
                                     </div>
                                     <span className="col-12 product-card__old-price promo-products__price-old">

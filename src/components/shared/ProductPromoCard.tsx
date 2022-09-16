@@ -10,16 +10,16 @@ import AppLink from './AppLink';
 // import Compare16Svg from '../../svg/compare-16.svg';
 import CurrencyFormat from './CurrencyFormat';
 // import Rating from './Rating';
-import url from '../../services/url';
 // import Wishlist16Svg from '../../svg/wishlist-16.svg';
 // import { useCompareAddItem } from '../../store/compare/compareHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import InputNumber from './InputNumber';
+import { IPromoLine } from '../../interfaces/promo';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
 export interface ProductCardProps {
-    product: any;
+    product: IPromoLine;
     layout?: ProductCardLayout;
     handleAddItem: Function;
     productQuantity: number;
@@ -42,38 +42,14 @@ function ProductPromoCard(props: ProductCardProps) {
         'product-card--layout--horizontal': layout === 'horizontal',
     });
 
-    product.badges = ['new'];
-
     const badges: any[] = [];
     let image;
     let price;
 
-    if (product.badges.includes('sale')) {
-        badges.push(
-            <div key="sale" className="product-card__badge product-card__badge--sale">
-                Sale
-            </div>,
-        );
-    }
-    if (product.badges.includes('hot')) {
-        badges.push(
-            <div key="hot" className="product-card__badge product-card__badge--hot">
-                Hot
-            </div>,
-        );
-    }
-    if (product.badges.includes('new')) {
-        badges.push(
-            <div key="new" className="product-card__badge product-card__badge--new">
-                {product.itemCode}
-            </div>,
-        );
-    }
-
     if (product.itemCode) {
         image = (
             <div className="product-card__image product-image">
-                <AppLink href={url.product(product)} className="product-image__body">
+                <AppLink className="product-image__body">
                     <img
                         className="product-image__img"
                         src={`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${product.itemCode}.jpg`}
@@ -91,7 +67,7 @@ function ProductPromoCard(props: ProductCardProps) {
             <div className="product-card__prices row">
                 <div className="col-12 d-flex">
                     <CurrencyFormat value={newPrice} currency={product.currency} />
-                    <div className="product-card__grey-text">with </div>
+                    <div className="product-card__grey-text">con</div>
                     <div className="product-card__discount">{product.u_Porcentaje}% </div>
                 </div>
                 <span className="col-12 product-card__old-price promo-products__price-old">
@@ -119,7 +95,7 @@ function ProductPromoCard(props: ProductCardProps) {
             {image}
             <div className="product-card__info">
                 <div className="product-card__name">
-                    <AppLink href={url.product(product)}>{product.itemName}</AppLink>
+                    <AppLink>{product.itemName}</AppLink>
                 </div>
             </div>
             <div className=" product-card__actions row promo-card-row">
@@ -132,8 +108,7 @@ function ProductPromoCard(props: ProductCardProps) {
                             aria-label="Quantity"
                             className="product__quantity"
                             size="lg"
-                            min={product.unitMult}
-                            step={product.unitMult}
+                            min={0}
                             value={quantity}
                             onChange={(quantity) => handleChangeQuantity(quantity)}
                         />

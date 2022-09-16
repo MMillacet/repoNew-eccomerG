@@ -3,6 +3,7 @@ import { IBrand } from './brand';
 import { IFilter } from './filter';
 import { IFilterableList, IPaginatedList } from './list';
 import { IShopCategory } from './category';
+import { IPromoLine } from './promo';
 
 export interface IProductAttributeValue {
     slug: string;
@@ -50,15 +51,6 @@ export interface IProduct {
     relatedItems: string[];
     shops: any[];
     listOrder: string;
-}
-
-export interface IPromoLine {
-    itemCode: string;
-    itemName: string;
-    currency: string;
-    price: number;
-    discPrcnt: number;
-    u_Porcentaje: number;
 }
 
 export interface IProductPromoSelected {

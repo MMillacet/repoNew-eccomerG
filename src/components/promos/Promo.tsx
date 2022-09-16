@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useEffect, useState } from 'react';
-import { IProductPromoSelected, IPromoLine } from '../../interfaces/product';
+import React from 'react';
 import { IPromo } from '../../interfaces/promo';
+import PromoContainer from './hooks/PromoContainer';
 import PromoCheckout from './PromoCheckout';
 import PromoConfirm from './PromoConfirm';
 import PromoListProducts from './PromoListProducts';
@@ -11,28 +11,14 @@ export type ProductsViewLayout = 'grid' | 'grid-with-features' | 'list';
 export type ProductsViewGrid = 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full';
 
 export interface IPromoProducts {
-    products: IPromoLine[];
     promo: IPromo;
 }
 
-export default function PromoProducts({ products, promo }: IPromoProducts) {
-    const [view, setView] = useState<string>('view1');
-    const [productsSelected, setProductsSelected] = useState<IProductPromoSelected[]>([]);
+export default function PromoProducts({ promo }: IPromoProducts) {
+    const products = promo.lines;
+    const promoContainer = PromoContainer(promo);
 
-    useEffect(() => {
-        const newProductsSelecetd: IProductPromoSelected[] = [];
-        const generatedProducts = async () => {
-            await products.forEach((product: IPromoLine) => {
-                const newItem = {
-                    product,
-                    quantity: 0,
-                };
-                newProductsSelecetd.push(newItem);
-            });
-            setProductsSelected(newProductsSelecetd);
-        };
-        generatedProducts();
-    }, [products]);
+    const { view } = promoContainer;
 
     if (products.length < 1) {
         return (
@@ -56,20 +42,15 @@ export default function PromoProducts({ products, promo }: IPromoProducts) {
                     </div>
                     {view === 'view1' && (
                         <div className="products-view__list products-list">
-                            <PromoListProducts
-                                productsSelected={productsSelected}
-                                setView={setView}
-                                promo={promo}
-                                setProductsSelected={setProductsSelected}
-                            />
+                            <PromoListProducts promoContainer={promoContainer} />
                         </div>
                     )}
                     {view === 'view2' && (
                         <div className="products-view__list products-list" data-layout={'list'} data-with-features={'false'}>
-                            <PromoCheckout setView={setView} productsSelected={productsSelected} />
+                            <PromoCheckout promoContainer={promoContainer} />
                         </div>
                     )}
-                    {view === 'view3' && <PromoConfirm setView={setView} productsSelected={productsSelected} />}
+                    {view === 'view3' && <PromoConfirm promoContainer={promoContainer} />}
                 </div>
             </div>
         </div>

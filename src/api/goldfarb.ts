@@ -424,6 +424,22 @@ const goldfarbApi = {
 
         return data;
     },
+
+    getPromo: async (docEntry: number, cardcode: number) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getpromo',
+            method: 'get',
+            params: {
+                cardcode,
+                docEntry,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
     postPromo: async (orderPromoWeb: any) => {
         const config: AxiosRequestConfig = {
             baseURL,

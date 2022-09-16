@@ -4,15 +4,14 @@ import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
 import goldfarbApi from '../../api/goldfarb';
 import PromoProducts from '../../components/promos/Promo';
-import { IProduct } from '../../interfaces/product';
+import { IPromo } from '../../interfaces/promo';
 
 interface IParams extends ParsedUrlQuery {
     orderId: string;
 }
 
 export interface PageProps {
-    products: IProduct[];
-    promo: any;
+    promo: IPromo;
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext<IParams>) {
@@ -20,14 +19,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
     const { id } = params as IParams;
 
     try {
-        const products = await goldfarbApi.getPromoProducts(Number(id), 400092);
-        const promos = await goldfarbApi.getPromos(400092);
-        const promo = promos.find((pro: any) => pro.docEntry === Number(id));
-        console.log({ promos });
+        const allPromos = await goldfarbApi.getPromos(400092);
+        console.log({ allPromos });
+        const promo = await goldfarbApi.getPromo(Number(id), 400092);
+        console.log({ a: promo.lines[0] });
 
         return {
             props: {
-                products,
                 promo,
             },
         };
@@ -36,8 +34,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
     }
 }
 
-function Page({ products, promo }: PageProps) {
-    return <PromoProducts products={products} promo={promo} />;
+function Page({ promo }: PageProps) {
+    return <PromoProducts promo={promo} />;
 }
 
 export default Page;

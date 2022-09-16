@@ -1,4 +1,13 @@
 /* eslint-disable camelcase */
+
+export interface IPromoLine {
+    itemCode: string;
+    itemName: string;
+    currency: string;
+    price: number;
+    discPrcnt: number;
+    u_Porcentaje: number;
+}
 export interface IPromo {
     docEntry: number;
     u_Descrip: string;
@@ -10,4 +19,5 @@ export interface IPromo {
     u_Moneda: string;
     u_DesAdic?: string;
     u_Banner: string;
+    lines: IPromoLine[];
 }
