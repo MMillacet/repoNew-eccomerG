@@ -176,7 +176,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             <PromoHeader setView={setView} header="Confirmar pedido" breadcrumb={breadcrumb} />
 
             {!orderSuccessMessage && (
-                <div className="checkout block">
+                <div className="checkout block confirm-section">
                     <div className="container">
                         <div className="row">
                             <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">

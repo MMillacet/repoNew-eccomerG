@@ -37,7 +37,6 @@ function ProductPromoCard(props: ProductCardProps) {
         'product-card--layout--horizontal': layout === 'horizontal',
     });
 
-    const badges: any[] = [];
     let image;
     let price;
 
@@ -104,11 +103,17 @@ function ProductPromoCard(props: ProductCardProps) {
 
     return (
         <div className={containerClasses}>
-            {badges.length > 0 && <div className="product-card__badges-list">{badges}</div>}
+            <div className="product-card__badges-list">
+                <div key="new" className="product-card__badge product-card__badge--new">
+                    {product.itemCode}
+                </div>
+                ,
+            </div>
+
             {image}
             <div className="product-card__info">
                 <div className="product-card__name">
-                    <AppLink>{product.itemName}</AppLink>
+                    <AppLink href={`/shop/products/${product.itemCode}`}>{product.itemName}</AppLink>
                 </div>
             </div>
             <div className=" product-card__actions row promo-card-row">
