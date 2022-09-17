@@ -1,17 +1,7 @@
-// react
 import { Fragment, ChangeEvent, useEffect, useState } from 'react';
-
-// third-party
 import Head from 'next/head';
-// application
-// import AppLink from '../shared/AppLink';
-// import Check9x7Svg from '../../svg/check-9x7.svg';
 import { useUser } from '@auth0/nextjs-auth0';
-// import Collapse, { CollapseRenderFn } from '../shared/Collapse';
 import CurrencyFormat from '../shared/CurrencyFormat';
-
-// data stubs
-// import dataShopPayments from '../../data/shopPayments';
 import theme from '../../data/theme';
 import PromoHeader from './PromoHeader';
 import { IProductPromoSelected } from '../../interfaces/product';
@@ -70,29 +60,37 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         setTotalNewPrice(0);
         productsSelected.forEach((item: any) => {
             if (item.quantity > 0) {
-                setTotalNewPrice(
-                    (prevState) =>
-                        prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
-                );
+                if (item.product.factorQty) {
+                    setTotalNewPrice(
+                        (prevState) =>
+                            prevState +
+                            (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
+                                item.quantity *
+                                item.product.factorQty,
+                    );
+                } else {
+                    setTotalNewPrice(
+                        (prevState) =>
+                            prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
+                    );
+                }
             }
         });
     }, [productsSelected]);
 
+    const getPriceItem = (item: IProductPromoSelected) => {
+        let price = (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity;
+        if (item.product.factorQty) {
+            price *= item.product.factorQty;
+        }
+        return price;
+    };
+
     const getTax = () => (22 * totalNewPrice) / 100;
 
     const totals = () => {
-        // const shipping = cart.totals.$.find((x: CartTotal) => x.type === 'shipping');
         const taxPesos = getTax();
         const taxDollars = getTax();
-        // const r1 = (
-        //     <tr key={1}>
-        //         <th>Envio</th>
-        //         <td></td>
-        //         <td>
-        //             <CurrencyFormat value={shippingCost} />
-        //         </td>
-        //     </tr>
-        // );
 
         const r2 = (taxPesos || taxDollars) && (
             <tr key={2}>
@@ -114,12 +112,12 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                             <td>{`${item.product.itemName} × ${item.quantity}`}</td>
                             <td>
                                 {item.product.currency === 'U$D' && (
-                                    <CurrencyFormat value={item.product.price * item.quantity} currency={item.product.currency} />
+                                    <CurrencyFormat value={getPriceItem(item)} currency={item.product.currency} />
                                 )}
                             </td>
                             <td>
                                 {item.product.currency === '$' && (
-                                    <CurrencyFormat value={item.product.price * item.quantity} currency={item.product.currency} />
+                                    <CurrencyFormat value={getPriceItem(item)} currency={item.product.currency} />
                                 )}
                             </td>
                         </tr>

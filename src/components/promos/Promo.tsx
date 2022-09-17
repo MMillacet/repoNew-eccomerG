@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react';
+import { Fragment } from 'react';
 import { IPromo } from '../../interfaces/promo';
 import PromoContainer from './hooks/PromoContainer';
 import PromoCheckout from './PromoCheckout';
@@ -22,11 +22,11 @@ export default function PromoProducts({ promo }: IPromoProducts) {
 
     if (products.length < 1) {
         return (
-            <React.Fragment>
+            <Fragment>
                 <div className="products-view__empty">
                     <div className="products-view__empty-title">No se encontraron productos</div>
                 </div>
-            </React.Fragment>
+            </Fragment>
         );
     }
 

@@ -7,12 +7,7 @@ import classNames from 'classnames';
 
 // application
 import AppLink from './AppLink';
-// import Compare16Svg from '../../svg/compare-16.svg';
 import CurrencyFormat from './CurrencyFormat';
-// import Rating from './Rating';
-// import Wishlist16Svg from '../../svg/wishlist-16.svg';
-// import { useCompareAddItem } from '../../store/compare/compareHooks';
-// import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import InputNumber from './InputNumber';
 import { IPromoLine } from '../../interfaces/promo';
 
@@ -61,20 +56,38 @@ function ProductPromoCard(props: ProductCardProps) {
     }
 
     if (product && product.price > 0 && product.u_Porcentaje > 0) {
-        const oldPrice = product.price;
-        const newPrice = product.price - product.price * (product.u_Porcentaje / 100);
-        price = (
-            <div className="product-card__prices row">
-                <div className="col-12 d-flex">
-                    <CurrencyFormat value={newPrice} currency={product.currency} />
-                    <div className="product-card__grey-text">con</div>
-                    <div className="product-card__discount">{product.u_Porcentaje}% </div>
+        let oldPrice = product.price;
+        let newPrice = product.price - product.price * (product.u_Porcentaje / 100);
+        if (product.factorQty > 1) {
+            oldPrice *= product.factorQty;
+            newPrice *= product.factorQty;
+            price = (
+                <div className="product-card__prices row">
+                    <div className="col-12 promo-prod-box">Precio por caja de {product.factorQty}</div>
+                    <div className="col-12 d-flex">
+                        <CurrencyFormat value={newPrice} currency={product.currency} />
+                        <div className="product-card__grey-text">con</div>
+                        <div className="product-card__discount">{product.u_Porcentaje}% </div>
+                    </div>
+                    <span className="col-12 product-card__old-price promo-products__price-old">
+                        <CurrencyFormat value={oldPrice} currency={product.currency} />
+                    </span>
                 </div>
-                <span className="col-12 product-card__old-price promo-products__price-old">
-                    <CurrencyFormat value={oldPrice} currency={product.currency} />
-                </span>
-            </div>
-        );
+            );
+        } else {
+            price = (
+                <div className="product-card__prices row">
+                    <div className="col-12 d-flex">
+                        <CurrencyFormat value={newPrice} currency={product.currency} />
+                        <div className="product-card__grey-text">con</div>
+                        <div className="product-card__discount">{product.u_Porcentaje}% </div>
+                    </div>
+                    <span className="col-12 product-card__old-price promo-products__price-old">
+                        <CurrencyFormat value={oldPrice} currency={product.currency} />
+                    </span>
+                </div>
+            );
+        }
     } else if (product && product.price > 0) {
         price = (
             <div className="product-card__prices">
@@ -100,7 +113,6 @@ function ProductPromoCard(props: ProductCardProps) {
             </div>
             <div className=" product-card__actions row promo-card-row">
                 <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>
-
                 <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-5 ">
                     <div className="product__actions-item">
                         <InputNumber

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import Head from 'next/head';
 import { Fragment } from 'react';
 import theme from '../../data/theme';
@@ -20,6 +19,14 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
 
     const handleFinalize = () => {
         setView('view3');
+    };
+
+    const getPriceItem = (item: IProductPromoSelected) => {
+        let price = (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity;
+        if (item.product.factorQty) {
+            price *= item.product.factorQty;
+        }
+        return price;
     };
 
     const cartItems = productsSelected.map((item: IProductPromoSelected, index: number) => {
@@ -55,10 +62,7 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
                         {item.product.u_Porcentaje ? `${item.product.u_Porcentaje}%` : ''}
                     </td>
                     <td className="cart-table__column cart-table__column--total" data-title="Total">
-                        <CurrencyFormat
-                            value={(item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity}
-                            currency={item.product.currency}
-                        />
+                        <CurrencyFormat value={getPriceItem(item)} currency={item.product.currency} />
                     </td>
                 </tr>
             );
