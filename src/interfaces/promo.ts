@@ -7,6 +7,7 @@ export interface IPromoLine {
     price: number;
     discPrcnt: number;
     u_Porcentaje: number;
+    factorQty: number;
 }
 export interface IPromo {
     docEntry: number;

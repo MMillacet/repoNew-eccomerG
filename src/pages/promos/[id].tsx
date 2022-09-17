@@ -20,7 +20,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
 
     try {
         const allPromos = await goldfarbApi.getPromos(400092);
-        console.log({ allPromos });
+        allPromos.forEach((allpr: any) => {
+            if (allpr.u_Tipo === 'CP') {
+                console.log({ allpr });
+            }
+        });
+
         const promo = await goldfarbApi.getPromo(Number(id), 400092);
         console.log({ a: promo.lines[0] });
 

@@ -35,13 +35,25 @@ const PromoContainer = (promoFetch: IPromo) => {
         setTotalNewPrice(0);
         setTotalOldPrice(0);
         setTotalQuantity(0);
+        setError('');
         productsSelected.forEach((item: IProductPromoSelected) => {
             if (item.quantity > 0) {
-                setTotalNewPrice(
-                    (prevState) =>
-                        prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
-                );
-                setTotalOldPrice((prevState) => prevState + item.product.price * item.quantity);
+                if (promo.u_Tipo === 'CM' || promo.u_Tipo === 'CP') {
+                    setTotalNewPrice(
+                        (prevState) =>
+                            prevState +
+                            (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
+                                item.quantity *
+                                item.product.factorQty,
+                    );
+                    setTotalOldPrice((prevState) => prevState + item.product.price * item.quantity * item.product.factorQty);
+                } else {
+                    setTotalNewPrice(
+                        (prevState) =>
+                            prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
+                    );
+                    setTotalOldPrice((prevState) => prevState + item.product.price * item.quantity);
+                }
                 setTotalQuantity((prevState) => prevState + item.quantity);
             }
         });
@@ -59,7 +71,6 @@ const PromoContainer = (promoFetch: IPromo) => {
     };
 
     const handleCheckPromo = () => {
-        console.log('sadasd');
         if (promo.u_Tipo === 'MO') {
             let totalPrice: number = 0;
             productsSelected.forEach((item: IProductPromoSelected) => {
@@ -67,38 +78,17 @@ const PromoContainer = (promoFetch: IPromo) => {
                     totalPrice += item.product.price * item.quantity;
                 }
             });
-            if (totalPrice > promo.u_Cantidad) {
-                console.log('es acaacas');
+            if (totalPrice >= promo.u_Cantidad) {
                 setView('view2');
             } else {
                 setError('Condición de promoción no alcanzada');
             }
-        } else if (promo.u_Tipo === 'CA') {
+        } else if (promo.u_Tipo === 'CA' || promo.u_Tipo === 'CM' || promo.u_Tipo === 'CP') {
             let productsQuantity: number = 0;
             productsSelected.forEach((item: IProductPromoSelected) => {
                 productsQuantity += item.quantity;
             });
-            if (productsQuantity > promo.u_Cantidad) {
-                setView('view2');
-            } else {
-                setError('Condición de promoción no alcanzada');
-            }
-        } else if (promo.u_Tipo === 'CM') {
-            let productsQuantity: number = 0;
-            productsSelected.forEach((item: IProductPromoSelected) => {
-                productsQuantity += item.quantity;
-            });
-            if (productsQuantity > promo.u_Cantidad) {
-                setView('view2');
-            } else {
-                setError('Condición de promoción no alcanzada');
-            }
-        } else if (promo.u_Tipo === 'CP') {
-            let productsQuantity: number = 0;
-            productsSelected.forEach((item: IProductPromoSelected) => {
-                productsQuantity += item.quantity;
-            });
-            if (productsQuantity > promo.u_Cantidad) {
+            if (productsQuantity >= promo.u_Cantidad) {
                 setView('view2');
             } else {
                 setError('Condición de promoción no alcanzada');

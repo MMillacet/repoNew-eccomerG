@@ -35,7 +35,7 @@ export default function PromoProducts({ promo }: IPromoProducts) {
             <div className="container">
                 <div className="products-view__content">
                     <div className="products-view__empty-title product-promo-banner">
-                        <img src={promo.u_Banner}></img>
+                        <img style={{ maxWidth: '100%' }} src={promo.u_Banner}></img>
                     </div>
                     <div className="product-promo-discount row">
                         <div className="product-promo-discount-col col-12 col-lg-10">{promo.u_Descrip}</div>
