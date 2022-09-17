@@ -14,7 +14,7 @@ function CurrencyFormat(props: CurrencyFormatProps) {
         currency = 'U$D';
     }
 
-    return <Fragment>{`${currency} ${value.toLocaleString('es-UY', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`}</Fragment>;
+    return <Fragment>{`${currency}${value.toLocaleString('es-UY', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`}</Fragment>;
 }
 
 export default CurrencyFormat;
