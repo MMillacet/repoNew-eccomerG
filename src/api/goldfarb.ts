@@ -453,6 +453,17 @@ const goldfarbApi = {
 
         return data;
     },
+
+    getEmployes: async () => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/Employes',
+            method: 'get',
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
 };
 
 export default goldfarbApi;
