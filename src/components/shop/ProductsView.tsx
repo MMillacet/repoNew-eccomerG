@@ -47,6 +47,7 @@ function ProductsView(props: ProductsViewProps) {
     const productsList = useShopProductsList();
     const options = useShopOptions();
     const filterValues = useShopFilterValues();
+    console.log({ a: productsList?.items });
 
     const { user } = useUser();
 
