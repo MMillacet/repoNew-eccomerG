@@ -1,5 +1,5 @@
 // react
-import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { Fragment, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ import AppLink from './AppLink';
 import GoldfarbSlick, { SlickProps } from './GoldfarbSlick';
 import ZoomIn24Svg from '../../svg/zoom-in-24.svg';
 import { useDirection } from '../../store/locale/localeHooks';
+import pdf from './pdf.png';
 
 const slickSettingsFeatured = {
     dots: false,
@@ -88,10 +89,11 @@ export type ProductGalleryLayout = 'standard' | 'sidebar' | 'columnar' | 'quickv
 export interface ProductGalleryProps {
     images: string[];
     layout: ProductGalleryLayout;
+    documents: string[];
 }
 
 function ProductGallery(props: ProductGalleryProps) {
-    const { layout, images } = props;
+    const { layout, images, documents } = props;
     const direction = useDirection();
     const [state, setState] = useState({ currentIndex: 0, transition: false });
     const imagesRefs = useRef<Array<HTMLImageElement | null>>([]);
@@ -100,6 +102,19 @@ function ProductGallery(props: ProductGalleryProps) {
     const galleryRef = useRef<PhotoSwipe<PhotoSwipeUIDefault.Options> | null>(null);
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
+
+    const [allFiles, setAllFiles] = useState<string[]>([]);
+
+    useEffect(() => {
+        setAllFiles([]);
+        images.forEach((image) => {
+            setAllFiles((prevState) => [...prevState, image]);
+        });
+        documents.forEach((document) => {
+            setAllFiles((prevState) => [...prevState, document]);
+        });
+        setState((prev) => ({ ...prev, currentIndex: 0 }));
+    }, [images]);
 
     const getIndexDependOnDir = useCallback(
         (index: number) => {
@@ -267,45 +282,73 @@ function ProductGallery(props: ProductGalleryProps) {
         getIndexDependOnDirRef.current = getIndexDependOnDir;
     }, [getIndexDependOnDir]);
 
-    const featured = images.map((image, index) => (
-        <div key={index} className="product-image product-image--location--gallery">
-            <AppLink
-                href={`${image}`}
-                className="product-image__body"
-                target="_blank"
-                onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
-            >
-                {/*
-                    The data-width and data-height attributes must contain the size of a larger
-                    version of the product image.
+    const featured = allFiles.map((image, index) => {
+        const isPDF = image.indexOf('pdf') > -1;
+        return (
+            <Fragment key={index}>
+                <div className="product-image product-image--location--gallery ">
+                    {isPDF ? (
+                        <div className="product-image__body">
+                            <Fragment>
+                                <object data={`${image}`} type="application/pdf" width="100%" height="100%" className="product-image__img">
+                                    <p>
+                                        Alternative text - include a link{' '}
+                                        <a href="http://africau.edu/images/default/sample.pdf">to the PDF!</a>
+                                    </p>
+                                </object>
+                                <a onClick={() => window.open(image, '_blank')} className="product-gallery-pdf">
+                                    Open PDF
+                                </a>
+                            </Fragment>
+                        </div>
+                    ) : (
+                        <AppLink
+                            href={`${image}`}
+                            className="product-image__body"
+                            target="_blank"
+                            onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
+                        >
+                            {/*
+                            The data-width and data-height attributes must contain the size of a larger
+                            version of the product image.
 
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the
-                    naturalWidth and naturalHeight property of img.product-image__img.
-                    */}
-                <img
-                    className="product-image__img"
-                    src={image}
-                    alt=""
-                    ref={(element) => {
-                        imagesRefs.current[index] = element;
-                    }}
-                    data-width="700"
-                    data-height="700"
-                />
-            </AppLink>
-        </div>
-    ));
+                            If you do not know the image size, you can remove the data-width and data-height
+                            attribute, in which case the width and height will be obtained from the
+                            naturalWidth and naturalHeight property of img.product-image__img.
+                            */}
 
-    const thumbnails = images.map((image, index) => {
+                            <img
+                                className="product-image__img"
+                                src={image}
+                                alt=""
+                                ref={(element) => {
+                                    imagesRefs.current[index] = element;
+                                }}
+                                data-width="700"
+                                data-height="700"
+                            />
+                        </AppLink>
+                    )}
+                </div>
+            </Fragment>
+        );
+    });
+
+    const thumbnails = allFiles.map((image, index) => {
         const classes = classNames('product-gallery__carousel-item product-image', {
             'product-gallery__carousel-item--active': index === state.currentIndex,
         });
 
+        const isPDF = image.indexOf('pdf') > -1;
+
         return (
             <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
                 <div className="product-image__body">
-                    <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
+                    {isPDF ? (
+                        <img className="product-image__img product-gallery__carousel-image" src={pdf.src} alt="" />
+                    ) : (
+                        <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
+                    )}
                 </div>
             </button>
         );
@@ -331,6 +374,7 @@ function ProductGallery(props: ProductGalleryProps) {
                 </div>
                 <div className="product-gallery__carousel">
                     <GoldfarbSlick {...slickSettingsThumbnails[layout]}>{thumbnails}</GoldfarbSlick>
+                    {/* <GoldfarbSlick {...slickSettingsThumbnails[layout]}></GoldfarbSlick> */}
                 </div>
             </div>
         </div>

@@ -153,7 +153,7 @@ function ProductCard(props: ProductCardProps) {
                     </div>
                 )}
                 {price}
-                {isUserActivated && (
+                {isUserActivated && price && (
                     <div className="product-card__buttons">
                         <div className="product__actions-item">
                             <InputNumber

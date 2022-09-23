@@ -86,7 +86,7 @@ function Product(props: ProductProps) {
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} images={rtProduct?.images ?? []} />
+                <ProductGallery documents={product.documents} layout={layout} images={rtProduct?.images ?? []} />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
