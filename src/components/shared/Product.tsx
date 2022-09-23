@@ -31,6 +31,7 @@ function Product(props: ProductProps) {
     const { product, layout } = props;
 
     const [quantity, setQuantity] = useState<number>(product.unitMult);
+    console.log({ product });
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
@@ -183,7 +184,7 @@ function Product(props: ProductProps) {
 
                     {rtProduct && <div className="product__prices">{prices}</div>}
 
-                    {isUserActivated && (
+                    {isUserActivated && product.finalPrice > 0 && (
                         <form className="product__options">
                             <div className="form-group product__option">
                                 <label htmlFor="product-quantity" className="product__option-label">
