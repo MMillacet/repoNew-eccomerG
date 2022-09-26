@@ -51,6 +51,7 @@ export interface IProduct {
     relatedItems: string[];
     shops: any[];
     listOrder: string;
+    pvp?: number;
 }
 
 export interface IProductPromoSelected {

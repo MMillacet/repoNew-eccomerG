@@ -31,6 +31,7 @@ function ProductCard(props: ProductCardProps) {
     const { product, layout } = props;
 
     const [quantity, setQuantity] = useState<number>(product.unitMult);
+    console.log({ a: product.pvp });
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
@@ -70,6 +71,7 @@ function ProductCard(props: ProductCardProps) {
     let image;
     let price;
     let features;
+    let pvp;
 
     if (product.badges.includes('sale')) {
         badges.push(
@@ -125,6 +127,13 @@ function ProductCard(props: ProductCardProps) {
             </div>
         );
     }
+    if (product.pvp) {
+        pvp = (
+            <div className="product-card__prices">
+                <CurrencyFormat value={product.pvp} currency={rtProduct.currency} />{' '}
+            </div>
+        );
+    }
 
     const handleChangeQuantity = (_quantity: string | number) => {
         const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
@@ -153,6 +162,13 @@ function ProductCard(props: ProductCardProps) {
                     </div>
                 )}
                 {price}
+                {product.pvp > 0 && (
+                    <div className=" product-card__pvp_row">
+                        <div className="product-card__pvp">PVP:</div>
+                        <div>{pvp}</div>
+                    </div>
+                )}
+
                 {isUserActivated && price && (
                     <div className="product-card__buttons">
                         <div className="product__actions-item">
