@@ -8,7 +8,7 @@ export default function AccountPagePassword() {
     return (
         <div className="card">
             <Head>
-                <title>{`Change Password — ${theme.name}`}</title>
+                <title>{`Cambiar contraseña  — ${theme.name}`}</title>
             </Head>
 
             <div className="card-header">
@@ -20,30 +20,15 @@ export default function AccountPagePassword() {
                     <div className="col-12 col-lg-7 col-xl-6">
                         <div className="form-group">
                             <label htmlFor="password-current">Current Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="password-current"
-                                placeholder="Current Password"
-                            />
+                            <input type="password" className="form-control" id="password-current" placeholder="Current Password" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password-new">New Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="password-new"
-                                placeholder="New Password"
-                            />
+                            <input type="password" className="form-control" id="password-new" placeholder="New Password" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password-confirm">Reenter New Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="password-confirm"
-                                placeholder="Reenter New Password"
-                            />
+                            <input type="password" className="form-control" id="password-confirm" placeholder="Reenter New Password" />
                         </div>
 
                         <div className="form-group mt-5 mb-0">

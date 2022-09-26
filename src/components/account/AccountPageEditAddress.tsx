@@ -8,7 +8,7 @@ export default function AccountPageEditAddress() {
     return (
         <div className="card">
             <Head>
-                <title>{`Edit Address — ${theme.name}`}</title>
+                <title>{`Editar dirección — ${theme.name}`}</title>
             </Head>
 
             <div className="card-header">
@@ -21,21 +21,11 @@ export default function AccountPageEditAddress() {
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label htmlFor="checkout-first-name">First Name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="checkout-first-name"
-                                    placeholder="First Name"
-                                />
+                                <input type="text" className="form-control" id="checkout-first-name" placeholder="First Name" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label htmlFor="checkout-last-name">Last Name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="checkout-last-name"
-                                    placeholder="Last Name"
-                                />
+                                <input type="text" className="form-control" id="checkout-last-name" placeholder="Last Name" />
                             </div>
                         </div>
 
@@ -43,19 +33,11 @@ export default function AccountPageEditAddress() {
                             <label htmlFor="checkout-company-name">
                                 Company Name <span className="text-muted">(Optional)</span>
                             </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="checkout-company-name"
-                                placeholder="Company Name"
-                            />
+                            <input type="text" className="form-control" id="checkout-company-name" placeholder="Company Name" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-country">Country</label>
-                            <select
-                                id="checkout-country"
-                                className="form-control form-control-select2"
-                            >
+                            <select id="checkout-country" className="form-control form-control-select2">
                                 <option>Select a country...</option>
                                 <option>United States</option>
                                 <option>Russia</option>
@@ -68,17 +50,11 @@ export default function AccountPageEditAddress() {
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-street-address">Street Address</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="checkout-street-address"
-                                placeholder="Street Address"
-                            />
+                            <input type="text" className="form-control" id="checkout-street-address" placeholder="Street Address" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="checkout-address">
-                                Apartment, suite, unit etc.{' '}
-                                <span className="text-muted">(Optional)</span>
+                                Apartment, suite, unit etc. <span className="text-muted">(Optional)</span>
                             </label>
                             <input type="text" className="form-control" id="checkout-address" />
                         </div>
@@ -98,21 +74,11 @@ export default function AccountPageEditAddress() {
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label htmlFor="checkout-email">Email address</label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    id="checkout-email"
-                                    placeholder="Email address"
-                                />
+                                <input type="email" className="form-control" id="checkout-email" placeholder="Email address" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label htmlFor="checkout-phone">Phone</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="checkout-phone"
-                                    placeholder="Phone"
-                                />
+                                <input type="text" className="form-control" id="checkout-phone" placeholder="Phone" />
                             </div>
                         </div>
 

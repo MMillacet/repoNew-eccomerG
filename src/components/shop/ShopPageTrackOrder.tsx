@@ -19,7 +19,7 @@ function ShopPageTrackOrder() {
     return (
         <Fragment>
             <Head>
-                <title>{`Track Order — ${theme.name}`}</title>
+                <title>{`Seguimiento de orden — ${theme.name}`}</title>
             </Head>
 
             <PageHeader breadcrumb={breadcrumb} />
@@ -34,33 +34,20 @@ function ShopPageTrackOrder() {
                                         <h1 className="pt-lg-0 pt-2">Track Order</h1>
                                     </div>
                                     <p className="mb-4 pt-2">
-                                        Vestibulum sem odio, ullamcorper a imperdiet tincidunt sed
-                                        magna felis, consequat a erat ut, rutrum finibus odio.
+                                        Vestibulum sem odio, ullamcorper a imperdiet tincidunt sed magna felis, consequat a erat ut, rutrum
+                                        finibus odio.
                                     </p>
                                     <form>
                                         <div className="form-group">
                                             <label htmlFor="track-order-id">Order ID</label>
-                                            <input
-                                                id="track-order-id"
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Order ID"
-                                            />
+                                            <input id="track-order-id" type="text" className="form-control" placeholder="Order ID" />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="track-email">Email address</label>
-                                            <input
-                                                id="track-email"
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="Email address"
-                                            />
+                                            <input id="track-email" type="email" className="form-control" placeholder="Email address" />
                                         </div>
                                         <div className="pt-3">
-                                            <button
-                                                type="submit"
-                                                className="btn btn-primary btn-lg btn-block"
-                                            >
+                                            <button type="submit" className="btn btn-primary btn-lg btn-block">
                                                 Track
                                             </button>
                                         </div>

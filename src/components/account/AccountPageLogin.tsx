@@ -21,7 +21,7 @@ export default function AccountPageLogin() {
     return (
         <Fragment>
             <Head>
-                <title>{`Login — ${theme.name}`}</title>
+                <title>{`Acceder — ${theme.name}`}</title>
             </Head>
 
             <PageHeader header="My Account" breadcrumb={breadcrumb} />

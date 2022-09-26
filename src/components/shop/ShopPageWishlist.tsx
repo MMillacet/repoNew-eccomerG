@@ -135,7 +135,7 @@ function ShopPageWishlist() {
     return (
         <Fragment>
             <Head>
-                <title>{`Wish List — ${theme.name}`}</title>
+                <title>{`Lista de deseos — ${theme.name}`}</title>
             </Head>
 
             <PageHeader header="Wishlist" breadcrumb={breadcrumb} />

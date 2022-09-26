@@ -207,7 +207,7 @@ function ShopPageCompare() {
     return (
         <Fragment>
             <Head>
-                <title>{`Compare Products Page — ${theme.name}`}</title>
+                <title>{`Pagina de comparación— ${theme.name}`}</title>
             </Head>
 
             <PageHeader header="Comparison" breadcrumb={breadcrumb} />
