@@ -20,7 +20,6 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
         totalItemQuantity,
         productsSelected,
     } = promoContainer;
-    console.log({ productsSelected });
     return (
         <Fragment>
             {productsSelected[0] && productsSelected[0].product && (

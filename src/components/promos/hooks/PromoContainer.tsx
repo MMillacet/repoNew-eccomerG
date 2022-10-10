@@ -44,7 +44,6 @@ const PromoContainer = (promoFetch: IPromo) => {
         setError('');
         productsSelected.forEach((item: IProductPromoSelected) => {
             if (item.quantity > 0) {
-                console.log({ item });
                 if (promo.u_Tipo === 'CM' || promo.u_Tipo === 'CP') {
                     if (item.product.currency === '$') {
                         setTotalNewPriceUYU(
