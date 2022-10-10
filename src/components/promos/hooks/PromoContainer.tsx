@@ -7,9 +7,12 @@ const PromoContainer = (promoFetch: IPromo) => {
     const [view, setView] = useState<string>('view1');
     const [productsSelected, setProductsSelected] = useState<IProductPromoSelected[]>([]);
     const [error, setError] = useState<string>('');
-    const [totalNewPrice, setTotalNewPrice] = useState<number>(0);
-    const [totalOldPrice, setTotalOldPrice] = useState<number>(0);
+    const [totalNewPriceUYU, setTotalNewPriceUYU] = useState<number>(0);
+    const [totalNewPriceUSD, setTotalNewPriceUSD] = useState<number>(0);
+    const [totalOldPriceUYU, setTotalOldPriceUYU] = useState<number>(0);
+    const [totalOldPriceUSD, setTotalOldPriceUSD] = useState<number>(0);
     const [totalQuantity, setTotalQuantity] = useState<number>(0);
+    const [totalItemQuantity, setTotalItemQuantity] = useState<number>(0);
     const products = promoFetch.lines;
 
     useEffect(() => {
@@ -32,29 +35,51 @@ const PromoContainer = (promoFetch: IPromo) => {
     }, [products]);
 
     useEffect(() => {
-        setTotalNewPrice(0);
-        setTotalOldPrice(0);
+        setTotalNewPriceUYU(0);
+        setTotalNewPriceUSD(0);
+        setTotalOldPriceUYU(0);
+        setTotalOldPriceUSD(0);
         setTotalQuantity(0);
+        setTotalItemQuantity(0);
         setError('');
         productsSelected.forEach((item: IProductPromoSelected) => {
             if (item.quantity > 0) {
+                console.log({ item });
                 if (promo.u_Tipo === 'CM' || promo.u_Tipo === 'CP') {
-                    setTotalNewPrice(
-                        (prevState) =>
-                            prevState +
-                            (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
-                                item.quantity *
-                                item.product.factorQty,
-                    );
-                    setTotalOldPrice((prevState) => prevState + item.product.price * item.quantity * item.product.factorQty);
-                } else {
-                    setTotalNewPrice(
+                    if (item.product.currency === '$') {
+                        setTotalNewPriceUYU(
+                            (prevState) =>
+                                prevState +
+                                (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
+                                    item.quantity *
+                                    item.product.factorQty,
+                        );
+                        setTotalOldPriceUYU((prevState) => prevState + item.product.price * item.quantity * item.product.factorQty);
+                    } else {
+                        setTotalNewPriceUSD(
+                            (prevState) =>
+                                prevState +
+                                (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
+                                    item.quantity *
+                                    item.product.factorQty,
+                        );
+                        setTotalOldPriceUSD((prevState) => prevState + item.product.price * item.quantity * item.product.factorQty);
+                    }
+                } else if (item.product.currency === '$') {
+                    setTotalNewPriceUYU(
                         (prevState) =>
                             prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
                     );
-                    setTotalOldPrice((prevState) => prevState + item.product.price * item.quantity);
+                    setTotalOldPriceUYU((prevState) => prevState + item.product.price * item.quantity);
+                } else {
+                    setTotalNewPriceUSD(
+                        (prevState) =>
+                            prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
+                    );
+                    setTotalOldPriceUSD((prevState) => prevState + item.product.price * item.quantity);
                 }
                 setTotalQuantity((prevState) => prevState + item.quantity);
+                setTotalItemQuantity((prevState) => prevState + 1);
             }
         });
     }, [productsSelected]);
@@ -84,11 +109,13 @@ const PromoContainer = (promoFetch: IPromo) => {
                 setError('Condición de promoción no alcanzada');
             }
         } else if (promo.u_Tipo === 'CA' || promo.u_Tipo === 'CM' || promo.u_Tipo === 'CP') {
-            let productsQuantity: number = 0;
-            productsSelected.forEach((item: IProductPromoSelected) => {
-                productsQuantity += item.quantity;
-            });
-            if (productsQuantity >= promo.u_Cantidad) {
+            if (totalQuantity >= promo.u_Cantidad) {
+                setView('view2');
+            } else {
+                setError('Condición de promoción no alcanzada');
+            }
+        } else if (promo.u_Tipo === 'CI') {
+            if (totalItemQuantity >= promo.u_Cantidad) {
                 setView('view2');
             } else {
                 setError('Condición de promoción no alcanzada');
@@ -104,9 +131,12 @@ const PromoContainer = (promoFetch: IPromo) => {
         handleAddItem,
         error,
         handleCheckPromo,
-        totalNewPrice,
-        totalOldPrice,
+        totalNewPriceUYU,
+        totalOldPriceUYU,
+        totalOldPriceUSD,
         totalQuantity,
+        totalItemQuantity,
+        totalNewPriceUSD,
     };
 };
 

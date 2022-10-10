@@ -11,7 +11,16 @@ export interface IPromoProducts {
 }
 
 export default function PromoCheckout({ promoContainer }: IPromoProducts) {
-    const { totalNewPrice, totalOldPrice, totalQuantity, productsSelected, setView } = promoContainer;
+    const {
+        totalOldPriceUYU,
+        totalNewPriceUYU,
+        totalOldPriceUSD,
+        totalNewPriceUSD,
+        totalQuantity,
+        totalItemQuantity,
+        productsSelected,
+        setView,
+    } = promoContainer;
 
     const handleGoBack = () => {
         setView('view1');
@@ -22,7 +31,7 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
     };
 
     const getPriceItem = (item: IProductPromoSelected) => {
-        let price = (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity;
+        let price = (item.product.price - item.product.price * (item.product.finalDiscount / 100)) * item.quantity;
         if (item.product.factorQty) {
             price *= item.product.factorQty;
         }
@@ -59,7 +68,7 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
                         {item.quantity}
                     </td>
                     <td className="cart-table__column cart-table__column--discount" data-title="Discount">
-                        {item.product.u_Porcentaje ? `${item.product.u_Porcentaje}%` : ''}
+                        {item.product.finalDiscount ? `${item.product.finalDiscount}%` : ''}
                     </td>
                     <td className="cart-table__column cart-table__column--total" data-title="Total">
                         <CurrencyFormat value={getPriceItem(item)} currency={item.product.currency} />
@@ -107,21 +116,44 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
                 <div className="products-list__item col-12 ">
                     <div className={'product-card product-card--layout--list'}>
                         <div className="promo-products__price-row product-card__actions row promo-checkout-total-quantity">
-                            <div className="product-card__name promo-checkout-quantity-text">Cantidad Total: </div>
-                            <div> {totalQuantity}</div>
+                            <div className="d-flex">
+                                <div className="product-card__name promo-checkout-quantity-text">
+                                    Cantidad de productos seleccionados :{' '}
+                                </div>
+                                <div> {totalItemQuantity}</div>
+                            </div>
+                            <div className="d-flex">
+                                <div className="product-card__name promo-checkout-quantity-text">Cantidad de unidades pedidas: </div>
+                                <div> {totalQuantity}</div>
+                            </div>
                         </div>
-                        <div className="promo-products__price-row product-card__actions promo-checkout-total-price">
-                            <div className="promo-checkout-price-row">
-                                <div className="product-card__name promo-checkout-quantity-text">Precio Total: </div>
-                                <div className="product-card__prices row">
-                                    <div className="col-12 d-flex">
-                                        <CurrencyFormat value={totalNewPrice} currency={productsSelected[0].product.currency} />
-                                        <div className="product-card__grey-text">con </div>
-                                        <div className="product-card__discount">{productsSelected[0].product.u_Porcentaje}% </div>
+                        <div className="d-grid promo-products__price-row product-card__actions promo-checkout-total-price">
+                            <div className="total-buy">
+                                <div className="product-card__name promo-checkout-quantity-text">Compra Total </div>
+                            </div>
+
+                            <div className="d-flex">
+                                <div className="promo-checkout-price-row">
+                                    <div className="product-card__name promo-checkout-quantity-text">UYU: </div>
+                                    <div className="product-card__prices row">
+                                        <div className="col-12 d-flex">
+                                            <CurrencyFormat value={totalNewPriceUYU} currency={'$'} />
+                                        </div>
+                                        <span className="col-12 product-card__old-price promo-products__price-old">
+                                            <CurrencyFormat value={totalOldPriceUYU} currency={productsSelected[0].product.currency} />
+                                        </span>
                                     </div>
-                                    <span className="col-12 product-card__old-price promo-products__price-old">
-                                        <CurrencyFormat value={totalOldPrice} currency={productsSelected[0].product.currency} />
-                                    </span>
+                                </div>
+                                <div className="promo-checkout-price-row">
+                                    <div className="product-card__name promo-checkout-quantity-text">USD: </div>
+                                    <div className="product-card__prices row">
+                                        <div className="col-12 d-flex">
+                                            <CurrencyFormat value={totalNewPriceUSD} currency={'U$D'} />
+                                        </div>
+                                        <span className="col-12 product-card__old-price promo-products__price-old">
+                                            <CurrencyFormat value={totalOldPriceUSD} currency={productsSelected[0].product.currency} />
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

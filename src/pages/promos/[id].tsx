@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
     const { id } = params as IParams;
 
     try {
-        const promo = await goldfarbApi.getPromo(Number(id), 400092);
+        const promo = await goldfarbApi.getPromo(Number(id), 4001335);
 
         return {
             props: {

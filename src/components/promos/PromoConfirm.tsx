@@ -1,4 +1,4 @@
-import { Fragment, ChangeEvent, useEffect, useState } from 'react';
+import { Fragment, ChangeEvent, useState } from 'react';
 import Head from 'next/head';
 import { useUser } from '@auth0/nextjs-auth0';
 import CurrencyFormat from '../shared/CurrencyFormat';
@@ -12,7 +12,7 @@ export interface IPromoProducts {
 }
 
 export default function PromoConfirm({ promoContainer }: IPromoProducts) {
-    const { setView, productsSelected } = promoContainer;
+    const { setView, productsSelected, totalNewPriceUYU, totalNewPriceUSD } = promoContainer;
 
     const { user } = useUser();
     const { clientHeader }: any = user || {};
@@ -21,10 +21,20 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
-    const [totalNewPrice, setTotalNewPrice] = useState<number>(0);
 
     const handleOrderTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setOrderType(event.target.value);
     const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
+
+    const getProductsLines = () => {
+        const res: any[] = [];
+        productsSelected.forEach((item: IProductPromoSelected) => {
+            if (item.quantity > 0) {
+                res.push({ itemCode: item.product.itemCode, quantity: item.quantity });
+            }
+            return null;
+        });
+        return res;
+    };
 
     const createOrder = () => ({
         header: {
@@ -40,63 +50,40 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             // addressExtention:
             // compraID
         },
-        lines: productsSelected.map((item: IProductPromoSelected) => ({
-            itemCode: item.product.itemCode,
-            quantity: item.quantity,
-        })),
+        lines: getProductsLines(),
     });
 
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
         const order = createOrder();
         try {
             const res = await goldfarbApi.postPromo(order);
-            setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
+            console.log({ res });
+            setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
         } catch (error) {
+            console.log({ error });
             setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }
     };
 
-    useEffect(() => {
-        setTotalNewPrice(0);
-        productsSelected.forEach((item: any) => {
-            if (item.quantity > 0) {
-                if (item.product.factorQty) {
-                    setTotalNewPrice(
-                        (prevState) =>
-                            prevState +
-                            (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
-                                item.quantity *
-                                item.product.factorQty,
-                    );
-                } else {
-                    setTotalNewPrice(
-                        (prevState) =>
-                            prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
-                    );
-                }
-            }
-        });
-    }, [productsSelected]);
-
     const getPriceItem = (item: IProductPromoSelected) => {
-        let price = (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity;
+        let price = (item.product.price - item.product.price * (item.product.finalDiscount / 100)) * item.quantity;
         if (item.product.factorQty) {
             price *= item.product.factorQty;
         }
         return price;
     };
 
-    const getTax = () => (22 * totalNewPrice) / 100;
+    const getTax = (price: number) => (22 * price) / 100;
 
     const totals = () => {
-        const taxPesos = getTax();
-        const taxDollars = getTax();
+        const taxPesos = getTax(totalNewPriceUYU);
+        const taxDollars = getTax(totalNewPriceUSD);
 
         const r2 = (taxPesos || taxDollars) && (
             <tr key={2}>
                 <th>Impuestos</th>
-                <td>{productsSelected[0].product.currency === 'U$D' && <CurrencyFormat value={taxDollars} currency={'U$D'} />}</td>
-                <td>{productsSelected[0].product.currency === '$' && <CurrencyFormat value={taxPesos} />}</td>
+                <td>{<CurrencyFormat value={taxDollars} currency={'U$D'} />}</td>
+                <td>{<CurrencyFormat value={taxPesos} />}</td>
             </tr>
         );
 
@@ -111,7 +98,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                         <tr key={item.id}>
                             <td>{`${item.product.itemName} × ${item.quantity}`}</td>
                             <td>
-                                {item.product.currency === 'U$D' && (
+                                {item.product.currency === 'U$' && (
                                     <CurrencyFormat value={getPriceItem(item)} currency={item.product.currency} />
                                 )}
                             </td>
@@ -142,10 +129,8 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                 <tbody className="checkout__totals-subtotals">
                     <tr>
                         <th>Subtotal</th>
-                        <td>
-                            {productsSelected[0].product.currency === 'U$D' && <CurrencyFormat value={totalNewPrice} currency={'U$D'} />}
-                        </td>
-                        <td>{productsSelected[0].product.currency === '$' && <CurrencyFormat value={totalNewPrice} currency={'$'} />}</td>
+                        <td>{<CurrencyFormat value={totalNewPriceUSD} currency={'U$D'} />}</td>
+                        <td>{<CurrencyFormat value={totalNewPriceUYU} currency={'$'} />}</td>
                     </tr>
                     {totals()}
                 </tbody>
@@ -153,14 +138,8 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             <tfoot className="checkout__totals-footer">
                 <tr>
                     <th>Total</th>
-                    <td>
-                        {productsSelected[0].product.currency === 'U$D' && (
-                            <CurrencyFormat value={totalNewPrice + getTax()} currency={'U$D'} />
-                        )}
-                    </td>
-                    <td>
-                        {productsSelected[0].product.currency === '$' && <CurrencyFormat value={totalNewPrice + getTax()} currency={'$'} />}
-                    </td>
+                    <td>{<CurrencyFormat value={totalNewPriceUSD + getTax(totalNewPriceUSD)} currency={'U$D'} />}</td>
+                    <td>{<CurrencyFormat value={totalNewPriceUYU + getTax(totalNewPriceUYU)} currency={'$'} />}</td>
                 </tr>
             </tfoot>
         </table>

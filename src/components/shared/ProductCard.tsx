@@ -31,7 +31,6 @@ function ProductCard(props: ProductCardProps) {
     const { product, layout } = props;
 
     const [quantity, setQuantity] = useState<number>(product.unitMult);
-    console.log({ a: product.pvp });
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;

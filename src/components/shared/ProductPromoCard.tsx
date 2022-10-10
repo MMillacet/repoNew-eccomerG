@@ -54,9 +54,9 @@ function ProductPromoCard(props: ProductCardProps) {
         );
     }
 
-    if (product && product.price > 0 && product.u_Porcentaje > 0) {
+    if (product && product.price > 0 && product.finalDiscount > 0) {
         let oldPrice = product.price;
-        let newPrice = product.price - product.price * (product.u_Porcentaje / 100);
+        let newPrice = product.price - product.price * (product.finalDiscount / 100);
         if (product.factorQty > 1) {
             oldPrice *= product.factorQty;
             newPrice *= product.factorQty;
@@ -66,7 +66,7 @@ function ProductPromoCard(props: ProductCardProps) {
                     <div className="col-12 d-flex">
                         <CurrencyFormat value={newPrice} currency={product.currency} />
                         <div className="product-card__grey-text">con</div>
-                        <div className="product-card__discount">{product.u_Porcentaje}% </div>
+                        <div className="product-card__discount">{product.finalDiscount}% </div>
                     </div>
                     <span className="col-12 product-card__old-price promo-products__price-old">
                         <CurrencyFormat value={oldPrice} currency={product.currency} />
@@ -79,7 +79,7 @@ function ProductPromoCard(props: ProductCardProps) {
                     <div className="col-12 d-flex">
                         <CurrencyFormat value={newPrice} currency={product.currency} />
                         <div className="product-card__grey-text">con</div>
-                        <div className="product-card__discount">{product.u_Porcentaje}% </div>
+                        <div className="product-card__discount">{product.finalDiscount}% </div>
                     </div>
                     <span className="col-12 product-card__old-price promo-products__price-old">
                         <CurrencyFormat value={oldPrice} currency={product.currency} />
