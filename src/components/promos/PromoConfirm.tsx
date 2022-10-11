@@ -12,12 +12,12 @@ export interface IPromoProducts {
 }
 
 export default function PromoConfirm({ promoContainer }: IPromoProducts) {
-    const { setView, productsSelected, totalNewPriceUYU, totalNewPriceUSD } = promoContainer;
+    const { promo, setView, productsSelected, totalNewPriceUYU, totalNewPriceUSD } = promoContainer;
 
     const { user } = useUser();
     const { clientHeader }: any = user || {};
 
-    const [orderType, setOrderType] = useState('');
+    const [orderType, setOrderType] = useState('R');
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
@@ -37,6 +37,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     };
 
     const createOrder = () => ({
+        idPromo: promo.docEntry,
         header: {
             cardcode: user?.cardcode,
             cardname: user?.name,
@@ -47,8 +48,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             // comments
             discount: clientHeader.discount,
             remito: clientHeader.remito,
-            // addressExtention:
-            // compraID
+            addressExtention: '',
         },
         lines: getProductsLines(),
     });
@@ -56,11 +56,9 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
         const order = createOrder();
         try {
-            const res = await goldfarbApi.postPromo(order);
-            console.log({ res });
+            await goldfarbApi.postPromo(order);
             setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
         } catch (error) {
-            console.log({ error });
             setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }
     };

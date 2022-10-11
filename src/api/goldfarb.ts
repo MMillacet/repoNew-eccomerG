@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import useSWR from 'swr';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
+import { IProduct } from '../interfaces/product';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
@@ -118,26 +120,30 @@ const goldfarbApi = {
         return data;
     },
 
-    // getProductsLookup: async (options: LookupOptions): Promise<{ products: any[] }> => {
-    //     const config: AxiosRequestConfig = {
-    //         baseURL,
-    //         url: '/goldfarb/ProductLookup',
-    //         method: 'post',
-    //         data: options,
-    //     };
+    getProductLookup: async (productId: number, cardcode?: string, withDesc?: string) => {
+        const { data } = useSWR(
+            `${baseURL}/web/productlookup?itemcodes=${[`${productId}`]}&cardcode=${cardcode}&withDesc=${withDesc}`,
+            (url: any) => fetch(url).then((res) => res.json()),
+        );
+        return data;
+        // const config: AxiosRequestConfig = {s
+        //     baseURL,
+        //     url: '/goldfarb/ProductLookup',
+        //     method: 'post',
+        //     data: options,
+        // };
 
-    //     try {
-    //         const { data } = await axios(config);
+        // try {
+        //     const { data } = await axios(config);
 
-    //         data.products = data.products.map((product: any) => makeProduct(product));
+        //     data.products = data.products.map((product: any) => makeProduct(product));
 
-    //         return data;
-    //     } catch (error) {
-    //         return {
-    //             products: [],
-    //         };
-    //     }
-    // },
+        //     return data;
+        // } catch (error) {
+        //     return {
+        //         products: [],
+        //     };
+    },
 
     getProductsLookup: async (options: LookupOptions) => {
         const config: AxiosRequestConfig = {
@@ -445,9 +451,7 @@ const goldfarbApi = {
             baseURL,
             url: '/web/createorderpromo',
             method: 'post',
-            params: {
-                ...orderPromoWeb,
-            },
+            data: orderPromoWeb,
         };
         const { data } = await axios(config);
 

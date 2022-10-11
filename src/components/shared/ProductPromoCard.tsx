@@ -39,7 +39,7 @@ function ProductPromoCard(props: ProductCardProps) {
 
     let image;
     let price;
-
+    console.log({ product });
     if (product.itemCode) {
         image = (
             <div className="product-card__image product-image">
@@ -127,6 +127,7 @@ function ProductPromoCard(props: ProductCardProps) {
                             size="lg"
                             min={0}
                             value={quantity}
+                            step={product.salPackUn}
                             onChange={(quantity) => handleChangeQuantity(quantity)}
                         />
                     </div>

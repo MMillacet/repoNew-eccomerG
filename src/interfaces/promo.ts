@@ -9,6 +9,7 @@ export interface IPromoLine {
     u_Porcentaje: number;
     factorQty: number;
     finalDiscount: number;
+    salPackUn: number;
 }
 export interface IPromo {
     docEntry: number;

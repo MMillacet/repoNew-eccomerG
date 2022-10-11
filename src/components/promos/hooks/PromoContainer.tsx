@@ -136,6 +136,7 @@ const PromoContainer = (promoFetch: IPromo) => {
         totalQuantity,
         totalItemQuantity,
         totalNewPriceUSD,
+        promo,
     };
 };
 
