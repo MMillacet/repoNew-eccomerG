@@ -55,12 +55,15 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
 
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
         const order = createOrder();
-
-        const response = await goldfarbApi.postPromo(order);
-        if (response.status === 'E') {
+        try {
+            const response = await goldfarbApi.postPromo(order);
+            if (response.status === 'E') {
+                setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+            } else {
+                setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
+            }
+        } catch (err) {
             setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
-        } else {
-            setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
         }
     };
 
