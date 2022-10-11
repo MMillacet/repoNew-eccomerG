@@ -39,7 +39,6 @@ function ProductPromoCard(props: ProductCardProps) {
 
     let image;
     let price;
-    console.log({ product });
     if (product.itemCode) {
         image = (
             <div className="product-card__image product-image">
