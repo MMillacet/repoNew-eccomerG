@@ -115,23 +115,25 @@ function ProductPromoCard(props: ProductCardProps) {
                     <AppLink href={`/shop/products/${product.itemCode}`}>{product.itemName}</AppLink>
                 </div>
             </div>
-            <div className=" product-card__actions row promo-card-row">
-                <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>
-                <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-5 ">
-                    <div className="product__actions-item">
-                        <InputNumber
-                            id="product-quantity"
-                            aria-label="Quantity"
-                            className="product__quantity"
-                            size="lg"
-                            min={0}
-                            value={quantity}
-                            step={product.salPackUn}
-                            onChange={(quantity) => handleChangeQuantity(quantity)}
-                        />
+            {isUserActivated && (
+                <div className=" product-card__actions row promo-card-row">
+                    <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>
+                    <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-5 ">
+                        <div className="product__actions-item">
+                            <InputNumber
+                                id="product-quantity"
+                                aria-label="Quantity"
+                                className="product__quantity"
+                                size="lg"
+                                min={0}
+                                value={quantity}
+                                step={product.salPackUn}
+                                onChange={(quantity) => handleChangeQuantity(quantity)}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
