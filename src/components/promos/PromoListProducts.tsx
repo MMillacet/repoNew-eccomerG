@@ -55,7 +55,7 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
 
                                     <div className="d-flex">
                                         <div className="promo-checkout-price-row">
-                                            <div className="product-card__name promo-checkout-quantity-text">UYU: </div>
+                                            {/* <div className="product-card__name promo-checkout-quantity-text">UYU: </div> */}
                                             <div className="product-card__prices row">
                                                 <div className="col-12 d-flex">
                                                     <CurrencyFormat value={totalNewPriceUYU} currency={'$'} />
@@ -73,7 +73,7 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
                                             </div>
                                         </div>
                                         <div className="promo-checkout-price-row">
-                                            <div className="product-card__name promo-checkout-quantity-text">USD: </div>
+                                            {/* <div className="product-card__name promo-checkout-quantity-text">USD: </div> */}
                                             <div className="product-card__prices row">
                                                 <div className="col-12 d-flex">
                                                     <CurrencyFormat value={totalNewPriceUSD} currency={'U$D'} />

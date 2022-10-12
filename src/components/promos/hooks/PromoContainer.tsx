@@ -49,7 +49,7 @@ const PromoContainer = (promoFetch: IPromo) => {
                         setTotalNewPriceUYU(
                             (prevState) =>
                                 prevState +
-                                (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
+                                (item.product.price - item.product.price * (item.product.finalDiscount / 100)) *
                                     item.quantity *
                                     item.product.factorQty,
                         );
@@ -58,7 +58,7 @@ const PromoContainer = (promoFetch: IPromo) => {
                         setTotalNewPriceUSD(
                             (prevState) =>
                                 prevState +
-                                (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) *
+                                (item.product.price - item.product.price * (item.product.finalDiscount / 100)) *
                                     item.quantity *
                                     item.product.factorQty,
                         );
@@ -67,13 +67,13 @@ const PromoContainer = (promoFetch: IPromo) => {
                 } else if (item.product.currency === '$') {
                     setTotalNewPriceUYU(
                         (prevState) =>
-                            prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
+                            prevState + (item.product.price - item.product.price * (item.product.finalDiscount / 100)) * item.quantity,
                     );
                     setTotalOldPriceUYU((prevState) => prevState + item.product.price * item.quantity);
                 } else {
                     setTotalNewPriceUSD(
                         (prevState) =>
-                            prevState + (item.product.price - item.product.price * (item.product.u_Porcentaje / 100)) * item.quantity,
+                            prevState + (item.product.price - item.product.price * (item.product.finalDiscount / 100)) * item.quantity,
                     );
                     setTotalOldPriceUSD((prevState) => prevState + item.product.price * item.quantity);
                 }
