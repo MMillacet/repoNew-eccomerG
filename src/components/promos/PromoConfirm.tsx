@@ -35,6 +35,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         });
         return res;
     };
+    console.log({ a: user?.cardcode });
 
     const createOrder = () => ({
         idPromo: promo.docEntry,

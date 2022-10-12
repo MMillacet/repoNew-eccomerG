@@ -24,6 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
     try {
         if (cardcode) {
             const order = await goldfarbApi.getOrder(orderId, cardcode);
+            console.log({ cardcode });
             return {
                 props: {
                     order,

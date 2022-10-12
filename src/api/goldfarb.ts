@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import useSWR from 'swr';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
-import { IProduct } from '../interfaces/product';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
