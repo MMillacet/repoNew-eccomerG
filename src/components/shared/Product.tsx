@@ -18,6 +18,7 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
+import goldfarb from '../../api/goldfarb';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -45,20 +46,25 @@ function Product(props: ProductProps) {
     //     products: [rtProduct],
     // } = data ?? { products: [null] };
 
-    const fetchPrpduct = () => {
-        const aux = async () => {
-            const data = await fetch(
-                `http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=${product.code}&cardcode=${cardcode}&withDesc=true`,
-            ).then((res) => res.json());
-            setrtProduct(data.products[0]);
-        };
-        aux();
-    };
+    // const fetchPrpduct = () => {
+    //     const aux = async () => {
+    //         const data = await fetch(
+    //             `http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=${product.code}&cardcode=${cardcode}&withDesc=true`,
+    //         ).then((res) => res.json());
+    //         setrtProduct(data.products[0]);
+    //     };
+    //     aux();
+    // };
 
     useEffect(() => {
+        const fetchProduct = async () => {
+            const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');
+            setrtProduct(response);
+        };
+
         try {
             if (cardcode) {
-                fetchPrpduct();
+                fetchProduct();
             }
         } catch (error) {
             console.log({ error });

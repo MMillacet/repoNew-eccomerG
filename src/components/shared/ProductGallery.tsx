@@ -88,9 +88,9 @@ type CreateGalleryFn = (images: PhotoSwipe.Item[], options: PhotoSwipe.Options) 
 export type ProductGalleryLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
 export interface ProductGalleryProps {
-    images: string[];
+    images: any[];
     layout: ProductGalleryLayout;
-    documents: string[];
+    documents: any[];
     videos: any[];
 }
 
@@ -110,13 +110,13 @@ function ProductGallery(props: ProductGalleryProps) {
     useEffect(() => {
         setAllFiles([]);
         images.forEach((image) => {
-            setAllFiles((prevState) => [...prevState, image]);
+            setAllFiles((prevState) => [...prevState, image.url]);
         });
         videos.forEach((video) => {
             setAllFiles((prevState) => [...prevState, video.url]);
         });
         documents.forEach((document) => {
-            setAllFiles((prevState) => [...prevState, document]);
+            setAllFiles((prevState) => [...prevState, document.url]);
         });
 
         setState((prev) => ({ ...prev, currentIndex: 0 }));
@@ -311,7 +311,7 @@ function ProductGallery(props: ProductGalleryProps) {
         }
         if (isPDF) {
             return (
-                <div className="product-image product-image--location--gallery ">
+                <div key={index} className="product-image product-image--location--gallery ">
                     <div className="product-image__body">
                         <Fragment>
                             <object data={`${image}`} type="application/pdf" width="100%" height="100%" className="product-image__img">

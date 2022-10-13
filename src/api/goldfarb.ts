@@ -120,29 +120,28 @@ const goldfarbApi = {
         return data;
     },
 
-    getProductLookup: async (productId: number, cardcode?: string, withDesc?: string) => {
-        const { data } = useSWR(
-            `${baseURL}/web/productlookup?itemcodes=${[`${productId}`]}&cardcode=${cardcode}&withDesc=${withDesc}`,
-            (url: any) => fetch(url).then((res) => res.json()),
-        );
-        return data;
-        // const config: AxiosRequestConfig = {s
-        //     baseURL,
-        //     url: '/goldfarb/ProductLookup',
-        //     method: 'post',
-        //     data: options,
-        // };
+    getProductLookup: async (itemcodes: string, cardcode?: string, withDesc?: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/productlookup',
+            method: 'get',
+            params: {
+                cardcode,
+                itemcodes,
+                withDesc,
+            },
+        };
 
-        // try {
-        //     const { data } = await axios(config);
+        try {
+            const { data } = await axios(config);
 
-        //     data.products = data.products.map((product: any) => makeProduct(product));
-
-        //     return data;
-        // } catch (error) {
-        //     return {
-        //         products: [],
-        //     };
+            return data.products[0];
+        } catch (error) {
+            console.log(error);
+            return {
+                products: [],
+            };
+        }
     },
 
     getProductsLookup: async (options: LookupOptions) => {

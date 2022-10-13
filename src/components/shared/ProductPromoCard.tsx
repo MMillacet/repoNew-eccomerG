@@ -118,7 +118,7 @@ function ProductPromoCard(props: ProductCardProps) {
             {isUserActivated && (
                 <div className=" product-card__actions row promo-card-row">
                     <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>
-                    <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-5 ">
+                    <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-12 ">
                         <div className="product__actions-item">
                             <InputNumber
                                 id="product-quantity"

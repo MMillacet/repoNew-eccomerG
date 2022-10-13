@@ -32,7 +32,7 @@ export default function PromoProducts({ promo }: IPromoProducts) {
 
     return (
         <div className="cart block">
-            <div className="container">
+            <div className="container-xxl">
                 <div className="products-view__content">
                     <div className="products-view__empty-title product-promo-banner">
                         <img style={{ maxWidth: '100%' }} src={promo.u_Banner}></img>

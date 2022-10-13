@@ -19,6 +19,7 @@ import { IProduct } from '../../interfaces/product';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
 import InputNumber from './InputNumber';
+import goldfarb from '../../api/goldfarb';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -41,14 +42,12 @@ function ProductCard(props: ProductCardProps) {
     //     fetch(url).then((res) => res.json()),
     // );
 
-    const fetchProduct = async () => {
-        const data = await fetch(
-            `http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=${product.id}&cardcode=${cardcode}&withDesc=true)`,
-        ).then((res) => res.json());
-        setrtProduct(data.products[0]);
-    };
-
     useEffect(() => {
+        const fetchProduct = async () => {
+            const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');
+            setrtProduct(response);
+        };
+
         try {
             if (cardcode) {
                 fetchProduct();
