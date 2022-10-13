@@ -1,5 +1,5 @@
 // react
-import { Fragment, memo, useState } from 'react';
+import { Fragment, memo, useEffect, useState } from 'react';
 
 // third-party
 import { useUser } from '@auth0/nextjs-auth0';
@@ -29,20 +29,38 @@ export interface ProductCardProps {
 
 function ProductCard(props: ProductCardProps) {
     const { product, layout } = props;
+    // const [dataa, setData] = useState();
 
     const [quantity, setQuantity] = useState<number>(product.unitMult);
-
+    const [rtProduct, setrtProduct] = useState<any>();
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
-    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}`, (url: any) =>
-        fetch(url).then((res) => res.json()),
-    );
+    // const { data } = useSWR(`/api/web/productlookup?itemcodes=${product.id}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
+    //     fetch(url).then((res) => res.json()),
+    // );
 
-    const {
-        products: [rtProduct],
-    } = data ?? { products: [null] };
+    const fetchProduct = async () => {
+        const data = await fetch(
+            `http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=${product.id}&cardcode=${cardcode}&withDesc=true)`,
+        ).then((res) => res.json());
+        setrtProduct(data.products[0]);
+    };
+
+    useEffect(() => {
+        try {
+            if (cardcode) {
+                fetchProduct();
+            }
+        } catch (error) {
+            console.log({ error });
+        }
+    }, [cardcode]);
+
+    // const {
+    //     products: [rtProduct],
+    // } = dataa ?? { products: [null] };
 
     const containerClasses = classNames('product-card', {
         noauth: !isUserActivated,
@@ -108,6 +126,17 @@ function ProductCard(props: ProductCardProps) {
         );
     }
 
+    if (rtProduct && rtProduct.pvp) {
+        <Fragment>
+            <h5 className="d-flex" style={{ alignItems: 'baseline' }}>
+                PVP:{' '}
+                <div className="pvp__prices ">
+                    {rtProduct.pvpCur} {rtProduct.pvp}
+                </div>
+            </h5>
+        </Fragment>;
+    }
+
     if (rtProduct && rtProduct.price > 0 && rtProduct.discount > 0) {
         const oldPrice = rtProduct.price;
         const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
@@ -161,12 +190,7 @@ function ProductCard(props: ProductCardProps) {
                     </div>
                 )}
                 {price}
-                {product.pvp > 0 && (
-                    <div className=" product-card__pvp_row">
-                        <div className="product-card__pvp">PVP:</div>
-                        <div>{pvp}</div>
-                    </div>
-                )}
+                {pvp && <div className="product__name">{pvp}</div>}
 
                 {isUserActivated && price && (
                     <div className="product-card__buttons">

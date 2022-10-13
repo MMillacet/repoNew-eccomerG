@@ -28,6 +28,7 @@ const makeProduct = (product: any) => {
     const subcategory = product.subcategory || product.subCategory || null;
     const subsubcategory = product.subsubcategory || product.subSubCategory || null;
     const currency = product.currency === 'U$' ? 'U$D' : product.currency;
+    // console.log({ aaaaa: product });
 
     return {
         ...product,

@@ -26,7 +26,7 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
                 <div>
                     <div className="products-list__body row promo-product-row">
                         {productsSelected.map((item: IProductPromoSelected, index: number) => (
-                            <div key={index} className="products-list__item col-12 col-sm-6 col-md-6 col-lg-4 ">
+                            <div key={index} className="products-list__item col-12 col-sm-6 col-md-4 col-lg-4 ">
                                 <ProductPromoCard productQuantity={item.quantity} product={item.product} handleAddItem={handleAddItem} />
                             </div>
                         ))}

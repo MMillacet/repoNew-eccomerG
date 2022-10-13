@@ -13,6 +13,7 @@ import GoldfarbSlick, { SlickProps } from './GoldfarbSlick';
 import ZoomIn24Svg from '../../svg/zoom-in-24.svg';
 import { useDirection } from '../../store/locale/localeHooks';
 import pdf from './pdf.png';
+import youtube from './youtube.png';
 
 const slickSettingsFeatured = {
     dots: false,
@@ -90,10 +91,11 @@ export interface ProductGalleryProps {
     images: string[];
     layout: ProductGalleryLayout;
     documents: string[];
+    videos: any[];
 }
 
 function ProductGallery(props: ProductGalleryProps) {
-    const { layout, images, documents } = props;
+    const { layout, images, documents, videos } = props;
     const direction = useDirection();
     const [state, setState] = useState({ currentIndex: 0, transition: false });
     const imagesRefs = useRef<Array<HTMLImageElement | null>>([]);
@@ -110,11 +112,15 @@ function ProductGallery(props: ProductGalleryProps) {
         images.forEach((image) => {
             setAllFiles((prevState) => [...prevState, image]);
         });
+        videos.forEach((video) => {
+            setAllFiles((prevState) => [...prevState, video.url]);
+        });
         documents.forEach((document) => {
             setAllFiles((prevState) => [...prevState, document]);
         });
+
         setState((prev) => ({ ...prev, currentIndex: 0 }));
-    }, [images]);
+    }, [images, videos, documents]);
 
     const getIndexDependOnDir = useCallback(
         (index: number) => {
@@ -284,31 +290,54 @@ function ProductGallery(props: ProductGalleryProps) {
 
     const featured = allFiles.map((image, index) => {
         const isPDF = image.indexOf('pdf') > -1;
+        const isVideo = image.indexOf('youtube') > -1;
+
+        if (isVideo) {
+            const url = image.replace('watch?v=', 'embed/');
+            return (
+                <Fragment key={index}>
+                    <div className="video-responsive ">
+                        <iframe
+                            className=""
+                            src={url}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            title="Embedded youtube"
+                        ></iframe>
+                    </div>
+                </Fragment>
+            );
+        }
+        if (isPDF) {
+            return (
+                <div className="product-image product-image--location--gallery ">
+                    <div className="product-image__body">
+                        <Fragment>
+                            <object data={`${image}`} type="application/pdf" width="100%" height="100%" className="product-image__img">
+                                <p>
+                                    Alternative text - include a link <a href="http://africau.edu/images/default/sample.pdf">to the PDF!</a>
+                                </p>
+                            </object>
+                            <a onClick={() => window.open(image, '_blank')} className="product-gallery-pdf">
+                                Open PDF
+                            </a>
+                        </Fragment>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <Fragment key={index}>
                 <div className="product-image product-image--location--gallery ">
-                    {isPDF ? (
-                        <div className="product-image__body">
-                            <Fragment>
-                                <object data={`${image}`} type="application/pdf" width="100%" height="100%" className="product-image__img">
-                                    <p>
-                                        Alternative text - include a link{' '}
-                                        <a href="http://africau.edu/images/default/sample.pdf">to the PDF!</a>
-                                    </p>
-                                </object>
-                                <a onClick={() => window.open(image, '_blank')} className="product-gallery-pdf">
-                                    Open PDF
-                                </a>
-                            </Fragment>
-                        </div>
-                    ) : (
-                        <AppLink
-                            href={`${image}`}
-                            className="product-image__body"
-                            target="_blank"
-                            onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
-                        >
-                            {/*
+                    <AppLink
+                        href={`${image}`}
+                        className="product-image__body"
+                        target="_blank"
+                        onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
+                    >
+                        {/*
                             The data-width and data-height attributes must contain the size of a larger
                             version of the product image.
 
@@ -317,18 +346,17 @@ function ProductGallery(props: ProductGalleryProps) {
                             naturalWidth and naturalHeight property of img.product-image__img.
                             */}
 
-                            <img
-                                className="product-image__img"
-                                src={image}
-                                alt=""
-                                ref={(element) => {
-                                    imagesRefs.current[index] = element;
-                                }}
-                                data-width="700"
-                                data-height="700"
-                            />
-                        </AppLink>
-                    )}
+                        <img
+                            className="product-image__img"
+                            src={image}
+                            alt=""
+                            ref={(element) => {
+                                imagesRefs.current[index] = element;
+                            }}
+                            data-width="700"
+                            data-height="700"
+                        />
+                    </AppLink>
                 </div>
             </Fragment>
         );
@@ -340,6 +368,17 @@ function ProductGallery(props: ProductGalleryProps) {
         });
 
         const isPDF = image.indexOf('pdf') > -1;
+        const isVideo = image.indexOf('youtube') > -1;
+
+        if (isVideo) {
+            return (
+                <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
+                    <div className="product-image__body">
+                        <img className="product-image__img product-gallery__carousel-image" src={youtube.src} alt="" />
+                    </div>
+                </button>
+            );
+        }
 
         return (
             <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>

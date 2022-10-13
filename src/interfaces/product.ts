@@ -52,6 +52,8 @@ export interface IProduct {
     shops: any[];
     listOrder: string;
     pvp?: number;
+    videos: any[];
+    videoLinks: any[];
 }
 
 export interface IProductPromoSelected {

@@ -1,12 +1,11 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
 import { useUser } from '@auth0/nextjs-auth0';
 
 // application
-import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 import Compare16Svg from '../../svg/compare-16.svg';
@@ -29,22 +28,42 @@ export interface ProductProps {
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
-
+    const [rtProduct, setrtProduct] = useState<any>();
     const [quantity, setQuantity] = useState<number>(product.unitMult);
-    console.log({ product });
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
-
     const cardcode = user && (user.cardcode as string);
 
-    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
-        fetch(url).then((res) => res.json()),
-    );
+    // const cardcode = user && (user.cardcode as string);
+    // // http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=3452&cardcode=4001335&withDesc=true
+    // const { data } = useSWR(`/api/web/productlookup?itemcodes=${product.id}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
+    //     fetch(url).then((res) => res.json()),
+    // );
 
-    const {
-        products: [rtProduct],
-    } = data ?? { products: [null] };
+    // const {
+    //     products: [rtProduct],
+    // } = data ?? { products: [null] };
+
+    const fetchPrpduct = () => {
+        const aux = async () => {
+            const data = await fetch(
+                `http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=${product.code}&cardcode=${cardcode}&withDesc=true`,
+            ).then((res) => res.json());
+            setrtProduct(data.products[0]);
+        };
+        aux();
+    };
+
+    useEffect(() => {
+        try {
+            if (cardcode) {
+                fetchPrpduct();
+            }
+        } catch (error) {
+            console.log({ error });
+        }
+    }, [cardcode]);
 
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
@@ -84,10 +103,31 @@ function Product(props: ProductProps) {
         }
     }
 
+    let pvp;
+
+    if (rtProduct && rtProduct.pvp) {
+        pvp = (
+            <Fragment>
+                <h5 className="d-flex" style={{ alignItems: 'baseline' }}>
+                    PVP:{' '}
+                    <div className="pvp__prices ">
+                        {rtProduct.pvpCur}
+                        {rtProduct.pvp}
+                    </div>
+                </h5>
+            </Fragment>
+        );
+    }
+
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery documents={product.documents} layout={layout} images={rtProduct?.images ?? []} />
+                <ProductGallery
+                    documents={rtProduct?.documents ?? []}
+                    layout={layout}
+                    images={rtProduct?.images ?? []}
+                    videos={rtProduct?.videoLinks ?? []}
+                />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -168,7 +208,7 @@ function Product(props: ProductProps) {
                             </li>
                         )}
                         <li>
-                            Marca: <AppLink href="/">{rtProduct?.brand?.name}</AppLink>
+                            Marca: <AppLink href="/">{rtProduct?.brand}</AppLink>
                         </li>
                         <li>
                             Unidad venta: <AppLink href="/">{rtProduct?.unitsPerItem}</AppLink>
@@ -184,7 +224,9 @@ function Product(props: ProductProps) {
 
                     {rtProduct && <div className="product__prices">{prices}</div>}
 
-                    {isUserActivated && product.finalPrice > 0 && (
+                    {pvp && <div className="product__name">{pvp}</div>}
+
+                    {isUserActivated && rtProduct && rtProduct.price > 0 && (
                         <form className="product__options">
                             <div className="form-group product__option">
                                 <label htmlFor="product-quantity" className="product__option-label">
