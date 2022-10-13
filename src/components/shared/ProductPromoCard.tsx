@@ -77,8 +77,8 @@ function ProductPromoCard(props: ProductCardProps) {
                 <div className="product-card__prices row">
                     <div className="col-12 d-flex">
                         <CurrencyFormat value={newPrice} currency={product.currency} />
-                        <div className="product-card__grey-text">con</div>
-                        <div className="product-card__discount">{product.finalDiscount}% </div>
+
+                        <div className="product-card__discount">(Dto.{product.finalDiscount}%)</div>
                     </div>
                     <span className="col-12 product-card__old-price promo-products__price-old">
                         <CurrencyFormat value={oldPrice} currency={product.currency} />

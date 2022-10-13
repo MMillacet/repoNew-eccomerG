@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import useSWR from 'swr';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
@@ -28,7 +27,6 @@ const makeProduct = (product: any) => {
     const subcategory = product.subcategory || product.subCategory || null;
     const subsubcategory = product.subsubcategory || product.subSubCategory || null;
     const currency = product.currency === 'U$' ? 'U$D' : product.currency;
-    // console.log({ aaaaa: product });
 
     return {
         ...product,

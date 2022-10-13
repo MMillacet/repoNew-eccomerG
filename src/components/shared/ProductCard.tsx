@@ -6,7 +6,6 @@ import { useUser } from '@auth0/nextjs-auth0';
 import classNames from 'classnames';
 
 // application
-import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 // import Compare16Svg from '../../svg/compare-16.svg';
