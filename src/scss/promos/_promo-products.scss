@@ -41,6 +41,14 @@ margin-top: 5px;
     font-size: 13px;
 }
 
+.products-list__item .display-grid{
+    display: grid
+}
+
+.justify-center{
+    justify-content: center
+}
+
 .product-card__discount{
     color: $price-new-color;
     font-weight: $font-weight-semi-bold;

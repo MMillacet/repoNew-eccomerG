@@ -34,14 +34,14 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
                     <Fragment>
                         <div className="products-list__item col-12 ">
                             <div className={'product-card product-card--layout--list'}>
-                                <div className="promo-products__price-row product-card__actions row promo-checkout-total-quantity">
+                                <div className="display-grid promo-products__price-row product-card__actions row promo-checkout-total-quantity">
                                     <div className="d-flex">
                                         <div className="product-card__name promo-checkout-quantity-text">
                                             Cantidad de productos seleccionados :{' '}
                                         </div>
                                         <div> {totalItemQuantity}</div>
                                     </div>
-                                    <div className="d-flex">
+                                    <div className="d-flex justify-center">
                                         <div className="product-card__name promo-checkout-quantity-text">
                                             Cantidad de unidades pedidas:{' '}
                                         </div>
