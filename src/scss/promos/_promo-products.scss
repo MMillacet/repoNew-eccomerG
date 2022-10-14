@@ -49,9 +49,21 @@ margin-top: 5px;
     justify-content: center
 }
 
-.product-card__discount{
+.margin-t{
+    margin-top: 9px;
+}
+
+
+.product-card__discPrcnt{
+    color: $price-new-color;
+    font-weight: 400;
+    // font-size: 14px;
+}
+.product-card__u_Porcentaje{
     color: $price-new-color;
     font-weight: $font-weight-semi-bold;
+    // font-size: 14px;
+    font-size: 20px;
 }
 
 .product-promo-banner{

@@ -25,6 +25,8 @@ function ProductPromoCard(props: ProductCardProps) {
 
     const [quantity, setQuantity] = useState<number>(productQuantity);
 
+    console.log({ product });
+
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
 
@@ -63,12 +65,15 @@ function ProductPromoCard(props: ProductCardProps) {
                 <div className="product-card__prices row">
                     <div className="col-12 promo-prod-box">Precio por caja de {product.factorQty}</div>
                     <div className="col-12 d-flex">
-                        <CurrencyFormat value={newPrice} currency={product.currency} />
-                        <div className="product-card__grey-text">con</div>
-                        <div className="product-card__discount">{product.finalDiscount}% </div>
+                        <span style={{ color: '#b3b3b3' }}>
+                            <CurrencyFormat value={oldPrice} currency={product.currency} />
+                        </span>
+
+                        {product.discPrcnt > 0 && <div className="product-card__discPrcnt">- {product.discPrcnt}%</div>}
+                        {product.u_Porcentaje > 0 && <div className="product-card__u_Porcentaje">- {product.u_Porcentaje}%</div>}
                     </div>
-                    <span className="col-12 product-card__old-price promo-products__price-old">
-                        <CurrencyFormat value={oldPrice} currency={product.currency} />
+                    <span className="col-12 margin-t promo-products__price-old">
+                        <CurrencyFormat value={newPrice} currency={product.currency} />
                     </span>
                 </div>
             );
@@ -76,12 +81,15 @@ function ProductPromoCard(props: ProductCardProps) {
             price = (
                 <div className="product-card__prices row">
                     <div className="col-12 d-flex">
-                        <CurrencyFormat value={newPrice} currency={product.currency} />
+                        <span style={{ color: '#b3b3b3' }}>
+                            <CurrencyFormat value={oldPrice} currency={product.currency} />
+                        </span>
 
-                        <div className="product-card__discount">(Dto.{product.finalDiscount}%)</div>
+                        {product.discPrcnt > 0 && <div className="product-card__discPrcnt">- {product.discPrcnt}%</div>}
+                        {product.u_Porcentaje > 0 && <div className="product-card__u_Porcentaje">- {product.u_Porcentaje}%</div>}
                     </div>
-                    <span className="col-12 product-card__old-price promo-products__price-old">
-                        <CurrencyFormat value={oldPrice} currency={product.currency} />
+                    <span className="col-12 margin-t promo-products__price-old">
+                        <CurrencyFormat value={newPrice} currency={product.currency} />
                     </span>
                 </div>
             );
@@ -117,7 +125,7 @@ function ProductPromoCard(props: ProductCardProps) {
             </div>
             {isUserActivated && (
                 <div className=" product-card__actions row promo-card-row">
-                    <div className="product-promo-price col-7 col-sm-12 col-md-12 col-lg-12 col-xl-7 promo-product-price">{price}</div>
+                    <div className="product-promo-price col-12 promo-product-price">{price}</div>
                     <div className="justify-content-c promo-product__buttons col-5 col-sm-12 col-md-12  col-lg-12 col-xl-12 ">
                         <div className="product__actions-item">
                             <InputNumber

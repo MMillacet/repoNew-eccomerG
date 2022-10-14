@@ -99,13 +99,25 @@ function ProductGallery(props: ProductGalleryProps) {
     const direction = useDirection();
     const [state, setState] = useState({ currentIndex: 0, transition: false });
     const imagesRefs = useRef<Array<HTMLImageElement | null>>([]);
-    const slickFeaturedRef = useRef<Slick>(null);
+    const slickFeaturedRef = useRef<Slick>();
     const createGalleryRef = useRef<Promise<CreateGalleryFn> | null>(null);
     const galleryRef = useRef<PhotoSwipe<PhotoSwipeUIDefault.Options> | null>(null);
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
 
     const [allFiles, setAllFiles] = useState<string[]>([]);
+
+    const getIndexDependOnDir = useCallback(
+        (index: number) => {
+            // we need to invert index id direction === 'rtl' due to react-slick bug
+            if (direction === 'rtl') {
+                return images.length - 1 - index;
+            }
+
+            return index;
+        },
+        [direction, images],
+    );
 
     useEffect(() => {
         setAllFiles([]);
@@ -121,18 +133,6 @@ function ProductGallery(props: ProductGalleryProps) {
 
         setState((prev) => ({ ...prev, currentIndex: 0 }));
     }, [images, videos, documents]);
-
-    const getIndexDependOnDir = useCallback(
-        (index: number) => {
-            // we need to invert index id direction === 'rtl' due to react-slick bug
-            if (direction === 'rtl') {
-                return images.length - 1 - index;
-            }
-
-            return index;
-        },
-        [direction, images],
-    );
 
     const openPhotoswipe = (index: number) => {
         if (!createGalleryRef.current) {
@@ -234,6 +234,12 @@ function ProductGallery(props: ProductGalleryProps) {
             slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(index));
         }
     };
+
+    useEffect(() => {
+        if (slickFeaturedRef.current) {
+            slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(0));
+        }
+    }, [allFiles]);
 
     const handleFeaturedBeforeChange: SlickProps['beforeChange'] = (oldIndex, newIndex) => {
         setState((prev) => ({

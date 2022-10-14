@@ -11,10 +11,10 @@ function CurrencyFormat(props: CurrencyFormatProps) {
     let currency = props.currency || '$';
 
     if (currency === 'U$') {
-        currency = 'U$D';
+        currency = 'U$S';
     }
 
-    return <Fragment>{`${currency}${value.toLocaleString('es-UY', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`}</Fragment>;
+    return <Fragment>{`${currency} ${value.toLocaleString('es-UY', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`}</Fragment>;
 }
 
 export default CurrencyFormat;
