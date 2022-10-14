@@ -131,7 +131,7 @@ function Product(props: ProductProps) {
                 <ProductGallery
                     documents={rtProduct?.documents ?? []}
                     layout={layout}
-                    images={rtProduct?.images ?? []}
+                    images={rtProduct?.images.map((i: any) => i.url) ?? []}
                     videos={rtProduct?.videoLinks ?? []}
                 />
 

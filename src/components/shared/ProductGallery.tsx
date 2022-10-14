@@ -104,19 +104,27 @@ function ProductGallery(props: ProductGalleryProps) {
     const galleryRef = useRef<PhotoSwipe<PhotoSwipeUIDefault.Options> | null>(null);
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
+    const [allFiles, setAllFiles] = useState<string[]>([]);
+
+    useEffect(() => {
+        setAllFiles([...images, ...documents.map((f) => f.url), ...videos.map((f) => f.url)]);
+    }, [images]);
 
     const getIndexDependOnDir = useCallback(
         (index: number) => {
             // we need to invert index id direction === 'rtl' due to react-slick bug
             if (direction === 'rtl') {
-                return images.length - 1 - index;
+                return allFiles.length - 1 - index;
             }
 
             return index;
         },
-        [direction, images],
+        [direction, allFiles],
     );
-    const allFiles = [...images.map((f) => f.url), ...documents.map((f) => f.url), ...videos.map((f) => f.url)];
+
+    if (slickFeaturedRef.current) {
+        slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(0));
+    }
 
     const openPhotoswipe = (index: number) => {
         if (!createGalleryRef.current) {
@@ -218,12 +226,6 @@ function ProductGallery(props: ProductGalleryProps) {
             slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(index));
         }
     };
-
-    useEffect(() => {
-        if (slickFeaturedRef.current) {
-            slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(0));
-        }
-    }, [allFiles]);
 
     const handleFeaturedBeforeChange: SlickProps['beforeChange'] = (oldIndex, newIndex) => {
         setState((prev) => ({
