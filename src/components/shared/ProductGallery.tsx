@@ -105,8 +105,6 @@ function ProductGallery(props: ProductGalleryProps) {
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
 
-    const [allFiles, setAllFiles] = useState<string[]>([]);
-
     const getIndexDependOnDir = useCallback(
         (index: number) => {
             // we need to invert index id direction === 'rtl' due to react-slick bug
@@ -118,21 +116,7 @@ function ProductGallery(props: ProductGalleryProps) {
         },
         [direction, images],
     );
-
-    useEffect(() => {
-        setAllFiles([]);
-        images.forEach((image) => {
-            setAllFiles((prevState) => [...prevState, image.url]);
-        });
-        videos.forEach((video) => {
-            setAllFiles((prevState) => [...prevState, video.url]);
-        });
-        documents.forEach((document) => {
-            setAllFiles((prevState) => [...prevState, document.url]);
-        });
-
-        setState((prev) => ({ ...prev, currentIndex: 0 }));
-    }, [images, videos, documents]);
+    const allFiles = [...images.map((f) => f.url), ...documents.map((f) => f.url), ...videos.map((f) => f.url)];
 
     const openPhotoswipe = (index: number) => {
         if (!createGalleryRef.current) {
