@@ -1,4 +1,4 @@
-import { getSession } from '@auth0/nextjs-auth0';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 // eslint-disable-next-line no-use-before-define
@@ -23,27 +23,30 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
 
     const cardcode = session?.user?.cardcode || null;
 
-    try {
-        if (cardcode) {
+    if (cardcode) {
+        try {
             const promo = await goldfarbApi.getPromo(Number(id), cardcode);
             return {
                 props: {
                     promo,
                 },
             };
+        } catch (error) {
+            return { notFound: true };
         }
-    } catch (error) {
-        return { notFound: true };
     }
     return {
         props: {
-            promo: null,
+            redirect: {
+                destination: '/api/auth/login',
+                permanent: false,
+            },
         },
     };
 }
 
-function Page({ promo }: PageProps) {
+function Page({ promo }: any) {
     return <PromoProducts promo={promo} />;
 }
 
-export default Page;
+export default withPageAuthRequired(Page);
