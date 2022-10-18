@@ -57,7 +57,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         const order = createOrder();
         try {
             const response = await goldfarbApi.postPromo(order);
-            if (response.status === 'E') {
+            if (response.state === 'E') {
                 setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
             } else {
                 setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
