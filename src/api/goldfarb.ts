@@ -132,8 +132,20 @@ const goldfarbApi = {
 
         try {
             const { data } = await axios(config);
+            const code = data.code || data.itemCode;
+            const subcategory = data.subcategory || data.subCategory || null;
+            const subsubcategory = data.subsubcategory || data.subSubCategory || null;
 
-            return { ...data.products[0], id: Number(data.products[0].code) };
+            return {
+                ...data.products[0],
+                id: Number(code),
+                slug: code,
+                code,
+                subcategory,
+                subsubcategory,
+                unitMult: Number(data.unitMult),
+                unitsPerItem: data.unitsPerItem,
+            };
         } catch (error) {
             console.log(error);
             return {

@@ -25,8 +25,6 @@ function ProductPromoCard(props: ProductCardProps) {
 
     const [quantity, setQuantity] = useState<number>(productQuantity);
 
-    console.log({ product });
-
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
 

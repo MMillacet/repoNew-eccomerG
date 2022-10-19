@@ -18,6 +18,7 @@ export interface IProductAttribute {
 }
 
 export interface IProduct {
+    itemCode: string;
     id: number;
     slug: string;
     name: string;

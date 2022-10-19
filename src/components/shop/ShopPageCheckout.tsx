@@ -81,7 +81,7 @@ function ShopPageCheckout() {
             shipToCode,
         },
         lines: cart.items.map((item) => ({
-            itemcode: item.product.code,
+            itemcode: Number(item.product.itemCode),
             description: item.product.title,
             quantity: item.quantity,
             currency: item.product.currency,
