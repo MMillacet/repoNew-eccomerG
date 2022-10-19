@@ -21,7 +21,7 @@ export interface IProduct {
     id: number;
     slug: string;
     name: string;
-    images: string[];
+    images: any[];
     documents: string[];
     compareAtPrice: number | null;
     brand: IBrand | null;
