@@ -76,7 +76,7 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
                                             {/* <div className="product-card__name promo-checkout-quantity-text">USD: </div> */}
                                             <div className="product-card__prices row">
                                                 <div className="col-12 d-flex">
-                                                    <CurrencyFormat value={totalNewPriceUSD} currency={'U$D'} />
+                                                    <CurrencyFormat value={totalNewPriceUSD} currency={'U$'} />
                                                     {/* <div className="product-card__grey-text">con </div>
                                                 <div 
                                                     className="product-card__discount">{productsSelected[0].product.u_Porcentaje}% 

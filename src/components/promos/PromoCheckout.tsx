@@ -148,7 +148,7 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
                                     {/* <div className="product-card__name promo-checkout-quantity-text">USD: </div> */}
                                     <div className="product-card__prices row">
                                         <div className="col-12 d-flex">
-                                            <CurrencyFormat value={totalNewPriceUSD} currency={'U$D'} />
+                                            <CurrencyFormat value={totalNewPriceUSD} currency={'U$'} />
                                         </div>
                                         <span className="col-12 product-card__old-price promo-products__price-old">
                                             <CurrencyFormat value={totalOldPriceUSD} currency={productsSelected[0].product.currency} />

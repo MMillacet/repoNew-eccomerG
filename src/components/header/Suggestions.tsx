@@ -36,7 +36,7 @@ function Suggestions(props: SuggestionsProps) {
                 {product.images && product.images.length > 0 && (
                     <div className="suggestions__item-image product-image">
                         <div className="product-image__body">
-                            <img className="product-image__img" src={product.images[0]} alt="" />
+                            <img className="product-image__img" src={product.images[0].url} alt="" />
                         </div>
                     </div>
                 )}

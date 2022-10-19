@@ -65,7 +65,7 @@ function AccountPageCatalog() {
             <td>
                 <div className="product-image">
                     <AppLink href={url.product(item.product)} className="product-image__body">
-                        <img className="product-image__img" src={item.product.images[0]} alt="" />
+                        <img className="product-image__img" src={item.product.images[0].url} alt="" />
                     </AppLink>
                 </div>
             </td>

@@ -36,26 +36,6 @@ function Product(props: ProductProps) {
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
-    // const cardcode = user && (user.cardcode as string);
-    // // http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=3452&cardcode=4001335&withDesc=true
-    // const { data } = useSWR(`/api/web/productlookup?itemcodes=${product.id}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
-    //     fetch(url).then((res) => res.json()),
-    // );
-
-    // const {
-    //     products: [rtProduct],
-    // } = data ?? { products: [null] };
-
-    // const fetchPrpduct = () => {
-    //     const aux = async () => {
-    //         const data = await fetch(
-    //             `http://app.goldfarb.com.uy/PruebasMain/api/web/productlookup?itemcodes=${product.code}&cardcode=${cardcode}&withDesc=true`,
-    //         ).then((res) => res.json());
-    //         setrtProduct(data.products[0]);
-    //     };
-    //     aux();
-    // };
-
     useEffect(() => {
         const fetchProduct = async () => {
             const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');

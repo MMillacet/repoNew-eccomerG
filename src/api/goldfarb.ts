@@ -26,7 +26,7 @@ const makeProduct = (product: any) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
     const subsubcategory = product.subsubcategory || product.subSubCategory || null;
-    const currency = product.currency === 'U$' ? 'U$D' : product.currency;
+    const { currency } = product;
 
     return {
         ...product,
@@ -133,7 +133,7 @@ const goldfarbApi = {
         try {
             const { data } = await axios(config);
 
-            return data.products[0];
+            return { ...data.products[0], id: Number(data.products[0].code) };
         } catch (error) {
             console.log(error);
             return {

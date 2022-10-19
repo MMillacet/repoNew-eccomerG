@@ -38,7 +38,7 @@ function ShopPageWishlist() {
                 image = (
                     <div className="product-image">
                         <AppLink href={url.product(item)} className="product-image__body">
-                            <img className="product-image__img" src={item.images[0]} alt="" />
+                            <img className="product-image__img" src={item.images[0].url} alt="" />
                         </AppLink>
                     </div>
                 );

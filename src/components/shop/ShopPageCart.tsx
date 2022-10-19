@@ -206,12 +206,12 @@ function ShopPageCart() {
                                 <div className="card-body">
                                     <h3 className="card-title">Totales</h3>
                                     <table className="cart__totals">
-                                        {cartTotals('U$D')}
+                                        {cartTotals('U$')}
                                         <tfoot className="cart__totals-footer">
                                             <tr>
                                                 <th>Total dolares</th>
                                                 <td>
-                                                    <CurrencyFormat value={cart.total.U$D} currency={'U$D'} />
+                                                    <CurrencyFormat value={cart.total.U$} currency={'U$'} />
                                                 </td>
                                             </tr>
                                         </tfoot>

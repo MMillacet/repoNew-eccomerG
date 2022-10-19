@@ -84,7 +84,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         const r2 = (taxPesos || taxDollars) && (
             <tr key={2}>
                 <th>Impuestos</th>
-                <td>{<CurrencyFormat value={taxDollars} currency={'U$D'} />}</td>
+                <td>{<CurrencyFormat value={taxDollars} currency={'U$'} />}</td>
                 <td>{<CurrencyFormat value={taxPesos} />}</td>
             </tr>
         );
@@ -122,7 +122,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             <thead className="checkout__totals-header">
                 <tr>
                     <th>Producto</th>
-                    <th>Total U$D</th>
+                    <th>Total U$</th>
                     <th>Total $</th>
                 </tr>
             </thead>
@@ -131,7 +131,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                 <tbody className="checkout__totals-subtotals">
                     <tr>
                         <th>Subtotal</th>
-                        <td>{<CurrencyFormat value={totalNewPriceUSD} currency={'U$D'} />}</td>
+                        <td>{<CurrencyFormat value={totalNewPriceUSD} currency={'U$'} />}</td>
                         <td>{<CurrencyFormat value={totalNewPriceUYU} currency={'$'} />}</td>
                     </tr>
                     {totals()}
@@ -140,7 +140,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             <tfoot className="checkout__totals-footer">
                 <tr>
                     <th>Total</th>
-                    <td>{<CurrencyFormat value={totalNewPriceUSD + getTax(totalNewPriceUSD)} currency={'U$D'} />}</td>
+                    <td>{<CurrencyFormat value={totalNewPriceUSD + getTax(totalNewPriceUSD)} currency={'U$'} />}</td>
                     <td>{<CurrencyFormat value={totalNewPriceUYU + getTax(totalNewPriceUYU)} currency={'$'} />}</td>
                 </tr>
             </tfoot>
