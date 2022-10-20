@@ -97,8 +97,7 @@ function Product(props: ProductProps) {
                 <h5 className="d-flex" style={{ alignItems: 'baseline' }}>
                     PVP:{' '}
                     <div className="pvp__prices ">
-                        {rtProduct.pvpCur}
-                        {rtProduct.pvp}
+                        {rtProduct.pvpCur} {rtProduct.pvp}
                     </div>
                 </h5>
             </Fragment>
