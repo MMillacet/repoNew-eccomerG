@@ -61,14 +61,14 @@ function ProductPromoCard(props: ProductCardProps) {
             newPrice *= product.factorQty;
             price = (
                 <div className="product-card__prices row">
-                    <div className="col-12 promo-prod-box">Precio por caja de {product.factorQty}</div>
-                    <div className="col-12 d-flex">
-                        <span style={{ color: '#b3b3b3' }}>
+                    {/* <div className="col-12 promo-prod-box">Precio por caja de {product.factorQty}</div> */}
+                    <div className="row d-flex">
+                        <span className="col-12" style={{ color: '#b3b3b3' }}>
                             <CurrencyFormat value={oldPrice} currency={product.currency} />
                         </span>
 
-                        {product.discPrcnt > 0 && <div className="product-card__discPrcnt">- {product.discPrcnt}%</div>}
-                        {product.u_Porcentaje > 0 && <div className="product-card__u_Porcentaje">- {product.u_Porcentaje}%</div>}
+                        {product.discPrcnt > 0 && <div className="product-card__discPrcnt col-6">- {product.discPrcnt}%</div>}
+                        {product.u_Porcentaje > 0 && <div className="product-card__u_Porcentaje col-6">- {product.u_Porcentaje}%</div>}
                     </div>
                     <span className="col-12 margin-t promo-products__price-old">
                         <CurrencyFormat value={newPrice} currency={product.currency} />
@@ -79,12 +79,15 @@ function ProductPromoCard(props: ProductCardProps) {
             price = (
                 <div className="product-card__prices row">
                     <div className="col-12 d-flex">
-                        <span style={{ color: '#b3b3b3' }}>
-                            <CurrencyFormat value={oldPrice} currency={product.currency} />
-                        </span>
-
-                        {product.discPrcnt > 0 && <div className="product-card__discPrcnt">- {product.discPrcnt}%</div>}
-                        {product.u_Porcentaje > 0 && <div className="product-card__u_Porcentaje">- {product.u_Porcentaje}%</div>}
+                        <div className="row">
+                            <span className="col-12" style={{ color: '#b3b3b3' }}>
+                                <CurrencyFormat value={oldPrice} currency={product.currency} />
+                            </span>
+                            <div className="col-12 d-flex margin-t">
+                                {product.discPrcnt > 0 && <div className="product-card__discPrcnt">- {product.discPrcnt}%</div>}
+                                {product.u_Porcentaje > 0 && <div className="product-card__u_Porcentaje ">- {product.u_Porcentaje}%</div>}
+                            </div>
+                        </div>
                     </div>
                     <span className="col-12 margin-t promo-products__price-old">
                         <CurrencyFormat value={newPrice} currency={product.currency} />
