@@ -65,10 +65,7 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
                                                 </div> */}
                                                 </div>
                                                 <span className="col-12 product-card__old-price promo-products__price-old">
-                                                    <CurrencyFormat
-                                                        value={totalOldPriceUYU}
-                                                        currency={productsSelected[0].product.currency}
-                                                    />
+                                                    <CurrencyFormat value={totalOldPriceUYU} currency={'$'} />
                                                 </span>
                                             </div>
                                         </div>
@@ -83,10 +80,7 @@ export default function PromoListProducts({ promoContainer }: IPromoProducts) {
                                                 </div> */}
                                                 </div>
                                                 <span className="col-12 product-card__old-price promo-products__price-old">
-                                                    <CurrencyFormat
-                                                        value={totalOldPriceUSD}
-                                                        currency={productsSelected[0].product.currency}
-                                                    />
+                                                    <CurrencyFormat value={totalOldPriceUSD} currency={'U$'} />
                                                 </span>
                                             </div>
                                         </div>
