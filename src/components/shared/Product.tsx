@@ -39,7 +39,6 @@ function Product(props: ProductProps) {
     useEffect(() => {
         const fetchProduct = async () => {
             const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');
-            console.log({ response });
             setrtProduct(response);
         };
 
@@ -60,8 +59,6 @@ function Product(props: ProductProps) {
         if (typeof quantity === 'string') {
             return Promise.resolve();
         }
-
-        console.log({ rtProduct });
 
         return cartAddItem(rtProduct, [], quantity);
     };
