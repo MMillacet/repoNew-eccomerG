@@ -24,6 +24,7 @@ export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
 export interface ProductProps {
     product: IProduct;
+
     layout: ProductLayout;
 }
 
