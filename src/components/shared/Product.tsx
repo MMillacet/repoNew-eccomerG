@@ -1,11 +1,12 @@
 // react
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
 import { useUser } from '@auth0/nextjs-auth0';
 
 // application
+import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 import Compare16Svg from '../../svg/compare-16.svg';
@@ -18,7 +19,6 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
-import goldfarb from '../../api/goldfarb';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -29,25 +29,19 @@ export interface ProductProps {
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
-    const [rtProduct, setrtProduct] = useState<any>();
     const [quantity, setQuantity] = useState<number>(product.unitMult);
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');
-            setrtProduct(response);
-        };
+    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
+        fetch(url).then((res) => res.json()),
+    );
 
-        try {
-            fetchProduct();
-        } catch (error) {
-            console.log({ error });
-        }
-    }, [cardcode]);
+    const {
+        products: [rtProduct],
+    } = data ?? { products: [null] };
 
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
