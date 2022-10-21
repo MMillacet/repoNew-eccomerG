@@ -50,10 +50,6 @@ const makeProduct = (product: any) => {
 };
 
 const goldfarbApi = {
-    /**
-     * Configuration
-     * */
-
     getExchangeRate: async () => {
         const config: AxiosRequestConfig = {
             baseURL,
