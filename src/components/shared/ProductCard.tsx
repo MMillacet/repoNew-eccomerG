@@ -1,11 +1,12 @@
 // react
-import { Fragment, memo, useEffect, useState } from 'react';
+import { Fragment, memo, useState } from 'react';
 
 // third-party
 import { useUser } from '@auth0/nextjs-auth0';
 import classNames from 'classnames';
 
 // application
+import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 // import Compare16Svg from '../../svg/compare-16.svg';
@@ -18,7 +19,6 @@ import { IProduct } from '../../interfaces/product';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
 import InputNumber from './InputNumber';
-import goldfarb from '../../api/goldfarb';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -32,31 +32,18 @@ function ProductCard(props: ProductCardProps) {
     // const [dataa, setData] = useState();
 
     const [quantity, setQuantity] = useState<number>(product.unitMult);
-    const [rtProduct, setrtProduct] = useState<any>();
+    // const [rtProduct, setrtProduct] = useState<any>();
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
-    // const { data } = useSWR(`/api/web/productlookup?itemcodes=${product.id}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
-    //     fetch(url).then((res) => res.json()),
-    // );
+    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
+        fetch(url).then((res) => res.json()),
+    );
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');
-            setrtProduct(response);
-        };
-
-        try {
-            fetchProduct();
-        } catch (error) {
-            console.log({ error });
-        }
-    }, [cardcode]);
-
-    // const {
-    //     products: [rtProduct],
-    // } = dataa ?? { products: [null] };
+    const {
+        products: [rtProduct],
+    } = data ?? { products: [null] };
 
     const containerClasses = classNames('product-card', {
         noauth: !isUserActivated,
