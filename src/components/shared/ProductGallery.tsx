@@ -395,7 +395,7 @@ function ProductGallery(props: ProductGalleryProps) {
                         </button>
                     )}
                     <GoldfarbSlick
-                        ref={slickFeaturedRef}
+                        ref={slickFeaturedRef as any}
                         {...slickSettingsFeatured}
                         beforeChange={handleFeaturedBeforeChange}
                         afterChange={handleFeaturedAfterChange}
@@ -405,7 +405,6 @@ function ProductGallery(props: ProductGalleryProps) {
                 </div>
                 <div className="product-gallery__carousel">
                     <GoldfarbSlick {...slickSettingsThumbnails[layout]}>{thumbnails}</GoldfarbSlick>
-                    {/* <GoldfarbSlick {...slickSettingsThumbnails[layout]}></GoldfarbSlick> */}
                 </div>
             </div>
         </div>
