@@ -10,7 +10,7 @@ const nameToSlug = (name) =>
         .replace(/[^a-z0-9]/, '-')
         .replace(/-+/, '-');
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
 const makeProduct = (product) => {
     const code = product.code || product.itemCode;
