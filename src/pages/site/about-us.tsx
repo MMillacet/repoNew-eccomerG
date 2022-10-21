@@ -1,12 +1,13 @@
 // third-party
 import { GetServerSideProps } from 'next';
+import goldfarbApi from '../../api/goldfarb';
 
 // application
 import sanityApi from '../../api/sanity';
 import SitePageAboutUs, { InitData } from '../../components/site/SitePageAboutUs';
 
 export interface PageProps {
-    initData?: InitData;
+    initData: InitData;
 }
 
 function Page(props: PageProps) {
@@ -16,18 +17,23 @@ function Page(props: PageProps) {
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     const { title, subtitle = '', nuestroEquipo, banner, texts } = await sanityApi.getAboutUsContent();
-
-    return {
-        props: {
-            initData: {
-                title,
-                subtitle,
-                team: nuestroEquipo,
-                banner,
-                texts,
+    try {
+        const teamData = await goldfarbApi.getEmployes();
+        return {
+            props: {
+                initData: {
+                    title,
+                    subtitle,
+                    team: nuestroEquipo,
+                    banner,
+                    texts,
+                    teamData,
+                },
             },
-        },
-    };
+        };
+    } catch (error) {
+        return { notFound: true };
+    }
 };
 
 export default Page;

@@ -56,6 +56,14 @@ function ProductsView(props: ProductsViewProps) {
     const handleSortChange = useSetOption('sort', (event) => event.target.value);
     const handleLimitChange = useSetOption('limit', (event) => parseFloat(event.target.value));
 
+    const handlePagination = (e: any) => {
+        handlePageChange(e);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
+
     const shopResetFilters = useShopResetFiltersThunk();
 
     if (productsList === null) {
@@ -178,7 +186,7 @@ function ProductsView(props: ProductsViewProps) {
                         current={options.page || productsList.page}
                         siblings={2}
                         total={productsList.pages}
-                        onPageChange={handlePageChange}
+                        onPageChange={handlePagination}
                     />
                 </div>
             </div>

@@ -1,12 +1,11 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
 import { useUser } from '@auth0/nextjs-auth0';
 
 // application
-import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
 import Compare16Svg from '../../svg/compare-16.svg';
@@ -19,6 +18,7 @@ import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCartAddItem } from '../../store/cart/cartHooks';
+import goldfarb from '../../api/goldfarb';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -29,21 +29,25 @@ export interface ProductProps {
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
-
+    const [rtProduct, setrtProduct] = useState<any>();
     const [quantity, setQuantity] = useState<number>(product.unitMult);
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
-
     const cardcode = user && (user.cardcode as string);
 
-    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
-        fetch(url).then((res) => res.json()),
-    );
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const response = await goldfarb.getProductLookup(product.code, cardcode, 'true');
+            setrtProduct(response);
+        };
 
-    const {
-        products: [rtProduct],
-    } = data ?? { products: [null] };
+        try {
+            fetchProduct();
+        } catch (error) {
+            console.log({ error });
+        }
+    }, [cardcode]);
 
     const cartAddItem = useCartAddItem();
     const wishlistAddItem = useWishlistAddItem();
@@ -83,10 +87,30 @@ function Product(props: ProductProps) {
         }
     }
 
+    let pvp;
+
+    if (rtProduct && rtProduct.pvp) {
+        pvp = (
+            <Fragment>
+                <h5 className="d-flex" style={{ alignItems: 'baseline' }}>
+                    PVP:{' '}
+                    <div className="pvp__prices ">
+                        {rtProduct.pvpCur} {rtProduct.pvp}
+                    </div>
+                </h5>
+            </Fragment>
+        );
+    }
+
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} images={rtProduct?.images ?? []} />
+                <ProductGallery
+                    documents={rtProduct?.documents ?? []}
+                    layout={layout}
+                    images={rtProduct?.images.map((i: any) => i.url) ?? []}
+                    videos={rtProduct?.videoLinks ?? []}
+                />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -167,7 +191,7 @@ function Product(props: ProductProps) {
                             </li>
                         )}
                         <li>
-                            Marca: <AppLink href="/">{rtProduct?.brand?.name}</AppLink>
+                            Marca: <AppLink href="/">{rtProduct?.brand}</AppLink>
                         </li>
                         <li>
                             Unidad venta: <AppLink href="/">{rtProduct?.unitsPerItem}</AppLink>
@@ -183,7 +207,9 @@ function Product(props: ProductProps) {
 
                     {rtProduct && <div className="product__prices">{prices}</div>}
 
-                    {isUserActivated && (
+                    {pvp && <div className="product__name">{pvp}</div>}
+
+                    {isUserActivated && rtProduct && rtProduct.price > 0 && (
                         <form className="product__options">
                             <div className="form-group product__option">
                                 <label htmlFor="product-quantity" className="product__option-label">

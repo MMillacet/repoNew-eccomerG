@@ -81,12 +81,11 @@ function ShopPageCart() {
         const cartItems = cart.items.map((item) => {
             let image;
             let options;
-
             if (item.product.images.length > 0) {
                 image = (
                     <div className="product-image">
                         <AppLink href={url.product(item.product)} className="product-image__body">
-                            <img className="product-image__img" src={item.product.images[0]} alt="" />
+                            <img className="product-image__img" src={item.product.images[0].url} alt="" />
                         </AppLink>
                     </div>
                 );
@@ -207,12 +206,12 @@ function ShopPageCart() {
                                 <div className="card-body">
                                     <h3 className="card-title">Totales</h3>
                                     <table className="cart__totals">
-                                        {cartTotals('U$D')}
+                                        {cartTotals('U$')}
                                         <tfoot className="cart__totals-footer">
                                             <tr>
                                                 <th>Total dolares</th>
                                                 <td>
-                                                    <CurrencyFormat value={cart.total.U$D} currency={'U$D'} />
+                                                    <CurrencyFormat value={cart.total.U$} currency={'U$'} />
                                                 </td>
                                             </tr>
                                         </tfoot>

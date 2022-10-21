@@ -4,7 +4,7 @@ import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
 // const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
-//const baseURL = 'http://localhost:50483/api';
+// const baseURL = 'http://localhost:50483/api';
 
 const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
@@ -26,7 +26,7 @@ const makeProduct = (product: any) => {
     const code = product.code || product.itemCode;
     const subcategory = product.subcategory || product.subCategory || null;
     const subsubcategory = product.subsubcategory || product.subSubCategory || null;
-    const currency = product.currency === 'U$' ? 'U$D' : product.currency;
+    const { currency } = product;
 
     return {
         ...product,
@@ -118,26 +118,41 @@ const goldfarbApi = {
         return data;
     },
 
-    // getProductsLookup: async (options: LookupOptions): Promise<{ products: any[] }> => {
-    //     const config: AxiosRequestConfig = {
-    //         baseURL,
-    //         url: '/goldfarb/ProductLookup',
-    //         method: 'post',
-    //         data: options,
-    //     };
+    getProductLookup: async (itemcodes: string, cardcode?: string, withDesc?: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/productlookup',
+            method: 'get',
+            params: {
+                cardcode,
+                itemcodes,
+                withDesc,
+            },
+        };
 
-    //     try {
-    //         const { data } = await axios(config);
+        try {
+            const { data } = await axios(config);
+            const code = data.products[0].code || data.products[0].itemCode;
+            const subcategory = data.products[0].subcategory || data.products[0].subCategory || null;
+            const subsubcategory = data.products[0].subsubcategory || data.products[0].subSubCategory || null;
 
-    //         data.products = data.products.map((product: any) => makeProduct(product));
-
-    //         return data;
-    //     } catch (error) {
-    //         return {
-    //             products: [],
-    //         };
-    //     }
-    // },
+            return {
+                ...data.products[0],
+                id: Number(code),
+                slug: code,
+                code,
+                subcategory,
+                subsubcategory,
+                unitMult: Number(data.unitMult),
+                unitsPerItem: data.unitsPerItem,
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                products: [],
+            };
+        }
+    },
 
     getProductsLookup: async (options: LookupOptions) => {
         const config: AxiosRequestConfig = {
@@ -390,6 +405,73 @@ const goldfarbApi = {
             url: '/web/getshipping',
             method: 'get',
             params,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getPromoProducts: async (docEntry: number, cardcode: number) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getpromolines',
+            method: 'get',
+            params: {
+                docEntry,
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getPromos: async (cardcode: number) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getpromos',
+            method: 'get',
+            params: {
+                cardcode,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getPromo: async (docEntry: number, cardcode: number) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/getpromo',
+            method: 'get',
+            params: {
+                cardcode,
+                docEntry,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    postPromo: async (orderPromoWeb: any) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/createorderpromo',
+            method: 'post',
+            data: orderPromoWeb,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+
+    getEmployes: async () => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/Employes',
+            method: 'get',
         };
         const { data } = await axios(config);
 

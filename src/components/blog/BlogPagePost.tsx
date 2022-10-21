@@ -67,7 +67,7 @@ export default function BlogPagePost(props: BlogPagePostProps) {
     return (
         <Fragment>
             <Head>
-                <title>{`Blog Post Page — ${theme.name}`}</title>
+                <title>{`Publicar Blog  — ${theme.name}`}</title>
             </Head>
 
             <PageHeader breadcrumb={breadcrumbs} />

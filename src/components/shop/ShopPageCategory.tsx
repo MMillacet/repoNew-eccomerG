@@ -138,7 +138,7 @@ function ShopPageCategory(props: ShopPageCategoryProps) {
     return (
         <Fragment>
             <Head>
-                <title>{`Shop Category Page — ${theme.name}`}</title>
+                <title>{`Productos por categorias — ${theme.name}`}</title>
             </Head>
 
             <PageHeader header={pageTitle} breadcrumb={breadcrumb} />

@@ -30,7 +30,7 @@ export default function AccountPageDashboard() {
     return (
         <div className="dashboard">
             <Head>
-                <title>{`My Account — ${user?.name}`}</title>
+                <title>{`Mi cuenta — ${user?.name}`}</title>
             </Head>
 
             <div className="dashboard__profile card profile-card">

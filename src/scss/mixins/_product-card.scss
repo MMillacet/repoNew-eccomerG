@@ -37,14 +37,12 @@
         flex-shrink: 0;
         width: 190px;
         padding: 16px 20px;
-
         @include direction {
             #{$border-inline-start}: 1px solid $product-card-divider-color;
         }
     }
     .product-card__prices {
         margin-top: 16px;
-        font-size: 18px;
     }
     .product-card__old-price {
         font-size: 14px;

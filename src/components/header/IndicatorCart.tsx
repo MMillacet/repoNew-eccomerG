@@ -14,7 +14,7 @@ import Indicator from './Indicator';
 import url from '../../services/url';
 import { useCart, useCartRemoveItem } from '../../store/cart/cartHooks';
 
-const currencies = ['$', 'U$D'];
+const currencies = ['$', 'U$'];
 
 function IndicatorCart() {
     const cart = useCart();
@@ -53,7 +53,7 @@ function IndicatorCart() {
             image = (
                 <div className="product-image dropcart__product-image">
                     <AppLink href={url.product(item.product)} className="product-image__body">
-                        <img className="product-image__img" src={item.product.images[0]} alt="" />
+                        <img className="product-image__img" src={item.product.images[0].url} alt="" />
                     </AppLink>
                 </div>
             );

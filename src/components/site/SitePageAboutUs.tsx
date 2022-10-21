@@ -2,194 +2,52 @@
 import Head from 'next/head';
 import SanityBlockContent from '@sanity/block-content-to-react';
 
-// application
-// import { useRef } from 'react';
-// import Slick from 'react-slick';
-// import GoldfarbSlick from '../shared/GoldfarbSlick';
-
 // data stubs
 import { useState } from 'react';
 import classNames from 'classnames';
 import { Modal } from 'reactstrap';
-import { ITeamMember } from '../../interfaces/teamMember';
+import { ITeam, ITeamMember } from '../../interfaces/teamMember';
 import { BlockSlideItem } from '../blocks/BlockSlideShow';
 
 import ArrowRoundedDownSvg from '../../svg/arrow-rounded-down-12x7.svg';
 import ArrowRoundedLeftSvg from '../../svg/arrow-rounded-left-8x13.svg';
 
-// import BlockHeader from '../shared/BlockHeader';
-
-// const slickSettings = {
-//     dots: false,
-//     arrows: false,
-//     infinite: true,
-//     speed: 400,
-//     slidesToShow: 5,
-//     slidesToScroll: 5,
-//     responsive: [
-//         {
-//             breakpoint: 1367,
-//             settings: {
-//                 slidesToShow: 4,
-//                 slidesToScroll: 4,
-//             },
-//         },
-//         {
-//             breakpoint: 967,
-//             settings: {
-//                 slidesToShow: 3,
-//                 slidesToScroll: 3,
-//             },
-//         },
-//         {
-//             breakpoint: 767,
-//             settings: {
-//                 slidesToShow: 2,
-//                 slidesToScroll: 2,
-//             },
-//         },
-//         {
-//             breakpoint: 379,
-//             settings: {
-//                 slidesToShow: 1,
-//                 slidesToScroll: 1,
-//             },
-//         },
-//     ],
-// };
 export interface InitData {
     title: string;
     subtitle?: string;
     team?: ITeamMember[];
     banner?: BlockSlideItem;
     texts?: object[];
+    teamData: ITeam[];
 }
 export interface SitePageAboutUsProps {
-    initData?: InitData;
+    initData: InitData;
 }
 
-const teamData = [
-    {
-        name: 'Depto. Logística',
-        members: [
-            { firstName: 'ERNESTO', lastName: 'DE ROSA', role: 'Jefe de Logistica ', team: 'Depto. Logística' },
-            { firstName: 'SUSANA', lastName: 'BASANTA', role: 'Telefonista', team: 'Depto. Logística' },
-            { firstName: 'RAFAEL', lastName: 'AGUILAR', role: 'Atención al pùblico', team: 'Depto. Logística' },
-            { firstName: 'ROSALíA', lastName: 'RAVELO', role: 'Asistente de Logística', team: 'Depto. Logística' },
-            { firstName: 'MAXIMILIANO', lastName: 'RODRIGUEZ', role: 'Administración Logística', team: 'Depto. Logística' },
-            { firstName: 'SANTIAGO', lastName: 'MEDINA', role: 'Asistente Operativo ', team: 'Depto. Logística' },
-            { firstName: 'RUBEN', lastName: 'CARNALES', role: 'Responsable de Recepciòn y Almacenaje', team: 'Depto. Logística' },
-            { firstName: 'RUBEN', lastName: 'TRAVIESO', role: 'Responsable de Expedición', team: 'Depto. Logística' },
-            { firstName: 'MARCELO', lastName: 'NAVIA', role: 'Responsable de Picking', team: 'Depto. Logística' },
-            { firstName: 'FABRIZIO', lastName: 'PERELLI', role: 'Equipo de Tráfico', team: 'Depto. Logística' },
-            { firstName: 'ALEXANDER', lastName: 'MATTOS', role: 'Equipo de Tráfico', team: 'Depto. Logística' },
-            { firstName: 'LUIS', lastName: 'TRUCELLI', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'MATHIAS', lastName: 'MILLACET', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'MARCEL', lastName: 'PUENTE', role: 'Equipo de Tráfico', team: 'Depto. Logística' },
-            { firstName: 'MARIA', lastName: 'CAMARGO', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'JULIAN', lastName: 'QUIROZ', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'MARCOS', lastName: 'DOLGAY', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'LUCAS', lastName: 'GOUX', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'WALTER', lastName: 'MOLINA', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'FEDERICO', lastName: 'LAUNAS', role: 'Equipo de Tráfico', team: 'Depto. Logística' },
-            { firstName: 'MAXIMILIANO', lastName: 'GARCÍA', role: 'Equipo de Tráfico', team: 'Depto. Logística' },
-            { firstName: 'JUAN', lastName: 'PICARDO', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-            { firstName: 'FABIO', lastName: 'RIVERO', role: 'Equipo de Logìstica', team: 'Depto. Logística' },
-        ],
-    },
-    {
-        name: 'Administración',
-        members: [
-            { firstName: 'FLORENCIA', lastName: 'MAYER', role: 'Gerente de Administraciòn y Finanzas', team: 'Administración' },
-            { firstName: 'RODY', lastName: 'BANCHERO', role: 'Encargado de Administracion ', team: 'Administración' },
-            { firstName: 'DANIELA', lastName: 'LANERI', role: 'Auxiliar Administrativo ', team: 'Administración' },
-            { firstName: 'DANIEL', lastName: 'LOPEZ DE HARO', role: 'Auxiliar Administrativo ', team: 'Administración' },
-            { firstName: 'CARINA', lastName: 'PEÑA', role: 'Auxiliar Administrativo ', team: 'Administración' },
-            { firstName: 'PABLO', lastName: 'STABLE', role: 'Auxiliar Administrativo ', team: 'Administración' },
-            { firstName: 'PABLO', lastName: 'TRIPODI', role: 'Auxiliar Administrativo ', team: 'Administración' },
-            { firstName: 'CLAUDIA', lastName: 'AVILA', role: 'Auxiliar de Importaciones', team: 'Administración' },
-            { firstName: 'LETICIA', lastName: 'ROMERO', role: 'Demand Planner ', team: 'Administración' },
-            { firstName: 'JOSEFINA', lastName: 'OSORIO', role: 'Auxiliar de Importaciones ', team: 'Administración' },
-        ],
-    },
-    {
-        name: 'Gestión Humana',
-        members: [{ firstName: 'ALEX', lastName: 'GRZABEL', role: 'Jefe Gestión y Desarrollo Humano ', team: 'Gestión Humana' }],
-    },
-    {
-        name: 'Post-Venta',
-        members: [
-            { firstName: 'JUAN', lastName: 'ROSA', role: 'Responsable de Service ', team: 'Post-Venta' },
-            { firstName: 'ANDRES', lastName: 'DI PAOLA', role: 'Responsable de Service', team: 'Post-Venta' },
-            { firstName: 'ESTEBAN', lastName: 'DALTO', role: 'Auxiliar de Service', team: 'Post-Venta' },
-            { firstName: 'NICOLAS', lastName: 'BERGARA', role: 'Auxiliar de Service', team: 'Post-Venta' },
-        ],
-    },
-    {
-        name: 'Depto Comercial',
-        members: [
-            { firstName: 'PABLO', lastName: 'REBUFFO', role: 'Gerente Comercial ', team: 'Depto Comercial' },
-            { firstName: 'GASTÓN', lastName: 'NÚÑEZ', role: 'Asistente Comercial', team: 'Depto Comercial' },
-            { firstName: 'CAROLAINE', lastName: 'MACHADO', role: 'Merchandiser', team: 'Depto Comercial' },
-            { firstName: 'KOKE', lastName: 'CASTRO', role: 'Responsable de Linea Pinturas', team: 'Depto Comercial' },
-            {
-                firstName: 'CLAUDIA',
-                lastName: 'RAJCHMAN',
-                role: 'Responsable de Línea Ferretería y Ventas Telefónicas',
-                team: 'Depto Comercial',
-            },
-            {
-                firstName: 'MARCOS',
-                lastName: 'VARELA',
-                role: 'Responsable de Línea Goldex y Herramientas Profesionales',
-                team: 'Depto Comercial',
-            },
-            { firstName: 'VALERIA', lastName: 'PIGNATTA', role: 'Responsable de Línea Bazar ', team: 'Depto Comercial' },
-            {
-                firstName: 'JAVIER',
-                lastName: 'GONZALEZ',
-                role: 'Responsable de Línea Electrodomésticos y Marketing',
-                team: 'Depto Comercial',
-            },
-            { firstName: 'SANTIAGO', lastName: 'OLIVERA', role: 'Responsable de Línea  Echo-Shindaiwa', team: 'Depto Comercial' },
-            { firstName: 'ENRIQUE', lastName: 'ESCOTO', role: 'Promotor de Pinturas', team: 'Depto Comercial' },
-            { firstName: 'EDUARDO', lastName: 'GONZALEZ', role: 'Asistente Técnico ', team: 'Depto Comercial' },
-            { firstName: 'ANDRES', lastName: 'SOCA', role: 'Asistente Técnico ', team: 'Depto Comercial' },
-            { firstName: 'BRUNO', lastName: 'PERCIANTE', role: 'Asistente Técnico ', team: 'Depto Comercial' },
-            { firstName: 'OSVALDO', lastName: 'AÑON ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'RAFAEL', lastName: 'MIGLIERINA', role: 'Vendedor de Plaza ', team: 'Depto Comercial' },
-            { firstName: 'MARCELO', lastName: 'BERMUDEZ ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'VICENTE', lastName: 'GAUDIOSO ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'PABLO', lastName: 'MATTOS', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'ALEJANDRO', lastName: 'VANOLI ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'FERNANDO', lastName: 'ETCHEBARNE', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'JORGE', lastName: 'BALSA ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'MAXIMILIANO', lastName: 'ROLANDO ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'ALEJANDRO', lastName: 'DEVINCENZI ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'CLAUDIA', lastName: 'GARCIA', role: 'Vendedor de Plaza ', team: 'Depto Comercial' },
-            { firstName: 'GABRIEL', lastName: 'FERNANDEZ', role: 'Vend. Viajante ', team: 'Depto Comercial' },
-            { firstName: 'ADRIAN', lastName: 'MAZZUCO', role: 'Vendedor de Plaza ', team: 'Depto Comercial' },
-            { firstName: 'ALVARO', lastName: 'CARRIZO', role: 'Vendedor Telefónico', team: 'Depto Comercial' },
-            { firstName: 'ALEJANDRO', lastName: 'TRIBEL', role: 'Vendedor Telefónico', team: 'Depto Comercial' },
-            { firstName: 'GONZALO', lastName: 'MISA', role: 'Vendedor Telefónico', team: 'Depto Comercial' },
-        ],
-    },
-    { name: 'Gerencia Gral.', members: [{ firstName: 'SYLVINA', lastName: 'BLUTH', role: 'Gerente General ', team: 'Gerencia Gral.' }] },
-    {
-        name: 'Informática / Diseño',
-        members: [
-            { firstName: 'OBDULIO', lastName: 'RODRIGUEZ', role: 'Auxiliar de Informática ', team: 'Informática / Diseño' },
-            { firstName: 'REYNALDO', lastName: 'MARTINEZ', role: 'Infraestructura y Diseño ', team: 'Informática / Diseño' },
-            { firstName: 'DIEGO', lastName: 'SILVEIRA', role: 'Auxiliar Administrativo ', team: 'Informática / Diseño' },
-            { firstName: 'ANDREA', lastName: 'GONZALEZ', role: 'Asistente de Diseño', team: 'Informática / Diseño' },
-        ],
-    },
-];
+const getTeamMembers = (team: string, teamData: ITeam[]) => {
+    const teamMembers: any = [];
+    teamData.forEach((teamMember: ITeam) => {
+        if (teamMember.equipo.toUpperCase() === team.toUpperCase()) {
+            teamMembers.push(teamMember);
+        }
+        return null;
+    });
+    return teamMembers;
+};
 
-const TeamsView = (props: { selectedTeam: string; onClick: any }) => (
+const getTeams = (teamData: any) => {
+    const teams: any = [];
+    teamData.forEach((teamMember: any) => {
+        if (!teams.includes(teamMember.equipo)) {
+            teams.push(teamMember.equipo);
+        }
+    });
+    return teams;
+};
+
+const TeamsView = (props: { selectedTeam: string; onClick: any; teamData: ITeam[] }) => (
     <div>
-        {teamData
-            .map((t) => t.name)
+        {getTeams(props.teamData)
             .sort()
             .map((team: string, index: number) => {
                 const isSelected = team.toUpperCase() === props.selectedTeam.toUpperCase();
@@ -208,18 +66,17 @@ const TeamsView = (props: { selectedTeam: string; onClick: any }) => (
     </div>
 );
 
-const MembersView = (props: { selectedTeam: string }) => {
-    const data = teamData.find((t) => t.name.toUpperCase() === props.selectedTeam.toUpperCase());
-    if (data) {
-        const { members } = data;
+const MembersView = (props: { selectedTeam: string; teamData: ITeam[] }) => {
+    const teamMembers = getTeamMembers(props.selectedTeam, props.teamData);
+    if (teamMembers.length > 0) {
         return (
             <div className="teamview">
-                {members.sort().map((member, index) => (
+                {teamMembers.sort().map((member: ITeam, index: number) => (
                     <div className="teamview__member row" key={index}>
                         <div className="col-5">
-                            {member.lastName.toUpperCase()}, {member.firstName.toUpperCase()}
+                            {member.apellido.toUpperCase()}, {member.nombre.toUpperCase()}
                         </div>
-                        <div className="col-7">{member.role.toUpperCase()}</div>
+                        {member.descripcion && <div className="col-7">{member.descripcion.toUpperCase()}</div>}
                     </div>
                 ))}
             </div>
@@ -229,27 +86,14 @@ const MembersView = (props: { selectedTeam: string }) => {
 };
 
 function SitePageAboutUs(props: SitePageAboutUsProps) {
-    const [selectedTeam, setSelectedTeam] = useState(teamData[0].name);
+    const { teamData } = props.initData;
+    const [selectedTeam, setSelectedTeam] = useState<string>(teamData[0].equipo);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleTeamNameClick = (e: any) => {
         const teamClicked = e.target.innerText;
         setSelectedTeam(teamClicked);
     };
-
-    // const slickRef = useRef<Slick>(null);
-
-    // const handleNextClick = () => {
-    //     if (slickRef.current) {
-    //         slickRef.current.slickNext();
-    //     }
-    // };
-
-    // const handlePrevClick = () => {
-    //     if (slickRef.current) {
-    //         slickRef.current.slickPrev();
-    //     }
-    // };
 
     return (
         <div className="about-us">
@@ -278,44 +122,15 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                     <h3 className="about-us__teammembers-title">MIEMBROS DEL EQUIPO</h3>
                     <div className="row">
                         <div className="col-12 col-md-6 col-lg-6 teamnamescontainer">
-                            <TeamsView selectedTeam={selectedTeam} onClick={handleTeamNameClick} />
+                            <TeamsView teamData={teamData} selectedTeam={selectedTeam} onClick={handleTeamNameClick} />
                         </div>
                         <div className="col-12 col-md-6 col-lg-6 teamviewcontainer">
-                            <MembersView selectedTeam={selectedTeam} />
+                            <MembersView teamData={teamData} selectedTeam={selectedTeam} />
                         </div>
                     </div>
                 </div>
 
-                {/* <div className="about-us__team">
-                    <h3 className="about-us__team-title">REFERENTES DEL EQUIPO COMERCIAL</h3>
-                    <BlockHeader title={''} arrows onNext={handleNextClick} onPrev={handlePrevClick} />
-                    <div className="about-us__teammates teammates">
-                        <GoldfarbSlick ref={slickRef} {...slickSettings}>
-                            {props.initData?.team?.map((teamMember) => (
-                                <div key={teamMember.id} className="teammates__item teammate">
-                                    <div className="teammate__avatar">
-                                        <img src={`${teamMember.image?.url}`} alt="" />
-                                    </div>
-                                </div>
-                            ))}
-                        </GoldfarbSlick>
-                    </div>
-                </div> */}
                 <div className="row" style={{ marginTop: '35px' }}>
-                    {/* <div className="about-us__banner col-12 col-md-6 col-lg-6 justify-content-left">
-                        <div
-                            className="about-us__banner-img"
-                            style={{
-                                padding: '15px',
-                            }}
-                        >
-                            <h3 className="about-us__banner-img-overlay-title">RSE</h3>
-                            <h5 className="about-us__banner-img-overlay-text">
-                                Presentamos algunos de los proyectos internos y externos en los que trabajamos con colaboradores de forma
-                                voluntaria.{' '}
-                            </h5>
-                        </div>
-                    </div> */}
                     <div className="about-us__banner col-12 col-md-6 col-lg-6 justify-content-left">
                         <div
                             className="about-us__banner-img"
@@ -395,23 +210,6 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                             </div>
                         </div>
                     </div>
-
-                    {/* <div className="about-us__banner col-12 col-md-6 col-lg-6 justify-content-right">
-                        <div
-                            className="about-us__banner-img"
-                            style={{ backgroundImage: `url('/images/aboutus/Goldfarb - Web Boceto_SOBRE NOSOTROS1-07.png')` }}
-                        >
-                            {' '}
-                            <div className="about-us__banner-img-overlay">
-                                <h3 className="about-us__banner-img-overlay-title">Te ayudamos a mejorar tu casa</h3>
-                                <h5 className="about-us__banner-img-overlay-text">
-                                    Un equipo de colaboradores ayuda a concretar tareas de mantenimiento en la casa de compañeros de
-                                    trabajo, que por diferentes motivos no han podido concretar. A su vez la empresa colabora con la
-                                    donación de materiales.{' '}
-                                </h5>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>
