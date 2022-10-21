@@ -43,9 +43,7 @@ function Product(props: ProductProps) {
         };
 
         try {
-            if (cardcode) {
-                fetchProduct();
-            }
+            fetchProduct();
         } catch (error) {
             console.log({ error });
         }
