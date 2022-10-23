@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
 const axios = require('axios');
 
 const nameToSlug = (name) =>
@@ -10,7 +9,7 @@ const nameToSlug = (name) =>
         .replace(/[^a-z0-9]/, '-')
         .replace(/-+/, '-');
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
 const makeProduct = (product) => {
     const code = product.code || product.itemCode;
@@ -25,7 +24,6 @@ const makeProduct = (product) => {
         subsubcategory,
         unitMult: Number(product.unitMult),
         unitsPerItem: Number(product.unitsPerItem),
-        images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
         availability: product.hasStock ? 'in-stock' : 'out-of-stock',
         brand: {
             name: product.brand,
@@ -59,16 +57,7 @@ const lookup = async (itemcodes) => {
 
     const { data } = await axios(config);
 
-    data.products = await Promise.all(
-        data.products.map(async (product) => {
-            const p = makeProduct(product);
-            const [documents, images] = await Promise.all([getDocuments(p.id), getImages(p.id)]);
-
-            p.images = images;
-            p.documents = documents;
-            return p;
-        }),
-    );
+    data.products = data.products.map(makeProduct);
 
     return data;
 };
@@ -146,99 +135,99 @@ const run = async () => {
     console.log(`Done in ${seconds} seconds`);
 };
 
-const IMG_EXT = ['jpg'];
-const IMG_BASE_URL = 'https://goldfarb.blob.core.windows.net/goldfarb/imagenes/';
+// const IMG_EXT = ['jpg'];
+// const IMG_BASE_URL = 'https://goldfarb.blob.core.windows.net/goldfarb/imagenes/';
 
-const DOCS_EXT = ['jpg', 'pdf'];
-const DOCS_BASE_URL = 'https://goldfarb.blob.core.windows.net/goldfarb/documentos/';
+// const DOCS_EXT = ['jpg', 'pdf'];
+// const DOCS_BASE_URL = 'https://goldfarb.blob.core.windows.net/goldfarb/documentos/';
 
-async function isUrlFound(url) {
-    try {
-        const response = await fetch(url, { method: 'HEAD', cache: 'no-cache' });
-        return response.status === 200;
-    } catch (error) {
-        return false;
-    }
-}
+// async function isUrlFound(url) {
+//     try {
+//         const response = await fetch(url, { method: 'HEAD', cache: 'no-cache' });
+//         return response.status === 200;
+//     } catch (error) {
+//         return false;
+//     }
+// }
 
-async function getDocumentsForExt(id, ext) {
-    const docs = [];
+// async function getDocumentsForExt(id, ext) {
+//     const docs = [];
 
-    let i = 0;
-    let exit = false;
+//     let i = 0;
+//     let exit = false;
 
-    while (!exit && i < 10) {
-        const url = i === 0 ? `${DOCS_BASE_URL}${id}.${ext}` : `${DOCS_BASE_URL}${id}-${i}.${ext}`;
-        // eslint-disable-next-line no-await-in-loop
-        const found = await isUrlFound(url);
+//     while (!exit && i < 10) {
+//         const url = i === 0 ? `${DOCS_BASE_URL}${id}.${ext}` : `${DOCS_BASE_URL}${id}-${i}.${ext}`;
+//         // eslint-disable-next-line no-await-in-loop
+//         const found = await isUrlFound(url);
 
-        if (found) {
-            docs.push(url);
-        } else {
-            exit = true;
-        }
+//         if (found) {
+//             docs.push(url);
+//         } else {
+//             exit = true;
+//         }
 
-        i += 1;
-    }
+//         i += 1;
+//     }
 
-    return docs;
-}
+//     return docs;
+// }
 
-async function getDocuments(id) {
-    try {
-        const docs = [];
+// async function getDocuments(id) {
+//     try {
+//         const docs = [];
 
-        // eslint-disable-next-line no-restricted-syntax
-        for await (const ext of DOCS_EXT) {
-            const extdocs = await getDocumentsForExt(id, ext);
-            docs.push(...extdocs);
-        }
+//         // eslint-disable-next-line no-restricted-syntax
+//         for await (const ext of DOCS_EXT) {
+//             const extdocs = await getDocumentsForExt(id, ext);
+//             docs.push(...extdocs);
+//         }
 
-        return docs;
-    } catch (error) {
-        console.log('getDocuments error', error);
-        throw error;
-    }
-}
+//         return docs;
+//     } catch (error) {
+//         console.log('getDocuments error', error);
+//         throw error;
+//     }
+// }
 
-async function getImagesExt(id, ext) {
-    const imgs = [];
+// async function getImagesExt(id, ext) {
+//     const imgs = [];
 
-    let i = 0;
-    let exit = false;
+//     let i = 0;
+//     let exit = false;
 
-    while (!exit && i < 10) {
-        const url = i === 0 ? `${IMG_BASE_URL}${id}.${ext}` : `${IMG_BASE_URL}${id}-${i}.${ext}`;
-        // eslint-disable-next-line no-await-in-loop
-        const found = await isUrlFound(url);
+//     while (!exit && i < 10) {
+//         const url = i === 0 ? `${IMG_BASE_URL}${id}.${ext}` : `${IMG_BASE_URL}${id}-${i}.${ext}`;
+//         // eslint-disable-next-line no-await-in-loop
+//         const found = await isUrlFound(url);
 
-        if (found) {
-            imgs.push(url);
-        } else {
-            exit = true;
-        }
+//         if (found) {
+//             imgs.push(url);
+//         } else {
+//             exit = true;
+//         }
 
-        i += 1;
-    }
+//         i += 1;
+//     }
 
-    return imgs;
-}
+//     return imgs;
+// }
 
-async function getImages(id) {
-    try {
-        const imgs = [];
+// async function getImages(id) {
+//     try {
+//         const imgs = [];
 
-        // eslint-disable-next-line no-restricted-syntax
-        for await (const ext of IMG_EXT) {
-            const extimgs = await getImagesExt(id, ext);
-            imgs.push(...extimgs);
-        }
+//         // eslint-disable-next-line no-restricted-syntax
+//         for await (const ext of IMG_EXT) {
+//             const extimgs = await getImagesExt(id, ext);
+//             imgs.push(...extimgs);
+//         }
 
-        return imgs;
-    } catch (error) {
-        console.log('getimages', error);
-        throw error;
-    }
-}
+//         return imgs;
+//     } catch (error) {
+//         console.log('getimages', error);
+//         throw error;
+//     }
+// }
 
 run();

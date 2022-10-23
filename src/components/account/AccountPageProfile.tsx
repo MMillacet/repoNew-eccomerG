@@ -40,7 +40,7 @@ export default function AccountPageProfile() {
     return (
         <div className="card">
             <Head>
-                <title>{`Profile — ${user?.name}`}</title>
+                <title>{`Perfil — ${user?.name}`}</title>
             </Head>
 
             <div className="card-header">

@@ -3,7 +3,7 @@ import { CartItem, CartItemOption, CartState, CartTotal } from './cartTypes';
 import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_UPDATE_QUANTITIES, CART_EMPTY, CartAction, CartItemQuantity } from './cartActionTypes';
 import { withClientState } from '../client';
 
-const currencies = ['$', 'U$D'];
+const currencies = ['$', 'U$'];
 
 function findItemIndex(items: CartItem[], product: IProduct, options: CartItemOption[]): number {
     return items.findIndex((item) => {
@@ -206,15 +206,15 @@ const initialState: CartState = {
     items: [],
     subtotal: {
         $: 0,
-        U$D: 0,
+        U$: 0,
     },
     totals: {
         $: [],
-        U$D: [],
+        U$: [],
     },
     total: {
         $: 0,
-        U$D: 0,
+        U$: 0,
     },
 };
 

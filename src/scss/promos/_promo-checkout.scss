@@ -1,0 +1,80 @@
+.promo-checkout-quantity{
+    align-items: center;
+    justify-content: start;
+    grid-gap:5px;
+    width:120px;
+    border-left: 1px solid $product-card-divider-color;
+}
+
+.promo-checkout-quantity-text{
+    font-weight: 600;
+}
+
+
+.promo-checkout-btns{
+    justify-content:center;
+    gap:20px;
+    display: flex;
+}
+
+.promo-checkout-total-price{
+    justify-content:center;
+}
+
+.promo-checkout-total-quantity{
+    align-items: center;
+    justify-content: center;
+    grid-gap:5px
+}
+
+.promo-checkout-price-row{
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+}
+
+.promo-checkout-name{
+    justify-content:center;
+}
+
+.promo-products__price-row {
+    padding: 2px 22px 24px;
+    flex-grow: 1;
+    display: flex;
+}
+
+.promo-products__quantity-row {
+    padding: 2px 22px 24px;
+    flex-grow: 1;
+    display: flex;
+}
+
+.d-grid{
+    display: grid;
+}
+
+.total-buy{
+    justify-content: center;
+    display: flex;
+}
+
+@media screen and (max-width: 1200px) {
+    .promo-products__quantity-row {
+        padding: 2px 10px 24px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .promo-products__quantity-row {
+        padding: 2px 22px 24px;
+    }
+}
+
+
+
+
+
+
+
+
+

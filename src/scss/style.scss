@@ -151,6 +151,7 @@ Table of Contents:
 @import 'common/fake-svg-icon';
 @import 'common/page-header';
 @import 'common/site';
+@import 'remixicon/fonts/remixicon.css';
 
 /* ----------------------------------------
 // Components
@@ -228,6 +229,7 @@ Table of Contents:
 @import 'footer/footer-newsletter';
 @import 'footer/site-footer';
 @import 'footer/totop';
+@import 'footer/social-media';
 
 /* ----------------------------------------
 // Pages
@@ -238,6 +240,7 @@ Table of Contents:
 @import 'pages/faq';
 @import 'pages/how-to-buy';
 @import 'pages/not-found';
+@import 'pages/whatsapp';
 
 /* ----------------------------------------
 // Shop
@@ -313,3 +316,11 @@ Table of Contents:
 @import 'widgets/widget-tags';
 
 @import 'custom';
+
+/* ----------------------------------------
+// Promos
+// ---------------------------------------- */
+@import 'promos/product-promo-confirm';
+@import 'promos/promo-products';
+@import 'promos/promo-checkout';
+

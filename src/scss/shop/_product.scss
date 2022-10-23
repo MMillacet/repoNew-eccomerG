@@ -158,6 +158,31 @@
     letter-spacing: -0.03em;
     color: $price-color;
 }
+
+.pvp__prices {
+    margin-top: 18px;
+    margin-bottom: 14px;
+    font-size: 20px;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.03em;
+    color: $price-color;
+}
+
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+  
 .product__new-price {
     color: $price-new-color;
 }

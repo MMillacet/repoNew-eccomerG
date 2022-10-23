@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 // application
 import FooterContacts from './FooterContacts';
 import FooterLinks from './FooterLinks';
+// import SocialMedia from './SocialMedia';
 // import FooterNewsletter from './FooterNewsletter';
 import ToTop from './ToTop';
 
@@ -32,6 +33,9 @@ const Footer: FunctionComponent = () => {
                         <div className="col-6 col-md-3 col-lg-3">
                             <FooterContacts />
                         </div>
+                        {/* <div className="col-12 col-md-4 col-lg-3 social-media-col">
+                            <SocialMedia />
+                        </div> */}
                     </div>
                 </div>
 

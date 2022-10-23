@@ -49,7 +49,7 @@ export default function AccountPageAddresses() {
     return (
         <div className="addresses-list">
             <Head>
-                <title>{`Address List — ${theme.name}`}</title>
+                <title>{`Lista de direcciones — ${theme.name}`}</title>
             </Head>
 
             <AppLink href="/" className="addresses-list__item addresses-list__item--new">

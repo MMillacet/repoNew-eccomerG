@@ -29,20 +29,17 @@ export interface ProductCardProps {
 
 function ProductCard(props: ProductCardProps) {
     const { product, layout } = props;
+    // const [dataa, setData] = useState();
 
     const [quantity, setQuantity] = useState<number>(product.unitMult);
-
+    // const [rtProduct, setrtProduct] = useState<any>();
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
-    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}`, (url: any) =>
+    const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
         fetch(url).then((res) => res.json()),
     );
-
-    // const { data } = useSWR(cardcode ? product.code : null, async () =>
-    //     goldfarbApi.getProductsLookup({ itemcodes: [`${product.id}`], cardcode }),
-    // );
 
     const {
         products: [rtProduct],
@@ -74,6 +71,7 @@ function ProductCard(props: ProductCardProps) {
     let image;
     let price;
     let features;
+    let pvp;
 
     if (product.badges.includes('sale')) {
         badges.push(
@@ -111,6 +109,17 @@ function ProductCard(props: ProductCardProps) {
         );
     }
 
+    if (rtProduct && rtProduct.pvp) {
+        <Fragment>
+            <h5 className="d-flex" style={{ alignItems: 'baseline' }}>
+                PVP:{' '}
+                <div className="pvp__prices ">
+                    {rtProduct.pvpCur} {rtProduct.pvp}
+                </div>
+            </h5>
+        </Fragment>;
+    }
+
     if (rtProduct && rtProduct.price > 0 && rtProduct.discount > 0) {
         const oldPrice = rtProduct.price;
         const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
@@ -129,20 +138,18 @@ function ProductCard(props: ProductCardProps) {
             </div>
         );
     }
+    if (product.pvp) {
+        pvp = (
+            <div className="product-card__prices">
+                <CurrencyFormat value={product.pvp} currency={rtProduct.currency} />{' '}
+            </div>
+        );
+    }
 
     const handleChangeQuantity = (_quantity: string | number) => {
         const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
         setQuantity(quantity);
     };
-    // if (product.attributes && product.attributes.length) {
-    //     features = (
-    //         <ul className="product-card__features-list">
-    //             {product.attributes.filter((x) => x.featured).map((attribute, index) => (
-    //                 <li key={index}>{`${attribute.name}: ${attribute.values.map((x) => x.name).join(', ')}`}</li>
-    //             ))}
-    //         </ul>
-    //     );
-    // }
 
     return (
         <div className={containerClasses}>
@@ -166,7 +173,9 @@ function ProductCard(props: ProductCardProps) {
                     </div>
                 )}
                 {price}
-                {isUserActivated && (
+                {pvp && <div className="product__name">{pvp}</div>}
+
+                {isUserActivated && price && (
                     <div className="product-card__buttons">
                         <div className="product__actions-item">
                             <InputNumber
@@ -207,34 +216,6 @@ function ProductCard(props: ProductCardProps) {
                                 </Fragment>
                             )}
                         />
-                        {/* <AsyncAction
-                        action={() => wishlistAddItem(product)}
-                        render={({ run, loading }) => (
-                            <button
-                                type="button"
-                                onClick={run}
-                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist', {
-                                    'btn-loading': loading,
-                                })}
-                            >
-                                <Wishlist16Svg />
-                            </button>
-                        )}
-                    /> */}
-                        {/* <AsyncAction
-                        action={() => compareAddItem(product)}
-                        render={({ run, loading }) => (
-                            <button
-                                type="button"
-                                onClick={run}
-                                className={classNames('btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare', {
-                                    'btn-loading': loading,
-                                })}
-                            >
-                                <Compare16Svg />
-                            </button>
-                        )}
-                    /> */}
                     </div>
                 )}
             </div>

@@ -58,7 +58,7 @@ function ShopPageCompare() {
                 image = (
                     <div className="compare-table__product-image product-image">
                         <div className="product-image__body">
-                            <img className="product-image__img" src={product.images[0]} alt="" />
+                            <img className="product-image__img" src={product.images[0].url} alt="" />
                         </div>
                     </div>
                 );
@@ -207,7 +207,7 @@ function ShopPageCompare() {
     return (
         <Fragment>
             <Head>
-                <title>{`Compare Products Page — ${theme.name}`}</title>
+                <title>{`Pagina de comparación— ${theme.name}`}</title>
             </Head>
 
             <PageHeader header="Comparison" breadcrumb={breadcrumb} />

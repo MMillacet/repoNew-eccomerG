@@ -40,7 +40,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
         const r2 = (taxPesos || taxDolares) && (
             <tr key={2}>
                 <th>Impuestos</th>
-                <td>{taxDolares > 0 && <CurrencyFormat value={taxDolares} currency={'U$D'} />}</td>
+                <td>{taxDolares > 0 && <CurrencyFormat value={taxDolares} currency={'U$'} />}</td>
                 <td>{taxPesos > 0 && <CurrencyFormat value={taxPesos} />}</td>
             </tr>
         );
@@ -80,7 +80,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                             <thead>
                                 <tr>
                                     <th>Producto</th>
-                                    <th>Total U$D</th>
+                                    <th>Total U$</th>
                                     <th>Total $</th>
                                 </tr>
                             </thead>
@@ -91,7 +91,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                                     <th>Total</th>
                                     <td>
                                         {order.header.totalDolares > 0 && (
-                                            <CurrencyFormat value={order.header.totalDolares} currency={'U$D'} />
+                                            <CurrencyFormat value={order.header.totalDolares} currency={'U$'} />
                                         )}
                                     </td>
                                     <td>{order.header.totalPesos > 0 && <CurrencyFormat value={order.header.totalPesos} />}</td>

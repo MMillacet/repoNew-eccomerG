@@ -30,3 +30,15 @@
     font-size: 15px;
     margin-bottom: 24px;
 }
+
+.product-card__pvp_row{
+    display: flex;
+    align-items: baseline;
+}
+
+.product-card__pvp{
+    font-size: 15px;
+    line-height: 19px;
+    margin-right: 3px;
+    font-weight: 500;
+}

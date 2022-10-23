@@ -30,12 +30,10 @@ export interface ProductProps {
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
-
     const [quantity, setQuantity] = useState<number>(product.unitMult);
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
-
     const cardcode = user && (user.cardcode as string);
 
     const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
@@ -84,10 +82,30 @@ function Product(props: ProductProps) {
         }
     }
 
+    let pvp;
+
+    if (rtProduct && rtProduct.pvp) {
+        pvp = (
+            <Fragment>
+                <h5 className="d-flex" style={{ alignItems: 'baseline' }}>
+                    PVP:{' '}
+                    <div className="pvp__prices ">
+                        {rtProduct.pvpCur} {rtProduct.pvp}
+                    </div>
+                </h5>
+            </Fragment>
+        );
+    }
+
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} images={rtProduct?.images ?? []} />
+                <ProductGallery
+                    documents={rtProduct?.documents ?? []}
+                    layout={layout}
+                    images={rtProduct?.images.map((i: { url: string }) => i.url) ?? []}
+                    videos={rtProduct?.videoLinks ?? []}
+                />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -184,7 +202,9 @@ function Product(props: ProductProps) {
 
                     {rtProduct && <div className="product__prices">{prices}</div>}
 
-                    {isUserActivated && (
+                    {pvp && <div className="product__name">{pvp}</div>}
+
+                    {isUserActivated && rtProduct && rtProduct.price > 0 && (
                         <form className="product__options">
                             <div className="form-group product__option">
                                 <label htmlFor="product-quantity" className="product__option-label">

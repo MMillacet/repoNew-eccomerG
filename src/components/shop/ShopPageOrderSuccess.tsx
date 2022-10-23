@@ -65,7 +65,7 @@ export default function ShopPageOrderSuccess() {
     return (
         <div className="block order-success">
             <Head>
-                <title>{`Order Success — ${theme.name}`}</title>
+                <title>{`Orden exitosa — ${theme.name}`}</title>
             </Head>
 
             <div className="container">
@@ -99,9 +99,7 @@ export default function ShopPageOrderSuccess() {
                             </li>
                             <li className="order-success__meta-item">
                                 <span className="order-success__meta-title">Payment method:</span>
-                                <span className="order-success__meta-value">
-                                    {order.paymentMethod}
-                                </span>
+                                <span className="order-success__meta-value">{order.paymentMethod}</span>
                             </li>
                         </ul>
                     </div>
@@ -150,9 +148,7 @@ export default function ShopPageOrderSuccess() {
                         <div className="col-sm-6 col-12 px-2">
                             <div className="card address-card">
                                 <div className="address-card__body">
-                                    <div className="address-card__badge address-card__badge--muted">
-                                        Shipping Address
-                                    </div>
+                                    <div className="address-card__badge address-card__badge--muted">Shipping Address</div>
                                     <div className="address-card__name">
                                         {`${order.shippingAddress.firstName} ${order.shippingAddress.lastName}`}
                                     </div>
@@ -165,15 +161,11 @@ export default function ShopPageOrderSuccess() {
                                     </div>
                                     <div className="address-card__row">
                                         <div className="address-card__row-title">Phone Number</div>
-                                        <div className="address-card__row-content">
-                                            {order.shippingAddress.phone}
-                                        </div>
+                                        <div className="address-card__row-content">{order.shippingAddress.phone}</div>
                                     </div>
                                     <div className="address-card__row">
                                         <div className="address-card__row-title">Email Address</div>
-                                        <div className="address-card__row-content">
-                                            {order.shippingAddress.email}
-                                        </div>
+                                        <div className="address-card__row-content">{order.shippingAddress.email}</div>
                                     </div>
                                 </div>
                             </div>
@@ -181,9 +173,7 @@ export default function ShopPageOrderSuccess() {
                         <div className="col-sm-6 col-12 px-2 mt-sm-0 mt-3">
                             <div className="card address-card">
                                 <div className="address-card__body">
-                                    <div className="address-card__badge address-card__badge--muted">
-                                        Billing Address
-                                    </div>
+                                    <div className="address-card__badge address-card__badge--muted">Billing Address</div>
                                     <div className="address-card__name">
                                         {`${order.billingAddress.firstName} ${order.billingAddress.lastName}`}
                                     </div>
@@ -196,15 +186,11 @@ export default function ShopPageOrderSuccess() {
                                     </div>
                                     <div className="address-card__row">
                                         <div className="address-card__row-title">Phone Number</div>
-                                        <div className="address-card__row-content">
-                                            {order.billingAddress.phone}
-                                        </div>
+                                        <div className="address-card__row-content">{order.billingAddress.phone}</div>
                                     </div>
                                     <div className="address-card__row">
                                         <div className="address-card__row-title">Email Address</div>
-                                        <div className="address-card__row-content">
-                                            {order.billingAddress.email}
-                                        </div>
+                                        <div className="address-card__row-content">{order.billingAddress.email}</div>
                                     </div>
                                 </div>
                             </div>

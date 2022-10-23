@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
 import { IBrand } from './brand';
 import { IFilter } from './filter';
 import { IFilterableList, IPaginatedList } from './list';
 import { IShopCategory } from './category';
+import { IPromoLine } from './promo';
 
 export interface IProductAttributeValue {
     slug: string;
@@ -16,10 +18,11 @@ export interface IProductAttribute {
 }
 
 export interface IProduct {
+    itemCode: string;
     id: number;
     slug: string;
     name: string;
-    images: string[];
+    images: any[];
     documents: string[];
     compareAtPrice: number | null;
     brand: IBrand | null;
@@ -49,6 +52,14 @@ export interface IProduct {
     relatedItems: string[];
     shops: any[];
     listOrder: string;
+    pvp?: number;
+    videos: any[];
+    videoLinks: any[];
+}
+
+export interface IProductPromoSelected {
+    quantity: number;
+    product: IPromoLine;
 }
 
 export type IProductsList = IPaginatedList<IProduct> & IFilterableList<IProduct, IFilter>;

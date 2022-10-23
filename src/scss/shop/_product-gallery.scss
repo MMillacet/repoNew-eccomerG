@@ -82,3 +82,14 @@
 .product-gallery__carousel-item--active {
     box-shadow: $product-gallery-item-active-shadow;
 }
+
+.product-gallery-pdf{
+    z-index: 10;
+    position: absolute;
+    top: 100%;
+    font-weight:600;
+    cursor: pointer;
+    font-size:18px;
+    padding:1px;
+    color: #003c7e;
+}

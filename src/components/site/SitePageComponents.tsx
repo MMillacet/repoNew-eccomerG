@@ -77,10 +77,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-loading btn-xl`}>
                         Extra Large
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-loading btn-xl btn-svg-icon`}
-                    >
+                    <button type="button" className={`btn btn-${style} btn-loading btn-xl btn-svg-icon`}>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -88,10 +85,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-loading btn-lg`}>
                         Button Large
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-loading btn-lg btn-svg-icon`}
-                    >
+                    <button type="button" className={`btn btn-${style} btn-loading btn-lg btn-svg-icon`}>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -107,10 +101,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-loading btn-sm`}>
                         Button Small
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-loading btn-sm btn-svg-icon`}
-                    >
+                    <button type="button" className={`btn btn-${style} btn-loading btn-sm btn-svg-icon`}>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -118,10 +109,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-loading btn-xs`}>
                         Extra Small
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-loading btn-xs btn-svg-icon`}
-                    >
+                    <button type="button" className={`btn btn-${style} btn-loading btn-xs btn-svg-icon`}>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -134,11 +122,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-lg`} disabled>
                         Button Large
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-lg btn-svg-icon`}
-                        disabled
-                    >
+                    <button type="button" className={`btn btn-${style} btn-lg btn-svg-icon`} disabled>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -154,11 +138,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-sm`} disabled>
                         Button Small
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-sm btn-svg-icon`}
-                        disabled
-                    >
+                    <button type="button" className={`btn btn-${style} btn-sm btn-svg-icon`} disabled>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -166,11 +146,7 @@ function SitePageComponents() {
                     <button type="button" className={`btn btn-${style} btn-xs`} disabled>
                         Extra Small
                     </button>{' '}
-                    <button
-                        type="button"
-                        className={`btn btn-${style} btn-xs btn-svg-icon`}
-                        disabled
-                    >
+                    <button type="button" className={`btn btn-${style} btn-xs btn-svg-icon`} disabled>
                         <Quickview16Svg />
                     </button>
                 </div>
@@ -181,7 +157,7 @@ function SitePageComponents() {
     return (
         <Fragment>
             <Head>
-                <title>{`Components — ${theme.name}`}</title>
+                <title>{`Componente — ${theme.name}`}</title>
             </Head>
 
             <PageHeader header="Components" breadcrumb={breadcrumb} />
@@ -191,45 +167,32 @@ function SitePageComponents() {
                     <div className="row">
                         <div className="col-12">
                             <div className="alert alert-primary alert-lg mb-3 alert-dismissible fade show">
-                                A simple large alert with{' '}
-                                <AppLink href="/">an example link</AppLink>. Give it a click if you
-                                like.
-                                <button
-                                    type="button"
-                                    className="close"
-                                    data-dismiss="alert"
-                                    aria-label="Close"
-                                >
+                                A simple large alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                     <Cross12Svg />
                                 </button>
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
                             <div className="alert alert-info mb-3">
-                                A simple alert with <AppLink href="/">an example link</AppLink>.
-                                Give it a click if you like.
+                                A simple alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
                             </div>
                             <div className="alert alert-primary mb-3">
-                                A simple alert with <AppLink href="/">an example link</AppLink>.
-                                Give it a click if you like.
+                                A simple alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
                             </div>
                             <div className="alert alert-secondary mb-3 mb-md-5">
-                                A simple alert with <AppLink href="/">an example link</AppLink>.
-                                Give it a click if you like.
+                                A simple alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
                             <div className="alert alert-success mb-3">
-                                A simple alert with <AppLink href="/">an example link</AppLink>.
-                                Give it a click if you like.
+                                A simple alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
                             </div>
                             <div className="alert alert-danger mb-3">
-                                A simple alert with <AppLink href="/">an example link</AppLink>.
-                                Give it a click if you like.
+                                A simple alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
                             </div>
                             <div className="alert alert-warning mb-5">
-                                A simple alert with <AppLink href="/">an example link</AppLink>.
-                                Give it a click if you like.
+                                A simple alert with <AppLink href="/">an example link</AppLink>. Give it a click if you like.
                             </div>
                         </div>
                     </div>
@@ -242,54 +205,25 @@ function SitePageComponents() {
 
                             <div className="form-group">
                                 <label htmlFor="input-default">Default</label>
-                                <input
-                                    id="input-default"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Placeholder"
-                                />
+                                <input id="input-default" type="text" className="form-control" placeholder="Placeholder" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="input-readonly">Readonly</label>
-                                <input
-                                    id="input-readonly"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Placeholder"
-                                    readOnly
-                                />
+                                <input id="input-readonly" type="text" className="form-control" placeholder="Placeholder" readOnly />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="input-disabled">Disabled</label>
-                                <input
-                                    id="input-disabled"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Placeholder"
-                                    disabled
-                                />
+                                <input id="input-disabled" type="text" className="form-control" placeholder="Placeholder" disabled />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="input-success">Success</label>
-                                <input
-                                    id="input-success"
-                                    type="text"
-                                    className="form-control is-valid"
-                                    placeholder="Placeholder"
-                                />
+                                <input id="input-success" type="text" className="form-control is-valid" placeholder="Placeholder" />
                                 <div className="valid-feedback">Example invalid feedback text</div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="input-error">Error</label>
-                                <input
-                                    id="input-error"
-                                    type="text"
-                                    className="form-control is-invalid"
-                                    placeholder="Placeholder"
-                                />
-                                <div className="invalid-feedback">
-                                    Example invalid feedback text
-                                </div>
+                                <input id="input-error" type="text" className="form-control is-invalid" placeholder="Placeholder" />
+                                <div className="invalid-feedback">Example invalid feedback text</div>
                             </div>
 
                             <p className="mt-5">
@@ -297,21 +231,13 @@ function SitePageComponents() {
                             </p>
 
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    className="form-control form-control-lg"
-                                    placeholder="Large"
-                                />
+                                <input type="text" className="form-control form-control-lg" placeholder="Large" />
                             </div>
                             <div className="form-group">
                                 <input type="text" className="form-control" placeholder="Normal" />
                             </div>
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    className="form-control form-control-sm"
-                                    placeholder="Small"
-                                />
+                                <input type="text" className="form-control form-control-sm" placeholder="Small" />
                             </div>
                         </div>
 
@@ -344,9 +270,7 @@ function SitePageComponents() {
                                 <select id="select-error" className="form-control is-invalid">
                                     <option>Select value...</option>
                                 </select>
-                                <div className="invalid-feedback">
-                                    Example invalid feedback text
-                                </div>
+                                <div className="invalid-feedback">Example invalid feedback text</div>
                             </div>
 
                             <p className="mt-5">
@@ -377,71 +301,36 @@ function SitePageComponents() {
 
                             <div className="form-group">
                                 <label htmlFor="textarea-default">Default</label>
-                                <textarea
-                                    id="textarea-default"
-                                    rows={3}
-                                    className="form-control"
-                                    placeholder="Placeholder"
-                                />
+                                <textarea id="textarea-default" rows={3} className="form-control" placeholder="Placeholder" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="textarea-readonly">Readonly</label>
-                                <textarea
-                                    id="textarea-readonly"
-                                    rows={3}
-                                    className="form-control"
-                                    placeholder="Placeholder"
-                                    readOnly
-                                />
+                                <textarea id="textarea-readonly" rows={3} className="form-control" placeholder="Placeholder" readOnly />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="textarea-disabled">Disabled</label>
-                                <textarea
-                                    id="textarea-disabled"
-                                    rows={3}
-                                    className="form-control"
-                                    placeholder="Placeholder"
-                                    disabled
-                                />
+                                <textarea id="textarea-disabled" rows={3} className="form-control" placeholder="Placeholder" disabled />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="textarea-success">Success</label>
-                                <textarea
-                                    id="textarea-success"
-                                    rows={3}
-                                    className="form-control is-valid"
-                                    placeholder="Placeholder"
-                                />
+                                <textarea id="textarea-success" rows={3} className="form-control is-valid" placeholder="Placeholder" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="textarea-error">Error</label>
-                                <textarea
-                                    id="textarea-error"
-                                    rows={3}
-                                    className="form-control is-invalid"
-                                    placeholder="Placeholder"
-                                />
+                                <textarea id="textarea-error" rows={3} className="form-control is-invalid" placeholder="Placeholder" />
                             </div>
 
                             <p className="mt-5">
                                 <strong>Textarea Sizes</strong>
                             </p>
                             <div className="form-group">
-                                <textarea
-                                    rows={3}
-                                    className="form-control form-control-lg"
-                                    placeholder="Large"
-                                />
+                                <textarea rows={3} className="form-control form-control-lg" placeholder="Large" />
                             </div>
                             <div className="form-group">
                                 <textarea rows={3} className="form-control" placeholder="Normal" />
                             </div>
                             <div className="form-group">
-                                <textarea
-                                    rows={3}
-                                    className="form-control form-control-sm"
-                                    placeholder="Small"
-                                />
+                                <textarea rows={3} className="form-control form-control-sm" placeholder="Small" />
                             </div>
                         </div>
                     </div>

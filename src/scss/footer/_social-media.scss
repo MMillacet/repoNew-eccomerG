@@ -1,0 +1,43 @@
+.social-media .facebook{
+    color:#3c5998 ;
+}
+
+.social-media .instagram{
+    color:#e94375 ;
+}
+
+.social-media .twitter{
+    color:#1D9BF0 ;
+}
+
+.social-media{
+    display: flex;
+    align-items: center;  
+}
+.social-media .icons{
+    margin-right: 0.5rem;
+    font-size: 1.6rem;
+    align-items: center; 
+    display: flex;  
+}
+
+.social-media .title{
+color: white;
+font-size: 16px;
+}
+
+.social-media-row{
+    display:grid;
+    grid-gap: 0.6rem;
+}
+.social-media-data{
+    display:grid;
+    justify-content: center;
+    z-index: 30;
+    position: relative;
+}
+.social-media-data .footer-contacts__title{
+    margin-bottom: 15px;
+}
+
+

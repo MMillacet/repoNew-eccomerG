@@ -1,5 +1,5 @@
 // react
-import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { Fragment, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -12,6 +12,8 @@ import AppLink from './AppLink';
 import GoldfarbSlick, { SlickProps } from './GoldfarbSlick';
 import ZoomIn24Svg from '../../svg/zoom-in-24.svg';
 import { useDirection } from '../../store/locale/localeHooks';
+import pdf from './pdf.png';
+import youtube from './youtube.png';
 
 const slickSettingsFeatured = {
     dots: false,
@@ -88,30 +90,42 @@ export type ProductGalleryLayout = 'standard' | 'sidebar' | 'columnar' | 'quickv
 export interface ProductGalleryProps {
     images: string[];
     layout: ProductGalleryLayout;
+    documents: any[];
+    videos: any[];
 }
 
 function ProductGallery(props: ProductGalleryProps) {
-    const { layout, images } = props;
+    const { layout, images, documents, videos } = props;
     const direction = useDirection();
     const [state, setState] = useState({ currentIndex: 0, transition: false });
     const imagesRefs = useRef<Array<HTMLImageElement | null>>([]);
-    const slickFeaturedRef = useRef<Slick>(null);
+    const slickFeaturedRef = useRef<Slick>();
     const createGalleryRef = useRef<Promise<CreateGalleryFn> | null>(null);
     const galleryRef = useRef<PhotoSwipe<PhotoSwipeUIDefault.Options> | null>(null);
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
+    const [allFiles, setAllFiles] = useState<string[]>([]);
+
+    useEffect(() => {
+        const files = [...images, ...documents.map((f) => f.url), ...videos.map((f) => f.url)];
+        setAllFiles(files);
+    }, [images]);
 
     const getIndexDependOnDir = useCallback(
         (index: number) => {
             // we need to invert index id direction === 'rtl' due to react-slick bug
             if (direction === 'rtl') {
-                return images.length - 1 - index;
+                return allFiles.length - 1 - index;
             }
 
             return index;
         },
-        [direction, images],
+        [direction, allFiles],
     );
+
+    if (slickFeaturedRef.current) {
+        slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(0));
+    }
 
     const openPhotoswipe = (index: number) => {
         if (!createGalleryRef.current) {
@@ -267,45 +281,106 @@ function ProductGallery(props: ProductGalleryProps) {
         getIndexDependOnDirRef.current = getIndexDependOnDir;
     }, [getIndexDependOnDir]);
 
-    const featured = images.map((image, index) => (
-        <div key={index} className="product-image product-image--location--gallery">
-            <AppLink
-                href={`${image}`}
-                className="product-image__body"
-                target="_blank"
-                onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
-            >
-                {/*
-                    The data-width and data-height attributes must contain the size of a larger
-                    version of the product image.
+    const featured = allFiles.map((image, index) => {
+        const isPDF = image.indexOf('pdf') > -1;
+        const isVideo = image.indexOf('youtube') > -1;
 
-                    If you do not know the image size, you can remove the data-width and data-height
-                    attribute, in which case the width and height will be obtained from the
-                    naturalWidth and naturalHeight property of img.product-image__img.
-                    */}
-                <img
-                    className="product-image__img"
-                    src={image}
-                    alt=""
-                    ref={(element) => {
-                        imagesRefs.current[index] = element;
-                    }}
-                    data-width="700"
-                    data-height="700"
-                />
-            </AppLink>
-        </div>
-    ));
+        if (isVideo) {
+            const url = image.replace('watch?v=', 'embed/');
+            return (
+                <Fragment key={index}>
+                    <div className="video-responsive ">
+                        <iframe
+                            className=""
+                            src={url}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            title="Embedded youtube"
+                        ></iframe>
+                    </div>
+                </Fragment>
+            );
+        }
+        if (isPDF) {
+            return (
+                <div key={index} className="product-image product-image--location--gallery ">
+                    <div className="product-image__body">
+                        <Fragment>
+                            <object data={`${image}`} type="application/pdf" width="100%" height="100%" className="product-image__img">
+                                <p>
+                                    Alternative text - include a link <a href="http://africau.edu/images/default/sample.pdf">to the PDF!</a>
+                                </p>
+                            </object>
+                            <a onClick={() => window.open(image, '_blank')} className="product-gallery-pdf">
+                                Open PDF
+                            </a>
+                        </Fragment>
+                    </div>
+                </div>
+            );
+        }
 
-    const thumbnails = images.map((image, index) => {
+        return (
+            <Fragment key={index}>
+                <div className="product-image product-image--location--gallery ">
+                    <AppLink
+                        href={`${image}`}
+                        className="product-image__body"
+                        target="_blank"
+                        onClick={(event: MouseEvent) => handleFeaturedClick(event, index)}
+                    >
+                        {/*
+                            The data-width and data-height attributes must contain the size of a larger
+                            version of the product image.
+
+                            If you do not know the image size, you can remove the data-width and data-height
+                            attribute, in which case the width and height will be obtained from the
+                            naturalWidth and naturalHeight property of img.product-image__img.
+                            */}
+
+                        <img
+                            className="product-image__img"
+                            src={image}
+                            alt=""
+                            ref={(element) => {
+                                imagesRefs.current[index] = element;
+                            }}
+                            data-width="700"
+                            data-height="700"
+                        />
+                    </AppLink>
+                </div>
+            </Fragment>
+        );
+    });
+
+    const thumbnails = allFiles.map((image, index) => {
         const classes = classNames('product-gallery__carousel-item product-image', {
             'product-gallery__carousel-item--active': index === state.currentIndex,
         });
 
+        const isPDF = image.indexOf('pdf') > -1;
+        const isVideo = image.indexOf('youtube') > -1;
+
+        if (isVideo) {
+            return (
+                <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
+                    <div className="product-image__body">
+                        <img className="product-image__img product-gallery__carousel-image" src={youtube.src} alt="" />
+                    </div>
+                </button>
+            );
+        }
+
         return (
             <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
                 <div className="product-image__body">
-                    <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
+                    {isPDF ? (
+                        <img className="product-image__img product-gallery__carousel-image" src={pdf.src} alt="" />
+                    ) : (
+                        <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
+                    )}
                 </div>
             </button>
         );
@@ -321,7 +396,7 @@ function ProductGallery(props: ProductGalleryProps) {
                         </button>
                     )}
                     <GoldfarbSlick
-                        ref={slickFeaturedRef}
+                        ref={slickFeaturedRef as any}
                         {...slickSettingsFeatured}
                         beforeChange={handleFeaturedBeforeChange}
                         afterChange={handleFeaturedAfterChange}

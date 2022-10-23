@@ -61,7 +61,7 @@ function BlogPageCategory(props: BlogPageCategoryProps) {
     return (
         <Fragment>
             <Head>
-                <title>{`Blog Category Page — ${theme.name}`}</title>
+                <title>{`Blog Categorias — ${theme.name}`}</title>
             </Head>
 
             <PageHeader header="Latest News" breadcrumb={breadcrumb} />
@@ -72,18 +72,11 @@ function BlogPageCategory(props: BlogPageCategoryProps) {
                     <div className="col-12 col-lg-8">
                         <div className="block">
                             <div className="posts-view">
-                                <div
-                                    className={`posts-view__list posts-list posts-list--layout--${layout}`}
-                                >
+                                <div className={`posts-view__list posts-list posts-list--layout--${layout}`}>
                                     <div className="posts-list__body">{postsList}</div>
                                 </div>
                                 <div className="posts-view__pagination">
-                                    <Pagination
-                                        current={page}
-                                        siblings={2}
-                                        total={10}
-                                        onPageChange={setPage}
-                                    />
+                                    <Pagination current={page} siblings={2} total={10} onPageChange={setPage} />
                                 </div>
                             </div>
                         </div>
