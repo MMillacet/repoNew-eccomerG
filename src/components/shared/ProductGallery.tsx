@@ -88,7 +88,7 @@ type CreateGalleryFn = (images: PhotoSwipe.Item[], options: PhotoSwipe.Options) 
 export type ProductGalleryLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
 export interface ProductGalleryProps {
-    images: any[];
+    images: string[];
     layout: ProductGalleryLayout;
     documents: any[];
     videos: any[];
@@ -107,7 +107,8 @@ function ProductGallery(props: ProductGalleryProps) {
     const [allFiles, setAllFiles] = useState<string[]>([]);
 
     useEffect(() => {
-        setAllFiles([...images, ...documents.map((f) => f.url), ...videos.map((f) => f.url)]);
+        const files = [...images, ...documents.map((f) => f.url), ...videos.map((f) => f.url)];
+        setAllFiles(files);
     }, [images]);
 
     const getIndexDependOnDir = useCallback(

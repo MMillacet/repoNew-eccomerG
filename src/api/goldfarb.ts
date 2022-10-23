@@ -38,7 +38,7 @@ const makeProduct = (product: any) => {
         unitMult: Number(product.unitMult),
         unitsPerItem: product.unitsPerItem,
         currency,
-        images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
+        // images: [`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${code}.jpg`],
         // images: [`https://goldfarbbetascc.sana-cloud.net/product/image/large/${code}_0.jpg`],
         availability: product.hasStock ? 'in-stock' : 'out-of-stock',
         // compareAtPrice: product.discount > 0 ? product.price * (1 - (product.discount / 100 )) : undefined,

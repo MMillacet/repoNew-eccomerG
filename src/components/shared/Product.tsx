@@ -102,7 +102,7 @@ function Product(props: ProductProps) {
                 <ProductGallery
                     documents={rtProduct?.documents ?? []}
                     layout={layout}
-                    images={rtProduct?.images.map((i: any) => i.url) ?? []}
+                    images={rtProduct?.images.map((i: { url: string }) => i.url) ?? []}
                     videos={rtProduct?.videoLinks ?? []}
                 />
 
@@ -185,7 +185,7 @@ function Product(props: ProductProps) {
                             </li>
                         )}
                         <li>
-                            Marca: <AppLink href="/">{rtProduct?.brand}</AppLink>
+                            Marca: <AppLink href="/">{rtProduct?.brand?.name}</AppLink>
                         </li>
                         <li>
                             Unidad venta: <AppLink href="/">{rtProduct?.unitsPerItem}</AppLink>
