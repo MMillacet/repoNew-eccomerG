@@ -56,12 +56,9 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
         const order = createOrder();
         try {
-            const response = (await axios.post('/api/promos/create', { order })) as any;
-            if (response.state === 'E') {
-                setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
-            } else {
-                setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
-            }
+            await axios.post('/api/promos/create', { order });
+
+            setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
         } catch (err) {
             setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }

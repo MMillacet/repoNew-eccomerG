@@ -12,5 +12,12 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
 
     order.header.email = email;
 
-    return goldfarbApi.postPromo(order);
+    const result = await goldfarbApi.postPromo(order);
+
+    if (result.state !== 'E') {
+        res.status(200);
+    } else {
+        console.error({ error: result });
+        res.status(500).json({ error: result });
+    }
 });
