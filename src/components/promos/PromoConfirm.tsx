@@ -1,11 +1,11 @@
 import { Fragment, ChangeEvent, useState } from 'react';
 import Head from 'next/head';
 import { useUser } from '@auth0/nextjs-auth0';
+import axios from 'axios';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import theme from '../../data/theme';
 import PromoHeader from './PromoHeader';
 import { IProductPromoSelected } from '../../interfaces/product';
-import goldfarbApi from '../../api/goldfarb';
 
 export interface IPromoProducts {
     promoContainer: any;
@@ -56,7 +56,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
         const order = createOrder();
         try {
-            const response = await goldfarbApi.postPromo(order);
+            const response = (await axios.post('/api/promos/create', { order })) as any;
             if (response.state === 'E') {
                 setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
             } else {
