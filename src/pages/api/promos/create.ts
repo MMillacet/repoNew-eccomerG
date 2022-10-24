@@ -15,7 +15,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
     const result = await goldfarbApi.postPromo(order);
 
     if (result.state !== 'E') {
-        res.status(200);
+        res.status(200).json({});
     } else {
         console.error({ error: result });
         res.status(500).json({ error: result });
