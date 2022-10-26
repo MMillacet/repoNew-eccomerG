@@ -38,20 +38,15 @@ async function getImagesExt(id: string, ext: string) {
 }
 
 async function getImages(id: string) {
-    try {
-        const imgs = [];
+    const imgs = [];
 
-        // eslint-disable-next-line no-restricted-syntax
-        for await (const ext of IMG_EXT) {
-            const extimgs = await getImagesExt(id, ext);
-            imgs.push(...extimgs);
-        }
-
-        return imgs;
-    } catch (error) {
-        console.log('getimages', error);
-        throw error;
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const ext of IMG_EXT) {
+        const extimgs = await getImagesExt(id, ext);
+        imgs.push(...extimgs);
     }
+
+    return imgs;
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
