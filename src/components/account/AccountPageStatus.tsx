@@ -108,7 +108,7 @@ function AccountPageStatus() {
                                 <th>Factura</th>
                                 <th>Fecha</th>
                                 <th>Saldo $</th>
-                                <th>Saldo U$</th>
+                                <th>Saldo U$S</th>
                             </tr>
                         </thead>
                         <tbody>{statusList}</tbody>
