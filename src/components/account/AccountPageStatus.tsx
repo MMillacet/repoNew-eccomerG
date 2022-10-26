@@ -83,13 +83,13 @@ function AccountPageStatus() {
                     <div className="status-card__row-content">{accountStatus?.rut}</div>
                 </div>
                 <div className="status-card__row">
-                    <div className="status-card__row-title">Saldo $</div>
+                    <div className="status-card__row-title">Saldo Pesos</div>
                     <div className="status-card__row-content">
                         <CurrencyFormat value={accountStatus?.balanceP} />
                     </div>
                 </div>
                 <div className="status-card__row">
-                    <div className="status-card__row-title">Saldo D</div>
+                    <div className="status-card__row-title">Saldo Dólares</div>
                     <div className="status-card__row-content">
                         <CurrencyFormat value={accountStatus?.balanceD} currency={'U$'} />
                     </div>
