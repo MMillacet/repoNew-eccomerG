@@ -17,7 +17,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const { user } = useUser();
     const { clientHeader }: any = user || {};
 
-    const [orderType, setOrderType] = useState('R');
+    const [orderType, setOrderType] = useState('N');
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
