@@ -69,12 +69,24 @@ function Product(props: ProductProps) {
             const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
 
             prices = (
+                
                 <Fragment>
-                    <CurrencyFormat value={newPrice} currency={rtProduct?.currency} />
-                    <span className="product__old-price" style={{ marginLeft: '15px' }}>
-                        <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
-                    </span>
-                    <span className="product__discount">{`(Descuento del ${rtProduct.discount}%)`}</span>
+                    <div className="product-card__prices row">                    
+                        <div className="col-12 d-flex">
+                            <div className="row ">
+                                <span className="col-12" style={{ color: '#b3b3b3' }}>
+                                    <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
+                                </span>
+
+                                <div className="col-12 d-flex margin-t">
+                                    {rtProduct.discount > 0 && <div className="product-card__discPrcnt">- {rtProduct.discount}%</div>}                                
+                                </div>
+                            </div>
+                        </div>
+                        <span className="col-12 margin-t promo-products__price-old">
+                            <CurrencyFormat value={newPrice} currency={rtProduct.currency} />
+                        </span>
+                    </div>                                      
                 </Fragment>
             );
         } else {
