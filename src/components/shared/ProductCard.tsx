@@ -123,13 +123,23 @@ function ProductCard(props: ProductCardProps) {
     if (rtProduct && rtProduct.price > 0 && rtProduct.discount > 0) {
         const oldPrice = rtProduct.price;
         const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
-        price = (
-            <div className="product-card__prices">
-                <CurrencyFormat value={newPrice} currency={rtProduct.currency} />{' '}
-                <span className="product-card__old-price">
-                    <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
-                </span>
-            </div>
+        price = (           
+            <div className="product-card__prices row">
+                <div className="col-12 d-flex">
+                    <div className="row ">
+                        <span className="col-12" style={{ color: '#b3b3b3' }}>
+                            <CurrencyFormat value={oldPrice} currency={rtProduct.currency} />
+                        </span>
+
+                        <div className="col-12 d-flex margin-t">
+                            {rtProduct.discount > 0 && <div className="product-card__discPrcnt">- {rtProduct.discount}%</div>}
+                        </div>
+                    </div>
+                </div>
+            <span className="col-12 margin-t promo-products__price-old">
+                <CurrencyFormat value={newPrice} currency={rtProduct.currency} />
+            </span>
+        </div>
         );
     } else if (rtProduct && rtProduct.price > 0) {
         price = (
