@@ -5,7 +5,7 @@ import { Fragment, memo, useState } from 'react';
 import { useUser } from '@auth0/nextjs-auth0';
 import classNames from 'classnames';
 
-// application
+// application.
 import useSWR from 'swr';
 import AppLink from './AppLink';
 import AsyncAction from './AsyncAction';
