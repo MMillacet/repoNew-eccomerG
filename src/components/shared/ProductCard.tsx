@@ -1,4 +1,4 @@
-// react
+// react.
 import { Fragment, memo, useState } from 'react';
 
 // third-party
