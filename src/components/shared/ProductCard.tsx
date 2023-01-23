@@ -148,13 +148,13 @@ function ProductCard(props: ProductCardProps) {
             </div>
         );
     }
-    if (product.pvp) {
+    /*if (product.pvp) {
         pvp = (
             <div className="product-card__prices">
                 <CurrencyFormat value={product.pvp} currency={rtProduct.currency} />{' '}
             </div>
         );
-    }
+    }*/
 
     const handleChangeQuantity = (_quantity: string | number) => {
         const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
