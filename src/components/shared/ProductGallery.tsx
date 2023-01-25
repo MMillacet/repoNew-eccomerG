@@ -217,10 +217,6 @@ function ProductGallery(props: ProductGalleryProps) {
     };
 
     const handleThumbnailClick = (index: number) => {
-        if (state.transition) {
-            return;
-        }
-
         setState((prev) => ({ ...prev, currentIndex: index }));
 
         if (slickFeaturedRef.current) {
