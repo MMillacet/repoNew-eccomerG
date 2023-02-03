@@ -88,14 +88,12 @@ type CreateGalleryFn = (images: PhotoSwipe.Item[], options: PhotoSwipe.Options) 
 export type ProductGalleryLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
 export interface ProductGalleryProps {
-    images: string[];
     layout: ProductGalleryLayout;
-    documents: any[];
-    videos: any[];
+    allFiles: any[];
 }
 
 function ProductGallery(props: ProductGalleryProps) {
-    const { layout, images, documents, videos } = props;
+    const { layout, allFiles } = props;
     const direction = useDirection();
     const [state, setState] = useState({ currentIndex: 0, transition: false });
     const imagesRefs = useRef<Array<HTMLImageElement | null>>([]);
@@ -104,12 +102,6 @@ function ProductGallery(props: ProductGalleryProps) {
     const galleryRef = useRef<PhotoSwipe<PhotoSwipeUIDefault.Options> | null>(null);
     const getIndexDependOnDirRef = useRef<((index: number) => number) | null>(null);
     const unmountedRef = useRef(false);
-    const [allFiles, setAllFiles] = useState<string[]>([]);
-
-    useEffect(() => {
-        const files = [...images, ...documents.map((f) => f.url), ...videos.map((f) => f.url)];
-        setAllFiles(files);
-    }, [images]);
 
     const getIndexDependOnDir = useCallback(
         (index: number) => {
@@ -117,11 +109,43 @@ function ProductGallery(props: ProductGalleryProps) {
             if (direction === 'rtl') {
                 return allFiles.length - 1 - index;
             }
-
+            if (index === -1) return 0;
             return index;
         },
-        [direction, allFiles],
+        [direction],
     );
+
+    const handleThumbnailClick = async (index: number) => {
+        if (state.transition) {
+            return;
+        }
+
+        setState((prev) => ({ ...prev, currentIndex: index }));
+
+        if (slickFeaturedRef.current) {
+            slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(index));
+        }
+    };
+
+    const handleFeaturedAfterChange: SlickProps['afterChange'] = (index) => {
+        setState((prev) => ({
+            ...prev,
+            currentIndex: getIndexDependOnDir(index),
+            transition: false,
+        }));
+    };
+
+    const handleFeaturedBeforeChange: SlickProps['beforeChange'] = (oldIndex, newIndex) => {
+        if (!state.transition) {
+            setState((prev) => ({
+                ...prev,
+                currentIndex: getIndexDependOnDir(newIndex),
+                transition: true,
+            }));
+
+            handleFeaturedAfterChange(newIndex);
+        }
+    };
 
     if (slickFeaturedRef.current) {
         slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(0));
@@ -141,8 +165,8 @@ function ProductGallery(props: ProductGalleryProps) {
             const height = (tag.dataset.height ? parseFloat(tag.dataset.height) : null) || tag.naturalHeight;
 
             return {
-                src: images[index],
-                msrc: images[index],
+                src: allFiles[index],
+                msrc: allFiles[index],
                 w: width,
                 h: height,
             };
@@ -214,30 +238,6 @@ function ProductGallery(props: ProductGalleryProps) {
         event.preventDefault();
 
         openPhotoswipe(index);
-    };
-
-    const handleThumbnailClick = (index: number) => {
-        setState((prev) => ({ ...prev, currentIndex: index }));
-
-        if (slickFeaturedRef.current) {
-            slickFeaturedRef.current.slickGoTo(getIndexDependOnDir(index));
-        }
-    };
-
-    const handleFeaturedBeforeChange: SlickProps['beforeChange'] = (oldIndex, newIndex) => {
-        setState((prev) => ({
-            ...prev,
-            currentIndex: getIndexDependOnDir(newIndex),
-            transition: true,
-        }));
-    };
-
-    const handleFeaturedAfterChange: SlickProps['afterChange'] = (index) => {
-        setState((prev) => ({
-            ...prev,
-            currentIndex: getIndexDependOnDir(index),
-            transition: false,
-        }));
     };
 
     const handleZoomButtonClick = () => {
@@ -391,12 +391,7 @@ function ProductGallery(props: ProductGalleryProps) {
                             <ZoomIn24Svg />
                         </button>
                     )}
-                    <GoldfarbSlick
-                        ref={slickFeaturedRef as any}
-                        {...slickSettingsFeatured}
-                        beforeChange={handleFeaturedBeforeChange}
-                        afterChange={handleFeaturedAfterChange}
-                    >
+                    <GoldfarbSlick ref={slickFeaturedRef as any} {...slickSettingsFeatured} beforeChange={handleFeaturedBeforeChange}>
                         {featured}
                     </GoldfarbSlick>
                 </div>
