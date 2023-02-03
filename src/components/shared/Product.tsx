@@ -189,12 +189,14 @@ function Product(props: ProductProps) {
                     <ul className="product__meta">
                         {isUserActivated && (
                             <li className="product__meta-availability">
-                                Disponibilidad:{' '}
-                                {rtProduct?.hasStock ? (
-                                    <span className="text-success">En stock</span>
-                                ) : (
-                                    <span className="text-muted">Sin stock</span>
-                                )}
+                                Disponibilidad:{' '}  
+                               {
+                                 rtProduct?.stockStatus === 'S'?<span className="text-success">{rtProduct?.stockDescription}</span>:
+                                 rtProduct?.stockStatus === 'W'?<span className="text-warning">{rtProduct?.stockDescription}</span>:
+                                 rtProduct?.stockStatus === 'D'?<span className="text-muted">{rtProduct?.stockDescription}</span>:
+                                 rtProduct?.stockStatus === 'A'?<span className="text-info">{rtProduct?.stockDescription}</span>:  
+                                 <span className="text-muted">N/A</span>                               
+                               }                                                                       
                             </li>
                         )}
                         <li>
