@@ -1,4 +1,4 @@
-// react.
+// react
 import { Fragment, PropsWithChildren } from 'react';
 
 // third-party
