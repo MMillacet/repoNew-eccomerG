@@ -1,5 +1,5 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -69,9 +69,8 @@ function Product(props: ProductProps) {
             const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
 
             prices = (
-                
                 <Fragment>
-                    <div className="product-card__prices row">                    
+                    <div className="product-card__prices row">
                         <div className="col-12 d-flex">
                             <div className="row ">
                                 <span className="col-12" style={{ color: '#b3b3b3' }}>
@@ -79,14 +78,14 @@ function Product(props: ProductProps) {
                                 </span>
 
                                 <div className="col-12 d-flex margin-t">
-                                    {rtProduct.discount > 0 && <div className="product-card__discPrcnt">- {rtProduct.discount}%</div>}                                
+                                    {rtProduct.discount > 0 && <div className="product-card__discPrcnt">- {rtProduct.discount}%</div>}
                                 </div>
                             </div>
                         </div>
                         <span className="col-12 margin-t promo-products__price-old">
                             <CurrencyFormat value={newPrice} currency={rtProduct.currency} />
                         </span>
-                    </div>                                      
+                    </div>
                 </Fragment>
             );
         } else {
@@ -109,15 +108,23 @@ function Product(props: ProductProps) {
         );
     }
 
+    const [aux, setAux] = useState<any>([]);
+
+    useEffect(() => {
+        if (rtProduct) {
+            const files = [
+                ...rtProduct?.images.map((i: { url: string }) => i.url),
+                ...rtProduct?.documents.map((f: any) => f.url),
+                ...rtProduct?.videoLinks.map((f: any) => f.url),
+            ];
+            setAux(files);
+        }
+    }, [rtProduct]);
+
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery
-                    documents={rtProduct?.documents ?? []}
-                    layout={layout}
-                    images={rtProduct?.images.map((i: { url: string }) => i.url) ?? []}
-                    videos={rtProduct?.videoLinks ?? []}
-                />
+                <ProductGallery layout={layout} allFiles={aux} />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
