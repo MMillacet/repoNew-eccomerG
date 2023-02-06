@@ -182,11 +182,16 @@ function SitePageAboutUs(props: SitePageAboutUsProps) {
                                     mismos para su reciclaje.{' '}
                                 </h5>
                             </div>
-                            <Modal isOpen={isOpen} toggle={() => setIsOpen(false)}>
+                            <Modal isOpen={isOpen} toggle={() => setIsOpen(false)} size={"lg"}>
                                 <div
                                     className="about-us__banner-img"
                                     style={{
-                                        backgroundImage: `url('/images/aboutus/Goldfarb - Web Boceto_SOBRE NOSOTROS1-08.png')`,
+                                        backgroundImage: `url('/images/aboutus/WEB_reciclaje.jpg')`,
+                                        height:'30em',
+                                        width:"53em",
+                                        backgroundSize:"cover",
+                                        backgroundRepeat:"no-repeat",
+                                        backgroundPosition:"center center"
                                     }}
                                     onClick={() => setIsOpen(true)}
                                 ></div>
