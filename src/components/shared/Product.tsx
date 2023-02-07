@@ -199,11 +199,11 @@ function Product(props: ProductProps) {
                                 Disponibilidad:{' '}                                 
                                 <span 
                                 className={
-                                    rtProduct?.stockStatus === 'S'?("text-success"):
-                                    rtProduct?.stockStatus === 'W'?("text-warning"):
-                                    rtProduct?.stockStatus === 'D'?("text-muted"):
-                                    rtProduct?.stockStatus === 'A'?("text-info"):
-                                    ("text-muted")
+                                    rtProduct?.stockStatus === 'S'?'text-success':
+                                    rtProduct?.stockStatus === 'W'?'text-warning':
+                                    rtProduct?.stockStatus === 'D'?'text-muted':
+                                    rtProduct?.stockStatus === 'A'?'text-info':
+                                    'text-muted'
                                 }>{rtProduct?.stockDescription}</span>                                                                      
                             </li>
                         )}
