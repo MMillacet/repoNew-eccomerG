@@ -174,10 +174,23 @@ function ProductCard(props: ProductCardProps) {
                         Disponibilidad:
                         <span className="text-success">In Stock</span>
                     </div>
-                )}
+                )}                
                 {price}
                 {pvp && <div className="product__name">{pvp}</div>}
-
+                {isUserActivated && (
+                            <span className="product__meta-availability">                                                                 
+                                <span 
+                                className={
+                                    classNames({
+                                        'text-success':rtProduct?.stockStatus === 'S',
+                                        'text-warning':rtProduct?.stockStatus === 'W',
+                                        'text-muted':rtProduct?.stockStatus === 'D',
+                                        'text-info':rtProduct?.stockStatus === 'A'
+                                    })
+                                }                                   
+                                >{rtProduct?.stockDescription}</span>                                                                      
+                            </span>
+                        )}
                 {isUserActivated && price && (
                     <div className="product-card__buttons">
                         <div className="product__actions-item">
