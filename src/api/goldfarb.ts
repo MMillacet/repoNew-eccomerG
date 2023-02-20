@@ -298,7 +298,7 @@ const goldfarbApi = {
             params: {
                 cardcode,
                 start: '2000-01-01',
-                end: '2022-12-31',
+                end: new Date(),
             },
         };
         const { data } = await axios(config);
