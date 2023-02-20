@@ -48,7 +48,7 @@ function IndicatorAccount() {
                             <AppLink href={url.accountOrders()}>Historial pedidos</AppLink>
                         </li>
                         <li>
-                            <AppLink href={url.accountProducts()}>Más comprados</AppLink>
+                            <AppLink href={url.accountProducts()}>Mis productos</AppLink>
                         </li>
                         <li>
                             <AppLink href={url.accountCatalog()}>Crear catalogo</AppLink>
