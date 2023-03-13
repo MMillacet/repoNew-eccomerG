@@ -127,6 +127,12 @@ function ProductGallery(props: ProductGalleryProps) {
         }
     };
 
+    useEffect(() => {
+        setTimeout(() => {
+            handleThumbnailClick(0);
+        }, 1000);
+    }, []);
+
     const handleFeaturedAfterChange: SlickProps['afterChange'] = (index) => {
         setState((prev) => ({
             ...prev,
