@@ -108,23 +108,23 @@ function Product(props: ProductProps) {
         );
     }
 
-    const [aux, setAux] = useState<any>([]);
+    const [allFiles, setAllFiles] = useState<any>([]);
 
     useEffect(() => {
         if (rtProduct) {
             const files = [
                 ...rtProduct?.images.map((i: { url: string }) => i.url),
                 ...rtProduct?.documents.map((f: any) => f.url),
-                ...rtProduct?.videoLinks.map((f: any) => f.url),
+                ...rtProduct?.videos.map((f: any) => f.url),
             ];
-            setAux(files);
+            setAllFiles(files);
         }
     }, [rtProduct]);
 
     return (
         <div className={`product product--layout--${layout}`}>
             <div className="product__content">
-                <ProductGallery layout={layout} allFiles={aux} />
+                <ProductGallery layout={layout} allFiles={allFiles} />
 
                 <div className="product__info">
                     <div className="product__wishlist-compare">
@@ -196,17 +196,17 @@ function Product(props: ProductProps) {
                     <ul className="product__meta">
                         {isUserActivated && (
                             <li className="product__meta-availability">
-                                Disponibilidad:{' '}                                 
-                                <span 
-                                className={
-                                    classNames({
-                                        'text-success':rtProduct?.stockStatus === 'S',
-                                        'text-warning':rtProduct?.stockStatus === 'W',
-                                        'text-muted':rtProduct?.stockStatus === 'D',
-                                        'text-info':rtProduct?.stockStatus === 'A'
-                                    })
-                                }                                   
-                                >{rtProduct?.stockDescription}</span>                                                                      
+                                Disponibilidad:{' '}
+                                <span
+                                    className={classNames({
+                                        'text-success': rtProduct?.stockStatus === 'S',
+                                        'text-warning': rtProduct?.stockStatus === 'W',
+                                        'text-muted': rtProduct?.stockStatus === 'D',
+                                        'text-info': rtProduct?.stockStatus === 'A',
+                                    })}
+                                >
+                                    {rtProduct?.stockDescription}
+                                </span>
                             </li>
                         )}
                         <li>

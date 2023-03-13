@@ -279,7 +279,8 @@ function ProductGallery(props: ProductGalleryProps) {
 
     const featured = allFiles.map((image, index) => {
         const isPDF = image.indexOf('pdf') > -1;
-        const isVideo = image.indexOf('youtube') > -1;
+        let isVideo = image.indexOf('youtube') > -1;
+        isVideo = image.indexOf('mp4') > -1;
 
         if (isVideo) {
             const url = image.replace('watch?v=', 'embed/');
@@ -357,7 +358,8 @@ function ProductGallery(props: ProductGalleryProps) {
         });
 
         const isPDF = image.indexOf('pdf') > -1;
-        const isVideo = image.indexOf('youtube') > -1;
+        let isVideo = image.indexOf('youtube') > -1;
+        isVideo = image.indexOf('mp4') > -1;
 
         if (isVideo) {
             return (
