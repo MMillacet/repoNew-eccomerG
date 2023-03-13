@@ -34,6 +34,7 @@ function Product(props: ProductProps) {
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;
+
     const cardcode = user && (user.cardcode as string);
 
     const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
@@ -196,17 +197,17 @@ function Product(props: ProductProps) {
                     <ul className="product__meta">
                         {isUserActivated && (
                             <li className="product__meta-availability">
-                                Disponibilidad:{' '}                                 
-                                <span 
-                                className={
-                                    classNames({
-                                        'text-success':rtProduct?.stockStatus === 'S',
-                                        'text-warning':rtProduct?.stockStatus === 'W',
-                                        'text-muted':rtProduct?.stockStatus === 'D',
-                                        'text-info':rtProduct?.stockStatus === 'A'
-                                    })
-                                }                                   
-                                >{rtProduct?.stockDescription}</span>                                                                      
+                                Disponibilidad:{' '}
+                                <span
+                                    className={classNames({
+                                        'text-success': rtProduct?.stockStatus === 'S',
+                                        'text-warning': rtProduct?.stockStatus === 'W',
+                                        'text-muted': rtProduct?.stockStatus === 'D',
+                                        'text-info': rtProduct?.stockStatus === 'A',
+                                    })}
+                                >
+                                    {rtProduct?.stockDescription}
+                                </span>
                             </li>
                         )}
                         <li>

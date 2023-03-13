@@ -38,6 +38,8 @@ function ShopPageCheckout() {
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
+    const [delveryTypeError, setDelveryTypeError] = useState(false);
+    const [delveryError, setDelveryError] = useState(false);
 
     useEffect(() => {
         const getShipping = async () => {
@@ -92,17 +94,39 @@ function ShopPageCheckout() {
         })),
     });
 
-    const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
-        setLoading(true);
-        const order = createOrder();
-        try {
-            const res = await axios.post('/api/orders/create', { order });
-            setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
-            emptyCart();
-        } catch (error) {
-            setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+    const checkDeliveryTypesSelected = () => {
+        if (orderType.length < 1) {
+            setDelveryTypeError(false);
+            if (orderType === 'N') {
+                if (shipToCode.length > 0) {
+                    setDelveryError(false);
+                    return true;
+                }
+
+                setDelveryError(true);
+                return false;
+            }
+            return true;
         }
-        setLoading(false);
+        setDelveryTypeError(true);
+        setDelveryError(false);
+
+        return false;
+    };
+
+    const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
+        if (checkDeliveryTypesSelected()) {
+            setLoading(true);
+            const order = createOrder();
+            try {
+                const res = await axios.post('/api/orders/create', { order });
+                setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
+                emptyCart();
+            } catch (error) {
+                setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+            }
+            setLoading(false);
+        }
     };
 
     const totals = () => {
@@ -250,6 +274,9 @@ function ShopPageCheckout() {
                                                         <option value="N">Goldfarb envia a cliente</option>
                                                         <option value="R">Cliente retira en Pantaleón Pérez</option>
                                                     </select>
+                                                    {delveryTypeError && (
+                                                        <label className="alert alert-danger mb-3">Seleccione forma de entrega</label>
+                                                    )}
                                                 </div>
                                             </div>
                                             {orderType === 'N' && (
@@ -268,6 +295,9 @@ function ShopPageCheckout() {
                                                                 </option>
                                                             ))}
                                                         </select>
+                                                        {delveryError && (
+                                                            <label className="alert alert-danger mb-3">Seleccione dirección</label>
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}

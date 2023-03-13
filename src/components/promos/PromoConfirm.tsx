@@ -22,6 +22,8 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [delveryTypeError, setDelveryTypeError] = useState(false);
+    const [delveryError, setDelveryError] = useState(false);
 
     const handleOrderTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setOrderType(event.target.value);
     const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
@@ -54,17 +56,39 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         lines: getProductsLines(),
     });
 
-    const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
-        setLoading(true);
-        const order = createOrder();
-        try {
-            await axios.post('/api/promos/create', { order });
+    const checkDeliveryTypesSelected = () => {
+        if (orderType.length < 1) {
+            setDelveryTypeError(false);
+            if (orderType === 'N') {
+                if (shipToCode.length > 0) {
+                    setDelveryError(false);
+                    return true;
+                }
 
-            setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
-        } catch (err) {
-            setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+                setDelveryError(true);
+                return false;
+            }
+            return true;
         }
-        setLoading(false);
+        setDelveryTypeError(true);
+        setDelveryError(false);
+
+        return false;
+    };
+
+    const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
+        if (checkDeliveryTypesSelected()) {
+            setLoading(true);
+            const order = createOrder();
+            try {
+                await axios.post('/api/promos/create', { order });
+
+                setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
+            } catch (err) {
+                setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+            }
+            setLoading(false);
+        }
     };
 
     const getPriceItem = (item: IProductPromoSelected) => {
@@ -178,6 +202,9 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                                                         <option value="N">Goldfarb envia a cliente</option>
                                                         <option value="R">Cliente retira en Pantaleón Pérez</option>
                                                     </select>
+                                                    {delveryTypeError && (
+                                                        <label className="alert alert-danger mb-3">Seleccione forma de entrega</label>
+                                                    )}
                                                 </div>
                                             </div>
                                             {orderType === 'N' && (
@@ -196,6 +223,9 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                                                                 </option>
                                                             ))}
                                                         </select>
+                                                        {delveryError && (
+                                                            <label className="alert alert-danger mb-3">Seleccione dirección</label>
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}
