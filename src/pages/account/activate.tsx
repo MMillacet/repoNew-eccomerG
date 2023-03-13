@@ -3,7 +3,7 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import oldUsers from '../../data/users.json';
+// import oldUsers from '../../data/users.json';
 import auth0Api from '../../api/auth0';
 import { transformUser } from '../../services/user';
 import goldfarbApi from '../../api/goldfarb';
