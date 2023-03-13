@@ -21,6 +21,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleOrderTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setOrderType(event.target.value);
     const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
@@ -54,6 +55,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     });
 
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
+        setLoading(true);
         const order = createOrder();
         try {
             await axios.post('/api/promos/create', { order });
@@ -62,6 +64,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         } catch (err) {
             setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }
+        setLoading(false);
     };
 
     const getPriceItem = (item: IProductPromoSelected) => {
@@ -206,10 +209,13 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                                 <div className="card mb-0">
                                     <div className="card-body">
                                         <h3 className="card-title">Tu Pedido</h3>
-
                                         {cartTable}
-
-                                        <button type="submit" className="btn btn-primary btn-xl btn-block" onClick={handleOrderSubmit}>
+                                        <button
+                                            disabled={loading}
+                                            type="submit"
+                                            className="btn btn-primary btn-xl btn-block"
+                                            onClick={handleOrderSubmit}
+                                        >
                                             Realizar pedido
                                         </button>
                                     </div>

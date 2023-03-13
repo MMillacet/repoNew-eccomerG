@@ -29,6 +29,7 @@ function ShopPageCheckout() {
     const emptyCart = useCartEmpty();
     // const [currentPayment, setCurrentPayment] = useState('bank');
     const [shippingCost, setShippingCost] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const { user } = useUser();
     const { clientHeader }: any = user || {};
@@ -92,6 +93,7 @@ function ShopPageCheckout() {
     });
 
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
+        setLoading(true);
         const order = createOrder();
         try {
             const res = await axios.post('/api/orders/create', { order });
@@ -100,6 +102,7 @@ function ShopPageCheckout() {
         } catch (error) {
             setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }
+        setLoading(false);
     };
 
     const totals = () => {
@@ -285,7 +288,12 @@ function ShopPageCheckout() {
                                         <ul className="payment-methods__list">{payments}</ul>
                                     </div> */}
 
-                                        <button type="submit" className="btn btn-primary btn-xl btn-block" onClick={handleOrderSubmit}>
+                                        <button
+                                            disabled={loading}
+                                            type="submit"
+                                            className="btn btn-primary btn-xl btn-block"
+                                            onClick={handleOrderSubmit}
+                                        >
                                             Realizar pedido
                                         </button>
                                     </div>
