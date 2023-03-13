@@ -18,7 +18,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         const transformedUser = transformUser(user);
 
         if (!transformedUser.cardcode) {
-            
+            console.log('User sin cardcode');
         } else {
             const isClientValid = await goldfarbApi.isClientValid(transformedUser.cardcode);
             if (isClientValid) {
