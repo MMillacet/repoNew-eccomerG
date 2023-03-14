@@ -52,6 +52,10 @@ function ShopPageCheckout() {
         getShipping();
     }, [cart.total, orderType]);
 
+    useEffect(() => {
+        setDelveryTypeError(false);
+    }, [orderType]);
+
     // const handlePaymentChange = (event: ChangeEvent<HTMLInputElement>) => {
     //     if (event.target.checked) {
     //         setCurrentPayment(event.target.value);
@@ -95,7 +99,7 @@ function ShopPageCheckout() {
     });
 
     const checkDeliveryTypesSelected = () => {
-        if (orderType.length < 1) {
+        if (orderType.length > 0) {
             setDelveryTypeError(false);
             if (orderType === 'N') {
                 if (shipToCode.length > 0) {
@@ -259,6 +263,21 @@ function ShopPageCheckout() {
                             <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
                                 <div className="card mb-0">
                                     <div className="card-body">
+                                        <h3 className="card-title">Tu Pedido</h3>
+
+                                        {cartTable}
+
+                                        {/* <div className="payment-methods">
+                                        <ul className="payment-methods__list">{payments}</ul>
+                                    </div> */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
+                                <div className="card mb-0">
+                                    <div className="card-body">
                                         <h3 className="card-title">Direccion</h3>
                                         <div className="row">
                                             <div className="col-6 col-lg-6 col-xl-6">
@@ -275,7 +294,9 @@ function ShopPageCheckout() {
                                                         <option value="R">Cliente retira en Pantaleón Pérez</option>
                                                     </select>
                                                     {delveryTypeError && (
-                                                        <label className="alert alert-danger mb-3">Seleccione forma de entrega</label>
+                                                        <label className="mt-2 col-12 alert alert-danger mb-3">
+                                                            Seleccione forma de entrega
+                                                        </label>
                                                     )}
                                                 </div>
                                             </div>
@@ -302,22 +323,6 @@ function ShopPageCheckout() {
                                                 </div>
                                             )}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
-                                <div className="card mb-0">
-                                    <div className="card-body">
-                                        <h3 className="card-title">Tu Pedido</h3>
-
-                                        {cartTable}
-
-                                        {/* <div className="payment-methods">
-                                        <ul className="payment-methods__list">{payments}</ul>
-                                    </div> */}
-
                                         <button
                                             disabled={loading}
                                             type="submit"
