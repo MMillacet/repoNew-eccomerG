@@ -99,7 +99,7 @@ function ShopPageCheckout() {
     });
 
     const checkDeliveryTypesSelected = () => {
-        if (orderType.length > 0) {
+        if (orderType.length < 1) {
             setDelveryTypeError(false);
             if (orderType === 'N') {
                 if (shipToCode.length > 0) {
