@@ -61,7 +61,7 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     });
 
     const checkDeliveryTypesSelected = () => {
-        if (orderType.length < 1) {
+        if (orderType.length > 0) {
             setDelveryTypeError(false);
             if (orderType === 'N') {
                 if (shipToCode.length > 0) {
