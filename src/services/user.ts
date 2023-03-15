@@ -7,9 +7,9 @@ const namespace = 'https://goldfarb:us:auth0:com';
 export const transformUser = (user: Claims): IUser => ({
     id: user.sub,
     email: user.email,
-    name: user[`${namespace}/name`],
-    phone: user[`${namespace}/phone`],
-    cardcode: user[`${namespace}/cardcode`],
+    name: user['name'],
+    phone: user['phone'],
+    cardcode: user['cardcode'],
 });
 
 export default { transformUser };

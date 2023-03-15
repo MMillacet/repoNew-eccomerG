@@ -3,7 +3,7 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import oldUsers from '../../data/users.json';
+// import oldUsers from '../../data/users.json';
 import auth0Api from '../../api/auth0';
 import { transformUser } from '../../services/user';
 import goldfarbApi from '../../api/goldfarb';
@@ -18,27 +18,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         const transformedUser = transformUser(user);
 
         if (!transformedUser.cardcode) {
-            const oldUser = oldUsers.find((u) => u.email === transformedUser.email);
-            if (oldUser) {
-                console.log('User found in old database');
-                const metadata = {
-                    cardcode: oldUser.cardcode.toString(),
-                    name: oldUser.name,
-                };
-                const response = await auth0Api.patch(user.sub, metadata, session.accessToken);
-                if (response.status === 200) {
-                    console.log('User was updated');
-                    // After the user is updated, we can redirect to home
-                    res.writeHead(302, {
-                        Location: '/',
-                    });
-                    res.end();
-                } else {
-                    console.error(`Error updating user ${user.sub} metadata, status ${response.status}, ${response.statusText}`);
-                }
-            } else {
-                console.log('User not found in old users database');
-            }
+            console.log('User sin cardcode');
         } else {
             const isClientValid = await goldfarbApi.isClientValid(transformedUser.cardcode);
             if (isClientValid) {
