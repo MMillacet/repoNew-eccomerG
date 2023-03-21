@@ -3,7 +3,7 @@ import { IGoldfarbInvoice } from '../interfaces/invoice';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
-//const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+// const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 // const baseURL = 'http://localhost:50483/api';
 
 const baseURL = 'http://app.goldfarb.com.uy/main/api';
@@ -469,6 +469,12 @@ const goldfarbApi = {
         const { data } = await axios(config);
 
         return data;
+    },
+    getProducts: async (productNumbers: string, cardcode: number) => {
+        const { products } = await fetch(`/api/products/lookup?itemcodes=${[`${productNumbers}`]}&cardcode=${cardcode}&withDesc=true`).then(
+            (res) => res.json(),
+        );
+        return products[0];
     },
 };
 

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Head from 'next/head';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import AsyncAction from '../shared/AsyncAction';
 import Cross12Svg from '../../svg/cross-12.svg';
@@ -14,10 +15,11 @@ import InputNumber from '../shared/InputNumber';
 import PageHeader from '../shared/PageHeader';
 import url from '../../services/url';
 import { CartItem } from '../../store/cart/cartTypes';
+import { useCartAddItem, useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
 
 // data stubs
 import theme from '../../data/theme';
-import { useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
+import goldfarbApi from '../../api/goldfarb';
 
 export interface Quantity {
     itemId: number;
@@ -26,9 +28,12 @@ export interface Quantity {
 
 function ShopPageCart() {
     const [quantities, setQuantities] = useState<Quantity[]>([]);
+    const [productNumbers, setProductNumbers] = useState<string>();
     const cart = useCart();
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
+    const cartAddItem = useCartAddItem();
+    const { user } = useUser();
 
     const getItemQuantity = (item: CartItem) => {
         const quantity = quantities.find((x) => x.itemId === item.id);
@@ -76,6 +81,13 @@ function ShopPageCart() {
     ];
 
     let content;
+
+    const handleAddProduct = async () => {
+        if (productNumbers && user) {
+            const data = await goldfarbApi.getProducts(productNumbers, user.cardcode as number);
+            cartAddItem(data, [], data.unitMult ?? 1);
+        }
+    };
 
     if (cart.quantity) {
         const cartItems = cart.items.map((item) => {
@@ -199,6 +211,27 @@ function ShopPageCart() {
                         </thead>
                         <tbody className="cart-table__body">{cartItems}</tbody>
                     </table>
+                    <div className="cart__table cart-table cart-table__add_section">
+                        <div className="row cart-table__add_row">
+                            <div className=" col-md-4 cart-table__add_input">
+                                <input
+                                    type="text"
+                                    className="cart-table__add_input_width form-control"
+                                    id="checkout-last-name"
+                                    value={productNumbers}
+                                    onChange={(e) => {
+                                        setProductNumbers(e.target.value);
+                                    }}
+                                    placeholder="Agregue número de producto"
+                                />
+                            </div>
+                            <div className=" col-md-4 cart-table__add_btn-row">
+                                <div onClick={handleAddProduct} className="btn btn-primary">
+                                    Agregar producto
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="row justify-content-end pt-md-5 pt-4">
                         <div className="col-12 col-md-7 col-lg-6 col-xl-5">
