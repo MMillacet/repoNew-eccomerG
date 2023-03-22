@@ -52,8 +52,9 @@
 
 .cart-table__add_row{
     justify-content: center;
-
+    align-items: end;
 }
+
 
 .cart-table__add_input_label{
     display: flex;
@@ -67,6 +68,15 @@
 }
 .cart-table__add_btn{
 width: 100%;
+}
+
+.cart-table__add_section input[type=number]::-webkit-inner-spin-button, 
+.cart-table__add_section input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
+.cart-table__add_section input[type=number] {
+  -moz-appearance: textfield;
 }
 
 
@@ -278,8 +288,11 @@ width: 100%;
         display: none;
     }
     .cart-table__add_btn-row{
-        margin-top: 15px;
+        margin-bottom: 15px;
         justify-content: center;
 
+    }
+    .cart-table__add_input{
+        margin-bottom:20px
     }
 }
