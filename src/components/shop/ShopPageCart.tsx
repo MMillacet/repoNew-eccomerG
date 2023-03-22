@@ -95,7 +95,7 @@ function ShopPageCart() {
             const listQuantityItems = productNumbers.quantity.split(' ');
 
             if (listItems.length !== listQuantityItems.length) {
-                toast.error(`Cantidad de codigos diferente a cantdiad de cantidades`, { theme: 'colored' });
+                toast.error(`Cantidad de codigos diferente a cantidad de unidades`, { theme: 'colored' });
             } else {
                 listItems.forEach(async (item, index) => {
                     try {
