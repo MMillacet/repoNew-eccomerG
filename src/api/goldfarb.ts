@@ -470,6 +470,12 @@ const goldfarbApi = {
 
         return data;
     },
+    getProducts: async (productNumbers: string, cardcode: number) => {
+        const { products } = await fetch(`/api/products/lookup?itemcodes=${[`${productNumbers}`]}&cardcode=${cardcode}&withDesc=true`).then(
+            (res) => res.json(),
+        );
+        return products[0];
+    },
 };
 
 export default goldfarbApi;

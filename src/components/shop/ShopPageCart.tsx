@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import Head from 'next/head';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
+import { toast } from 'react-toastify';
 import AppLink from '../shared/AppLink';
 import AsyncAction from '../shared/AsyncAction';
 import Cross12Svg from '../../svg/cross-12.svg';
@@ -14,21 +16,31 @@ import InputNumber from '../shared/InputNumber';
 import PageHeader from '../shared/PageHeader';
 import url from '../../services/url';
 import { CartItem } from '../../store/cart/cartTypes';
+import { useCartAddItem, useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
 
 // data stubs
 import theme from '../../data/theme';
-import { useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
+import goldfarbApi from '../../api/goldfarb';
 
 export interface Quantity {
     itemId: number;
     value: string | number;
 }
 
+export interface AddProducts {
+    itemId: string;
+    quantity: string;
+    pastedItems: boolean;
+}
+
 function ShopPageCart() {
     const [quantities, setQuantities] = useState<Quantity[]>([]);
+    const [productNumbers, setProductNumbers] = useState<AddProducts>({ itemId: '', quantity: '', pastedItems: false });
     const cart = useCart();
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
+    const cartAddItem = useCartAddItem();
+    const { user } = useUser();
 
     const getItemQuantity = (item: CartItem) => {
         const quantity = quantities.find((x) => x.itemId === item.id);
@@ -76,6 +88,80 @@ function ShopPageCart() {
     ];
 
     let content;
+
+    const handleAddMultipleProducts = () => {
+        if (productNumbers.itemId.length > 0 && productNumbers.quantity.length > 0 && user) {
+            const listItems = productNumbers.itemId.split(' ');
+            const listQuantityItems = productNumbers.quantity.split(' ');
+
+            if (listItems.length !== listQuantityItems.length) {
+                toast.error(`Cantidad de codigos diferente a cantidad de unidades`, { theme: 'colored' });
+            } else {
+                listItems.forEach(async (item, index) => {
+                    try {
+                        const data = await goldfarbApi.getProducts(item, user.cardcode as number);
+                        if (data.unitMult) {
+                            if (Number(listQuantityItems[index]) % data.unitMult === 0) {
+                                cartAddItem(data, [], Number(listQuantityItems[index]));
+                            } else {
+                                cartAddItem(data, [], data.unitMult);
+                            }
+                        } else {
+                            cartAddItem(data, [], Number(listQuantityItems[index]));
+                        }
+                    } catch {
+                        toast.error(`Error agregando producto ${item}`, { theme: 'colored' });
+                    }
+                });
+            }
+        }
+    };
+
+    const addProductComponent = () => (
+        <div className="cart__table cart-table cart-table__add_section">
+            <div className="row cart-table__add_row">
+                <div className=" col-md-4 cart-table__add_input">
+                    <div>Codigo</div>
+                    <input
+                        type="text"
+                        className="cart-table__add_input_width form-control"
+                        id="checkout-last-name"
+                        value={productNumbers.itemId}
+                        min="0"
+                        max="200"
+                        onChange={(e) => {
+                            setProductNumbers((prevState) => ({
+                                ...prevState,
+                                itemId: e.target.value,
+                                pastedItems: e.target.value.length - productNumbers.itemId.length > 1,
+                            }));
+                        }}
+                        placeholder="Agregue el codigo"
+                    />
+                </div>
+                <div className=" col-md-4 cart-table__add_input">
+                    <div>Cantidad</div>
+                    <input
+                        type="text"
+                        className="cart-table__add_input_width form-control"
+                        id="checkout-last-name"
+                        value={productNumbers.quantity}
+                        min="0"
+                        max="200"
+                        onChange={(e) => {
+                            setProductNumbers((prevState) => ({ ...prevState, quantity: e.target.value }));
+                        }}
+                        placeholder="Agregue la cantidad"
+                    />
+                </div>
+                <div className=" col-md-4 cart-table__add_btn-row">
+                    <div onClick={handleAddMultipleProducts} className="btn btn-block btn-primary">
+                        Agregar producto
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 
     if (cart.quantity) {
         const cartItems = cart.items.map((item) => {
@@ -199,7 +285,7 @@ function ShopPageCart() {
                         </thead>
                         <tbody className="cart-table__body">{cartItems}</tbody>
                     </table>
-
+                    {addProductComponent()}
                     <div className="row justify-content-end pt-md-5 pt-4">
                         <div className="col-12 col-md-7 col-lg-6 col-xl-5">
                             <div className="card">
@@ -255,6 +341,7 @@ function ShopPageCart() {
                                 Continuar
                             </AppLink>
                         </div>
+                        {addProductComponent}
                     </div>
                 </div>
             </div>
