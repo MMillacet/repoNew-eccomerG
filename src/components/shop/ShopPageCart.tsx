@@ -1,5 +1,5 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -21,6 +21,7 @@ import { useCartAddItem, useCart, useCartRemoveItem, useCartUpdateQuantities } f
 // data stubs
 import theme from '../../data/theme';
 import goldfarbApi from '../../api/goldfarb';
+import { saveItem, saveRemoveItem, saveUpdateItem } from '../../api/helpers/cart';
 
 export interface Quantity {
     itemId: number;
@@ -36,6 +37,8 @@ export interface AddProducts {
 function ShopPageCart() {
     const [quantities, setQuantities] = useState<Quantity[]>([]);
     const [productNumbers, setProductNumbers] = useState<AddProducts>({ itemId: '', quantity: '', pastedItems: false });
+    const [loading, setLoading] = useState<boolean>(false);
+
     const cart = useCart();
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
@@ -48,7 +51,32 @@ function ShopPageCart() {
         return quantity ? quantity.value : item.quantity;
     };
 
-    const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
+    useEffect(() => {
+        const updateQuantities = async () => {
+            if (
+                await saveUpdateItem(
+                    cart,
+                    quantities.map((x) => ({
+                        ...x,
+                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                    })),
+                    user,
+                )
+            ) {
+                cartUpdateQuantities(
+                    quantities.map((x) => ({
+                        ...x,
+                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                    })),
+                );
+            }
+        };
+        if (user) {
+            updateQuantities();
+        }
+    }, [quantities]);
+
+    const handleChangeQuantity = async (item: CartItem, quantity: string | number) => {
         setQuantities((prevState) => {
             const index = prevState.findIndex((x) => x.itemId === item.id);
 
@@ -72,12 +100,6 @@ function ShopPageCart() {
                           ...prevState.slice(index + 1),
                       ];
 
-            cartUpdateQuantities(
-                quantities.map((x) => ({
-                    ...x,
-                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-                })),
-            );
             return quantities;
         });
     };
@@ -89,7 +111,8 @@ function ShopPageCart() {
 
     let content;
 
-    const handleAddMultipleProducts = () => {
+    const handleAddMultipleProducts = async () => {
+        setLoading(true);
         if (productNumbers.itemId.length > 0 && productNumbers.quantity.length > 0 && user) {
             const listItems = productNumbers.itemId.split(' ');
             const listQuantityItems = productNumbers.quantity.split(' ');
@@ -97,24 +120,34 @@ function ShopPageCart() {
             if (listItems.length !== listQuantityItems.length) {
                 toast.error(`Cantidad de codigos diferente a cantidad de unidades`, { theme: 'colored' });
             } else {
-                listItems.forEach(async (item, index) => {
+                for (let index = 0; index < listItems.length; index += 1) {
                     try {
-                        const data = await goldfarbApi.getProducts(item, user.cardcode as number);
-                        if (data.unitMult) {
-                            if (Number(listQuantityItems[index]) % data.unitMult === 0) {
-                                cartAddItem(data, [], Number(listQuantityItems[index]));
-                            } else {
-                                cartAddItem(data, [], data.unitMult);
-                            }
-                        } else {
-                            cartAddItem(data, [], Number(listQuantityItems[index]));
+                        // eslint-disable-next-line no-await-in-loop
+                        const data = await goldfarbApi.getProducts(listItems[index], user.cardcode as number);
+
+                        let quantity = Number(listQuantityItems[index]);
+                        if (data.unitMult && Number(listQuantityItems[index]) % data.unitMult !== 0) {
+                            quantity = data.unitMult;
+                        }
+
+                        // eslint-disable-next-line no-await-in-loop
+                        if (await saveItem(cart, data, quantity, user)) {
+                            // eslint-disable-next-line no-await-in-loop
+                            await cartAddItem(data, [], quantity);
                         }
                     } catch {
-                        toast.error(`Error agregando producto ${item}`, { theme: 'colored' });
+                        toast.error(`Error agregando producto ${listItems[index]}`, { theme: 'colored' });
                     }
-                });
+                }
             }
         }
+        setLoading(false);
+    };
+
+    const handleRemoveItem = async (item: CartItem) => {
+        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
+
+        return cartRemoveItem(item.id);
     };
 
     const addProductComponent = () => (
@@ -155,9 +188,9 @@ function ShopPageCart() {
                     />
                 </div>
                 <div className=" col-md-4 cart-table__add_btn-row">
-                    <div onClick={handleAddMultipleProducts} className="btn btn-block btn-primary">
+                    <button disabled={loading} onClick={handleAddMultipleProducts} className="btn btn-block btn-primary">
                         Agregar producto
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -189,7 +222,7 @@ function ShopPageCart() {
 
             const removeButton = (
                 <AsyncAction
-                    action={() => cartRemoveItem(item.id)}
+                    action={() => handleRemoveItem(item)}
                     render={({ run, loading }) => {
                         const classes = classNames('btn btn-light btn-sm btn-svg-icon', {
                             'btn-loading': loading,

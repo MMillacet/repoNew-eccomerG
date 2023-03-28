@@ -18,7 +18,8 @@ import Wishlist16Svg from '../../svg/wishlist-16.svg';
 import { IProduct } from '../../interfaces/product';
 import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
-import { useCartAddItem } from '../../store/cart/cartHooks';
+import { useCart, useCartAddItem } from '../../store/cart/cartHooks';
+import { saveItem } from '../../api/helpers/cart';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -33,6 +34,8 @@ function Product(props: ProductProps) {
     const [quantity, setQuantity] = useState<number>(product.unitMult);
 
     const { user } = useUser();
+    const cart = useCart();
+
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
@@ -48,10 +51,11 @@ function Product(props: ProductProps) {
     const wishlistAddItem = useWishlistAddItem();
     const compareAddItem = useCompareAddItem();
 
-    const addToCart = () => {
+    const addToCart = async () => {
         if (typeof quantity === 'string') {
             return Promise.resolve();
         }
+        if (!(await saveItem(cart, rtProduct, quantity, user))) return Promise.resolve();
 
         return cartAddItem(rtProduct, [], quantity);
     };
@@ -196,17 +200,17 @@ function Product(props: ProductProps) {
                     <ul className="product__meta">
                         {isUserActivated && (
                             <li className="product__meta-availability">
-                                Disponibilidad:{' '}                                 
-                                <span 
-                                className={
-                                    classNames({
-                                        'text-success':rtProduct?.stockStatus === 'S',
-                                        'text-warning':rtProduct?.stockStatus === 'W',
-                                        'text-muted':rtProduct?.stockStatus === 'D',
-                                        'text-info':rtProduct?.stockStatus === 'A'
-                                    })
-                                }                                   
-                                >{rtProduct?.stockDescription}</span>                                                                      
+                                Disponibilidad:{' '}
+                                <span
+                                    className={classNames({
+                                        'text-success': rtProduct?.stockStatus === 'S',
+                                        'text-warning': rtProduct?.stockStatus === 'W',
+                                        'text-muted': rtProduct?.stockStatus === 'D',
+                                        'text-info': rtProduct?.stockStatus === 'A',
+                                    })}
+                                >
+                                    {rtProduct?.stockDescription}
+                                </span>
                             </li>
                         )}
                         <li>

@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import classNames from 'classnames';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import AsyncAction from '../shared/AsyncAction';
 import Cart20Svg from '../../svg/cart-20.svg';
@@ -13,14 +14,25 @@ import CurrencyFormat from '../shared/CurrencyFormat';
 import Indicator from './Indicator';
 import url from '../../services/url';
 import { useCart, useCartRemoveItem } from '../../store/cart/cartHooks';
+import { saveRemoveItem } from '../../api/helpers/cart';
+import { CartItem } from '../../store/cart/cartTypes';
 
 const currencies = ['$', 'U$'];
 
 function IndicatorCart() {
     const cart = useCart();
+    const { user } = useUser();
+
     const cartRemoveItem = useCartRemoveItem();
+
     let dropdown;
     let totals;
+
+    const handleRemoveItem = async (item: CartItem) => {
+        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
+
+        return cartRemoveItem(item.id);
+    };
 
     if (cart.totals.$.length > 0) {
         totals = currencies.map((currency: string) => (
@@ -61,7 +73,7 @@ function IndicatorCart() {
 
         const removeButton = (
             <AsyncAction
-                action={() => cartRemoveItem(item.id)}
+                action={() => handleRemoveItem(item)}
                 render={({ run, loading }) => {
                     const classes = classNames('dropcart__product-remove btn btn-light btn-sm btn-svg-icon', {
                         'btn-loading': loading,

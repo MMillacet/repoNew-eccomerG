@@ -33,10 +33,6 @@ export interface CartEmptyAction {
     type: typeof CART_EMPTY;
 }
 
-export type CartAction =
-    | CartAddItemAction
-    | CartRemoveItemAction
-    | CartUpdateQuantitiesAction
-    | CartEmptyAction;
+export type CartAction = CartAddItemAction | CartRemoveItemAction | CartUpdateQuantitiesAction | CartEmptyAction;
 
 export type CartThunkAction<T = void> = AppAction<CartAction, T>;

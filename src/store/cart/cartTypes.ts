@@ -16,6 +16,11 @@ export interface CartItem {
     total: number;
 }
 
+export interface CartItemSave {
+    itemCode: number;
+    quantity: number;
+}
+
 export type CartTotalType = 'shipping' | 'tax';
 
 export interface CartTotal {

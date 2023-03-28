@@ -1,6 +1,4 @@
 // third-party
-import { toast } from 'react-toastify';
-
 // application
 import { IProduct } from '../../interfaces/product';
 import { CartItemOption } from './cartTypes';
@@ -18,8 +16,6 @@ import {
 } from './cartActionTypes';
 
 export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] = [], quantity = product.unitMult): CartAddItemAction {
-    toast.success(`Producto "${product.title}" agregado al carro!`, { theme: 'colored' });
-
     return {
         type: CART_ADD_ITEM,
         product,
@@ -31,6 +27,7 @@ export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] 
 export function cartRemoveItemSuccess(itemId: number): CartRemoveItemAction {
     return {
         type: CART_REMOVE_ITEM,
+
         itemId,
     };
 }
