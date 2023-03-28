@@ -477,20 +477,17 @@ const goldfarbApi = {
         );
         return products[0];
     },
-    getCart: async (cardcode: number, email: string) => {
-        console.log({ email });
-
+    getCart: async (cardcode: string, email: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/GetCart',
             method: 'get',
             params: {
-                cardcode,
+                cardcode: '4001335',
                 email,
             },
         };
         const { data } = await axios(config);
-        console.log({ data });
 
         return data;
     },

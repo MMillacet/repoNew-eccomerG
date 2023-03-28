@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { MakeStore, createWrapper } from 'next-redux-wrapper';
 // application
 import rootReducer from './root/rootReducer';
-import version from './version';
+
 import { RootState } from './root/rootTypes';
 
 export const save = (state: any) => {
@@ -17,34 +17,32 @@ export const save = (state: any) => {
     }
 };
 
-export const load = () => {
-    if (!process.browser) {
-        return undefined;
-    }
+export const load = () =>
+    // if (!process.browser) {
+    //     return undefined;
+    // }
 
-    let state;
+    // let state;
 
-    try {
-        state = localStorage.getItem('state');
+    // try {
+    //     state = localStorage.getItem('state');
 
-        if (typeof state === 'string') {
-            state = JSON.parse(state);
-        }
+    //     if (typeof state === 'string') {
+    //         state = JSON.parse(state);
+    //     }
 
-        if (state && state.version !== version) {
-            state = undefined;
-        }
-    } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
-    }
+    //     if (state && state.version !== version) {
+    //         state = undefined;
+    //     }
+    // } catch (error) {
+    //     // eslint-disable-next-line no-console
+    //     console.error(error);
+    // }
 
-    return state || undefined;
-};
+    undefined;
 
 // create a makeStore function
-const makeStore: MakeStore<Store<RootState>> = () =>
-    createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const makeStore: MakeStore<Store<RootState>> = () => createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 // export an assembled wrapper
 export const wrapper = createWrapper<Store<RootState>>(makeStore);
