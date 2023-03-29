@@ -58,6 +58,7 @@ function GoldfarbApp({ Component, pageProps }: GoldfarbAppProps) {
         const state = load();
 
         if (state) {
+            console.log({ state });
             applyClientState(state);
         }
 

@@ -6,6 +6,7 @@ export const CART_ADD_ITEM = 'CART_ADD_ITEM';
 export const CART_REMOVE_ITEM = 'CART_REMOVE_ITEM';
 export const CART_UPDATE_QUANTITIES = 'CART_UPDATE_QUANTITIES';
 export const CART_EMPTY = 'CART_EMPTY';
+export const CART_ADD_ITEMS = 'CART_ADD_ITEMS';
 
 export interface CartItemQuantity {
     itemId: number;
@@ -17,6 +18,13 @@ export interface CartAddItemAction {
     product: IProduct;
     options: CartItemOption[];
     quantity: number;
+}
+
+export interface CartAddItemsAction {
+    type: typeof CART_ADD_ITEMS;
+    products: IProduct[];
+    options: CartItemOption[];
+    quantities: number[];
 }
 
 export interface CartRemoveItemAction {
@@ -33,6 +41,6 @@ export interface CartEmptyAction {
     type: typeof CART_EMPTY;
 }
 
-export type CartAction = CartAddItemAction | CartRemoveItemAction | CartUpdateQuantitiesAction | CartEmptyAction;
+export type CartAction = CartAddItemAction | CartRemoveItemAction | CartUpdateQuantitiesAction | CartEmptyAction | CartAddItemsAction;
 
 export type CartThunkAction<T = void> = AppAction<CartAction, T>;

@@ -35,6 +35,33 @@ export async function saveItem(cart: Cart, product: IProduct, quantity: number, 
     }
 }
 
+export async function saveItems(cart: Cart, products: IProduct[], quantities: number[], user: any) {
+    try {
+        const itemsToSave = cart.items.map((item) => ({ itemCode: item.product.id, quantity: item.quantity }));
+
+        products.forEach((product, index) => {
+            const itemIndex = findItemIndex(cart.items, product);
+
+            if (itemIndex === -1) {
+                itemsToSave.push({ itemCode: product.id, quantity: quantities[index] });
+            } else {
+                const item = itemsToSave[itemIndex];
+                item.quantity += quantities[index];
+                itemsToSave[itemIndex] = item;
+            }
+        });
+
+        console.log({ itemsToSave });
+
+        await goldfarbApi.saveCart(itemsToSave, String(user?.cardcode), String(user?.email));
+        toast.success(`Productos  agregados al carro!`, { theme: 'colored' });
+        return true;
+    } catch {
+        toast.error(`Error agregando los productos  al carro!`, { theme: 'colored' });
+        return false;
+    }
+}
+
 export async function saveRemoveItem(cart: Cart, product: IProduct, user: any) {
     try {
         const itemsToSave = cart.items.map((item) => ({ itemCode: item.product.id, quantity: item.quantity }));

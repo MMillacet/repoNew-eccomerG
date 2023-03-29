@@ -79,22 +79,17 @@ function HomePageTwo(props: HomePageOneProps) {
 
     const banners = initData?.banners ?? [];
 
-    const fetchCart = async () => {
-        const cart = await goldfarbApi.getCart(String(user?.cardcode), String(user?.email));
+    // const fetchCart = async () => {
+    //     const cart = await goldfarbApi.getCart(String(user?.cardcode), String(user?.email));
+    //     console.log({ cart });
 
-        for (let index = 0; index < cart.lines.length; index += 1) {
-            // eslint-disable-next-line no-await-in-loop
-            const product = await goldfarbApi.getProducts(cart.lines[index].itemCode, user?.cardcode as number);
-            // eslint-disable-next-line no-await-in-loop
-            await cartAddItem(product, [], Number(cart.lines[index].quantity));
-        }
-    };
-
-    useEffect(() => {
-        if (user) {
-            fetchCart();
-        }
-    }, [user]);
+    //     // for (let index = 0; index < cart.lines.length; index += 1) {
+    //     //     // eslint-disable-next-line no-await-in-loop
+    //     //     const product = await goldfarbApi.getProducts(cart.lines[index].itemCode, user?.cardcode as number);
+    //     //     // eslint-disable-next-line no-await-in-loop
+    //     //     await cartAddItem(product, [], Number(cart.lines[index].quantity));
+    //     // }
+    // };
 
     return (
         <Fragment>

@@ -13,6 +13,8 @@ import {
     CartThunkAction,
     CartEmptyAction,
     CartUpdateQuantitiesAction,
+    CartAddItemsAction,
+    CART_ADD_ITEMS,
 } from './cartActionTypes';
 
 export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] = [], quantity = product.unitMult): CartAddItemAction {
@@ -21,6 +23,15 @@ export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] 
         product,
         options,
         quantity,
+    };
+}
+
+export function cartAddItemsSuccess(products: IProduct[], options: CartItemOption[] = [], quantities: number[]): CartAddItemsAction {
+    return {
+        type: CART_ADD_ITEMS,
+        products,
+        options,
+        quantities,
     };
 }
 
@@ -55,6 +66,17 @@ export function cartAddItem(
         new Promise((resolve) => {
             setTimeout(() => {
                 dispatch(cartAddItemSuccess(product, options, quantity));
+                resolve();
+            }, 100);
+        });
+}
+
+export function cartAddItems(products: IProduct[], options: CartItemOption[] = [], quantities: number[]): CartThunkAction<Promise<void>> {
+    // sending request to server, timeout is used as a stub
+    return (dispatch) =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                dispatch(cartAddItemsSuccess(products, options, quantities));
                 resolve();
             }, 100);
         });

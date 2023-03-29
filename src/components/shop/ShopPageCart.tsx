@@ -16,12 +16,12 @@ import InputNumber from '../shared/InputNumber';
 import PageHeader from '../shared/PageHeader';
 import url from '../../services/url';
 import { CartItem } from '../../store/cart/cartTypes';
-import { useCartAddItem, useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
+import { useCartAddItems, useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
 
 // data stubs
 import theme from '../../data/theme';
 import goldfarbApi from '../../api/goldfarb';
-import { saveItem, saveRemoveItem, saveUpdateItem } from '../../api/helpers/cart';
+import { saveItems, saveRemoveItem, saveUpdateItem } from '../../api/helpers/cart';
 
 export interface Quantity {
     itemId: number;
@@ -39,11 +39,12 @@ function ShopPageCart() {
     const [productNumbers, setProductNumbers] = useState<AddProducts>({ itemId: '', quantity: '', pastedItems: false });
     const [loading, setLoading] = useState<boolean>(false);
 
+    const { user } = useUser();
+
     const cart = useCart();
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
-    const cartAddItem = useCartAddItem();
-    const { user } = useUser();
+    const cartAddItems = useCartAddItems();
 
     const getItemQuantity = (item: CartItem) => {
         const quantity = quantities.find((x) => x.itemId === item.id);
@@ -120,6 +121,9 @@ function ShopPageCart() {
             if (listItems.length !== listQuantityItems.length) {
                 toast.error(`Cantidad de codigos diferente a cantidad de unidades`, { theme: 'colored' });
             } else {
+                const allProductsToAdd = [];
+                const allProductsQuanititiesToAdd = [];
+
                 for (let index = 0; index < listItems.length; index += 1) {
                     try {
                         // eslint-disable-next-line no-await-in-loop
@@ -130,14 +134,15 @@ function ShopPageCart() {
                             quantity = data.unitMult;
                         }
 
-                        // eslint-disable-next-line no-await-in-loop
-                        if (await saveItem(cart, data, quantity, user)) {
-                            // eslint-disable-next-line no-await-in-loop
-                            await cartAddItem(data, [], quantity);
-                        }
+                        allProductsToAdd.push(data);
+                        allProductsQuanititiesToAdd.push(quantity);
                     } catch {
                         toast.error(`Error agregando producto ${listItems[index]}`, { theme: 'colored' });
                     }
+                }
+                if (await saveItems(cart, allProductsToAdd, allProductsQuanititiesToAdd, user)) {
+                    // eslint-disable-next-line no-await-in-loop
+                    await cartAddItems(allProductsToAdd, [], allProductsQuanititiesToAdd);
                 }
             }
         }
