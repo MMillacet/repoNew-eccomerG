@@ -1,5 +1,5 @@
 // react
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
@@ -17,8 +17,6 @@ import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
 import { IBrand } from '../../interfaces/brand';
 import WhatsappFixed from '../shared/WhatsappFixed';
-import goldfarbApi from '../../api/goldfarb';
-import { useCartAddItem } from '../../store/cart/cartHooks';
 
 const YoutubeVideoModal = (props: { onClose: () => void; videoUrl: string | null }) => {
     const { onClose, videoUrl } = props;
@@ -71,25 +69,12 @@ function HomePageTwo(props: HomePageOneProps) {
     const { initData } = props;
 
     const { user } = useUser();
-    const cartAddItem = useCartAddItem();
 
     const isUserActivated = user && !!user.cardcode;
 
     const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
 
     const banners = initData?.banners ?? [];
-
-    // const fetchCart = async () => {
-    //     const cart = await goldfarbApi.getCart(String(user?.cardcode), String(user?.email));
-    //     console.log({ cart });
-
-    //     // for (let index = 0; index < cart.lines.length; index += 1) {
-    //     //     // eslint-disable-next-line no-await-in-loop
-    //     //     const product = await goldfarbApi.getProducts(cart.lines[index].itemCode, user?.cardcode as number);
-    //     //     // eslint-disable-next-line no-await-in-loop
-    //     //     await cartAddItem(product, [], Number(cart.lines[index].quantity));
-    //     // }
-    // };
 
     return (
         <Fragment>
