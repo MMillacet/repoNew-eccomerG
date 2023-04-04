@@ -483,7 +483,7 @@ const goldfarbApi = {
             url: '/web/GetCart',
             method: 'get',
             params: {
-                cardcode: '4001335',
+                cardcode,
                 email,
             },
         };
@@ -493,7 +493,7 @@ const goldfarbApi = {
     },
     saveCart: async (lines: CartItemSave[], cardcode: string, email: string) => {
         const cart = {
-            cardcode: '4001335',
+            cardcode,
             email,
             lines,
         };
