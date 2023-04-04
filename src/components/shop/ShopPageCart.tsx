@@ -372,6 +372,7 @@ function ShopPageCart() {
         content = (
             <div className="block block-empty">
                 <div className="container">
+                    {addProductComponent()}
                     <div className="block-empty__body">
                         <div className="block-empty__message">Tu carro esta vacio!</div>
                         <div className="block-empty__actions">
