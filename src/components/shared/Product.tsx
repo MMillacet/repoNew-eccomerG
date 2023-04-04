@@ -37,6 +37,7 @@ function Product(props: ProductProps) {
     const cart = useCart();
 
     const isUserActivated = user && !!user.cardcode;
+
     const cardcode = user && (user.cardcode as string);
 
     const { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}&cardcode=${cardcode}&withDesc=true`, (url: any) =>
