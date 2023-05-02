@@ -143,6 +143,7 @@ function ShopPageCart() {
                 if (await saveItems(cart, allProductsToAdd, allProductsQuanititiesToAdd, user)) {
                     // eslint-disable-next-line no-await-in-loop
                     await cartAddItems(allProductsToAdd, [], allProductsQuanititiesToAdd);
+                    setProductNumbers({ itemId: '', quantity: '', pastedItems: false });
                 }
             }
         }

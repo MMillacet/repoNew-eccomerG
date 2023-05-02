@@ -132,8 +132,12 @@ function IndicatorCart() {
         );
     } else {
         dropdown = (
-            <div className="dropcart">
-                <div className="dropcart__empty">El carro esta vacio!</div>
+            <div className="dropcart_empty">
+                <div className="dropcart__buttons">
+                    <AppLink href={url.cart()} className="btn btn-secondary">
+                        Ver Carro
+                    </AppLink>
+                </div>
             </div>
         );
     }

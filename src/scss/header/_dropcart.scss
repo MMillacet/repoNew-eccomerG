@@ -18,6 +18,20 @@
         box-shadow: 0 0 0 1px rgba(#000, 0.15);
     }
 }
+.dropcart_empty {
+    font-size: 15px;
+    width: 200px;
+    font-weight: $font-weight-normal;
+    color: $dropcart-font-color;
+    background: $dropcart-bg;
+    box-shadow: $dropcart-shadow;
+
+    // without it IE renders a blurred menu
+    @include only-ie() {
+        box-shadow: 0 0 0 1px rgba(#000, 0.15);
+    }
+}
+
 .dropcart__empty {
     padding: 42px 30px;
     text-align: center;
