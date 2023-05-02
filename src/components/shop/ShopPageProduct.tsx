@@ -54,7 +54,7 @@ function ShopPageProduct(props: ShopPageProductProps) {
     useEffect(() => {
         if (data) {
             setRelatedProducts([]);
-            product.relatedItems.forEach((id: any) => {
+            rtProduct.relatedItems.forEach((id: any) => {
                 const prod = data.products.find((prod: { itemCode: any }) => prod.itemCode === id);
                 if (prod) setRelatedProducts((prevState) => [...prevState, prod]);
             });
