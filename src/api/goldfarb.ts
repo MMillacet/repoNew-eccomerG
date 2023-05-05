@@ -508,6 +508,23 @@ const goldfarbApi = {
 
         return data;
     },
+    getRepairs: async (cardcode: string, start?: string, end?: string) => {
+        const threeMonthsAgo = new Date(new Date().getFullYear(), new Date().getMonth() - 24, new Date().getDate());
+        const params = {
+            cardcode,
+            start: start ?? threeMonthsAgo,
+            end: end ?? new Date(),
+        };
+
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/services',
+            method: 'get',
+            params,
+        };
+        const { data } = await axios(config);
+        return data;
+    },
 };
 
 export default goldfarbApi;
