@@ -23,7 +23,7 @@ export default function RepairsList(props: RepairsListProps) {
                         <tr className="repairs-table__row">
                             <th className="repairs-th">Codigo</th>
                             <th className="repairs-th">Nombre</th>
-                            <th className="repairs-th">Tipo consulta </th>
+                            <th className="repairs-th">Tipo </th>
                             <th className="repairs-th">Estado</th>
                             <th className="repairs-th">Resolución</th>
                             <th className="repairs-th">Data extra</th>
