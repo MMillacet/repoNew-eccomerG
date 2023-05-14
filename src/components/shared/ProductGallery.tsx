@@ -285,11 +285,12 @@ function ProductGallery(props: ProductGalleryProps) {
 
     const featured = allFiles.map((image, index) => {
         const isPDF = image.indexOf('pdf') > -1;
-        let isVideo = image.indexOf('youtube') > -1;
-        isVideo = image.indexOf('mp4') > -1;
+        const isYouTubeVideo = image.indexOf('youtube') > -1;
+        const isVideo = image.indexOf('mp4') > -1;
 
-        if (isVideo) {
+        if (isVideo || isYouTubeVideo) {
             const url = image.replace('watch?v=', 'embed/');
+
             return (
                 <Fragment key={index}>
                     <div className="video-responsive ">
@@ -364,10 +365,10 @@ function ProductGallery(props: ProductGalleryProps) {
         });
 
         const isPDF = image.indexOf('pdf') > -1;
-        let isVideo = image.indexOf('youtube') > -1;
-        isVideo = image.indexOf('mp4') > -1;
+        const isYouTubeVideo = image.indexOf('youtube') > -1;
+        const isVideo = image.indexOf('mp4') > -1;
 
-        if (isVideo) {
+        if (isVideo || isYouTubeVideo) {
             return (
                 <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
                     <div className="product-image__body">

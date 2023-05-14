@@ -24,9 +24,9 @@ export default function RepairsList(props: RepairsListProps) {
                             <th className="repairs-th">Codigo</th>
                             <th className="repairs-th">Nombre</th>
                             <th className="repairs-th">Tipo </th>
+                            <th className="repairs-th">Asunto</th>
                             <th className="repairs-th">Estado</th>
                             <th className="repairs-th">Resolución</th>
-                            <th className="repairs-th">Data extra</th>
                         </tr>
                     </thead>
                     <tbody className="">

@@ -1,5 +1,5 @@
 // react
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -52,20 +52,21 @@ function ShopPageCart() {
         return quantity ? quantity.value : item.quantity;
     };
 
-    useEffect(() => {
+    const handleUpdateQuantities = (newQuantities: Quantity[]) => {
         const updateQuantities = async () => {
             if (
                 await saveUpdateItem(
                     cart,
-                    quantities.map((x) => ({
+                    newQuantities.map((x) => ({
                         ...x,
                         value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
                     })),
                     user,
                 )
             ) {
+                setQuantities(newQuantities);
                 cartUpdateQuantities(
-                    quantities.map((x) => ({
+                    newQuantities.map((x) => ({
                         ...x,
                         value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
                     })),
@@ -75,34 +76,31 @@ function ShopPageCart() {
         if (user) {
             updateQuantities();
         }
-    }, [quantities]);
+    };
 
-    const handleChangeQuantity = async (item: CartItem, quantity: string | number) => {
-        setQuantities((prevState) => {
-            const index = prevState.findIndex((x) => x.itemId === item.id);
+    const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
+        const index: number = quantities.findIndex((x) => x.itemId === item.id);
 
-            const quantities =
-                index === -1
-                    ? [
-                          ...prevState,
-                          {
-                              itemId: item.id,
-                              value: quantity,
-                              step: item.product.unitMult,
-                          },
-                      ]
-                    : [
-                          ...prevState.slice(0, index),
-                          {
-                              ...prevState[index],
-                              value: quantity,
-                              step: item.product.unitMult,
-                          },
-                          ...prevState.slice(index + 1),
-                      ];
-
-            return quantities;
-        });
+        const newQuantities =
+            index === -1
+                ? [
+                      ...quantities,
+                      {
+                          itemId: item.id,
+                          value: quantity,
+                          step: item.product.unitMult,
+                      },
+                  ]
+                : [
+                      ...quantities.slice(0, index),
+                      {
+                          ...quantities[index],
+                          value: quantity,
+                          step: item.product.unitMult,
+                      },
+                      ...quantities.slice(index + 1),
+                  ];
+        handleUpdateQuantities(newQuantities);
     };
 
     const breadcrumb = [

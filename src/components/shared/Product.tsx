@@ -121,6 +121,7 @@ function Product(props: ProductProps) {
                 ...rtProduct?.images.map((i: { url: string }) => i.url),
                 ...rtProduct?.documents.map((f: any) => f.url),
                 ...rtProduct?.videos.map((f: any) => f.url),
+                ...rtProduct?.videoLinks.map((f: any) => f.url),
             ];
             setAllFiles(files);
         }

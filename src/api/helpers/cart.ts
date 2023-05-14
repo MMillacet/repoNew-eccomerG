@@ -51,8 +51,6 @@ export async function saveItems(cart: Cart, products: IProduct[], quantities: nu
             }
         });
 
-        console.log({ itemsToSave });
-
         await goldfarbApi.saveCart(itemsToSave, String(user?.cardcode), String(user?.email));
         toast.success(`Productos  agregados al carro!`, { theme: 'colored' });
         return true;
