@@ -15,6 +15,8 @@ export default function RepairsList(props: RepairsListProps) {
         { title: 'Mis reparaciones', url: '' },
     ];
 
+    console.log({ repairs });
+
     const content = (
         <div className="cart block">
             <div className="container">
@@ -33,10 +35,13 @@ export default function RepairsList(props: RepairsListProps) {
                         {repairs.map((item, index) => (
                             <tr key={index} className="repairs-table__row">
                                 <td className="repairs-td" data-title="Code">
-                                    {item.itemCode}
+                                    {item.docNum}
                                 </td>
                                 <td className="repairs-td" data-title="Code">
                                     {item.itemName}
+                                </td>
+                                <td className="repairs-td" data-title="Code">
+                                    {item.subject}
                                 </td>
                                 <td className="repairs-td" data-title="Code">
                                     {item.callType}
@@ -46,9 +51,6 @@ export default function RepairsList(props: RepairsListProps) {
                                 </td>
                                 <td className="repairs-td" data-title="Code">
                                     {item.resolution}
-                                </td>
-                                <td className="repairs-td" data-title="Code">
-                                    {item.subject}
                                 </td>
                             </tr>
                         ))}
