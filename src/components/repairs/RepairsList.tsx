@@ -23,6 +23,7 @@ export default function RepairsList(props: RepairsListProps) {
                 <table className="">
                     <thead className="repairs-table__head">
                         <tr className="repairs-table__row">
+                            <th className="repairs-th">Número</th>
                             <th className="repairs-th">Codigo</th>
                             <th className="repairs-th">Nombre</th>
                             <th className="repairs-th">Tipo </th>
@@ -31,20 +32,23 @@ export default function RepairsList(props: RepairsListProps) {
                             <th className="repairs-th">Resolución</th>
                         </tr>
                     </thead>
-                    <tbody className="">
+                    <tbody>
                         {repairs.map((item, index) => (
                             <tr key={index} className="repairs-table__row">
                                 <td className="repairs-td" data-title="Code">
                                     {item.docNum}
                                 </td>
                                 <td className="repairs-td" data-title="Code">
+                                    {item.itemCode}
+                                </td>
+                                <td className="repairs-td" data-title="Code">
                                     {item.itemName}
                                 </td>
                                 <td className="repairs-td" data-title="Code">
-                                    {item.subject}
+                                    {item.callType}
                                 </td>
                                 <td className="repairs-td" data-title="Code">
-                                    {item.callType}
+                                    {item.subject}
                                 </td>
                                 <td className="repairs-td" data-title="Code">
                                     {item.status}
