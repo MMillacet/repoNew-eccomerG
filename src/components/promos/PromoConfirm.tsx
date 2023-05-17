@@ -1,4 +1,4 @@
-import { Fragment, ChangeEvent, useState } from 'react';
+import { Fragment, ChangeEvent, useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useUser } from '@auth0/nextjs-auth0';
 import axios from 'axios';
@@ -21,9 +21,16 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [delveryTypeError, setDelveryTypeError] = useState(false);
+    const [delveryError, setDelveryError] = useState(false);
 
     const handleOrderTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setOrderType(event.target.value);
     const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
+
+    useEffect(() => {
+        setDelveryTypeError(false);
+    }, [orderType]);
 
     const getProductsLines = () => {
         const res: any[] = [];
@@ -53,14 +60,38 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
         lines: getProductsLines(),
     });
 
-    const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
-        const order = createOrder();
-        try {
-            await axios.post('/api/promos/create', { order });
+    const checkDeliveryTypesSelected = () => {
+        if (orderType.length > 0) {
+            setDelveryTypeError(false);
+            if (orderType === 'N') {
+                if (shipToCode.length > 0) {
+                    setDelveryError(false);
+                    return true;
+                }
 
-            setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
-        } catch (err) {
-            setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+                setDelveryError(true);
+                return false;
+            }
+            return true;
+        }
+        setDelveryTypeError(true);
+        setDelveryError(false);
+
+        return false;
+    };
+
+    const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
+        if (checkDeliveryTypesSelected()) {
+            setLoading(true);
+            const order = createOrder();
+            try {
+                await axios.post('/api/promos/create', { order });
+
+                setOrderSuccessMessage(`Tu pedido fue realizado correctamente`);
+            } catch (err) {
+                setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
+            }
+            setLoading(false);
         }
     };
 
@@ -154,8 +185,23 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
             <PromoHeader setView={setView} header="Confirmar pedido" breadcrumb={breadcrumb} />
 
             {!orderSuccessMessage && (
-                <div className="checkout block confirm-section">
+                <div className="checkout block">
                     <div className="container">
+                        <div className="row">
+                            <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
+                                <div className="card mb-0">
+                                    <div className="card-body">
+                                        <h3 className="card-title">Tu Pedido</h3>
+
+                                        {cartTable}
+
+                                        {/* <div className="payment-methods">
+                                        <ul className="payment-methods__list">{payments}</ul>
+                                    </div> */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
                                 <div className="card mb-0">
@@ -175,6 +221,11 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                                                         <option value="N">Goldfarb envia a cliente</option>
                                                         <option value="R">Cliente retira en Pantaleón Pérez</option>
                                                     </select>
+                                                    {delveryTypeError && (
+                                                        <label className="mt-2 col-12 alert alert-danger mb-3">
+                                                            Seleccione forma de entrega
+                                                        </label>
+                                                    )}
                                                 </div>
                                             </div>
                                             {orderType === 'N' && (
@@ -193,23 +244,19 @@ export default function PromoConfirm({ promoContainer }: IPromoProducts) {
                                                                 </option>
                                                             ))}
                                                         </select>
+                                                        {delveryError && (
+                                                            <label className="alert alert-danger mb-3">Seleccione dirección</label>
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
-                                <div className="card mb-0">
-                                    <div className="card-body">
-                                        <h3 className="card-title">Tu Pedido</h3>
-
-                                        {cartTable}
-
-                                        <button type="submit" className="btn btn-primary btn-xl btn-block" onClick={handleOrderSubmit}>
+                                        <button
+                                            disabled={loading}
+                                            type="submit"
+                                            className="btn btn-primary btn-xl btn-block"
+                                            onClick={handleOrderSubmit}
+                                        >
                                             Realizar pedido
                                         </button>
                                     </div>

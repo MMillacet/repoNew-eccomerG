@@ -43,8 +43,7 @@ export const load = () => {
 };
 
 // create a makeStore function
-const makeStore: MakeStore<Store<RootState>> = () =>
-    createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const makeStore: MakeStore<Store<RootState>> = () => createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 // export an assembled wrapper
 export const wrapper = createWrapper<Store<RootState>>(makeStore);

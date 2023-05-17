@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
+import { CartItemSave } from '../store/cart/cartTypes';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
@@ -468,6 +469,60 @@ const goldfarbApi = {
         };
         const { data } = await axios(config);
 
+        return data;
+    },
+    getProducts: async (productNumbers: string, cardcode: number) => {
+        const { products } = await fetch(`/api/products/lookup?itemcodes=${[`${productNumbers}`]}&cardcode=${cardcode}&withDesc=true`).then(
+            (res) => res.json(),
+        );
+        return products[0];
+    },
+    getCart: async (cardcode: string, email: string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/GetCart',
+            method: 'get',
+            params: {
+                cardcode,
+                email,
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+    saveCart: async (lines: CartItemSave[], cardcode: string, email: string) => {
+        const cart = {
+            cardcode,
+            email,
+            lines,
+        };
+
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/SaveCart',
+            method: 'post',
+            data: cart,
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
+    getRepairs: async (cardcode: string, start?: string, end?: string) => {
+        const threeMonthsAgo = new Date(new Date().getFullYear(), new Date().getMonth() - 24, new Date().getDate());
+        const params = {
+            cardcode,
+            start: start ?? threeMonthsAgo,
+            end: end ?? new Date(),
+        };
+
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/services',
+            method: 'get',
+            params,
+        };
+        const { data } = await axios(config);
         return data;
     },
 };

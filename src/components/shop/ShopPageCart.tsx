@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import Head from 'next/head';
 
 // application
+import { useUser } from '@auth0/nextjs-auth0';
+import { toast } from 'react-toastify';
 import AppLink from '../shared/AppLink';
 import AsyncAction from '../shared/AsyncAction';
 import Cross12Svg from '../../svg/cross-12.svg';
@@ -14,21 +16,35 @@ import InputNumber from '../shared/InputNumber';
 import PageHeader from '../shared/PageHeader';
 import url from '../../services/url';
 import { CartItem } from '../../store/cart/cartTypes';
+import { useCartAddItems, useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
 
 // data stubs
 import theme from '../../data/theme';
-import { useCart, useCartRemoveItem, useCartUpdateQuantities } from '../../store/cart/cartHooks';
+import goldfarbApi from '../../api/goldfarb';
+import { saveItems, saveRemoveItem, saveUpdateItem } from '../../api/helpers/cart';
 
 export interface Quantity {
     itemId: number;
     value: string | number;
 }
 
+export interface AddProducts {
+    itemId: string;
+    quantity: string;
+    pastedItems: boolean;
+}
+
 function ShopPageCart() {
     const [quantities, setQuantities] = useState<Quantity[]>([]);
+    const [productNumbers, setProductNumbers] = useState<AddProducts>({ itemId: '', quantity: '', pastedItems: false });
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const { user } = useUser();
+
     const cart = useCart();
     const cartRemoveItem = useCartRemoveItem();
     const cartUpdateQuantities = useCartUpdateQuantities();
+    const cartAddItems = useCartAddItems();
 
     const getItemQuantity = (item: CartItem) => {
         const quantity = quantities.find((x) => x.itemId === item.id);
@@ -36,38 +52,55 @@ function ShopPageCart() {
         return quantity ? quantity.value : item.quantity;
     };
 
+    const handleUpdateQuantities = (newQuantities: Quantity[]) => {
+        const updateQuantities = async () => {
+            if (
+                await saveUpdateItem(
+                    cart,
+                    newQuantities.map((x) => ({
+                        ...x,
+                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                    })),
+                    user,
+                )
+            ) {
+                setQuantities(newQuantities);
+                cartUpdateQuantities(
+                    newQuantities.map((x) => ({
+                        ...x,
+                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                    })),
+                );
+            }
+        };
+        if (user) {
+            updateQuantities();
+        }
+    };
+
     const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
-        setQuantities((prevState) => {
-            const index = prevState.findIndex((x) => x.itemId === item.id);
+        const index: number = quantities.findIndex((x) => x.itemId === item.id);
 
-            const quantities =
-                index === -1
-                    ? [
-                          ...prevState,
-                          {
-                              itemId: item.id,
-                              value: quantity,
-                              step: item.product.unitMult,
-                          },
-                      ]
-                    : [
-                          ...prevState.slice(0, index),
-                          {
-                              ...prevState[index],
-                              value: quantity,
-                              step: item.product.unitMult,
-                          },
-                          ...prevState.slice(index + 1),
-                      ];
-
-            cartUpdateQuantities(
-                quantities.map((x) => ({
-                    ...x,
-                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-                })),
-            );
-            return quantities;
-        });
+        const newQuantities =
+            index === -1
+                ? [
+                      ...quantities,
+                      {
+                          itemId: item.id,
+                          value: quantity,
+                          step: item.product.unitMult,
+                      },
+                  ]
+                : [
+                      ...quantities.slice(0, index),
+                      {
+                          ...quantities[index],
+                          value: quantity,
+                          step: item.product.unitMult,
+                      },
+                      ...quantities.slice(index + 1),
+                  ];
+        handleUpdateQuantities(newQuantities);
     };
 
     const breadcrumb = [
@@ -76,6 +109,96 @@ function ShopPageCart() {
     ];
 
     let content;
+
+    const handleAddMultipleProducts = async () => {
+        setLoading(true);
+        if (productNumbers.itemId.length > 0 && productNumbers.quantity.length > 0 && user) {
+            const listItems = productNumbers.itemId.split(' ');
+            const listQuantityItems = productNumbers.quantity.split(' ');
+
+            if (listItems.length !== listQuantityItems.length) {
+                toast.error(`Cantidad de codigos diferente a cantidad de unidades`, { theme: 'colored' });
+            } else {
+                const allProductsToAdd = [];
+                const allProductsQuanititiesToAdd = [];
+
+                for (let index = 0; index < listItems.length; index += 1) {
+                    try {
+                        // eslint-disable-next-line no-await-in-loop
+                        const data = await goldfarbApi.getProducts(listItems[index], user.cardcode as number);
+
+                        let quantity = Number(listQuantityItems[index]);
+                        if (data.unitMult && Number(listQuantityItems[index]) % data.unitMult !== 0) {
+                            quantity = data.unitMult;
+                        }
+
+                        allProductsToAdd.push(data);
+                        allProductsQuanititiesToAdd.push(quantity);
+                    } catch {
+                        toast.error(`Error agregando producto ${listItems[index]}`, { theme: 'colored' });
+                    }
+                }
+                if (await saveItems(cart, allProductsToAdd, allProductsQuanititiesToAdd, user)) {
+                    // eslint-disable-next-line no-await-in-loop
+                    await cartAddItems(allProductsToAdd, [], allProductsQuanititiesToAdd);
+                    setProductNumbers({ itemId: '', quantity: '', pastedItems: false });
+                }
+            }
+        }
+        setLoading(false);
+    };
+
+    const handleRemoveItem = async (item: CartItem) => {
+        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
+
+        return cartRemoveItem(item.id);
+    };
+
+    const addProductComponent = () => (
+        <div className="cart__table cart-table cart-table__add_section">
+            <div className="row cart-table__add_row">
+                <div className=" col-md-4 cart-table__add_input">
+                    <div>Codigo</div>
+                    <input
+                        type="text"
+                        className="cart-table__add_input_width form-control"
+                        id="checkout-last-name"
+                        value={productNumbers.itemId}
+                        min="0"
+                        max="200"
+                        onChange={(e) => {
+                            setProductNumbers((prevState) => ({
+                                ...prevState,
+                                itemId: e.target.value,
+                                pastedItems: e.target.value.length - productNumbers.itemId.length > 1,
+                            }));
+                        }}
+                        placeholder="Agregue el codigo"
+                    />
+                </div>
+                <div className=" col-md-4 cart-table__add_input">
+                    <div>Cantidad</div>
+                    <input
+                        type="text"
+                        className="cart-table__add_input_width form-control"
+                        id="checkout-last-name"
+                        value={productNumbers.quantity}
+                        min="0"
+                        max="200"
+                        onChange={(e) => {
+                            setProductNumbers((prevState) => ({ ...prevState, quantity: e.target.value }));
+                        }}
+                        placeholder="Agregue la cantidad"
+                    />
+                </div>
+                <div className=" col-md-4 cart-table__add_btn-row">
+                    <button disabled={loading} onClick={handleAddMultipleProducts} className="btn btn-block btn-primary">
+                        Agregar producto
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
 
     if (cart.quantity) {
         const cartItems = cart.items.map((item) => {
@@ -103,7 +226,7 @@ function ShopPageCart() {
 
             const removeButton = (
                 <AsyncAction
-                    action={() => cartRemoveItem(item.id)}
+                    action={() => handleRemoveItem(item)}
                     render={({ run, loading }) => {
                         const classes = classNames('btn btn-light btn-sm btn-svg-icon', {
                             'btn-loading': loading,
@@ -199,7 +322,7 @@ function ShopPageCart() {
                         </thead>
                         <tbody className="cart-table__body">{cartItems}</tbody>
                     </table>
-
+                    {addProductComponent()}
                     <div className="row justify-content-end pt-md-5 pt-4">
                         <div className="col-12 col-md-7 col-lg-6 col-xl-5">
                             <div className="card">
@@ -248,6 +371,7 @@ function ShopPageCart() {
         content = (
             <div className="block block-empty">
                 <div className="container">
+                    {addProductComponent()}
                     <div className="block-empty__body">
                         <div className="block-empty__message">Tu carro esta vacio!</div>
                         <div className="block-empty__actions">
@@ -255,6 +379,7 @@ function ShopPageCart() {
                                 Continuar
                             </AppLink>
                         </div>
+                        {addProductComponent}
                     </div>
                 </div>
             </div>

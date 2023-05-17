@@ -131,6 +131,9 @@ const url = {
     howToPurchase: (): ILinkProps => ({
         href: '/site/how-to-purchase',
     }),
+    repairs: (): ILinkProps => ({
+        href: '/repairs',
+    }),
 };
 
 export default url;
