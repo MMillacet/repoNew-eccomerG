@@ -4,10 +4,10 @@ import { CartItemSave } from '../store/cart/cartTypes';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
-const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+//const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 // const baseURL = 'http://localhost:50483/api';
 
-// const baseURL = 'http://app.goldfarb.com.uy/main/api';
+const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
 export interface CatalogOptions {
     email: string;
