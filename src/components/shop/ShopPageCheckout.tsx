@@ -29,7 +29,6 @@ function ShopPageCheckout() {
     const emptyCart = useCartEmpty();
     // const [currentPayment, setCurrentPayment] = useState('bank');
     const [shippingCost, setShippingCost] = useState(0);
-    const [loading, setLoading] = useState(false);
 
     const { user } = useUser();
     const { clientHeader }: any = user || {};
@@ -38,8 +37,6 @@ function ShopPageCheckout() {
     const [shipToCode, setShipToCode] = useState(clientHeader?.address[0]?.address);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState('');
     const [orderFailedMessage, setOrderFailedMessage] = useState('');
-    const [delveryTypeError, setDelveryTypeError] = useState(false);
-    const [delveryError, setDelveryError] = useState(false);
 
     useEffect(() => {
         const getShipping = async () => {
@@ -51,10 +48,6 @@ function ShopPageCheckout() {
         };
         getShipping();
     }, [cart.total, orderType]);
-
-    useEffect(() => {
-        setDelveryTypeError(false);
-    }, [orderType]);
 
     // const handlePaymentChange = (event: ChangeEvent<HTMLInputElement>) => {
     //     if (event.target.checked) {
@@ -98,38 +91,14 @@ function ShopPageCheckout() {
         })),
     });
 
-    const checkDeliveryTypesSelected = () => {
-        if (orderType.length > 0) {
-            setDelveryTypeError(false);
-            if (orderType === 'N') {
-                if (shipToCode.length > 0) {
-                    setDelveryError(false);
-                    return true;
-                }
-
-                setDelveryError(true);
-                return false;
-            }
-            return true;
-        }
-        setDelveryTypeError(true);
-        setDelveryError(false);
-
-        return false;
-    };
-
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
-        if (checkDeliveryTypesSelected()) {
-            setLoading(true);
-            const order = createOrder();
-            try {
-                const res = await axios.post('/api/orders/create', { order });
-                setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
-                emptyCart();
-            } catch (error) {
-                setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
-            }
-            setLoading(false);
+        const order = createOrder();
+        try {
+            const res = await axios.post('/api/orders/create', { order });
+            setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
+            emptyCart();
+        } catch (error) {
+            setOrderFailedMessage('Hubo un problema para procesar su pedido. Por favor vuelva a intentar.');
         }
     };
 
@@ -263,21 +232,6 @@ function ShopPageCheckout() {
                             <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
                                 <div className="card mb-0">
                                     <div className="card-body">
-                                        <h3 className="card-title">Tu Pedido</h3>
-
-                                        {cartTable}
-
-                                        {/* <div className="payment-methods">
-                                        <ul className="payment-methods__list">{payments}</ul>
-                                    </div> */}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
-                                <div className="card mb-0">
-                                    <div className="card-body">
                                         <h3 className="card-title">Direccion</h3>
                                         <div className="row">
                                             <div className="col-6 col-lg-6 col-xl-6">
@@ -293,11 +247,6 @@ function ShopPageCheckout() {
                                                         <option value="N">Goldfarb envia a cliente</option>
                                                         <option value="R">Cliente retira en Pantaleón Pérez</option>
                                                     </select>
-                                                    {delveryTypeError && (
-                                                        <label className="mt-2 col-12 alert alert-danger mb-3">
-                                                            Seleccione forma de entrega
-                                                        </label>
-                                                    )}
                                                 </div>
                                             </div>
                                             {orderType === 'N' && (
@@ -316,19 +265,27 @@ function ShopPageCheckout() {
                                                                 </option>
                                                             ))}
                                                         </select>
-                                                        {delveryError && (
-                                                            <label className="alert alert-danger mb-3">Seleccione dirección</label>
-                                                        )}
                                                     </div>
                                                 </div>
                                             )}
                                         </div>
-                                        <button
-                                            disabled={loading}
-                                            type="submit"
-                                            className="btn btn-primary btn-xl btn-block"
-                                            onClick={handleOrderSubmit}
-                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 col-lg-12 col-xl-12 mt-4 mt-lg-0">
+                                <div className="card mb-0">
+                                    <div className="card-body">
+                                        <h3 className="card-title">Tu Pedido</h3>
+
+                                        {cartTable}
+
+                                        {/* <div className="payment-methods">
+                                        <ul className="payment-methods__list">{payments}</ul>
+                                    </div> */}
+
+                                        <button type="submit" className="btn btn-primary btn-xl btn-block" onClick={handleOrderSubmit}>
                                             Realizar pedido
                                         </button>
                                     </div>

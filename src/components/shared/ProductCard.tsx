@@ -17,9 +17,8 @@ import url from '../../services/url';
 import { IProduct } from '../../interfaces/product';
 // import { useCompareAddItem } from '../../store/compare/compareHooks';
 // import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
-import { useCart, useCartAddItem } from '../../store/cart/cartHooks';
+import { useCartAddItem } from '../../store/cart/cartHooks';
 import InputNumber from './InputNumber';
-import { saveItem } from '../../api/helpers/cart';
 
 export type ProductCardLayout = 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal';
 
@@ -35,8 +34,6 @@ function ProductCard(props: ProductCardProps) {
     const [quantity, setQuantity] = useState<number>(product.unitMult);
     // const [rtProduct, setrtProduct] = useState<any>();
     const { user } = useUser();
-    const cart = useCart();
-
     const isUserActivated = user && !!user.cardcode;
     const cardcode = user && (user.cardcode as string);
 
@@ -60,12 +57,10 @@ function ProductCard(props: ProductCardProps) {
     // const wishlistAddItem = useWishlistAddItem();
     // const compareAddItem = useCompareAddItem();
 
-    const addToCart = async () => {
+    const addToCart = () => {
         if (typeof quantity === 'string') {
             return Promise.resolve();
         }
-
-        if (!(await saveItem(cart, rtProduct, quantity, user))) return Promise.resolve();
 
         return cartAddItem(rtProduct, [], quantity);
     };
@@ -128,7 +123,7 @@ function ProductCard(props: ProductCardProps) {
     if (rtProduct && rtProduct.price > 0 && rtProduct.discount > 0) {
         const oldPrice = rtProduct.price;
         const newPrice = rtProduct.price - rtProduct.price * (rtProduct.discount / 100);
-        price = (
+        price = (           
             <div className="product-card__prices row">
                 <div className="col-12 d-flex">
                     <div className="row ">
@@ -141,10 +136,10 @@ function ProductCard(props: ProductCardProps) {
                         </div>
                     </div>
                 </div>
-                <span className="col-12 margin-t promo-products__price-old">
-                    <CurrencyFormat value={newPrice} currency={rtProduct.currency} />
-                </span>
-            </div>
+            <span className="col-12 margin-t promo-products__price-old">
+                <CurrencyFormat value={newPrice} currency={rtProduct.currency} />
+            </span>
+        </div>
         );
     } else if (rtProduct && rtProduct.price > 0) {
         price = (
@@ -153,7 +148,7 @@ function ProductCard(props: ProductCardProps) {
             </div>
         );
     }
-
+    
     const handleChangeQuantity = (_quantity: string | number) => {
         const quantity = typeof _quantity === 'string' ? parseFloat(_quantity) : _quantity;
         setQuantity(quantity);
@@ -179,23 +174,23 @@ function ProductCard(props: ProductCardProps) {
                         Disponibilidad:
                         <span className="text-success">In Stock</span>
                     </div>
-                )}
+                )}                
                 {price}
                 {pvp && <div className="product__name">{pvp}</div>}
                 {isUserActivated && (
-                    <span className="product__meta-availability">
-                        <span
-                            className={classNames({
-                                'text-success': rtProduct?.stockStatus === 'S',
-                                'text-warning': rtProduct?.stockStatus === 'W',
-                                'text-muted': rtProduct?.stockStatus === 'D',
-                                'text-info': rtProduct?.stockStatus === 'A',
-                            })}
-                        >
-                            {rtProduct?.stockDescription}
-                        </span>
-                    </span>
-                )}
+                            <span className="product__meta-availability">                                                                 
+                                <span 
+                                className={
+                                    classNames({
+                                        'text-success':rtProduct?.stockStatus === 'S',
+                                        'text-warning':rtProduct?.stockStatus === 'W',
+                                        'text-muted':rtProduct?.stockStatus === 'D',
+                                        'text-info':rtProduct?.stockStatus === 'A'
+                                    })
+                                }                                   
+                                >{rtProduct?.stockDescription}</span>                                                                      
+                            </span>
+                        )}
                 {isUserActivated && price && (
                     <div className="product-card__buttons">
                         <div className="product__actions-item">

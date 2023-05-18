@@ -1,4 +1,6 @@
 // third-party
+import { toast } from 'react-toastify';
+
 // application
 import { IProduct } from '../../interfaces/product';
 import { CartItemOption } from './cartTypes';
@@ -13,11 +15,11 @@ import {
     CartThunkAction,
     CartEmptyAction,
     CartUpdateQuantitiesAction,
-    CartAddItemsAction,
-    CART_ADD_ITEMS,
 } from './cartActionTypes';
 
 export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] = [], quantity = product.unitMult): CartAddItemAction {
+    toast.success(`Producto "${product.title}" agregado al carro!`, { theme: 'colored' });
+
     return {
         type: CART_ADD_ITEM,
         product,
@@ -26,19 +28,9 @@ export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] 
     };
 }
 
-export function cartAddItemsSuccess(products: IProduct[], options: CartItemOption[] = [], quantities: number[]): CartAddItemsAction {
-    return {
-        type: CART_ADD_ITEMS,
-        products,
-        options,
-        quantities,
-    };
-}
-
 export function cartRemoveItemSuccess(itemId: number): CartRemoveItemAction {
     return {
         type: CART_REMOVE_ITEM,
-
         itemId,
     };
 }
@@ -66,17 +58,6 @@ export function cartAddItem(
         new Promise((resolve) => {
             setTimeout(() => {
                 dispatch(cartAddItemSuccess(product, options, quantity));
-                resolve();
-            }, 100);
-        });
-}
-
-export function cartAddItems(products: IProduct[], options: CartItemOption[] = [], quantities: number[]): CartThunkAction<Promise<void>> {
-    // sending request to server, timeout is used as a stub
-    return (dispatch) =>
-        new Promise((resolve) => {
-            setTimeout(() => {
-                dispatch(cartAddItemsSuccess(products, options, quantities));
                 resolve();
             }, 100);
         });
