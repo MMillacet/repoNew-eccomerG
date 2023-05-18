@@ -215,7 +215,8 @@ function Product(props: ProductProps) {
                         <li>
                             Unidad venta: <AppLink href="/">{rtProduct?.unitsPerItem}</AppLink>
                         </li>
-                        <li>Codigo: {product?.id}</li>
+                        <li>Código: {product?.id}</li>
+                        <li>Código de barras: {rtProduct?.codeBars}</li>
                     </ul>
                 </div>
 
