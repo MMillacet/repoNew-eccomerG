@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
-import { CartItemSave } from '../store/cart/cartTypes';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
