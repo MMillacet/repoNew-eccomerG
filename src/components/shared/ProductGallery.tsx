@@ -127,12 +127,6 @@ function ProductGallery(props: ProductGalleryProps) {
         }
     };
 
-    useEffect(() => {
-        setTimeout(() => {
-            handleThumbnailClick(0);
-        }, 1000);
-    }, []);
-
     const handleFeaturedAfterChange: SlickProps['afterChange'] = (index) => {
         setState((prev) => ({
             ...prev,
@@ -285,12 +279,10 @@ function ProductGallery(props: ProductGalleryProps) {
 
     const featured = allFiles.map((image, index) => {
         const isPDF = image.indexOf('pdf') > -1;
-        const isYouTubeVideo = image.indexOf('youtube') > -1;
-        const isVideo = image.indexOf('mp4') > -1;
+        const isVideo = image.indexOf('youtube') > -1;
 
-        if (isVideo || isYouTubeVideo) {
+        if (isVideo) {
             const url = image.replace('watch?v=', 'embed/');
-
             return (
                 <Fragment key={index}>
                     <div className="video-responsive ">
@@ -365,10 +357,9 @@ function ProductGallery(props: ProductGalleryProps) {
         });
 
         const isPDF = image.indexOf('pdf') > -1;
-        const isYouTubeVideo = image.indexOf('youtube') > -1;
-        const isVideo = image.indexOf('mp4') > -1;
+        const isVideo = image.indexOf('youtube') > -1;
 
-        if (isVideo || isYouTubeVideo) {
+        if (isVideo) {
             return (
                 <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
                     <div className="product-image__body">

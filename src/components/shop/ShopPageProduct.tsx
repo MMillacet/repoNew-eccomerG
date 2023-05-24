@@ -37,7 +37,6 @@ export interface ShopPageProductProps {
 function ShopPageProduct(props: ShopPageProductProps) {
     const { product, layout = 'standard', sidebarPosition = 'start' } = props;
     const [categories, setCategories] = useState<IShopCategory[]>([]);
-    const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
 
     let { data } = useSWR(`/api/products/lookup?itemcodes=${[`${product.id}`]}`, (url: any) => fetch(url).then((res) => res.json()));
 
@@ -51,15 +50,7 @@ function ShopPageProduct(props: ShopPageProductProps) {
         fetch(url).then((res) => res.json()),
     ));
 
-    useEffect(() => {
-        if (data) {
-            setRelatedProducts([]);
-            rtProduct.relatedItems.forEach((id: any) => {
-                const prod = data.products.find((prod: { itemCode: any }) => prod.itemCode === id);
-                if (prod) setRelatedProducts((prevState) => [...prevState, prod]);
-            });
-        }
-    }, [data]);
+    const relatedProducts = data?.products || [];
 
     // Load categories.
     useEffect(() => {
