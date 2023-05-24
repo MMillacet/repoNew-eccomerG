@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     cardcode = cardcode && cardcode !== 'undefined' ? cardcode : session ? session.user.cardcode : null;
 
     if (cardcode) {
-        const data = await goldfarbApi.saveCart(String(lines), String(cardcode), String(email));
+        const data = await goldfarbApi.saveCart(lines, String(cardcode), String(email));
         res.status(200).json({ data });
     }
 };

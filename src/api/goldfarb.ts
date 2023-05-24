@@ -490,11 +490,14 @@ const goldfarbApi = {
 
         return data;
     },
-    saveCart: async (lines: string, cardcode: string, email: string) => {
+    saveCart: async (lines: any, cardcode: string, email: string) => {
+        let linesToReturn = JSON.parse(lines);
+
+        if (linesToReturn.lines) linesToReturn = linesToReturn.lines;
         const cart = {
             cardcode,
             email,
-            lines,
+            lines: linesToReturn,
         };
 
         const config: AxiosRequestConfig = {
