@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
-import { CartItemSave } from '../store/cart/cartTypes';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
@@ -491,11 +490,14 @@ const goldfarbApi = {
 
         return data;
     },
-    saveCart: async (lines: CartItemSave[], cardcode: string, email: string) => {
+    saveCart: async (lines: any, cardcode: string, email: string) => {
+        let linesToReturn = JSON.parse(lines);
+
+        if (linesToReturn.lines) linesToReturn = linesToReturn.lines;
         const cart = {
             cardcode,
             email,
-            lines,
+            lines: linesToReturn,
         };
 
         const config: AxiosRequestConfig = {
