@@ -15,6 +15,8 @@ export default function RepairsList(props: RepairsListProps) {
         { title: 'Mis reparaciones', url: '' },
     ];
 
+    console.log({ repairs });
+
     const content = (
         <div className="cart block">
             <div className="container">

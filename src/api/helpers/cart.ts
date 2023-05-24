@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import { IProduct } from '../../interfaces/product';
 import { CartItemQuantity } from '../../store/cart/cartActionTypes';
 import { Cart, CartItem } from '../../store/cart/cartTypes';
+import goldfarbApi from '../goldfarb';
 
 function findItemIndex(items: CartItem[], product: IProduct): number {
     return items.findIndex((item) => {
@@ -25,12 +26,7 @@ export async function saveItem(cart: Cart, product: IProduct, quantity: number, 
             itemsToSave[itemIndex] = item;
         }
 
-        let itemsReturn: any = { lines: itemsToSave };
-        itemsReturn = JSON.stringify(itemsToSave);
-
-        await fetch(`/api/web/SaveCart?lines=${itemsReturn}&cardcode=${String(user?.cardcode)}&email=${String(user?.email)}`).then((res) =>
-            res.json(),
-        );
+        await goldfarbApi.saveCart(itemsToSave, String(user?.cardcode), String(user?.email));
         toast.success(`Producto "${product.title}" agregado al carro!`, { theme: 'colored' });
         return true;
     } catch {
@@ -54,14 +50,8 @@ export async function saveItems(cart: Cart, products: IProduct[], quantities: nu
                 itemsToSave[itemIndex] = item;
             }
         });
-        console.log('a');
 
-        let itemsReturn: any = { lines: itemsToSave };
-        itemsReturn = JSON.stringify(itemsToSave);
-
-        await fetch(`/api/web/SaveCart?lines=${itemsReturn}&cardcode=${String(user?.cardcode)}&email=${String(user?.email)}`).then((res) =>
-            res.json(),
-        );
+        await goldfarbApi.saveCart(itemsToSave, String(user?.cardcode), String(user?.email));
         toast.success(`Productos  agregados al carro!`, { theme: 'colored' });
         return true;
     } catch {
@@ -77,12 +67,7 @@ export async function saveRemoveItem(cart: Cart, product: IProduct, user: any) {
 
         if (itemIndex !== -1) {
             itemsToSave.splice(itemIndex);
-            let itemsReturn: any = { lines: itemsToSave };
-            itemsReturn = JSON.stringify(itemsToSave);
-
-            await fetch(`/api/web/SaveCart?lines=${itemsReturn}&cardcode=${String(user?.cardcode)}&email=${String(user?.email)}`).then(
-                (res) => res.json(),
-            );
+            await goldfarbApi.saveCart(itemsToSave, String(user?.cardcode), String(user?.email));
             toast.success(`Producto "${product.title}" removido del carro!`, { theme: 'colored' });
             return true;
         }
@@ -104,12 +89,7 @@ export async function saveUpdateItem(cart: Cart, quantities: CartItemQuantity[],
 
             return { itemCode: item.product.id, quantity: quantity.value };
         });
-        let itemsReturn: any = { lines: newItems };
-        itemsReturn = JSON.stringify(itemsReturn);
-
-        await fetch(`/api/web/SaveCart?lines=${itemsReturn}&cardcode=${String(user?.cardcode)}&email=${String(user?.email)}`).then((res) =>
-            res.json(),
-        );
+        await goldfarbApi.saveCart(newItems, String(user?.cardcode), String(user?.email));
         return true;
     } catch {
         toast.error(`Error cambiando las cantidades!`, { theme: 'colored' });
