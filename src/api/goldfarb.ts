@@ -491,7 +491,7 @@ const goldfarbApi = {
 
         return data;
     },
-    saveCart: async (lines: CartItemSave[], cardcode: string, email: string) => {
+    saveCart: async (lines: string, cardcode: string, email: string) => {
         const cart = {
             cardcode,
             email,
