@@ -27,7 +27,10 @@ function Layout(props: LayoutProps) {
 
     useEffect(() => {
         const fetchCart = async () => {
-            const cart = await goldfarbApi.getCart(String(user?.cardcode), String(user?.email));
+            const { data } = await fetch(`/api/web/GetCart?cardcode=${String(user?.cardcode)}&email=${String(user?.email)}`).then((res) =>
+                res.json(),
+            );
+            const cart = data;
             const allProductsToAdd = [];
             const allProductsQuanititiesToAdd = [];
             for (let index = 0; index < cart.lines.length; index += 1) {
