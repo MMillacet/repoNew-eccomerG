@@ -52,6 +52,7 @@ export interface IProduct {
     relatedItems: string[];
     shops: any[];
     listOrder: string;
+    codeBars:string;
     pvp?: number;
     videos: any[];
     videoLinks: any[];
