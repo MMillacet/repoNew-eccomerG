@@ -69,6 +69,7 @@ function HomePageTwo(props: HomePageOneProps) {
     const { initData } = props;
 
     const { user } = useUser();
+
     const isUserActivated = user && !!user.cardcode;
 
     const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);

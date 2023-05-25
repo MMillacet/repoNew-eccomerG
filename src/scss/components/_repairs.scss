@@ -1,0 +1,22 @@
+.repairs-th {
+    padding: 12px 18px;
+    border-top: 1px solid #ebebeb;
+    border: 1px solid #ebebeb;
+}
+
+.repairs-td {
+    padding: 12px 18px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border: 1px solid #ebebeb;
+}
+
+.repairs-table__row {
+    border: 1px solid $cart-table-card-border-color;
+    border-radius: 2px;
+    font-size: 15px;
+}
+
+.repairs-table__head {
+    background: #f7f7f7;
+}
