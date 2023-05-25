@@ -51,6 +51,9 @@ function IndicatorAccount() {
                             <AppLink href={url.accountProducts()}>Mis productos</AppLink>
                         </li>
                         <li>
+                            <AppLink href={url.repairs()}>Mis reparaciones</AppLink>
+                        </li>
+                        <li>
                             <AppLink href={url.accountCatalog()}>Crear catalogo</AppLink>
                         </li>
                     </ul>
