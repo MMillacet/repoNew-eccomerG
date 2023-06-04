@@ -1,5 +1,5 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -54,29 +54,25 @@ function ShopPageCart() {
 
     const handleUpdateQuantities = (newQuantities: Quantity[]) => {
         const updateQuantities = async () => {
-            if (
-                await saveUpdateItem(
-                    cart,
-                    newQuantities.map((x) => ({
-                        ...x,
-                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-                    })),
-                    user,
-                )
-            ) {
-                setQuantities(newQuantities);
-                cartUpdateQuantities(
-                    newQuantities.map((x) => ({
-                        ...x,
-                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-                    })),
-                );
-            }
+            await saveUpdateItem(
+                cart,
+                newQuantities.map((x) => ({
+                    ...x,
+                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                })),
+                user,
+            );
         };
         if (user) {
             updateQuantities();
         }
     };
+
+    useEffect(() => {
+        if (quantities.length > 0) {
+            handleUpdateQuantities(quantities);
+        }
+    }, [quantities]);
 
     const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
         const index: number = quantities.findIndex((x) => x.itemId === item.id);
@@ -100,7 +96,14 @@ function ShopPageCart() {
                       },
                       ...quantities.slice(index + 1),
                   ];
-        handleUpdateQuantities(newQuantities);
+
+        setQuantities(newQuantities);
+        cartUpdateQuantities(
+            newQuantities.map((x) => ({
+                ...x,
+                value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+            })),
+        );
     };
 
     const breadcrumb = [
@@ -262,6 +265,7 @@ function ShopPageCart() {
                             value={getItemQuantity(item)}
                             min={item.product.unitMult}
                             step={item.product.unitMult}
+                            onBlur={() => handleUpdateQuantities(quantities)}
                         />
                     </td>
                     <td className="cart-table__column cart-table__column--discount" data-title="Discount">
