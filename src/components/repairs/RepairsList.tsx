@@ -16,7 +16,7 @@ export default function RepairsList(props: RepairsListProps) {
         { title: 'Inicio', url: '/' },
         { title: 'Mis reparaciones', url: '' },
     ];
-    const rowsPerPage = 20;
+    const rowsPerPage = 10;
 
     const handlePagination = (e: any) => {
         setPage(e);

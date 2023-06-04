@@ -74,36 +74,47 @@ function ShopPageCart() {
         }
     }, [quantities]);
 
+    const handleRemoveItem = async (item: CartItem) => {
+        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
+
+        return cartRemoveItem(item.id);
+    };
+
     const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
-        const index: number = quantities.findIndex((x) => x.itemId === item.id);
+        const quantityToSet = quantity;
+        if (quantityToSet === '') {
+            handleRemoveItem(item);
+        } else {
+            const index: number = quantities.findIndex((x) => x.itemId === item.id);
 
-        const newQuantities =
-            index === -1
-                ? [
-                      ...quantities,
-                      {
-                          itemId: item.id,
-                          value: quantity,
-                          step: item.product.unitMult,
-                      },
-                  ]
-                : [
-                      ...quantities.slice(0, index),
-                      {
-                          ...quantities[index],
-                          value: quantity,
-                          step: item.product.unitMult,
-                      },
-                      ...quantities.slice(index + 1),
-                  ];
+            const newQuantities =
+                index === -1
+                    ? [
+                          ...quantities,
+                          {
+                              itemId: item.id,
+                              value: quantityToSet,
+                              step: item.product.unitMult,
+                          },
+                      ]
+                    : [
+                          ...quantities.slice(0, index),
+                          {
+                              ...quantities[index],
+                              value: quantityToSet,
+                              step: item.product.unitMult,
+                          },
+                          ...quantities.slice(index + 1),
+                      ];
 
-        setQuantities(newQuantities);
-        cartUpdateQuantities(
-            newQuantities.map((x) => ({
-                ...x,
-                value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-            })),
-        );
+            setQuantities(newQuantities);
+            cartUpdateQuantities(
+                newQuantities.map((x) => ({
+                    ...x,
+                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                })),
+            );
+        }
     };
 
     const breadcrumb = [
@@ -149,12 +160,6 @@ function ShopPageCart() {
             }
         }
         setLoading(false);
-    };
-
-    const handleRemoveItem = async (item: CartItem) => {
-        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
-
-        return cartRemoveItem(item.id);
     };
 
     const addProductComponent = () => (
