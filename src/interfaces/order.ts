@@ -70,6 +70,8 @@ export interface IGoldfarbOrderHeader {
     totalDolares: number;
     taxPesos: number;
     taxDolares: number;
+    docTotalPesos:number;
+    docTotalDolares:number;
 }
 
 export interface IGoldfarbOrderItem {

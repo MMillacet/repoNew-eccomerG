@@ -27,25 +27,33 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
 
     const totals = () => {
         const shipping = { price: 0 };
-        const { taxPesos, taxDolares } = order.header;
+        const { taxPesos, taxDolares, totalPesos, totalDolares } = order.header;       
 
-        const r1 = shipping && (
+        const r1 = (totalPesos || totalDolares) && (
             <tr key={1}>
+                <th>Subtotal</th>
+                <td>{totalDolares > 0 && <CurrencyFormat value={totalDolares} currency={'U$'} />}</td>
+                <td>{totalPesos > 0 && <CurrencyFormat value={totalPesos} />}</td>
+            </tr>
+        );
+
+        const r2 = shipping && (
+            <tr key={2}>
                 <th>Envio</th>
                 <td></td>
                 <td>{/* <CurrencyFormat value={shipping.price} /> */}</td>
             </tr>
         );
 
-        const r2 = (taxPesos || taxDolares) && (
-            <tr key={2}>
+        const r3 = (taxPesos || taxDolares) && (
+            <tr key={3}>
                 <th>Impuestos</th>
                 <td>{taxDolares > 0 && <CurrencyFormat value={taxDolares} currency={'U$'} />}</td>
                 <td>{taxPesos > 0 && <CurrencyFormat value={taxPesos} />}</td>
             </tr>
         );
 
-        return [r1, r2];
+        return [r1, r2, r3];
     };
 
     const { street, city } = order.header.addressExtention;
@@ -66,8 +74,8 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                     <h5 className="order-header__title">Pedido #{order.header.orderId}</h5>
                     <div className="order-header__subtitle">
                         Pedido fue creado el{' '}
-                        <mark className="order-header__date">{new Date(order.header.docDate).toLocaleDateString()}</mark> y esta siendo{' '}
-                        <mark className="order-header__status">procesado</mark>.
+                        <mark className="order-header__date">{new Date(order.header.docDate).toLocaleDateString()}</mark> y esta {' '}
+                        <mark className="order-header__status">{order.header.status}</mark>.
                     </div>
                     <div className="order-header__subtitle">
                         Dirección de envio: <mark className="order-header__status">{`${street}, ${city}`}</mark>.
@@ -91,10 +99,10 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                                     <th>Total</th>
                                     <td>
                                         {order.header.totalDolares > 0 && (
-                                            <CurrencyFormat value={order.header.totalDolares} currency={'U$'} />
+                                            <CurrencyFormat value={order.header.docTotalDolares} currency={'U$'} />
                                         )}
                                     </td>
-                                    <td>{order.header.totalPesos > 0 && <CurrencyFormat value={order.header.totalPesos} />}</td>
+                                    <td>{order.header.totalPesos > 0 && <CurrencyFormat value={order.header.docTotalPesos} />}</td>
                                 </tr>
                             </tfoot>
                         </table>
