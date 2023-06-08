@@ -17,6 +17,7 @@ export interface InputNumberProps {
     onChange?: (value: number | string) => void;
     disabled?: boolean;
     readonly?: boolean;
+    onBlur?: () => void;
 }
 
 function InputNumber(props: InputNumberProps) {

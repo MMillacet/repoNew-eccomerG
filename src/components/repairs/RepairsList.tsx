@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
+import Pagination from '../shared/Pagination';
 import theme from '../../data/theme';
 import { IRepairs } from '../../interfaces/repairs';
 import PageHeader from '../shared/PageHeader';
@@ -10,10 +11,20 @@ export interface RepairsListProps {
 
 export default function RepairsList(props: RepairsListProps) {
     const { repairs } = props;
+    const [page, setPage] = useState(1);
     const breadcrumb = [
         { title: 'Inicio', url: '/' },
         { title: 'Mis reparaciones', url: '' },
     ];
+    const rowsPerPage = 10;
+
+    const handlePagination = (e: any) => {
+        setPage(e);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
 
     const content = (
         <div className="cart block">
@@ -31,7 +42,7 @@ export default function RepairsList(props: RepairsListProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {repairs.map((item, index) => (
+                        {repairs.slice((page - 1) * rowsPerPage, (page - 1) * rowsPerPage + rowsPerPage).map((item, index) => (
                             <tr key={index} className="repairs-table__row">
                                 <td className="repairs-td" data-title="Code">
                                     {item.docNum}
@@ -58,6 +69,9 @@ export default function RepairsList(props: RepairsListProps) {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="products-view__pagination">
+                <Pagination current={page} siblings={2} total={Math.round(repairs.length / rowsPerPage)} onPageChange={handlePagination} />
             </div>
         </div>
     );

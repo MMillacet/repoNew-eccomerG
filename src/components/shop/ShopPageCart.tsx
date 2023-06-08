@@ -1,5 +1,5 @@
 // react
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 // third-party
 import classNames from 'classnames';
@@ -54,53 +54,67 @@ function ShopPageCart() {
 
     const handleUpdateQuantities = (newQuantities: Quantity[]) => {
         const updateQuantities = async () => {
-            if (
-                await saveUpdateItem(
-                    cart,
-                    newQuantities.map((x) => ({
-                        ...x,
-                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-                    })),
-                    user,
-                )
-            ) {
-                setQuantities(newQuantities);
-                cartUpdateQuantities(
-                    newQuantities.map((x) => ({
-                        ...x,
-                        value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
-                    })),
-                );
-            }
+            await saveUpdateItem(
+                cart,
+                newQuantities.map((x) => ({
+                    ...x,
+                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                })),
+                user,
+            );
         };
         if (user) {
             updateQuantities();
         }
     };
 
-    const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
-        const index: number = quantities.findIndex((x) => x.itemId === item.id);
+    useEffect(() => {
+        if (quantities.length > 0) {
+            handleUpdateQuantities(quantities);
+        }
+    }, [quantities]);
 
-        const newQuantities =
-            index === -1
-                ? [
-                      ...quantities,
-                      {
-                          itemId: item.id,
-                          value: quantity,
-                          step: item.product.unitMult,
-                      },
-                  ]
-                : [
-                      ...quantities.slice(0, index),
-                      {
-                          ...quantities[index],
-                          value: quantity,
-                          step: item.product.unitMult,
-                      },
-                      ...quantities.slice(index + 1),
-                  ];
-        handleUpdateQuantities(newQuantities);
+    const handleRemoveItem = async (item: CartItem) => {
+        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
+
+        return cartRemoveItem(item.id);
+    };
+
+    const handleChangeQuantity = (item: CartItem, quantity: string | number) => {
+        const quantityToSet = quantity;
+        if (quantityToSet === '') {
+            handleRemoveItem(item);
+        } else {
+            const index: number = quantities.findIndex((x) => x.itemId === item.id);
+
+            const newQuantities =
+                index === -1
+                    ? [
+                          ...quantities,
+                          {
+                              itemId: item.id,
+                              value: quantityToSet,
+                              step: item.product.unitMult,
+                          },
+                      ]
+                    : [
+                          ...quantities.slice(0, index),
+                          {
+                              ...quantities[index],
+                              value: quantityToSet,
+                              step: item.product.unitMult,
+                          },
+                          ...quantities.slice(index + 1),
+                      ];
+
+            setQuantities(newQuantities);
+            cartUpdateQuantities(
+                newQuantities.map((x) => ({
+                    ...x,
+                    value: typeof x.value === 'string' ? parseFloat(x.value) : x.value,
+                })),
+            );
+        }
     };
 
     const breadcrumb = [
@@ -146,12 +160,6 @@ function ShopPageCart() {
             }
         }
         setLoading(false);
-    };
-
-    const handleRemoveItem = async (item: CartItem) => {
-        if (!(await saveRemoveItem(cart, item.product, user))) return Promise.resolve();
-
-        return cartRemoveItem(item.id);
     };
 
     const addProductComponent = () => (
@@ -262,6 +270,7 @@ function ShopPageCart() {
                             value={getItemQuantity(item)}
                             min={item.product.unitMult}
                             step={item.product.unitMult}
+                            onBlur={() => handleUpdateQuantities(quantities)}
                         />
                     </td>
                     <td className="cart-table__column cart-table__column--discount" data-title="Discount">
