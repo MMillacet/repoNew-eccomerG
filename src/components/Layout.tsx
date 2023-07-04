@@ -15,6 +15,8 @@ import MobileHeader from './mobile/MobileHeader';
 import MobileMenu from './mobile/MobileMenu';
 import Quickview from './shared/Quickview';
 
+import WhatsappFixed from './shared/WhatsappFixed';
+
 export interface LayoutProps extends PropsWithChildren<{}> {
     headerLayout: HeaderLayout;
 }
@@ -64,7 +66,10 @@ function Layout(props: LayoutProps) {
                     <Header layout={headerLayout} />
                 </header>
 
-                <div className="site__body">{children}</div>
+                <div className="site__body">
+                    {children}
+                    <WhatsappFixed />
+                </div>
 
                 <footer className="site__footer">
                     <Footer />
