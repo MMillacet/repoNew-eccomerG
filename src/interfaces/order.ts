@@ -79,7 +79,7 @@ export interface IGoldfarbOrderItem {
     itemcode: string;
     itemCode: string;
     description: string;
-    quantity: number;
+    quantity: string;
     currency: string;
     price: number;
     discount: number;

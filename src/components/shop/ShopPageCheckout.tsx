@@ -161,7 +161,7 @@ function ShopPageCheckout() {
 
     const cartItems = cart.items.map((item) => (
         <tr key={item.id}>
-            <td>{`${item.product.title} × ${item.quantity}`}</td>
+            <td>{`${item.product.itemCode} - ${item.product.title} × ${item.quantity}`}</td>
             <td>{item.product.currency === 'U$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
             <td>{item.product.currency === '$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
         </tr>
