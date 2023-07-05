@@ -67,7 +67,7 @@ export default function AccountPageInvoiceDetails(props: AccountInvoiceDetailPro
                         Cliente: <mark className="order-header__status">{invoice.cardName}</mark>
                     </div>
                     <div className="order-header__subtitle">
-                        Codigo: <mark className="order-header__status">{invoice.cardName}</mark>
+                        Codigo: <mark className="order-header__status">{invoice.cardCode}</mark>
                     </div>
                     <div className="order-header__subtitle">
                         Folio:{' '}
