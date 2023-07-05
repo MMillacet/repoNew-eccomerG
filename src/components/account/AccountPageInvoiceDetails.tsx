@@ -1,5 +1,5 @@
 // react
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 // third-party
 import Head from 'next/head';
@@ -9,6 +9,8 @@ import AppLink from '../shared/AppLink';
 import url from '../../services/url';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import { IGoldfarbInvoice, IGoldfarbInvoiceLine } from '../../interfaces/invoice';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export interface AccountInvoiceDetailProps {
     invoice: IGoldfarbInvoice;
@@ -30,7 +32,19 @@ export default function AccountPageInvoiceDetails(props: AccountInvoiceDetailPro
             <td>{`${line.discount} %`}</td>
             <td>{<CurrencyFormat value={line.total} currency={line.currency} />}</td>
         </tr>
-    ));
+    ));    
+    const [loading, setLoading] = useState(false);
+    const SendCFE = async (/* event: FormEvent<HTMLButtonElement> */) => {        
+        setLoading(true);        
+        try {
+            const res = await axios.post('/api/documents/send', { invoice });
+            console.log(res);            
+            toast.success(`Copia enviada correctamente`, { theme: 'colored' });            
+        } catch (error) {            
+            toast.error('Hubo un problema para procesar su solicitud. Por favor vuelva a intentar.', { theme: 'colored' });
+        }
+        setLoading(false);        
+    };
 
     return (
         <Fragment>
@@ -43,14 +57,17 @@ export default function AccountPageInvoiceDetails(props: AccountInvoiceDetailPro
                     <div className="order-header__actions">
                         <AppLink href={url.accountStatus()} className="btn btn-xs btn-secondary">
                             Volver a estado de cuenta
-                        </AppLink>
+                        </AppLink><br/>
+                        <button  onClick={SendCFE} className={`btn  btn-xs btn-primary ${loading ? 'btn-loading' : ''}`} disabled={loading}>
+                            Enviar copia
+                        </button>                        
                     </div>
                     <h5 className="order-header__title">{title}</h5>
                     <div className="order-header__subtitle">
                         Cliente: <mark className="order-header__status">{invoice.cardName}</mark>
                     </div>
                     <div className="order-header__subtitle">
-                        Codigo: <mark className="order-header__status">{invoice.cardName}</mark>
+                        Codigo: <mark className="order-header__status">{invoice.cardCode}</mark>
                     </div>
                     <div className="order-header__subtitle">
                         Folio:{' '}

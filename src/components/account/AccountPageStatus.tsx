@@ -76,7 +76,7 @@ function AccountPageStatus() {
                 </div>
                 <div className="status-card__row">
                     <div className="status-card__row-title">Codigo</div>
-                    <div className="status-card__row-content">{accountStatus?.name}</div>
+                    <div className="status-card__row-content">{accountStatus?.cardCode}</div>
                 </div>
                 <div className="status-card__row">
                     <div className="status-card__row-title">RUT</div>

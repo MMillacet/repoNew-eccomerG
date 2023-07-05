@@ -19,7 +19,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
 
     const orderItems = order.lines.map((line) => (
         <tr key={line.lineNum}>
-            <td>{`${line.description} × ${line.quantity}`}</td>
+            <td>{`${line.itemCode} - ${line.description} × ${parseFloat(line.quantity)}`}</td>
             <td>{line.currency === 'U$' && <CurrencyFormat value={line.total} currency={line.currency} />}</td>
             <td>{line.currency === '$' && <CurrencyFormat value={line.total} currency={line.currency} />}</td>
         </tr>

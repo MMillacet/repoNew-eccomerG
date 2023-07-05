@@ -16,7 +16,6 @@ import BlockProductsCarousel from '../blocks/BlockProductsCarousel';
 import BlockSlideShow, { BlockSlideItem } from '../blocks/BlockSlideShow';
 
 import { IBrand } from '../../interfaces/brand';
-import WhatsappFixed from '../shared/WhatsappFixed';
 
 const YoutubeVideoModal = (props: { onClose: () => void; videoUrl: string | null }) => {
     const { onClose, videoUrl } = props;
@@ -189,8 +188,7 @@ function HomePageTwo(props: HomePageOneProps) {
                         </div>
                         <YoutubeVideoModal onClose={() => setPlayingVideoUrl(null)} videoUrl={playingVideoUrl}></YoutubeVideoModal>
                     </div>
-                </div>
-                <WhatsappFixed />
+                </div>                
             </div>
         </Fragment>
     );

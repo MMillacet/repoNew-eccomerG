@@ -527,6 +527,22 @@ const goldfarbApi = {
         const { data } = await axios(config);
         return data;
     },
+    sendCFE: async (folioPref:string, folioNum:string, cardcode: string, email:string) => {
+        const config: AxiosRequestConfig = {
+            baseURL,
+            url: '/web/sendCFE',
+            method: 'get',
+            params: {
+                folioPref, 
+                folioNum,
+                cardcode,
+                email
+            },
+        };
+        const { data } = await axios(config);
+
+        return data;
+    },
 };
 
 export default goldfarbApi;
