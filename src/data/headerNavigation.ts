@@ -1267,6 +1267,10 @@ const header: INav = [
 export default [
     ...header,
     {
+        title: 'PROMOS',
+        url: '/promos',
+    },
+    {
         title: 'SERVICIO TÉCNICO',
         url: '/site/contact-us',
     },
