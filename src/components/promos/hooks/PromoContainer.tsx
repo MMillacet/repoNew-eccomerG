@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { IProductPromoSelected } from '../../../interfaces/product';
-import { IPromo, IPromoLine } from '../../../interfaces/promo';
+import { IProductPromoSelected, IPromo, IPromoLine } from '../../../interfaces/promo';
+import { useCart } from '../../../store/cart/cartHooks';
+import { CartItem, CartItemsPromo } from '../../../store/cart/cartTypes';
 
 const PromoContainer = (promoFetch: IPromo) => {
     const [promo, setPromo] = useState<IPromo>(promoFetch);
@@ -13,11 +14,45 @@ const PromoContainer = (promoFetch: IPromo) => {
     const [totalOldPriceUSD, setTotalOldPriceUSD] = useState<number>(0);
     const [totalQuantity, setTotalQuantity] = useState<number>(0);
     const [totalItemQuantity, setTotalItemQuantity] = useState<number>(0);
+    const [startCart, setStartCart] = useState<boolean>(false);
     const products = promoFetch.lines;
+    const cart = useCart();
 
     useEffect(() => {
         setPromo(promo);
     }, [promoFetch]);
+
+    const uploadCartItems = async () => {
+        const newProductsSelecetd: any[] = [];
+        await cart.cartPromo.promos.forEach(async (promo: CartItemsPromo) => {
+            await promo.lines.forEach((item: CartItem) => {
+                const newItem = {
+                    product: item.product,
+                    quantity: item.quantity,
+                };
+                newProductsSelecetd.push(newItem);
+            });
+        });
+
+        const allpr: any[] = [];
+
+        productsSelected.forEach((productSelected) => {
+            const productfound = newProductsSelecetd.find((item) => item.product.itemCode === productSelected.product.itemCode);
+            if (productfound) {
+                allpr.push({
+                    ...productSelected,
+                    quantity: productfound.quantity + productSelected.quantity,
+                });
+            } else {
+                return allpr.push(productSelected);
+            }
+        });
+        setProductsSelected(allpr);
+    };
+
+    useEffect(() => {
+        if (productsSelected.length > 0) uploadCartItems();
+    }, [startCart]);
 
     useEffect(() => {
         const newProductsSelecetd: IProductPromoSelected[] = [];
@@ -30,6 +65,7 @@ const PromoContainer = (promoFetch: IPromo) => {
                 newProductsSelecetd.push(newItem);
             });
             setProductsSelected(newProductsSelecetd);
+            setStartCart(true);
         };
         generatedProducts();
     }, [products]);

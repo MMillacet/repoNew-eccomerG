@@ -135,11 +135,8 @@ margin-top: 5px;
     font-weight: 400;
 }
 
-
-
-
-
-
-
-
-
+@media screen and (max-width: 800px) {
+    .product-promo-discount{
+        font-size: 20px;
+    }
+}

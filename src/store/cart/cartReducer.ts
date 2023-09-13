@@ -295,8 +295,10 @@ function addPromo(state: CartState, promoItems: IProductPromoSelected[], idPromo
         }),
     );
 
+    const oldPromos = cartPromo.promos.filter((promo) => promo.idPromo !== idPromo);
+
     let allItemsPromos: any[] = newItems;
-    cartPromo.promos.forEach((promos) => {
+    oldPromos.forEach((promos) => {
         allItemsPromos = [...allItemsPromos, promos.lines];
     });
 
@@ -304,7 +306,7 @@ function addPromo(state: CartState, promoItems: IProductPromoSelected[], idPromo
 
     return {
         ...state,
-        cartPromo: { ...allTotals, promos: [...cartPromo.promos, { lines: newItems, idPromo, description }] },
+        cartPromo: { ...allTotals, promos: [...oldPromos, { lines: newItems, idPromo, description }] },
     };
 }
 

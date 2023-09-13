@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { IProductPromoSelected } from '../../interfaces/product';
+import { IProductPromoSelected } from '../../interfaces/promo';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import ProductPromoCard from '../shared/ProductPromoCard';
 
