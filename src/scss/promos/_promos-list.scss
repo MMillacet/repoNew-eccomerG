@@ -13,6 +13,27 @@
     &:hover{
         transform: translateY(-10px) scale(1.03);
     }
+    img{
+        border-radius: 10px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .promo-list-row {
+        display: grid;
+        padding: 16px 8px;
+        img{
+            width: 85%;
+        }
+        .promo-list-img-container{
+            width: 100%;
+            justify-content: center;
+            display: flex;
+        }
+        .promo-list-id-desciption{
+            text-align: center;
+        }
+    }
 }
 
 .promo-list-container {
@@ -33,7 +54,7 @@
 
 .promo-list-id-number{
     position:absolute;
-    top: 10px;
+    top: 12px;
     right:10px;
     font-size:12px
 }

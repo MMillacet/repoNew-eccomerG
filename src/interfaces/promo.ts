@@ -24,3 +24,29 @@ export interface IPromo {
     u_Banner: string;
     lines: IPromoLine[];
 }
+
+export interface IPromWebLine {
+    itemCode: string;
+    itemName: string;
+    currency: string;
+    price: number;
+    discPrcnt: number;
+    u_Porcentaje: number;
+    factorQty: number;
+    finalDiscount: number;
+    salPackUn: number;
+    obligatorio?: boolean;
+    obsequio?: boolean;
+    quantity: number;
+}
+
+export interface IPromoWeb {
+    idPromo: number;
+    description?: string;
+    lines: IPromWebLine[];
+}
+
+export interface IProductPromoSelected {
+    quantity: number;
+    product: IPromoLine;
+}

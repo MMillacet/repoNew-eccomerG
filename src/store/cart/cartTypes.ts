@@ -28,8 +28,7 @@ export interface CartTotal {
     title: string;
     price: number;
 }
-
-export interface Cart {
+export interface CartWeb {
     items: CartItem[];
     quantity: number;
     subtotal: { [currency: string]: number };
@@ -37,6 +36,29 @@ export interface Cart {
     total: { [currency: string]: number };
 }
 
-export interface CartState extends Cart {
+export interface CartItemsPromo {
+    lines: CartItem[];
+    idPromo: string;
+    description: string;
+}
+
+export interface CartPromo {
+    promos: CartItemsPromo[];
+    subtotal: { [currency: string]: number };
+    totals: { [currency: string]: CartTotal[] };
+    total: { [currency: string]: number };
+}
+
+export interface Cart {
+    cartWeb: CartWeb;
+    cartPromo: CartPromo;
+}
+
+export interface CartWebState extends CartWeb {
     lastItemId: number;
+}
+
+export interface CartState {
+    cartWeb: CartWebState;
+    cartPromo: CartPromo;
 }

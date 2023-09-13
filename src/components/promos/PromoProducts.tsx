@@ -5,7 +5,6 @@ import url from '../../services/url';
 import PageHeader from '../shared/PageHeader';
 import PromoContainer from './hooks/PromoContainer';
 import PromoCheckout from './PromoCheckout';
-import PromoConfirm from './PromoConfirm';
 import PromoListProducts from './PromoListProducts';
 
 export type ProductsViewLayout = 'grid' | 'grid-with-features' | 'list';
@@ -45,7 +44,7 @@ export default function PromoProducts({ promo }: IPromoProducts) {
                     <div className="products-view__empty-title product-promo-banner">
                         <img style={{ maxWidth: '100%' }} src={promo.u_Banner}></img>
                     </div>
-                    <div className="product-promo-discount row">
+                    <div className="product-promo-discount ">
                         <div className="product-promo-discount-col col-12 col-lg-10">{promo.u_Descrip}</div>
                     </div>
                     {view === 'view1' && (
@@ -58,7 +57,6 @@ export default function PromoProducts({ promo }: IPromoProducts) {
                             <PromoCheckout promoContainer={promoContainer} />
                         </div>
                     )}
-                    {/* {view === 'view3' && <PromoConfirm promoContainer={promoContainer} />} */}
                 </div>
             </div>
         </div>

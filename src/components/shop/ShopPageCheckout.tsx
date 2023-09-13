@@ -19,7 +19,6 @@ import url from '../../services/url';
 // import dataShopPayments from '../../data/shopPayments';
 import theme from '../../data/theme';
 import { useCart, useCartEmpty } from '../../store/cart/cartHooks';
-import { CartTotal } from '../../store/cart/cartTypes';
 
 // export type RenderPaymentFn = CollapseRenderFn<HTMLLIElement, HTMLDivElement>;
 
@@ -45,12 +44,18 @@ function ShopPageCheckout() {
         const getShipping = async () => {
             const type = orderType;
             if (type) {
-                const data = await (await fetch(`/api/shipping?totalp=${cart.total.$}&totald=${cart.total.U$}&tipoPedido=${type}`)).json();
+                const data = await (
+                    await fetch(
+                        `/api/shipping?totalp=${cart.cartWeb.total.$ + cart.cartPromo.total.$}&totald=${
+                            cart.cartWeb.total.U$ + cart.cartPromo.total.U$
+                        }&tipoPedido=${type}`,
+                    )
+                ).json();
                 setShippingCost(data);
             }
         };
         getShipping();
-    }, [cart.total, orderType]);
+    }, [cart.cartWeb.total, cart.cartPromo.total, orderType]);
 
     useEffect(() => {
         setDelveryTypeError(false);
@@ -66,35 +71,40 @@ function ShopPageCheckout() {
     const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
 
     useEffect(() => {
-        if (cart.stateFrom === 'client' && cart.items.length < 1 && !orderSuccessMessage) {
+        if (cart.stateFrom === 'client' && cart.cartWeb.items.length < 1 && !orderSuccessMessage) {
             const linkProps = url.cart();
 
             router.replace(linkProps.href, linkProps.as).then();
         }
-    }, [cart.stateFrom, cart.items.length, router, orderSuccessMessage]);
+    }, [cart.stateFrom, cart.cartWeb.items.length, router, orderSuccessMessage]);
 
-    if (cart.items.length < 1 && !orderSuccessMessage) {
+    if (cart.cartWeb.items.length < 1 && cart.cartPromo.promos.length < 1 && !orderSuccessMessage) {
         return null;
     }
 
     const createOrder = () => ({
         header: {
-            cardcode: user?.cardcode,
             cardname: user?.name,
             remito: clientHeader.remito,
             tipoMov: clientHeader.tipoMov,
             tipoPed: orderType,
             discount: clientHeader.discount,
             shipToCode,
+            email: user?.email,
+            cardcode: user?.cardcode,
         },
-        lines: cart.items.map((item) => ({
+        email: user?.email,
+        cardcode: user?.cardcode,
+        lines: cart.cartWeb.items.map((item) => ({
             itemcode: Number(item.product.itemCode),
-            description: item.product.title,
             quantity: item.quantity,
-            currency: item.product.currency,
-            price: item.product.price,
-            discount: item.product.discount,
-            total: item.total,
+        })),
+        promos: cart.cartPromo.promos.map((promo) => ({
+            idPromo: promo.idPromo,
+            lines: promo.lines.map((item) => ({
+                itemCode: Number(item.product.itemCode),
+                quantity: item.quantity,
+            })),
         })),
     });
 
@@ -121,9 +131,9 @@ function ShopPageCheckout() {
     const handleOrderSubmit = async (/* event: FormEvent<HTMLButtonElement> */) => {
         if (checkDeliveryTypesSelected()) {
             setLoading(true);
-            const order = createOrder();
+            const cart = createOrder();
             try {
-                const res = await axios.post('/api/orders/create', { order });
+                const res = await axios.post('/api/orders/create', { cart });
                 setOrderSuccessMessage(`Tu pedido fue realizado correctamente, pedido: ${res.data.orderId}`);
                 emptyCart();
             } catch (error) {
@@ -133,10 +143,16 @@ function ShopPageCheckout() {
         }
     };
 
+    const getTotalsValue = (currency: string) => {
+        const taxWeb = cart.cartWeb.totals[currency][0]?.price;
+        const taxPromo = cart.cartPromo.totals[currency][0]?.price;
+        return taxWeb + taxPromo;
+    };
+
     const totals = () => {
         // const shipping = cart.totals.$.find((x: CartTotal) => x.type === 'shipping');
-        const taxPesos = cart.totals.$.find((x: CartTotal) => x.type === 'tax');
-        const taxDollars = cart.totals.U$.find((x: CartTotal) => x.type === 'tax');
+        const taxPesos = getTotalsValue('$');
+        const taxDollars = getTotalsValue('U$');
 
         const r1 = (
             <tr key={1}>
@@ -151,21 +167,31 @@ function ShopPageCheckout() {
         const r2 = (taxPesos || taxDollars) && (
             <tr key={2}>
                 <th>Impuestos</th>
-                <td>{taxDollars && taxDollars.price > 0 && <CurrencyFormat value={taxDollars.price} currency={'U$'} />}</td>
-                <td>{taxPesos && taxPesos.price > 0 && <CurrencyFormat value={taxPesos.price} />}</td>
+                <td>{taxDollars > 0 && <CurrencyFormat value={taxDollars} currency={'U$'} />}</td>
+                <td>{taxPesos > 0 && <CurrencyFormat value={taxPesos} />}</td>
             </tr>
         );
 
         return [r1, r2];
     };
 
-    const cartItems = cart.items.map((item) => (
+    const cartItems = cart.cartWeb.items.map((item) => (
         <tr key={item.id}>
             <td>{`${item.product.itemCode} - ${item.product.title} × ${item.quantity}`}</td>
             <td>{item.product.currency === 'U$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
             <td>{item.product.currency === '$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
         </tr>
     ));
+
+    const cartPromoItems = cart.cartPromo.promos.map((promo) =>
+        promo.lines.map((item) => (
+            <tr key={item.product.id}>
+                <td>{`${item.product.itemCode} - ${item.product.itemName} × ${item.quantity}`}</td>
+                <td>{item.product.currency === 'U$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
+                <td>{item.product.currency === '$' && <CurrencyFormat value={item.total} currency={item.product.currency} />}</td>
+            </tr>
+        )),
+    );
 
     const cartTable = (
         <table className="checkout__totals">
@@ -176,16 +202,19 @@ function ShopPageCheckout() {
                     <th>Total $</th>
                 </tr>
             </thead>
-            <tbody className="checkout__totals-products">{cartItems}</tbody>
+            <tbody className="checkout__totals-products">
+                {cartItems}
+                {cartPromoItems}
+            </tbody>
             {totals().length > 0 && (
                 <tbody className="checkout__totals-subtotals">
                     <tr>
                         <th>Subtotal</th>
                         <td>
-                            <CurrencyFormat value={cart.subtotal.U$} currency={'U$'} />
+                            <CurrencyFormat value={cart.cartWeb.subtotal.U$} currency={'U$'} />
                         </td>
                         <td>
-                            <CurrencyFormat value={cart.subtotal.$} currency={'$'} />
+                            <CurrencyFormat value={cart.cartWeb.subtotal.$} currency={'$'} />
                         </td>
                     </tr>
                     {totals()}
@@ -195,10 +224,10 @@ function ShopPageCheckout() {
                 <tr>
                     <th>Total</th>
                     <td>
-                        <CurrencyFormat value={cart.total.U$} currency={'U$'} />
+                        <CurrencyFormat value={cart.cartWeb.total.U$ + cart.cartPromo.total.U$} currency={'U$'} />
                     </td>
                     <td>
-                        <CurrencyFormat value={cart.total.$} currency={'$'} />
+                        <CurrencyFormat value={cart.cartWeb.total.$ + +cart.cartPromo.total.$} currency={'$'} />
                     </td>
                 </tr>
             </tfoot>

@@ -1,30 +1,35 @@
-import { Fragment } from 'react';
+import classNames from 'classnames';
+import { useUser } from '@auth0/nextjs-auth0';
 import AppLink from '../shared/AppLink';
 import CurrencyFormat from '../shared/CurrencyFormat';
-import { IPromoWeb, IPromWebLine } from '../../interfaces/promo';
+import Cross12Svg from '../../svg/cross-12.svg';
+import AsyncAction from '../shared/AsyncAction';
+import { useCart, useCartRemovePromo } from '../../store/cart/cartHooks';
+import { removePromo } from '../../api/helpers/cart';
 
 export interface IPromoProducts {
-    promo: IPromoWeb;
+    promo: any;
 }
 
 export default function PromoCheckout({ promo }: IPromoProducts) {
     const { idPromo, description, lines } = promo;
+    const { user } = useUser();
+    const cart = useCart();
 
-    const getPriceItem = (product: IPromWebLine) => {
-        let price = (product.price - product.price * (product.finalDiscount / 100)) * product.quantity;
-        if (product.factorQty) {
-            price *= product.factorQty;
-        }
-        return price;
+    const cartRemovePromo = useCartRemovePromo();
+
+    const handleRemovePromo = async () => {
+        await removePromo(idPromo, cart, user);
+        await cartRemovePromo(idPromo);
     };
 
-    const cartItems = lines.map((product: IPromWebLine, index: number) => {
+    const cartItems = lines.map((item: any, index: number) => {
         const image = (
             <div className="product-image">
                 <AppLink className="product-image__body">
                     <img
                         className="product-image__img"
-                        src={`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${product.itemCode}.jpg`}
+                        src={`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${item.product.itemCode}.jpg`}
                         alt=""
                     />
                 </AppLink>
@@ -34,27 +39,44 @@ export default function PromoCheckout({ promo }: IPromoProducts) {
         return (
             <tr key={index} className="cart-table__row">
                 <td className="cart-table__column cart-table__column--code" data-title="Code">
-                    {product.itemCode}
+                    {item.product.itemCode}
                 </td>
                 <td className="cart-table__column cart-table__column--image">{image}</td>
                 <td className="cart-table__column cart-table__column--product">
-                    <AppLink className="cart-table__product-name">{product.itemName}</AppLink>
+                    <AppLink className="cart-table__product-name">{item.product.itemName}</AppLink>
                 </td>
                 <td className="cart-table__column cart-table__column--price" data-title="Price">
-                    <CurrencyFormat value={product.price} currency={product.currency} />
+                    <CurrencyFormat value={item.product.price} currency={item.product.currency} />
                 </td>
                 <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
-                    {product.quantity}
+                    {item.quantity}
                 </td>
                 <td className="cart-table__column cart-table__column--discount" data-title="Discount">
-                    {product.finalDiscount ? `${product.finalDiscount}%` : ''}
+                    {item.product.finalDiscount ? `${item.product.finalDiscount}%` : `${item.product.discount}%`}
                 </td>
                 <td className="cart-table__column cart-table__column--total" data-title="Total">
-                    <CurrencyFormat value={getPriceItem(product)} currency={product.currency} />
+                    <CurrencyFormat value={item.total} currency={item.product.currency} />
                 </td>
             </tr>
         );
     });
+
+    const removeButton = (
+        <AsyncAction
+            action={() => handleRemovePromo()}
+            render={({ run, loading }) => {
+                const classes = classNames('btn btn-light btn-sm btn-svg-icon', {
+                    'btn-loading': loading,
+                });
+
+                return (
+                    <button type="button" onClick={run} className={classes}>
+                        <Cross12Svg />
+                    </button>
+                );
+            }}
+        />
+    );
 
     const content = (
         <table className="cart__table cart-table">
@@ -76,7 +98,13 @@ export default function PromoCheckout({ promo }: IPromoProducts) {
     return (
         <div className="promo-list-cart">
             <div className="promo-list-cart-title">Promoción {idPromo}</div>
-            <div> {description}</div>
+            <div className="promo-list-cart-description-container">
+                <div className="promo-list-cart-description"> {description}</div>
+                <div className="promo-list-cart-remove-container">
+                    <div className="promo-list-cart-remove">Remover Promoción</div>
+                    {removeButton}
+                </div>
+            </div>
             {content}
         </div>
     );

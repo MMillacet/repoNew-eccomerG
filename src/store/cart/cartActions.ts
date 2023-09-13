@@ -15,7 +15,12 @@ import {
     CartUpdateQuantitiesAction,
     CartAddItemsAction,
     CART_ADD_ITEMS,
+    CART_ADD_PROMO,
+    CartAddPromoAction,
+    CART_REMOVE_PROMO,
+    CartRemovePromoAction,
 } from './cartActionTypes';
+import { IProductPromoSelected } from '../../interfaces/promo';
 
 export function cartAddItemSuccess(product: IProduct, options: CartItemOption[] = [], quantity = product.unitMult): CartAddItemAction {
     return {
@@ -53,6 +58,22 @@ export function cartUpdateQuantitiesSuccess(quantities: CartItemQuantity[]): Car
 export function cartEmptySuccess(): CartEmptyAction {
     return {
         type: CART_EMPTY,
+    };
+}
+
+export function cartAddPromoSuccess(promoItems: IProductPromoSelected[], idPromo: string, description: string): CartAddPromoAction {
+    return {
+        type: CART_ADD_PROMO,
+        promoItems,
+        idPromo,
+        description,
+    };
+}
+
+export function cartRemovePromoSuccess(idPromo: string): CartRemovePromoAction {
+    return {
+        type: CART_REMOVE_PROMO,
+        idPromo,
     };
 }
 
@@ -110,6 +131,29 @@ export function cartEmpty(): CartThunkAction<Promise<void>> {
         new Promise((resolve) => {
             setTimeout(() => {
                 dispatch(cartEmptySuccess());
+                resolve();
+            }, 100);
+        });
+}
+
+export function cartAddPromo(promoItems: IProductPromoSelected[], idPromo: string, description: string): CartThunkAction<Promise<void>> {
+    // sending request to server, timeout is used as a stub
+
+    return (dispatch) =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                dispatch(cartAddPromoSuccess(promoItems, idPromo, description));
+                resolve();
+            }, 100);
+        });
+}
+
+export function cartRemovePromo(idPromo: string): CartThunkAction<Promise<void>> {
+    // sending request to server, timeout is used as a stub
+    return (dispatch) =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+                dispatch(cartRemovePromoSuccess(idPromo));
                 resolve();
             }, 100);
         });

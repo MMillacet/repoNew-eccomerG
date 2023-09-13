@@ -13,7 +13,7 @@ import Cross10Svg from '../../svg/cross-10.svg';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import Indicator from './Indicator';
 import url from '../../services/url';
-import { useCart, useCartRemoveItem } from '../../store/cart/cartHooks';
+import { useCart, useCartRemoveItem, useCartRemovePromo } from '../../store/cart/cartHooks';
 import { saveRemoveItem } from '../../api/helpers/cart';
 import { CartItem } from '../../store/cart/cartTypes';
 
@@ -24,7 +24,7 @@ function IndicatorCart() {
     const { user } = useUser();
 
     const cartRemoveItem = useCartRemoveItem();
-
+    const cartRemovePromo = useCartRemovePromo();
     let dropdown;
     let totals;
 
@@ -34,20 +34,30 @@ function IndicatorCart() {
         return cartRemoveItem(item.id);
     };
 
-    if (cart.totals.$.length > 0) {
+    const getItemsCount = (): number => {
+        let promoItemsCount: number = 0;
+        cart.cartPromo.promos.forEach((promo) => {
+            promo.lines.forEach((item) => {
+                promoItemsCount += item.quantity;
+            });
+        });
+        return promoItemsCount + cart.cartWeb.quantity;
+    };
+
+    if (cart.cartWeb.totals.$.length > 0) {
         totals = currencies.map((currency: string) => (
             <Fragment key={currency}>
                 <tr>
                     <th>Total {currency}</th>
                     <td>
-                        <CurrencyFormat value={cart.total[currency]} currency={currency} />
+                        <CurrencyFormat value={cart.cartWeb.total[currency] + cart.cartPromo.total[currency]} currency={currency} />
                     </td>
                 </tr>
             </Fragment>
         ));
     }
 
-    const items = cart.items.map((item) => {
+    const items = cart.cartWeb.items.map((item) => {
         let options;
         let image;
 
@@ -109,10 +119,74 @@ function IndicatorCart() {
         );
     });
 
-    if (cart.quantity) {
+    const itemsPromo = cart.cartPromo.promos.map((promo) => {
+        const items = promo.lines.map((item) => {
+            const image = (
+                <div className="product-image dropcart__product-image">
+                    <AppLink className="product-image__body">
+                        <img
+                            className="product-image__img"
+                            src={`https://goldfarb.blob.core.windows.net/goldfarb/imagenes/${item.product.itemCode}.jpg`}
+                            alt=""
+                        />
+                    </AppLink>
+                </div>
+            );
+
+            return (
+                <div key={item.id} className="dropcart__product">
+                    {image}
+                    <div className="dropcart__product-info">
+                        <div className="dropcart__product-name">
+                            <AppLink href={url.product(item.product)}>{item.product.name}</AppLink>
+                        </div>
+                        <div className="dropcart__product-meta">
+                            <span className="dropcart__product-quantity">{item.quantity}</span>
+                            {' × '}
+                            <span className="dropcart__product-price">
+                                <CurrencyFormat value={item.price} currency={item.product.currency} />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+
+        const removeButton = (
+            <AsyncAction
+                action={() => cartRemovePromo(promo.idPromo)}
+                render={({ run, loading }) => {
+                    const classes = classNames('dropcart__promo-remove btn btn-light btn-sm btn-svg-icon', {
+                        'btn-loading': loading,
+                    });
+
+                    return (
+                        <button type="button" onClick={run} className={classes}>
+                            <Cross10Svg />
+                        </button>
+                    );
+                }}
+            />
+        );
+
+        return (
+            <div key={promo.idPromo}>
+                <div className="dropcart__promo-remove-container">
+                    <div className="promo-list-cart-remove">Remover Promoción</div>
+                    {removeButton}
+                </div>
+                {items}
+            </div>
+        );
+    });
+
+    if (cart.cartWeb.quantity) {
         dropdown = (
             <div className="dropcart">
-                <div className="dropcart__products-list">{items}</div>
+                <div className="dropcart__products-list">
+                    {items}
+                    {itemsPromo}
+                </div>
 
                 <div className="dropcart__totals">
                     <table>
@@ -142,7 +216,7 @@ function IndicatorCart() {
         );
     }
 
-    return <Indicator url="/shop/cart" dropdown={dropdown} value={cart.quantity} icon={<Cart20Svg />} />;
+    return <Indicator url="/shop/cart" dropdown={dropdown} value={getItemsCount()} icon={<Cart20Svg />} />;
 }
 
 export default IndicatorCart;

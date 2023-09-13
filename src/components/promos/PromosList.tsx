@@ -17,8 +17,10 @@ export default function PromosList({ promos }: PromosListProps) {
                     {promos.map((promo) => (
                         <Link key={promo.docEntry} href={url.promo(promo.docEntry).as}>
                             <div className="promo-list-row">
-                                <img width={300} src={promo.u_Banner}></img>
-                                <div>{promo.u_Descrip}</div>
+                                <div className="promo-list-img-container">
+                                    <img width={300} src={promo.u_Banner}></img>
+                                </div>
+                                <div className="promo-list-id-desciption">{promo.u_Descrip}</div>
                                 <div className="promo-list-id-number">{promo.docEntry}</div>
                             </div>
                         </Link>

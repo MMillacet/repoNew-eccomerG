@@ -5,7 +5,7 @@ import axios from 'axios';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import theme from '../../data/theme';
 import PromoHeader from './PromoHeader';
-import { IProductPromoSelected } from '../../interfaces/product';
+import { IProductPromoSelected } from '../../interfaces/promo';
 
 export interface IPromoProducts {
     promoContainer: any;
