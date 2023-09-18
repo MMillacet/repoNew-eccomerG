@@ -46,7 +46,6 @@ export interface BlockPaymentMethodsProps {
     paymentMethods?: SanityPaymentMethod[];
 }
 export default function BlockPaymentMethods(props: BlockPaymentMethodsProps) {
-    console.log(props.paymentMethods);
     const paymentMethodsList = props.paymentMethods?.map((paymentMethod) => (
         <div key={paymentMethod?.id} className="block-payment-methods__item">
             <AppLink href="/">
