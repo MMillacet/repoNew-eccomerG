@@ -172,13 +172,19 @@ export async function savePromo(promoProducts: IProductPromoSelected[], idPromo:
         let itemsReturn: any = { lines: itemsToSave };
         itemsReturn = JSON.stringify(itemsReturn);
 
-        let promos = cart.cartPromo.promos.map((promo) => ({
-            idPromo: promo.idPromo,
-            lines: promo.lines.map((item) => ({
-                itemCode: Number(item.product.itemCode),
-                quantity: item.quantity,
-            })),
-        }));
+        let promos: any[] = [];
+        cart.cartPromo.promos.forEach((promo) => {
+            if (promo.idPromo !== idPromo) {
+                promos.push({
+                    idPromo: promo.idPromo,
+                    lines: promo.lines.map((item) => ({
+                        itemCode: Number(item.product.itemCode),
+                        quantity: item.quantity,
+                    })),
+                });
+            }
+            return null;
+        });
 
         const newPromo = {
             idPromo,

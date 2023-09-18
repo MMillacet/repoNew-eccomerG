@@ -299,7 +299,7 @@ function addPromo(state: CartState, promoItems: IProductPromoSelected[], idPromo
 
     let allItemsPromos: any[] = newItems;
     oldPromos.forEach((promos) => {
-        allItemsPromos = [...allItemsPromos, promos.lines];
+        allItemsPromos = [...allItemsPromos, ...promos.lines];
     });
 
     const allTotals = calcAllTotals(allItemsPromos);
@@ -317,7 +317,7 @@ function removePromo(state: CartState, idPromo: string) {
     let allItemsPromos: any[] = [];
 
     newPromos.forEach((promos) => {
-        allItemsPromos = [...allItemsPromos, promos.lines];
+        allItemsPromos = [...allItemsPromos, ...promos.lines];
     });
 
     const allTotals = calcAllTotals(allItemsPromos);
