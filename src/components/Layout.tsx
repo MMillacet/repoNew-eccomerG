@@ -17,6 +17,7 @@ import Quickview from './shared/Quickview';
 
 import WhatsappFixed from './shared/WhatsappFixed';
 import LiveAgentGF from './shared/LiveAgentCHAT';
+
 export interface LayoutProps extends PropsWithChildren<{}> {
     headerLayout: HeaderLayout;
 }
