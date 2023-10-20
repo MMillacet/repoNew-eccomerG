@@ -12,3 +12,4 @@ dist
 node_modules
 .next
 prettier.config.js
+**/src/components/shared/LiveAgentCHAT.tsx
