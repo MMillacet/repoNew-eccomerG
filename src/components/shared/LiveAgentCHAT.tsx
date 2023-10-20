@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
+declare const LiveAgent: any;
+
 const LiveAgentGF = () => {
   useEffect(() => {
-    // Tu script JavaScript aquí
     (function(d, src, c) {
       var t = d.scripts[d.scripts.length - 1] as any,
         s = d.createElement('script') as any;
@@ -17,8 +18,10 @@ const LiveAgentGF = () => {
         c(this);
       };
       t.parentElement.insertBefore(s, t.nextSibling);
-    })(document, 'https://goldfarb.ladesk.com/scripts/track.js', function(e: any) {            
-      LiveAgent.createButton('467lagv1', e);
+    })(document, 'https://goldfarb.ladesk.com/scripts/track.js', function(e: any) {
+      if (typeof LiveAgent !== 'undefined') {
+        LiveAgent.createButton('467lagv1', e);
+      }
     });
   }, []);
 
