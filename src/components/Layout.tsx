@@ -16,7 +16,7 @@ import MobileMenu from './mobile/MobileMenu';
 import Quickview from './shared/Quickview';
 
 import WhatsappFixed from './shared/WhatsappFixed';
-import LiveAgentGF from './shared/LiveAgentCHAT';
+import LiveAgentCHAT from './shared/LiveAgentCHAT';
 
 export interface LayoutProps extends PropsWithChildren<{}> {
     headerLayout: HeaderLayout;
@@ -70,8 +70,9 @@ function Layout(props: LayoutProps) {
                 <div className="site__body">
                     {children}
                     <WhatsappFixed />
-                    <LiveAgentGF/>
-                </div>                
+                    <LiveAgentCHAT />
+                </div>
+
                 <footer className="site__footer">
                     <Footer />
                 </footer>

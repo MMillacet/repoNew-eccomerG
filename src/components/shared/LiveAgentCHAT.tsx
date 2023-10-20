@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 declare const LiveAgent: any;
 
-const LiveAgentGF = () => {
+const LiveAgentCHAT = () => {
   useEffect(() => {
     (function(d, src, c) {
       var t = d.scripts[d.scripts.length - 1] as any,
@@ -32,4 +32,4 @@ const LiveAgentGF = () => {
   );
 };
 
-export default LiveAgentGF;
+export default LiveAgentCHAT;
