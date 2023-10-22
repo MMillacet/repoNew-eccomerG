@@ -180,7 +180,7 @@ function IndicatorCart() {
         );
     });
 
-    if (cart.cartWeb.quantity) {
+    if (cart.cartWeb.quantity || cart.cartPromo.promos.length > 0) {
         dropdown = (
             <div className="dropcart">
                 <div className="dropcart__products-list">
