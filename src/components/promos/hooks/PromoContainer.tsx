@@ -39,13 +39,12 @@ const PromoContainer = (promoFetch: IPromo) => {
         productsSelected.forEach((productSelected) => {
             const productfound = newProductsSelecetd.find((item) => item.product.itemCode === productSelected.product.itemCode);
             if (productfound) {
-                allpr.push({
+                return allpr.push({
                     ...productSelected,
                     quantity: productfound.quantity + productSelected.quantity,
                 });
-            } else {
-                return allpr.push(productSelected);
             }
+            return allpr.push(productSelected);
         });
         setProductsSelected(allpr);
     };

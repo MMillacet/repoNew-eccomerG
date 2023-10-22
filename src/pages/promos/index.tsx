@@ -43,4 +43,4 @@ function Page({ promos }: PageProps) {
     return <PromosList promos={promos} />;
 }
 
-export default withPageAuthRequired(Page);
+export default withPageAuthRequired(Page as any);

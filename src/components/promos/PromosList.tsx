@@ -15,7 +15,7 @@ export default function PromosList({ promos }: PromosListProps) {
                 </div>
                 <div className="promo-list-container">
                     {promos.map((promo) => (
-                        <Link key={promo.docEntry} href={url.promo(promo.docEntry).as}>
+                        <Link key={promo.docEntry} href={url.promo(promo.docEntry).as!!}>
                             <div className="promo-list-row">
                                 <div className="promo-list-img-container">
                                     <img width={300} src={promo.u_Banner}></img>

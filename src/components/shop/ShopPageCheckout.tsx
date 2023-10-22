@@ -71,7 +71,7 @@ function ShopPageCheckout() {
     const handleShipToCodeChange = (event: ChangeEvent<HTMLSelectElement>) => setShipToCode(event.target.value);
 
     useEffect(() => {
-        if (cart.stateFrom === 'client' && cart.cartWeb.items.length < 1 && !orderSuccessMessage) {
+        if (cart.stateFrom === 'client' && cart.cartWeb.items.length < 1 && cart.cartPromo.promos.length < 1 && !orderSuccessMessage) {
             const linkProps = url.cart();
 
             router.replace(linkProps.href, linkProps.as).then();
