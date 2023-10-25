@@ -211,10 +211,10 @@ function ShopPageCheckout() {
                     <tr>
                         <th>Subtotal</th>
                         <td>
-                            <CurrencyFormat value={cart.cartWeb.subtotal.U$} currency={'U$'} />
+                            <CurrencyFormat value={cart.cartWeb.subtotal.U$ + cart.cartPromo.subtotal.U$} currency={'U$'} />
                         </td>
                         <td>
-                            <CurrencyFormat value={cart.cartWeb.subtotal.$} currency={'$'} />
+                            <CurrencyFormat value={cart.cartWeb.subtotal.$ + cart.cartPromo.subtotal.$} currency={'$'} />
                         </td>
                     </tr>
                     {totals()}
@@ -227,7 +227,7 @@ function ShopPageCheckout() {
                         <CurrencyFormat value={cart.cartWeb.total.U$ + cart.cartPromo.total.U$} currency={'U$'} />
                     </td>
                     <td>
-                        <CurrencyFormat value={cart.cartWeb.total.$ + +cart.cartPromo.total.$} currency={'$'} />
+                        <CurrencyFormat value={cart.cartWeb.total.$ + cart.cartPromo.total.$} currency={'$'} />
                     </td>
                 </tr>
             </tfoot>

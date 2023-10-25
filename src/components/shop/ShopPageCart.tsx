@@ -125,10 +125,27 @@ function ShopPageCart() {
 
     let content;
 
-    const getTotalsValue = (webPromoPrice: number, index: number, currency: string) => {
-        if (cart.cartPromo.promos.length > 0) return webPromoPrice + cart.cartPromo.totals[currency][index].price;
+    const getTotalsTaxes = (currency: string) => {
+        let total = 0;
 
-        return webPromoPrice;
+        cart.cartWeb.totals[currency].forEach((extraLine) => {
+            total = extraLine.price;
+        });
+        cart.cartPromo.totals[currency].forEach((extraLine) => {
+            total += extraLine.price;
+        });
+
+        if (total > 0) {
+            return (
+                <tr>
+                    <th>Impuestos</th>
+                    <td>
+                        <CurrencyFormat value={total} currency={currency} />
+                    </td>
+                </tr>
+            );
+        }
+        return null;
     };
 
     const handleAddMultipleProducts = async () => {
@@ -305,21 +322,7 @@ function ShopPageCart() {
                             </td>
                         </tr>
                     </thead>
-                    <tbody className="cart__totals-body">
-                        {cart.cartWeb.totals[currency].map((extraLine, index) => {
-                            let calcShippingLink;
-
-                            return (
-                                <tr key={index}>
-                                    <th>{extraLine.title}</th>
-                                    <td>
-                                        <CurrencyFormat value={getTotalsValue(extraLine.price, index, currency)} currency={currency} />
-                                        {calcShippingLink}
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
+                    <tbody className="cart__totals-body">{getTotalsTaxes(currency)}</tbody>
                 </Fragment>
             );
 
