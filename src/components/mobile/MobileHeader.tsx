@@ -77,7 +77,7 @@ function MobileHeader() {
                                 <Indicator
                                     className="indicator--mobile"
                                     url={url.cart()}
-                                    value={cart.cartWeb.quantity}
+                                    value={cart.cartWeb?.quantity}
                                     icon={<Cart20Svg />}
                                 />
                             )}

@@ -36,15 +36,15 @@ function IndicatorCart() {
 
     const getItemsCount = (): number => {
         let promoItemsCount: number = 0;
-        cart.cartPromo.promos.forEach((promo) => {
+        cart.cartPromo?.promos.forEach((promo) => {
             promo.lines.forEach((item) => {
                 promoItemsCount += item.quantity;
             });
         });
-        return promoItemsCount + cart.cartWeb.quantity;
+        return promoItemsCount + cart.cartWeb?.quantity;
     };
 
-    if (cart.cartWeb.totals.$.length > 0) {
+    if (cart.cartWeb?.totals.$.length > 0) {
         totals = currencies.map((currency: string) => (
             <Fragment key={currency}>
                 <tr>
@@ -57,7 +57,7 @@ function IndicatorCart() {
         ));
     }
 
-    const items = cart.cartWeb.items.map((item) => {
+    const items = cart.cartWeb?.items.map((item) => {
         let options;
         let image;
 
@@ -119,7 +119,7 @@ function IndicatorCart() {
         );
     });
 
-    const itemsPromo = cart.cartPromo.promos.map((promo) => {
+    const itemsPromo = cart.cartPromo?.promos.map((promo) => {
         const items = promo.lines.map((item) => {
             const image = (
                 <div className="product-image dropcart__product-image">
@@ -180,7 +180,7 @@ function IndicatorCart() {
         );
     });
 
-    if (cart.cartWeb.quantity || cart.cartPromo.promos.length > 0) {
+    if (cart.cartWeb?.quantity || cart.cartPromo?.promos.length > 0) {
         dropdown = (
             <div className="dropcart">
                 <div className="dropcart__products-list">
