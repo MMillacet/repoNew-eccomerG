@@ -146,7 +146,7 @@ function ShopPageCheckout() {
     const getTotalsValue = (currency: string) => {
         const taxWeb = cart.cartWeb.totals[currency][0]?.price;
         const taxPromo = cart.cartPromo.totals[currency][0]?.price;
-        return taxWeb + taxPromo;
+        return taxWeb + + (taxPromo == undefined?0:taxPromo);
     };
 
     const totals = () => {
