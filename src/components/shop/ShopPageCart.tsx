@@ -22,6 +22,7 @@ import { useCartAddItems, useCart, useCartRemoveItem, useCartUpdateQuantities } 
 import theme from '../../data/theme';
 import goldfarbApi from '../../api/goldfarb';
 import { saveItems, saveRemoveItem, saveUpdateItem } from '../../api/helpers/cart';
+import ShopPromoPart from './ShopPromoPart';
 
 export interface Quantity {
     itemId: number;
@@ -124,6 +125,29 @@ function ShopPageCart() {
 
     let content;
 
+    const getTotalsTaxes = (currency: string) => {
+        let total = 0;
+
+        cart.cartWeb.totals[currency].forEach((extraLine) => {
+            total = extraLine.price;
+        });
+        cart.cartPromo.totals[currency].forEach((extraLine) => {
+            total += extraLine.price;
+        });
+
+        if (total > 0) {
+            return (
+                <tr>
+                    <th>Impuestos</th>
+                    <td>
+                        <CurrencyFormat value={total} currency={currency} />
+                    </td>
+                </tr>
+            );
+        }
+        return null;
+    };
+
     const handleAddMultipleProducts = async () => {
         setLoading(true);
         if (productNumbers.itemId.length > 0 && productNumbers.quantity.length > 0 && user) {
@@ -208,8 +232,8 @@ function ShopPageCart() {
         </div>
     );
 
-    if (cart.quantity) {
-        const cartItems = cart.items.map((item) => {
+    if (cart.cartWeb.quantity || cart.cartPromo.promos.length > 0) {
+        const cartItems = cart.cartWeb.items.map((item) => {
             let image;
             let options;
             if (item.product.images.length > 0) {
@@ -285,31 +309,20 @@ function ShopPageCart() {
         });
 
         const cartTotals = (currency: string) =>
-            cart.totals[currency]?.length > 0 && (
+            (cart.cartWeb.totals[currency]?.length > 0 || cart.cartPromo.totals[currency]?.length > 0) && (
                 <Fragment>
                     <thead className="cart__totals-header">
                         <tr>
                             <th>Subtotal</th>
                             <td>
-                                <CurrencyFormat value={cart.subtotal[currency]} currency={currency} />
+                                <CurrencyFormat
+                                    value={cart.cartWeb.subtotal[currency] + cart.cartPromo.subtotal[currency]}
+                                    currency={currency}
+                                />
                             </td>
                         </tr>
                     </thead>
-                    <tbody className="cart__totals-body">
-                        {cart.totals[currency].map((extraLine, index) => {
-                            let calcShippingLink;
-
-                            return (
-                                <tr key={index}>
-                                    <th>{extraLine.title}</th>
-                                    <td>
-                                        <CurrencyFormat value={extraLine.price} currency={currency} />
-                                        {calcShippingLink}
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
+                    <tbody className="cart__totals-body">{getTotalsTaxes(currency)}</tbody>
                 </Fragment>
             );
 
@@ -332,6 +345,9 @@ function ShopPageCart() {
                         <tbody className="cart-table__body">{cartItems}</tbody>
                     </table>
                     {addProductComponent()}
+                    {cart.cartPromo.promos.length > 0 &&
+                        cart.cartPromo.promos.map((promo, index) => <ShopPromoPart key={index} promo={promo} />)}
+
                     <div className="row justify-content-end pt-md-5 pt-4">
                         <div className="col-12 col-md-7 col-lg-6 col-xl-5">
                             <div className="card">
@@ -343,7 +359,10 @@ function ShopPageCart() {
                                             <tr>
                                                 <th>Total dolares</th>
                                                 <td>
-                                                    <CurrencyFormat value={cart.total.U$} currency={'U$'} />
+                                                    <CurrencyFormat
+                                                        value={cart.cartWeb.total.U$ + cart.cartPromo.total.U$}
+                                                        currency={'U$'}
+                                                    />
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -361,7 +380,7 @@ function ShopPageCart() {
                                             <tr>
                                                 <th>Total pesos</th>
                                                 <td>
-                                                    <CurrencyFormat value={cart.total.$} currency={'$'} />
+                                                    <CurrencyFormat value={cart.cartWeb.total.$ + cart.cartPromo.total.$} currency={'$'} />
                                                 </td>
                                             </tr>
                                         </tfoot>

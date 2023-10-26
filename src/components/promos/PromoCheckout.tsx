@@ -1,10 +1,14 @@
 import Head from 'next/head';
 import { Fragment } from 'react';
+import { useRouter } from 'next/router';
+import { useUser } from '@auth0/nextjs-auth0';
 import theme from '../../data/theme';
-import { IProductPromoSelected } from '../../interfaces/product';
+import { IProductPromoSelected } from '../../interfaces/promo';
 import AppLink from '../shared/AppLink';
 import CurrencyFormat from '../shared/CurrencyFormat';
 import PromoHeader from './PromoHeader';
+import { useCart, useCartAddPromo } from '../../store/cart/cartHooks';
+import { savePromo } from '../../api/helpers/cart';
 
 export interface IPromoProducts {
     promoContainer: any;
@@ -20,14 +24,33 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
         totalItemQuantity,
         productsSelected,
         setView,
+        promo,
     } = promoContainer;
-
+    const router = useRouter();
     const handleGoBack = () => {
         setView('view1');
     };
 
-    const handleFinalize = () => {
-        setView('view3');
+    const cartAddPromo = useCartAddPromo();
+    const { user } = useUser();
+    const cart = useCart();
+
+    const getProductsLines = () => {
+        const res: IProductPromoSelected[] = [];
+        productsSelected.forEach((item: IProductPromoSelected) => {
+            if (item.quantity > 0) {
+                res.push(item);
+            }
+            return null;
+        });
+        return res;
+    };
+
+    const handleFinalize = async () => {
+        const description = promo.u_Descrip;
+        await cartAddPromo(getProductsLines(), promo.docEntry, description);
+        await savePromo(getProductsLines(), promo.docEntry, cart, user);
+        router.push('/shop/cart');
     };
 
     const getPriceItem = (item: IProductPromoSelected) => {
@@ -163,14 +186,12 @@ export default function PromoCheckout({ promoContainer }: IPromoProducts) {
             <div className="promo-checkout-btns">
                 <div className="product-promo-btn-sg">
                     <button onClick={handleGoBack} className="btn btn-primary btn-lg">
-                        {' '}
                         Volver
                     </button>
                 </div>
                 <div className="product-promo-btn-sg">
                     <button onClick={handleFinalize} className="btn btn-primary btn-lg">
-                        {' '}
-                        Finalizar
+                        Agregar al carrito
                     </button>
                 </div>
             </div>

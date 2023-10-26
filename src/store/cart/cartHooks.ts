@@ -1,5 +1,5 @@
 // application
-import { cartAddItem, cartAddItems, cartEmpty, cartRemoveItem, cartUpdateQuantities } from './cartActions';
+import { cartAddItem, cartAddItems, cartEmpty, cartRemoveItem, cartUpdateQuantities, cartAddPromo, cartRemovePromo } from './cartActions';
 import { useAppAction, useAppSelector } from '../hooks';
 
 export const useCart = () => useAppSelector((state) => state.cart);
@@ -13,3 +13,7 @@ export const useCartRemoveItem = () => useAppAction(cartRemoveItem);
 export const useCartUpdateQuantities = () => useAppAction(cartUpdateQuantities);
 
 export const useCartEmpty = () => useAppAction(cartEmpty);
+
+export const useCartAddPromo = () => useAppAction(cartAddPromo);
+
+export const useCartRemovePromo = () => useAppAction(cartRemovePromo);

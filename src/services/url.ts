@@ -131,8 +131,19 @@ const url = {
     howToPurchase: (): ILinkProps => ({
         href: '/site/how-to-purchase',
     }),
+
     repairs: (): ILinkProps => ({
         href: '/repairs',
+    }),
+
+    promo: (id: number): ILinkProps => ({
+        href: '/promos/[id]',
+        as: `/promos/${id}`,
+    }),
+
+    promos: () => ({
+        href: '/promos',
+        as: `/promos`,
     }),
 };
 

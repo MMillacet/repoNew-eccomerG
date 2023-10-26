@@ -3,8 +3,8 @@ import { IGoldfarbInvoice } from '../interfaces/invoice';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
 
-//const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
-//const baseURL = 'http://localhost:50483/api';
+// const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+// const baseURL = 'http://localhost:50483/api';
 
 const baseURL = 'http://app.goldfarb.com.uy/main/api';
 
@@ -263,12 +263,12 @@ const goldfarbApi = {
     },
 
     // todo: model order
-    postOrder: async (order: any) => {
+    postOrder: async (cart: any) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/CreateOrder',
             method: 'post',
-            data: order,
+            data: cart,
         };
         const { data } = await axios(config);
 
@@ -490,14 +490,19 @@ const goldfarbApi = {
 
         return data;
     },
-    saveCart: async (lines: any, cardcode: string, email: string) => {
+    saveCart: async (lines: any, promos: any, cardcode: string, email: string) => {
         let linesToReturn = JSON.parse(lines);
 
+        let promosToReturn = JSON.parse(promos) || [];
+
         if (linesToReturn.lines) linesToReturn = linesToReturn.lines;
+        if (promosToReturn.promos) promosToReturn = promosToReturn.promos;
+
         const cart = {
             cardcode,
             email,
             lines: linesToReturn,
+            promos: promosToReturn,
         };
 
         const config: AxiosRequestConfig = {
@@ -527,16 +532,16 @@ const goldfarbApi = {
         const { data } = await axios(config);
         return data;
     },
-    sendCFE: async (folioPref:string, folioNum:string, cardcode: string, email:string) => {
+    sendCFE: async (folioPref: string, folioNum: string, cardcode: string, email: string) => {
         const config: AxiosRequestConfig = {
             baseURL,
             url: '/web/sendCFE',
             method: 'get',
             params: {
-                folioPref, 
+                folioPref,
                 folioNum,
                 cardcode,
-                email
+                email,
             },
         };
         const { data } = await axios(config);

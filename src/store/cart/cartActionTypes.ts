@@ -1,12 +1,15 @@
 import { IProduct } from '../../interfaces/product';
 import { CartItemOption } from './cartTypes';
 import { AppAction } from '../types';
+import { IProductPromoSelected } from '../../interfaces/promo';
 
 export const CART_ADD_ITEM = 'CART_ADD_ITEM';
 export const CART_REMOVE_ITEM = 'CART_REMOVE_ITEM';
 export const CART_UPDATE_QUANTITIES = 'CART_UPDATE_QUANTITIES';
 export const CART_EMPTY = 'CART_EMPTY';
 export const CART_ADD_ITEMS = 'CART_ADD_ITEMS';
+export const CART_ADD_PROMO = 'CART_ADD_PROMO';
+export const CART_REMOVE_PROMO = 'CART_REMOVE_PROMO';
 
 export interface CartItemQuantity {
     itemId: number;
@@ -41,6 +44,25 @@ export interface CartEmptyAction {
     type: typeof CART_EMPTY;
 }
 
-export type CartAction = CartAddItemAction | CartRemoveItemAction | CartUpdateQuantitiesAction | CartEmptyAction | CartAddItemsAction;
+export interface CartAddPromoAction {
+    type: typeof CART_ADD_PROMO;
+    promoItems: IProductPromoSelected[];
+    idPromo: string;
+    description: string;
+}
+
+export interface CartRemovePromoAction {
+    type: typeof CART_REMOVE_PROMO;
+    idPromo: string;
+}
+
+export type CartAction =
+    | CartAddItemAction
+    | CartRemoveItemAction
+    | CartUpdateQuantitiesAction
+    | CartEmptyAction
+    | CartAddItemsAction
+    | CartAddPromoAction
+    | CartRemovePromoAction;
 
 export type CartThunkAction<T = void> = AppAction<CartAction, T>;

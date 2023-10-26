@@ -6,7 +6,8 @@ import { Fragment, PropsWithChildren, useEffect } from 'react';
 // third-party
 import { ToastContainer } from 'react-toastify';
 import goldfarbApi from '../api/goldfarb';
-import { useCartAddItems, useCartEmpty } from '../store/cart/cartHooks';
+import { IProductPromoSelected } from '../interfaces/promo';
+import { useCartAddItems, useCartAddPromo, useCartEmpty } from '../store/cart/cartHooks';
 
 // application
 import Footer from './footer/Footer';
@@ -27,6 +28,15 @@ function Layout(props: LayoutProps) {
     const { user } = useUser();
     const cartAddItems = useCartAddItems();
     const cartEmpty = useCartEmpty();
+    const cartAddPromo = useCartAddPromo();
+
+    const getProductsLines = (lines: any) => {
+        const res: IProductPromoSelected[] = [];
+        lines.forEach((item: any) => {
+            res.push({ product: item, quantity: item.quantity });
+        });
+        return res;
+    };
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -44,6 +54,14 @@ function Layout(props: LayoutProps) {
             }
             await cartEmpty();
             await cartAddItems(allProductsToAdd, [], allProductsQuanititiesToAdd);
+
+            for (let indexPromo = 0; indexPromo < cart.promos.length; indexPromo += 1) {
+                cartAddPromo(
+                    getProductsLines(cart.promos[indexPromo].lines),
+                    cart.promos[indexPromo].idPromo,
+                    cart.promos[indexPromo].description,
+                );
+            }
         };
         if (user) {
             fetchCart();
@@ -59,11 +77,11 @@ function Layout(props: LayoutProps) {
             <MobileMenu />
 
             <div className="site">
-                <header className="site__header d-lg-none">
+                <header className="site__header d-xl-none">
                     <MobileHeader />
                 </header>
 
-                <header className="site__header d-lg-block d-none">
+                <header className="site__header d-xl-block d-none">
                     <Header layout={headerLayout} />
                 </header>
 

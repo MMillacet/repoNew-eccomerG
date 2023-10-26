@@ -7,6 +7,7 @@ const dataMobileMenu: IMobileMenu = [
     { type: 'link', title: 'PINTURA', url: '/shop/catalog?family=Pinturas' },
     { type: 'link', title: 'BAZAR', url: '/shop/catalog?family=Bazar' },
     { type: 'link', title: 'ELECTRODOMÉSTICOS', url: '/shop/catalog?family=Electrodomésticos' },
+    { type: 'link', title: 'PROMOS', url: '/promos' },
     {
         type: 'link',
         title: 'SERVICIO TÉCNICO',

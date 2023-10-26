@@ -1,5 +1,5 @@
 // react
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 // third-party
 import { useUser } from '@auth0/nextjs-auth0';
@@ -24,6 +24,10 @@ function ProductPromoCard(props: ProductCardProps) {
     const { product, layout, handleAddItem, productQuantity } = props;
 
     const [quantity, setQuantity] = useState<number>(productQuantity);
+
+    useEffect(() => {
+        setQuantity(productQuantity);
+    }, [productQuantity]);
 
     const { user } = useUser();
     const isUserActivated = user && !!user.cardcode;

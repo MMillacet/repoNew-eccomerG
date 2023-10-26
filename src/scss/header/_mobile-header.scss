@@ -77,7 +77,7 @@
     }
 }
 
-@media (min-width: breakpoint(md-start)) and (max-width: breakpoint(md-end)) {
+@media (min-width: breakpoint(md-start)) and (max-width: breakpoint(lg-end)) {
     .mobile-header__search {
         flex-grow: 1;
         height: 36px;

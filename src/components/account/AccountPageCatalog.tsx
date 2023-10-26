@@ -49,7 +49,7 @@ function AccountPageCatalog() {
             price,
             iva,
             multiplier,
-            itemcodes: cart.items.map((item) => item.product.code),
+            itemcodes: cart.cartWeb.items.map((item) => item.product.code),
         });
         setIsLoading(false);
         if (res.status === 200) {
@@ -59,7 +59,7 @@ function AccountPageCatalog() {
         }
     };
 
-    const itemsList = cart.items?.map((item: any, i: number) => (
+    const itemsList = cart.cartWeb.items?.map((item: any, i: number) => (
         <tr key={i}>
             <td>{item?.product.code}</td>
             <td>

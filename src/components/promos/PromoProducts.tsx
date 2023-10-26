@@ -1,9 +1,10 @@
 // eslint-disable-next-line no-use-before-define
 import { Fragment } from 'react';
 import { IPromo } from '../../interfaces/promo';
+import url from '../../services/url';
+import PageHeader from '../shared/PageHeader';
 import PromoContainer from './hooks/PromoContainer';
 import PromoCheckout from './PromoCheckout';
-import PromoConfirm from './PromoConfirm';
 import PromoListProducts from './PromoListProducts';
 
 export type ProductsViewLayout = 'grid' | 'grid-with-features' | 'list';
@@ -20,6 +21,11 @@ export default function PromoProducts({ promo }: IPromoProducts) {
 
     const { view } = promoContainer;
 
+    const breadcrumb = [
+        { title: 'Promociones', url: url.promos() },
+        { title: promo.u_Descrip, url: url.promo(promo.docEntry) },
+    ];
+
     if (products.length < 1) {
         return (
             <Fragment>
@@ -34,10 +40,11 @@ export default function PromoProducts({ promo }: IPromoProducts) {
         <div className="cart block">
             <div className="container-xxl">
                 <div className="products-view__content">
+                    <PageHeader header="Mi cuenta" breadcrumb={breadcrumb} />
                     <div className="products-view__empty-title product-promo-banner">
                         <img style={{ maxWidth: '100%' }} src={promo.u_Banner}></img>
                     </div>
-                    <div className="product-promo-discount row">
+                    <div className="product-promo-discount ">
                         <div className="product-promo-discount-col col-12 col-lg-10">{promo.u_Descrip}</div>
                     </div>
                     {view === 'view1' && (
@@ -50,7 +57,6 @@ export default function PromoProducts({ promo }: IPromoProducts) {
                             <PromoCheckout promoContainer={promoContainer} />
                         </div>
                     )}
-                    {view === 'view3' && <PromoConfirm promoContainer={promoContainer} />}
                 </div>
             </div>
         </div>

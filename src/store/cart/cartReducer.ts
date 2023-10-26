@@ -1,4 +1,5 @@
 import { IProduct } from '../../interfaces/product';
+import { IProductPromoSelected } from '../../interfaces/promo';
 import { CartItem, CartItemOption, CartState, CartTotal } from './cartTypes';
 import {
     CART_ADD_ITEM,
@@ -8,6 +9,8 @@ import {
     CartAction,
     CartItemQuantity,
     CART_ADD_ITEMS,
+    CART_ADD_PROMO,
+    CART_REMOVE_PROMO,
 } from './cartActionTypes';
 import { withClientState } from '../client';
 
@@ -42,9 +45,13 @@ function calcSubtotal(items: CartItem[], currency: string = '$'): number {
     return items.reduce((subtotal, item) => (item.product.currency === currency ? subtotal + item.total : subtotal), 0);
 }
 
+function getTaxes(product: IProduct): number {
+    return product.tax ?? 22;
+}
+
 function calcTax(items: CartItem[], currency: string = '$'): number {
     return items.reduce(
-        (subtotal, item) => (item.product.currency === currency ? subtotal + (item.total * item.product.tax) / 100 : subtotal),
+        (subtotal, item) => (item.product.currency === currency ? subtotal + (item.total * getTaxes(item.product)) / 100 : subtotal),
         0,
     );
 }
@@ -118,15 +125,16 @@ function calcAllTotals(items: CartItem[]) {
 }
 
 function addItem(state: CartState, product: IProduct, options: CartItemOption[], quantity: number) {
-    const itemIndex = findItemIndex(state.items, product, options);
+    const { cartWeb } = state;
+    let { lastItemId } = cartWeb;
+    const itemIndex = findItemIndex(cartWeb.items, product, options);
 
     let newItems: CartItem[];
-    let { lastItemId } = state;
 
     if (itemIndex === -1) {
         lastItemId += 1;
         newItems = [
-            ...state.items,
+            ...cartWeb.items,
             {
                 id: lastItemId,
                 product: JSON.parse(JSON.stringify(product)),
@@ -137,16 +145,16 @@ function addItem(state: CartState, product: IProduct, options: CartItemOption[],
             },
         ];
     } else {
-        const item = state.items[itemIndex];
+        const item = cartWeb.items[itemIndex];
 
         newItems = [
-            ...state.items.slice(0, itemIndex),
+            ...cartWeb.items.slice(0, itemIndex),
             {
                 ...item,
                 quantity: item.quantity + quantity,
                 total: (item.quantity + quantity) * calcPriceWithDiscount(product),
             },
-            ...state.items.slice(itemIndex + 1),
+            ...cartWeb.items.slice(itemIndex + 1),
         ];
     }
 
@@ -154,19 +162,23 @@ function addItem(state: CartState, product: IProduct, options: CartItemOption[],
 
     return {
         ...state,
-        lastItemId,
-        items: newItems,
-        quantity: calcQuantity(newItems),
-        ...allTotals,
+        cartWeb: {
+            ...state.cartWeb,
+            lastItemId,
+            items: newItems,
+            quantity: calcQuantity(newItems),
+            ...allTotals,
+        },
     };
 }
 
 function addItems(state: CartState, products: IProduct[], options: CartItemOption[], quantities: number[]) {
-    let newItems: CartItem[] = [...state.items];
-    let { lastItemId } = state;
+    const { cartWeb } = state;
+    let newItems: CartItem[] = [...cartWeb.items];
+    let { lastItemId } = cartWeb;
 
     products.forEach((product, index) => {
-        const itemIndex = findItemIndex(state.items, product, options);
+        const itemIndex = findItemIndex(cartWeb.items, product, options);
 
         if (itemIndex === -1) {
             lastItemId += 1;
@@ -179,16 +191,16 @@ function addItems(state: CartState, products: IProduct[], options: CartItemOptio
                 quantity: quantities[index],
             });
         } else {
-            const item = state.items[itemIndex];
+            const item = cartWeb.items[itemIndex];
 
             newItems = [
-                ...state.items.slice(0, itemIndex),
+                ...cartWeb.items.slice(0, itemIndex),
                 {
                     ...item,
                     quantity: item.quantity + quantities[index],
                     total: (item.quantity + quantities[index]) * calcPriceWithDiscount(product),
                 },
-                ...state.items.slice(itemIndex + 1),
+                ...cartWeb.items.slice(itemIndex + 1),
             ];
         }
     });
@@ -197,31 +209,37 @@ function addItems(state: CartState, products: IProduct[], options: CartItemOptio
 
     return {
         ...state,
-        lastItemId,
-        items: newItems,
-        quantity: calcQuantity(newItems),
-        ...allTotals,
+        cartWeb: {
+            ...state.cartWeb,
+            lastItemId,
+            items: newItems,
+            quantity: calcQuantity(newItems),
+            ...allTotals,
+        },
     };
 }
 
 function removeItem(state: CartState, itemId: number) {
-    const { items } = state;
-    const newItems = items.filter((item) => item.id !== itemId);
+    const { cartWeb } = state;
+    const newItems = cartWeb.items.filter((item) => item.id !== itemId);
 
     const allTotals = calcAllTotals(newItems);
 
     return {
         ...state,
-        items: newItems,
-        quantity: calcQuantity(newItems),
-        ...allTotals,
+        cartWeb: {
+            ...state.cartWeb,
+            items: newItems,
+            quantity: calcQuantity(newItems),
+            ...allTotals,
+        },
     };
 }
 
 function updateQuantities(state: CartState, quantities: CartItemQuantity[]) {
     let needUpdate = false;
 
-    const newItems = state.items.map((item) => {
+    const newItems = state.cartWeb.items.map((item) => {
         const quantity = quantities.find((x) => x.itemId === item.id && x.value !== item.quantity);
 
         if (!quantity) {
@@ -242,30 +260,106 @@ function updateQuantities(state: CartState, quantities: CartItemQuantity[]) {
 
         return {
             ...state,
-            items: newItems,
-            quantity: calcQuantity(newItems),
-            ...allTotals,
+            cartWeb: {
+                ...state.cartWeb,
+                items: newItems,
+                quantity: calcQuantity(newItems),
+                ...allTotals,
+            },
         };
     }
 
     return state;
 }
 
+const getPriceItem = (item: IProductPromoSelected) => {
+    let price = (item.product.price - item.product.price * (item.product.finalDiscount / 100)) * item.quantity;
+    if (item.product.factorQty) {
+        price *= item.product.factorQty;
+    }
+    return price;
+};
+
+function addPromo(state: CartState, promoItems: IProductPromoSelected[], idPromo: string, description: string) {
+    const { cartPromo } = state;
+    const newItems: CartItem[] = [];
+
+    promoItems.forEach((items, index) =>
+        newItems.push({
+            id: index,
+            product: JSON.parse(JSON.stringify(items.product)),
+            price: items.product.price,
+            total: getPriceItem(items),
+            quantity: items.quantity,
+            options: [],
+        }),
+    );
+
+    const oldPromos = cartPromo.promos.filter((promo) => promo.idPromo !== idPromo);
+
+    let allItemsPromos: any[] = newItems;
+    oldPromos.forEach((promos) => {
+        allItemsPromos = [...allItemsPromos, ...promos.lines];
+    });
+
+    const allTotals = calcAllTotals(allItemsPromos);
+
+    return {
+        ...state,
+        cartPromo: { ...allTotals, promos: [...oldPromos, { lines: newItems, idPromo, description }] },
+    };
+}
+
+function removePromo(state: CartState, idPromo: string) {
+    const { cartPromo } = state;
+    const newPromos = cartPromo.promos.filter((promo) => promo.idPromo !== idPromo);
+
+    let allItemsPromos: any[] = [];
+
+    newPromos.forEach((promos) => {
+        allItemsPromos = [...allItemsPromos, ...promos.lines];
+    });
+
+    const allTotals = calcAllTotals(allItemsPromos);
+
+    return {
+        ...state,
+        cartPromo: { ...allTotals, promos: newPromos },
+    };
+}
+
 const initialState: CartState = {
-    lastItemId: 0,
-    quantity: 0,
-    items: [],
-    subtotal: {
-        $: 0,
-        U$: 0,
+    cartWeb: {
+        lastItemId: 0,
+        quantity: 0,
+        items: [],
+        subtotal: {
+            $: 0,
+            U$: 0,
+        },
+        totals: {
+            $: [],
+            U$: [],
+        },
+        total: {
+            $: 0,
+            U$: 0,
+        },
     },
-    totals: {
-        $: [],
-        U$: [],
-    },
-    total: {
-        $: 0,
-        U$: 0,
+    cartPromo: {
+        promos: [],
+        subtotal: {
+            $: 0,
+            U$: 0,
+        },
+        totals: {
+            $: [],
+            U$: [],
+        },
+        total: {
+            $: 0,
+            U$: 0,
+        },
     },
 };
 
@@ -284,8 +378,15 @@ function cartBaseReducer(state = initialState, action: CartAction): CartState {
 
         case CART_UPDATE_QUANTITIES:
             return updateQuantities(state, action.quantities);
+
         case CART_EMPTY:
             return initialState;
+
+        case CART_ADD_PROMO:
+            return addPromo(state, action.promoItems, action.idPromo, action.description);
+
+        case CART_REMOVE_PROMO:
+            return removePromo(state, action.idPromo);
 
         default:
             return state;

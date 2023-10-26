@@ -1,23 +1,17 @@
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { GetServerSidePropsContext } from 'next';
-import { ParsedUrlQuery } from 'querystring';
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import goldfarbApi from '../../api/goldfarb';
-import PromoProducts from '../../components/promos/PromoProducts';
+import PromosList from '../../components/promos/PromosList';
 import { IPromo } from '../../interfaces/promo';
 
-interface IParams extends ParsedUrlQuery {
-    orderId: string;
-}
-
 export interface PageProps {
-    promo: IPromo;
+    promos: IPromo[];
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext<IParams>) {
-    const { req, res, params } = context;
-    const { id } = params as IParams;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const { req, res } = context;
 
     const session = await getSession(req, res);
 
@@ -25,10 +19,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
 
     if (cardcode) {
         try {
-            const promo = await goldfarbApi.getPromo(Number(id), cardcode);
+            const promos = await goldfarbApi.getPromos(cardcode);
             return {
                 props: {
-                    promo,
+                    promos,
                 },
             };
         } catch (error) {
@@ -45,8 +39,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext<IPar
     };
 }
 
-function Page({ promo }: any) {
-    return <PromoProducts promo={promo} />;
+function Page({ promos }: PageProps) {
+    return <PromosList promos={promos} />;
 }
 
-export default withPageAuthRequired(Page);
+export default withPageAuthRequired(Page as any);

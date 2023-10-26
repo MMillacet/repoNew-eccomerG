@@ -22,7 +22,7 @@
         }
     }
 
-    @media (min-width: breakpoint(md-start)) and (max-width: breakpoint(md-end)) {
+    @media (min-width: breakpoint(md-start)) and (max-width: breakpoint(lg-end)) {
         .search__body {
             position: relative;
             z-index: 2;

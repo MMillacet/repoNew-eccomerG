@@ -74,7 +74,12 @@ function MobileHeader() {
                                 icon={<Heart20Svg />}
                             /> */}
                             {isUserActivated && (
-                                <Indicator className="indicator--mobile" url={url.cart()} value={cart.quantity} icon={<Cart20Svg />} />
+                                <Indicator
+                                    className="indicator--mobile"
+                                    url={url.cart()}
+                                    value={cart.cartWeb?.quantity}
+                                    icon={<Cart20Svg />}
+                                />
                             )}
                             <IndicatorAccount />
                         </div>
