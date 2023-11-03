@@ -59,8 +59,10 @@
         }
         &.search--has-suggestions.search--suggestions-open .search__input,
         .search__input:focus {
-            color: $mobile-header-search-input-focus-font-color;
+           color: $mobile-header-search-input-focus-font-color;
             outline: none;
+            color: black;
+           
 
             &::placeholder {
                 color: $mobile-header-search-input-focus-placeholder;
