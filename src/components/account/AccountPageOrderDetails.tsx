@@ -29,7 +29,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
         <tr key={line.lineNum}>
             <td>{new Date(line.fechaEnvio).toLocaleDateString()}</td>
             <td>{line.trnspName}</td>
-            <td>{line.idEnvio}</td>
+            <td><a href={line.urlSeguimiento} target='_blank'>{line.idEnvio}</a></td>
             <td>{line.packageQty}</td>
         </tr>
     ));
@@ -126,7 +126,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                                 <tr>
                                     <th>Fecha envío</th>
                                     <th>Transportista</th>
-                                    <th>Ref. Envío</th>
+                                    <th>Nro. Despacho</th>
                                     <th>Bultos</th>
                                 </tr>
                             </thead>

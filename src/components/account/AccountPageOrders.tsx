@@ -43,7 +43,7 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
                 <td>{item?.key && <AppLink href={`/account/orders/${item.key}`}>{`#${item.key}`}</AppLink>}</td>
                 <td>{dateString}</td>
                 <td>{item.status}</td>
-                <td>{item.idEnvio}</td>                
+                <td><a href={item.urlSeguimiento} target='_blank'>{item.idEnvio}</a></td>                
                 <td>{item.trnspName}</td>
                 <td>
                     <CurrencyFormat currency={item.currency} value={item.totalPedido} />
@@ -70,7 +70,7 @@ function AccountPageOrders(props: AccountPageOrdersProps) {
                                 <th>Pedido</th>
                                 <th>Fecha</th>
                                 <th>Estado</th>
-                                <th>Ref. envío</th>                                
+                                <th>Nro. Despacho</th>                                
                                 <th>Transportista</th>
                                 <th>Total</th>
                             </tr>
