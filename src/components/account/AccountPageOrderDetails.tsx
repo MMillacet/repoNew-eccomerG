@@ -25,6 +25,15 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
         </tr>
     ));
 
+    const orderEnvios = order.envios?.map((line) => (
+        <tr key={line.lineNum}>
+            <td>{new Date(line.fechaEnvio).toLocaleDateString()}</td>
+            <td>{line.trnspName}</td>
+            <td>{line.idEnvio}</td>
+            <td>{line.packageQty}</td>
+        </tr>
+    ));
+
     const totals = () => {
         const shipping = { price: 0 };
         const { taxPesos, taxDolares, totalPesos, totalDolares } = order.header;       
@@ -70,7 +79,7 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                         <AppLink href={url.accountOrders()} className="btn btn-xs btn-secondary">
                             Volver a pedidos
                         </AppLink>
-                    </div>
+                    </div>                    
                     <h5 className="order-header__title">Pedido #{order.header.orderId}</h5>
                     <div className="order-header__subtitle">
                         Pedido fue creado el{' '}
@@ -105,6 +114,23 @@ export default function AccountPageOrderDetails(props: AccountOrderDetailProps) 
                                     <td>{order.header.totalPesos > 0 && <CurrencyFormat value={order.header.docTotalPesos} />}</td>
                                 </tr>
                             </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div className='card-divider'/>
+                <div className='card-table'>
+                    <div className="table-responsive-sm">
+                        <table>                                                    
+                            <thead>
+                                <caption>Envíos</caption>
+                                <tr>
+                                    <th>Fecha envío</th>
+                                    <th>Transportista</th>
+                                    <th>Ref. Envío</th>
+                                    <th>Bultos</th>
+                                </tr>
+                            </thead>
+                            <tbody className="card-table__body card-table__body--merge-rows">{orderEnvios}</tbody>                            
                         </table>
                     </div>
                 </div>
