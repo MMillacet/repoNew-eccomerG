@@ -89,4 +89,5 @@ export interface IGoldfarbOrderItem {
 export interface IGoldfarbOrder {
     header: IGoldfarbOrderHeader;
     lines: IGoldfarbOrderItem[];
+    envios:any[];
 }
