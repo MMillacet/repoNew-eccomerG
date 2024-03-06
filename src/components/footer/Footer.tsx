@@ -30,7 +30,7 @@ const Footer: FunctionComponent = () => {
                             {isUserActivated && <FooterLinks title="Mi cuenta" items={accountLinks} />}
                         </div> */}
 
-                        <div className="col-6 col-md-3 col-lg-3">
+                        <div className="col-6 col-md-6 col-lg-6">
                             <FooterContacts />
                         </div>
                         {/* <div className="col-12 col-md-4 col-lg-3 social-media-col">
