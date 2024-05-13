@@ -381,11 +381,7 @@ function ProductGallery(props: ProductGalleryProps) {
         return (
             <button type="button" key={index} onClick={() => handleThumbnailClick(index)} className={classes}>
                 <div className="product-image__body">
-                    {isPDF ? (
-                        <img className="product-image__img product-gallery__carousel-image" src={pdf.src} alt="" />
-                    ) : (
-                        <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />
-                    )}
+                    <img className="product-image__img product-gallery__carousel-image" src={image} alt="" />                    
                 </div>
             </button>
         );
