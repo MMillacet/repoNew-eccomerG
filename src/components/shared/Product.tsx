@@ -20,6 +20,7 @@ import { useCompareAddItem } from '../../store/compare/compareHooks';
 import { useWishlistAddItem } from '../../store/wishlist/wishlistHooks';
 import { useCart, useCartAddItem } from '../../store/cart/cartHooks';
 import { saveItem } from '../../api/helpers/cart';
+import { url } from 'inspector';
 
 export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 
@@ -28,6 +29,17 @@ export interface ProductProps {
 
     layout: ProductLayout;
 }
+interface Document {
+    id: number;
+    name: string;
+    url: string;
+    extension: string;
+    userName: string;
+    createDate: string;
+    type: number;
+    items: any; 
+}
+
 
 function Product(props: ProductProps) {
     const { product, layout } = props;
@@ -119,7 +131,6 @@ function Product(props: ProductProps) {
         if (rtProduct) {
             const files = [
                 ...rtProduct?.images.map((i: { url: string }) => i.url),
-                ...rtProduct?.documents.map((f: any) => f.url),
                 ...rtProduct?.videos.map((f: any) => f.url),
                 ...rtProduct?.videoLinks.map((f: any) => f.url),
             ];
@@ -285,9 +296,9 @@ function Product(props: ProductProps) {
                                             Documentos
                                         </label>
                                         <ul className="product__meta">
-                                            {rtProduct.documents.map((document: string, i: number) => (
+                                            {rtProduct.documents.map((document: Document, i: number) => (
                                                 <li key={i}>
-                                                    <AppLink href={`${document}`}>{`Documento${i + 1}`}</AppLink>
+                                                     <AppLink href={document.url} target="_blank" >{document.name}</AppLink>
                                                 </li>
                                             ))}
                                         </ul>
