@@ -43,12 +43,18 @@ export function withClientState<
     return (state: S, action: Action | ApplyClientStateAction<{ [ns: string]: any }>): R => {
         const childState = reducer(state, action);
 
-        if (isApplyClientStateAction(action) && namespace in action.state) {
+        if (
+            isApplyClientStateAction(action) &&
+            action.state !== null && 
+            typeof action.state === 'object' &&
+            namespace in action.state
+        ) {
             return {
-                ...action.state[namespace],
+                ...(action.state as { [key: string]: any })[namespace],
                 stateFrom: 'client',
             };
         }
+        
 
         if ('stateFrom' in childState) {
             return childState;

@@ -31,8 +31,8 @@
         "react": "17.0.2",
         "react-bootstrap": "^2.5.0",
         "react-dom": "17.0.2",
-        "react-input-range": "git+https://github.com/MMillacet/react-input-range.git#c46b2520cadf347187cfbef64060fa57e427bac4",
-        "react-intl": "6.6.8",
+        "react-input-range-2": "2.0.0",
+        "react-intl": "^6.6.8",
         "react-redux": "7.2.4",
         "react-slick": "0.28.1",
         "react-toastify": "8.0.2",
@@ -47,10 +47,11 @@
         "swr": "^1.3.0"
     },
     "devDependencies": {
+        "@simplyianm/babel-plugin-inline-react-svg": "^1.2.0",
         "@types/node": "14.14.34",
         "@types/photoswipe": "4.1.2",
         "@types/react": "17.0.19",
-        "@types/react-redux": "7.1.18",
+        "@types/react-redux": "7.1.33",
         "@types/react-slick": "0.23.5",
         "@types/reactstrap": "8.7.2",
         "@typescript-eslint/eslint-plugin": "4.30.0",
@@ -59,12 +60,15 @@
         "cross-env": "^7.0.3",
         "eslint": "7.32.0",
         "eslint-config-airbnb": "18.2.1",
-        "eslint-config-prettier": "^7.0.0",
+        "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-import": "2.24.2",
         "eslint-plugin-jsx-a11y": "6.4.1",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "7.25.1",
         "prettier": "^2.4.1",
-        "typescript": "4.4.2"
+        "typescript": "5.4.5"
+    },
+    "resolutions": {
+        "@types/react": "17.0.19"
     }
 }

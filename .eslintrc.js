@@ -3,12 +3,13 @@ module.exports = {
         browser: true,
         es6: true,
     },
-    extends: ['airbnb/base', 'plugin:react/recommended', 'prettier', 'prettier/react'],
+    extends: ['airbnb/base', 'plugin:react/recommended', 'prettier', 'prettier/react',"next", "prettier"],
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
         JSX: 'readonly',
     },
+    
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
@@ -25,6 +26,7 @@ module.exports = {
             },
         },
     },
+    
     rules: {
         // indent: ['error', 4],
         // 'react/jsx-indent': ['error', 4],
@@ -75,4 +77,5 @@ module.exports = {
             },
         ],
     },
+    
 };

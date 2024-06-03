@@ -80,7 +80,7 @@
              );
          }
  
-         if (item.product.images.length) {
+         if (item.product.images && item.product.images.length) {
              image = (
                  <div className="product-image dropcart__product-image">
                      <AppLink href={url.product(item.product)} className="product-image__body">

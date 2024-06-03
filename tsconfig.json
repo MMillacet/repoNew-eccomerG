@@ -7,7 +7,6 @@
       "esnext"
     ],
     "allowJs": true,
-    "downlevelIteration": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,9 +19,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "files": [
-    "@types/block-content-to-react.d.ts"
-  ],
   "exclude": [
     "node_modules"
   ],
@@ -30,6 +26,7 @@
     "custom.d.ts",
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "@types/block-content-to-react.d.ts"
   ]
 }

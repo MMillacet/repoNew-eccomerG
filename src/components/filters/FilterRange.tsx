@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // third-party
-import InputRange from 'react-input-range';
+// import InputRange from 'react-input-range-2';
 
 // application
 import CurrencyFormat from '../shared/CurrencyFormat';
@@ -84,7 +84,7 @@ function FilterRange(props: FilterRangeProps) {
         () => (
             <div className="filter-price">
                 <div className="filter-price__slider" dir="ltr">
-                    <InputRange minValue={min} maxValue={max} value={{ min: from, max: to }} step={1} onChange={handleChange} />
+{/*                     <InputRange minValue={min} maxValue={max} value={{ min: from, max: to }} step={1} onChange={handleChange} /> */}
                 </div>
                 <div className="filter-price__title">
                     Price:{' '}
