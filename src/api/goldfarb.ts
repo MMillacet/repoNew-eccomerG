@@ -2,11 +2,10 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { IGoldfarbInvoice } from '../interfaces/invoice';
 import { nameToSlug } from './helpers/utils';
 // import { isProductionEnvironment } from '../services/environment';
-
-// const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
+const baseURL = 'http://app.goldfarb.com.uy/PruebasMain/api';
 // const baseURL = 'http://localhost:50483/api';
 
-const baseURL = 'http://52.167.61.86/apiswebgoldfarb/api';
+//const baseURL = 'http://52.167.61.86/apiswebgoldfarb/api';
 
 export interface CatalogOptions {
     email: string;
